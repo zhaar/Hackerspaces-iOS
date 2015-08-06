@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+extension Array {
+    
+    func foreach(fn: T -> Void) {
+        for e in self {
+            fn(e)
+        }
+    }
+}
