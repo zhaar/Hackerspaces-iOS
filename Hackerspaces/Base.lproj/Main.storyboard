@@ -57,7 +57,7 @@
             </objects>
             <point key="canvasLocation" x="750" y="360"/>
         </scene>
-        <!--Search-->
+        <!--Search View Controller-->
         <scene sceneID="7t5-2n-2mV">
             <objects>
                 <viewController id="lns-Lk-F59" customClass="SearchViewController" customModule="Hackerspaces" customModuleProvider="target" sceneMemberID="viewController">
@@ -69,7 +69,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DCv-g7-aVK">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="DCv-g7-aVK" customClass="TableViewController" customModule="Hackerspaces" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -90,7 +90,7 @@
                             <constraint firstItem="DCv-g7-aVK" firstAttribute="leading" secondItem="Cj3-LY-2Oa" secondAttribute="leading" id="zpW-ib-sTD"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Search" id="UU6-E2-nXL"/>
+                    <tabBarItem key="tabBarItem" systemItem="search" id="UU6-E2-nXL"/>
                     <connections>
                         <outlet property="tableView" destination="DCv-g7-aVK" id="XQw-Ky-BBI"/>
                     </connections>

@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+
+struct Hackerspace {
+    let name: String
+    let api: String
+}
+
+class SpaceBackend {
+    var favorites: [Hackerspace] = []
+    
+}

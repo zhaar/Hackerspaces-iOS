@@ -12,20 +12,17 @@ import JSONJoy
 
 let spaceAPI = "http://spaceapi.net/directory.json"
 
-class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-
-    let textCellIdentifier = "TextCell"
+class SearchViewController: UIViewController {
     
     var refreshControl:UIRefreshControl!
-    var spaces: [String]? = nil
-
-    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var tableView: TableViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.delegate = self
-        tableView.dataSource = self
+        tableView.delegate = tableView
+        tableView.dataSource = tableView
         
         self.refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -34,37 +31,15 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
-    }
-
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return spaces?.count ?? 0
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
-        
-        let row = indexPath.row
-        cell.textLabel?.text = spaces?[row]
-        
-        return cell
-    }
-
+    //function that runs after pull to refresh.
+    //Must call "endRefreshing" at some point
     func refresh(sender:AnyObject) {
-        // Code to refresh table view
-        println("refresh!")
         var request = HTTPTask()
         request.GET(spaceAPI, parameters: nil, completionHandler: {(response: HTTPResponse) in
             if let err = response.error {
                 println("error: \(err.localizedDescription)")
-                return;
-            }
-            if let data = response.responseObject as? NSData {
-                self.spaces = JSONDecoder(data).dictionary?.keys.array
-                self.spaces?.sort(<)
-                self.tableView.reloadData()
-                println(self.spaces)
+            } else if let data = response.responseObject as? NSData {
+                self.tableView.updateSpaceList(JSONDecoder(data).dictionary?.keys.array)
             }
             self.refreshControl.endRefreshing()
 

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5E1C0A039B7DFC7F871CA70E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A716B48507D7E59C5E3D6630 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		953161871B73B12A0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
-		953161891B73BB170061A1E6 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161881B73BB170061A1E6 /* TableViewController.swift */; };
+		9531618B1B74DB930061A1E6 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9531618A1B74DB930061A1E6 /* TableViewController.swift */; };
 		95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB21B729B3E0061A1E6 /* AppDelegate.swift */; };
 		95643FB51B729B3E0061A1E6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB41B729B3E0061A1E6 /* MainViewController.swift */; };
 		95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB61B729B3E0061A1E6 /* MapViewController.swift */; };
@@ -34,7 +34,7 @@
 /* Begin PBXFileReference section */
 		2AAFE8C70F764C41981E37E9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		953161861B73B12A0061A1E6 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
-		953161881B73BB170061A1E6 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		9531618A1B74DB930061A1E6 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		95643FAD1B729B3E0061A1E6 /* Hackerspaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hackerspaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95643FB11B729B3E0061A1E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95643FB21B729B3E0061A1E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -106,8 +106,8 @@
 				95643FB41B729B3E0061A1E6 /* MainViewController.swift */,
 				95643FB61B729B3E0061A1E6 /* MapViewController.swift */,
 				95643FD41B72AC910061A1E6 /* SearchViewController.swift */,
-				953161881B73BB170061A1E6 /* TableViewController.swift */,
 				953161861B73B12A0061A1E6 /* extensions.swift */,
+				9531618A1B74DB930061A1E6 /* TableViewController.swift */,
 				95643FD61B72AD130061A1E6 /* model.swift */,
 				95643FB81B729B3E0061A1E6 /* Main.storyboard */,
 				95643FBB1B729B3E0061A1E6 /* Images.xcassets */,
@@ -304,7 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95643FD71B72AD130061A1E6 /* model.swift in Sources */,
-				953161891B73BB170061A1E6 /* TableViewController.swift in Sources */,
+				9531618B1B74DB930061A1E6 /* TableViewController.swift in Sources */,
 				95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */,
 				95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */,
 				95643FD51B72AC910061A1E6 /* SearchViewController.swift in Sources */,
