@@ -18,18 +18,31 @@ class SearchViewController: UIViewController {
     
     @IBOutlet weak var tableView: TableViewController!
     
+    lazy   var searchBars:UISearchBar = UISearchBar(frame: CGRectMake(0, 0, 200, 20))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.delegate = tableView
         tableView.dataSource = tableView
         
+        setupRefreshControl()
+    }
+    
+    func setupRefreshControl() {
         self.refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         self.refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
         self.tableView.addSubview(refreshControl)
     }
     
+    func setupSearchBar() {
+//        var leftNavBarButton = UIBarButtonItem(customView:Yoursearchbar)
+//        self.navigationItem.leftBarButtonItem = leftNavBarButton
+//        searchBar.placeholder = "Your placeholder"
+//        var leftNavBarButton = UIBarButtonItem(customView:searchBar)
+//        self.navigationItem.leftBarButtonItem = leftNavBarButton
+    }
 
     //function that runs after pull to refresh.
     //Must call "endRefreshing" at some point

@@ -16,7 +16,27 @@
                     <view key="view" contentMode="scaleToFill" id="tsR-hK-woN">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="gUp-FA-peH" customClass="TableViewController" customModule="Hackerspaces" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TextCell" id="YrV-1Y-yum">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YrV-1Y-yum" id="l63-7L-sAC">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gUp-FA-peH" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" id="7Us-tb-WV6"/>
+                            <constraint firstAttribute="trailing" secondItem="gUp-FA-peH" secondAttribute="trailing" id="RFi-Mp-2UB"/>
+                            <constraint firstItem="gUp-FA-peH" firstAttribute="bottom" secondItem="4ug-Mw-9AY" secondAttribute="top" id="SYI-mO-SFh"/>
+                            <constraint firstItem="gUp-FA-peH" firstAttribute="leading" secondItem="tsR-hK-woN" secondAttribute="leading" id="YCL-OH-kKt"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Hackerspaces" image="first" id="acW-dT-cKf"/>
                 </viewController>
@@ -90,14 +110,14 @@
                             <constraint firstItem="DCv-g7-aVK" firstAttribute="leading" secondItem="Cj3-LY-2Oa" secondAttribute="leading" id="zpW-ib-sTD"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="search" id="UU6-E2-nXL"/>
+                    <navigationItem key="navigationItem" id="ZEt-4f-mJy"/>
                     <connections>
                         <outlet property="tableView" destination="DCv-g7-aVK" id="XQw-Ky-BBI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UDS-jZ-OPG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="786" y="1111"/>
+            <point key="canvasLocation" x="1598" y="1111"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -112,12 +132,31 @@
                     <connections>
                         <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
-                        <segue destination="lns-Lk-F59" kind="relationship" relationship="viewControllers" id="bDv-F9-8Q0"/>
+                        <segue destination="SVL-66-aIM" kind="relationship" relationship="viewControllers" id="bDv-F9-8Q0"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-252" y="672"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="xlj-Hs-joU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SVL-66-aIM" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" systemItem="search" id="UU6-E2-nXL"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="MiQ-nr-r4R">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lns-Lk-F59" kind="relationship" relationship="rootViewController" id="NVr-KJ-GI0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vsg-JX-1IR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="786" y="1111"/>
         </scene>
     </scenes>
     <resources>
