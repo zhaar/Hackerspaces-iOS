@@ -19,6 +19,9 @@
 		95643FCB1B729B3E0061A1E6 /* HackerspacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FCA1B729B3E0061A1E6 /* HackerspacesTests.swift */; };
 		95643FD51B72AC910061A1E6 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FD41B72AC910061A1E6 /* SearchViewController.swift */; };
 		95643FD71B72AD130061A1E6 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FD61B72AD130061A1E6 /* model.swift */; };
+		9597A1A91B7921090061A1E6 /* MapArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1A81B7921090061A1E6 /* MapArtwork.swift */; };
+		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
+		9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,9 @@
 		95643FCA1B729B3E0061A1E6 /* HackerspacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerspacesTests.swift; sourceTree = "<group>"; };
 		95643FD41B72AC910061A1E6 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		95643FD61B72AD130061A1E6 /* model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = model.swift; sourceTree = "<group>"; };
+		9597A1A81B7921090061A1E6 /* MapArtwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapArtwork.swift; sourceTree = "<group>"; };
+		9597A1AA1B79252F0061A1E6 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
+		9597A1AD1B7932100061A1E6 /* DataCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCache.xcdatamodel; sourceTree = "<group>"; };
 		A716B48507D7E59C5E3D6630 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F2332604CC665D6C319DD9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -103,8 +109,11 @@
 			isa = PBXGroup;
 			children = (
 				95643FB21B729B3E0061A1E6 /* AppDelegate.swift */,
+				9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */,
 				95643FB41B729B3E0061A1E6 /* MainViewController.swift */,
 				95643FB61B729B3E0061A1E6 /* MapViewController.swift */,
+				9597A1A81B7921090061A1E6 /* MapArtwork.swift */,
+				9597A1AA1B79252F0061A1E6 /* VCMapView.swift */,
 				95643FD41B72AC910061A1E6 /* SearchViewController.swift */,
 				9531618A1B74DB930061A1E6 /* TableViewController.swift */,
 				95643FD61B72AD130061A1E6 /* model.swift */,
@@ -204,6 +213,7 @@
 				TargetAttributes = {
 					95643FAC1B729B3E0061A1E6 = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 9PXQEQ2PNN;
 					};
 					95643FC31B729B3E0061A1E6 = {
 						CreatedOnToolsVersion = 6.4;
@@ -303,10 +313,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */,
 				95643FD71B72AD130061A1E6 /* model.swift in Sources */,
 				9531618B1B74DB930061A1E6 /* TableViewController.swift in Sources */,
 				95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */,
+				9597A1A91B7921090061A1E6 /* MapArtwork.swift in Sources */,
 				95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */,
+				9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */,
 				95643FD51B72AC910061A1E6 /* SearchViewController.swift in Sources */,
 				95643FB51B729B3E0061A1E6 /* MainViewController.swift in Sources */,
 				953161871B73B12A0061A1E6 /* extensions.swift in Sources */,
@@ -439,9 +452,12 @@
 			baseConfigurationReference = F4F2332604CC665D6C319DD9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Hackerspaces/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -450,9 +466,12 @@
 			baseConfigurationReference = 2AAFE8C70F764C41981E37E9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Hackerspaces/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -521,6 +540,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9597A1AD1B7932100061A1E6 /* DataCache.xcdatamodel */,
+			);
+			currentVersion = 9597A1AD1B7932100061A1E6 /* DataCache.xcdatamodel */;
+			path = DataCache.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 95643FA51B729B3E0061A1E6 /* Project object */;
 }
