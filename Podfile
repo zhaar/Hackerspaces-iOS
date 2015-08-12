@@ -5,3 +5,5 @@ use_frameworks!
 
 pod 'SwiftHTTP', '~> 0.9.4'
 pod 'JSONJoy-Swift', '~> 0.9.1'
+pod 'HanekeSwift'
+
