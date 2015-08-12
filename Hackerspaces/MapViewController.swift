@@ -15,6 +15,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
     
+    @IBAction func resetMap(sender: UILongPressGestureRecognizer) {
+        centerMapOnLocation(locationManager.location)
+    }
     func checkLocationAuthorizationStatus() {
         if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
             map.showsUserLocation = true
