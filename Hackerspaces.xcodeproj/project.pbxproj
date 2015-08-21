@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		5E1C0A039B7DFC7F871CA70E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A716B48507D7E59C5E3D6630 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		9525AB7D1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift */; };
+		9525AB801B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift */; };
 		953161871B73B12A0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
 		9531618B1B74DB930061A1E6 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9531618A1B74DB930061A1E6 /* TableViewController.swift */; };
+		95466B461B8124560061A1E6 /* SearchControllerBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95466B441B8124560061A1E6 /* SearchControllerBaseViewController.swift */; };
+		95466B471B8124560061A1E6 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95466B451B8124560061A1E6 /* SearchResultsViewController.swift */; };
+		95466B491B81245E0061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95466B481B81245E0061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift */; };
 		95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB21B729B3E0061A1E6 /* AppDelegate.swift */; };
-		95643FB51B729B3E0061A1E6 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB41B729B3E0061A1E6 /* MainViewController.swift */; };
 		95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB61B729B3E0061A1E6 /* MapViewController.swift */; };
 		95643FBA1B729B3E0061A1E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95643FB81B729B3E0061A1E6 /* Main.storyboard */; };
 		95643FBC1B729B3E0061A1E6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95643FBB1B729B3E0061A1E6 /* Images.xcassets */; };
@@ -22,6 +26,9 @@
 		9597A1A91B7921090061A1E6 /* MapArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1A81B7921090061A1E6 /* MapArtwork.swift */; };
 		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
 		9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */; };
+		95A21CAD1B7CE9300061A1E6 /* HackerspaceInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A21CAC1B7CE9300061A1E6 /* HackerspaceInfoTableViewController.swift */; };
+		95D4B7501B7D6FA90061A1E6 /* HackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D4B74F1B7D6FA90061A1E6 /* HackerspaceTableViewController.swift */; };
+		95E4B90C1B811F330061A1E6 /* DefaultSearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E4B90B1B811F330061A1E6 /* DefaultSearchBarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,12 +43,16 @@
 
 /* Begin PBXFileReference section */
 		2AAFE8C70F764C41981E37E9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		9525AB7C1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteHackerspaceTableViewController.swift; sourceTree = "<group>"; };
+		9525AB7F1B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceTitleTableViewCell.swift; sourceTree = "<group>"; };
 		953161861B73B12A0061A1E6 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		9531618A1B74DB930061A1E6 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		95466B441B8124560061A1E6 /* SearchControllerBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchControllerBaseViewController.swift; sourceTree = "<group>"; };
+		95466B451B8124560061A1E6 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
+		95466B481B81245E0061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarEmbeddedInNavigationBarViewController.swift; sourceTree = "<group>"; };
 		95643FAD1B729B3E0061A1E6 /* Hackerspaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hackerspaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95643FB11B729B3E0061A1E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95643FB21B729B3E0061A1E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		95643FB41B729B3E0061A1E6 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		95643FB61B729B3E0061A1E6 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		95643FB91B729B3E0061A1E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		95643FBB1B729B3E0061A1E6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -54,6 +65,9 @@
 		9597A1A81B7921090061A1E6 /* MapArtwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapArtwork.swift; sourceTree = "<group>"; };
 		9597A1AA1B79252F0061A1E6 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
 		9597A1AD1B7932100061A1E6 /* DataCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCache.xcdatamodel; sourceTree = "<group>"; };
+		95A21CAC1B7CE9300061A1E6 /* HackerspaceInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceInfoTableViewController.swift; sourceTree = "<group>"; };
+		95D4B74F1B7D6FA90061A1E6 /* HackerspaceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceTableViewController.swift; sourceTree = "<group>"; };
+		95E4B90B1B811F330061A1E6 /* DefaultSearchBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSearchBarViewController.swift; sourceTree = "<group>"; };
 		A716B48507D7E59C5E3D6630 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F2332604CC665D6C319DD9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +99,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9525AB7E1B8622C70061A1E6 /* favorite hackerspace */ = {
+			isa = PBXGroup;
+			children = (
+				9525AB7C1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift */,
+				9525AB7F1B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift */,
+			);
+			name = "favorite hackerspace";
+			sourceTree = "<group>";
+		};
 		95643FA41B729B3E0061A1E6 = {
 			isa = PBXGroup;
 			children = (
@@ -110,14 +133,13 @@
 			children = (
 				95643FB21B729B3E0061A1E6 /* AppDelegate.swift */,
 				9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */,
-				95643FB41B729B3E0061A1E6 /* MainViewController.swift */,
-				95643FB61B729B3E0061A1E6 /* MapViewController.swift */,
-				9597A1A81B7921090061A1E6 /* MapArtwork.swift */,
-				9597A1AA1B79252F0061A1E6 /* VCMapView.swift */,
-				95643FD41B72AC910061A1E6 /* SearchViewController.swift */,
-				9531618A1B74DB930061A1E6 /* TableViewController.swift */,
+				95A21CAC1B7CE9300061A1E6 /* HackerspaceInfoTableViewController.swift */,
+				95D4B74D1B7D68C80061A1E6 /* Map */,
+				95D4B74E1B7D68DC0061A1E6 /* Explore */,
 				95643FD61B72AD130061A1E6 /* model.swift */,
+				95E4B90A1B811F150061A1E6 /* Embeded search */,
 				953161861B73B12A0061A1E6 /* extensions.swift */,
+				9525AB7E1B8622C70061A1E6 /* favorite hackerspace */,
 				95643FB81B729B3E0061A1E6 /* Main.storyboard */,
 				95643FBB1B729B3E0061A1E6 /* Images.xcassets */,
 				95643FBD1B729B3E0061A1E6 /* LaunchScreen.xib */,
@@ -149,6 +171,37 @@
 				95643FC91B729B3E0061A1E6 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		95D4B74D1B7D68C80061A1E6 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				95643FB61B729B3E0061A1E6 /* MapViewController.swift */,
+				9597A1A81B7921090061A1E6 /* MapArtwork.swift */,
+				9597A1AA1B79252F0061A1E6 /* VCMapView.swift */,
+			);
+			name = Map;
+			sourceTree = "<group>";
+		};
+		95D4B74E1B7D68DC0061A1E6 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				95643FD41B72AC910061A1E6 /* SearchViewController.swift */,
+				9531618A1B74DB930061A1E6 /* TableViewController.swift */,
+				95D4B74F1B7D6FA90061A1E6 /* HackerspaceTableViewController.swift */,
+			);
+			name = Explore;
+			sourceTree = "<group>";
+		};
+		95E4B90A1B811F150061A1E6 /* Embeded search */ = {
+			isa = PBXGroup;
+			children = (
+				95466B441B8124560061A1E6 /* SearchControllerBaseViewController.swift */,
+				95466B451B8124560061A1E6 /* SearchResultsViewController.swift */,
+				95E4B90B1B811F330061A1E6 /* DefaultSearchBarViewController.swift */,
+				95466B481B81245E0061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift */,
+			);
+			name = "Embeded search";
 			sourceTree = "<group>";
 		};
 		DCC3320AD4ACFE951D6AA437 /* Pods */ = {
@@ -314,14 +367,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */,
+				95A21CAD1B7CE9300061A1E6 /* HackerspaceInfoTableViewController.swift in Sources */,
 				95643FD71B72AD130061A1E6 /* model.swift in Sources */,
 				9531618B1B74DB930061A1E6 /* TableViewController.swift in Sources */,
 				95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */,
+				9525AB801B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift in Sources */,
+				95466B471B8124560061A1E6 /* SearchResultsViewController.swift in Sources */,
+				95466B491B81245E0061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */,
+				95466B461B8124560061A1E6 /* SearchControllerBaseViewController.swift in Sources */,
+				9525AB7D1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift in Sources */,
 				9597A1A91B7921090061A1E6 /* MapArtwork.swift in Sources */,
 				95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */,
 				9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */,
+				95E4B90C1B811F330061A1E6 /* DefaultSearchBarViewController.swift in Sources */,
+				95D4B7501B7D6FA90061A1E6 /* HackerspaceTableViewController.swift in Sources */,
 				95643FD51B72AC910061A1E6 /* SearchViewController.swift in Sources */,
-				95643FB51B729B3E0061A1E6 /* MainViewController.swift in Sources */,
 				953161871B73B12A0061A1E6 /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
