@@ -1,3 +1,4 @@
+
 //
 //  HackerspaceMapTableViewCell.swift
 //  Hackerspaces
@@ -7,9 +8,11 @@
 //
 
 import UIKit
+import MapKit
 
 class HackerspaceMapTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var map: MKMapView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -20,5 +23,4 @@ class HackerspaceMapTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
 }

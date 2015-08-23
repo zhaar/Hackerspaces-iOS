@@ -9,6 +9,7 @@
 import UIKit
 
 class HackerspaceInfoTableViewController: UITableViewController {
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

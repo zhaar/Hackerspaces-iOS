@@ -8,6 +8,18 @@
 
 import Foundation
 
+
+func optionalBind<T, U>(optional: T?, f: T -> U?) -> U?
+{
+    if let x = optional {
+        return f(x)
+    }
+    else {
+        return nil
+    }
+}
+
+
 extension Array {
     
     func foreach(fn: T -> Void) {

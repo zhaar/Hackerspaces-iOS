@@ -11,8 +11,8 @@ import UIKit
 class HackerspaceTitleTableViewCell: UITableViewCell {
 
     @IBOutlet weak var logo: UIImageView!
-    @IBOutlet weak var hackerspaceTitle: UILabel!
     @IBOutlet weak var hackerspaceStatus: UILabel!
+    @IBOutlet weak var url: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -1,3 +1,4 @@
+
 //
 //  FavoriteHackerspaceTableViewController.swift
 //  Hackerspaces
@@ -7,22 +8,47 @@
 //
 
 import UIKit
+import SwiftHTTP
+import JSONJoy
+import MapKit
+import Swiftz
 
 class FavoriteHackerspaceTableViewController: UITableViewController {
 
+    var generalInfo = [String : JSONDecoder]()
+    var customInfo = [String : JSONDecoder]()
+    
+    private struct storyboard {
+        static let CellIdentifier = "Cell"
+        static let TitleIdentifier = "TitleCell"
+        static let MapIdentifier = "MapCell"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+//        tableView.estimatedRowHeight = tableView.rowHeight
+//        tableView.rowHeight = UITableViewAutomaticDimension
+        reloadData()
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func reloadData() {
+        let request = HTTPTask()
+        request.GET("https://fixme.ch/cgi-bin/spaceapi.py", parameters: nil, completionHandler: {(response: HTTPResponse) in
+            dispatch_async(dispatch_get_main_queue()) {
+                if let err = response.error {
+                    println("error: \(err.localizedDescription)")
+                } else if let data = response.responseObject as? NSData {
+                    if let dict = JSONDecoder(data).dictionary {
+                        for (k,v) in dict {
+                            self.generalInfo[k] = v
+                        }
+                        self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
+                    }
+                    self.tableView.reloadData()
+                }
+            }
+        })
     }
 
     // MARK: - Table view data source
@@ -30,25 +56,84 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 4
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 0
+        switch(section) {
+        case 0: return 1
+        case 1: return 1
+        case 2: return generalInfo.count
+        case 3: return customInfo.count
+        default: return 0
+        }
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as! UITableViewCell
-
-        // Configure the cell...
-
-        return cell
+        switch(indexPath.section) {
+        case 0 : return reuseTitleCell(indexPath)
+        case 1 : return reuseMapCell(indexPath)
+        default :
+            let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.CellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+            
+            let key = generalInfo.keys.array[indexPath.row]
+            cell.textLabel?.text = key
+            cell.detailTextLabel?.text = generalInfo[key]?.description
+            return cell
+        }
     }
-    */
-
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch(section) {
+        case 2: return "General Info"
+        case 3: return "Custom Info"
+        default: return nil
+        }
+    }
+    
+    func reuseTitleCell(indexPath: NSIndexPath) -> UITableViewCell {
+        if let titleCell = tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as? HackerspaceTitleTableViewCell{
+            if let logoURL = self.generalInfo["logo"]?.string {
+                let request = HTTPTask()
+                request.GET(logoURL, parameters: nil) {
+                    (response) in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let err = response.error {
+                            println("error: \(err.localizedDescription)")
+                        } else if let data = response.responseObject as? NSData {
+                            titleCell.logo.image = UIImage(data: data)
+                        }
+                    }
+                }
+            }
+            titleCell.hackerspaceStatus.text = (generalInfo["state"]?.dictionary?["open"]?.bool ?? false) ? "open" : "closed"
+            titleCell.url.text = generalInfo["url"]?.string
+            return titleCell
+        } else {
+            println("unknown cell")
+            return tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        }
+    }
+    
+    func reuseMapCell(indexPath: NSIndexPath) -> UITableViewCell {
+        if let mapCell = tableView.dequeueReusableCellWithIdentifier(storyboard.MapIdentifier, forIndexPath: indexPath) as? HackerspaceMapTableViewCell {
+            generalInfo >>- {MKFunctions.spaceCoordinate($0)} >>- { MKFunctions.centerMapOnLocation(mapCell.map, location: $0) }
+            return mapCell
+        } else {
+            println("unknown cell")
+            return tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        switch(indexPath.section) {
+        case 0: return CGFloat(150)
+        case 1: return CGFloat(200)
+        default: return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
