@@ -19,7 +19,6 @@ func optionalBind<T, U>(optional: T?, f: T -> U?) -> U?
     }
 }
 
-
 extension Array {
     
     func foreach(fn: T -> Void) {

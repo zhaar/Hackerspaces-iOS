@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E1C0A039B7DFC7F871CA70E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A716B48507D7E59C5E3D6630 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		9525AB7D1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift */; };
 		9525AB801B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift */; };
+		9525AB821B8748010061A1E6 /* HackerspaceMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HackerspaceMapTableViewCell.swift */; };
+		9525AB841B8889D50061A1E6 /* hackerspaceDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB831B8889D50061A1E6 /* hackerspaceDataFunctions.swift */; };
 		953161871B73B12A0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
-		9531618B1B74DB930061A1E6 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9531618A1B74DB930061A1E6 /* TableViewController.swift */; };
 		95466B461B8124560061A1E6 /* SearchControllerBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95466B441B8124560061A1E6 /* SearchControllerBaseViewController.swift */; };
 		95466B471B8124560061A1E6 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95466B451B8124560061A1E6 /* SearchResultsViewController.swift */; };
 		95466B491B81245E0061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95466B481B81245E0061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift */; };
@@ -21,13 +21,21 @@
 		95643FBC1B729B3E0061A1E6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95643FBB1B729B3E0061A1E6 /* Images.xcassets */; };
 		95643FBF1B729B3E0061A1E6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95643FBD1B729B3E0061A1E6 /* LaunchScreen.xib */; };
 		95643FCB1B729B3E0061A1E6 /* HackerspacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FCA1B729B3E0061A1E6 /* HackerspacesTests.swift */; };
-		95643FD51B72AC910061A1E6 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FD41B72AC910061A1E6 /* SearchViewController.swift */; };
-		95643FD71B72AD130061A1E6 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FD61B72AD130061A1E6 /* model.swift */; };
 		9597A1A91B7921090061A1E6 /* MapArtwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1A81B7921090061A1E6 /* MapArtwork.swift */; };
 		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
 		9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */; };
-		95A21CAD1B7CE9300061A1E6 /* HackerspaceInfoTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A21CAC1B7CE9300061A1E6 /* HackerspaceInfoTableViewController.swift */; };
-		95D4B7501B7D6FA90061A1E6 /* HackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95D4B74F1B7D6FA90061A1E6 /* HackerspaceTableViewController.swift */; };
+		95A594A21B893FB60061A1E6 /* Haneke.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */; };
+		95A594A31B893FB60061A1E6 /* JSONJoy.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A5949F1B893FB60061A1E6 /* JSONJoy.framework.dSYM */; };
+		95A594A41B893FB60061A1E6 /* SwiftHTTP.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */; };
+		95A594A51B893FB60061A1E6 /* Swiftz.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */; };
+		95ADEF991B8B53580061A1E6 /* HackerspaceAPIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADEF981B8B53580061A1E6 /* HackerspaceAPIFunctions.swift */; };
+		95DBD9461B8CFF360061A1E6 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */; };
+		95DBD9471B8CFF360061A1E6 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594941B893E5E0061A1E6 /* Haneke.framework */; };
+		95DBD9481B8CFF360061A1E6 /* JSONJoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594951B893E5E0061A1E6 /* JSONJoy.framework */; };
+		95DBD9491B8CFF360061A1E6 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */; };
+		95DBD94A1B8CFF360061A1E6 /* Swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594971B893E5E0061A1E6 /* Swiftz.framework */; };
+		95DBD94C1B8CFF360061A1E6 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DBD94B1B8CFF360061A1E6 /* Result.framework */; };
+		95DBD94E1B8CFF3E0061A1E6 /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DBD94D1B8CFF3E0061A1E6 /* Box.framework */; };
 		95E4B90C1B811F330061A1E6 /* DefaultSearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95E4B90B1B811F330061A1E6 /* DefaultSearchBarViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,12 +49,29 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		95A5949D1B893F630061A1E6 /* Debug */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				95A594A21B893FB60061A1E6 /* Haneke.framework.dSYM in Debug */,
+				95A594A31B893FB60061A1E6 /* JSONJoy.framework.dSYM in Debug */,
+				95A594A41B893FB60061A1E6 /* SwiftHTTP.framework.dSYM in Debug */,
+				95A594A51B893FB60061A1E6 /* Swiftz.framework.dSYM in Debug */,
+			);
+			name = Debug;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		2AAFE8C70F764C41981E37E9 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9525AB7C1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteHackerspaceTableViewController.swift; sourceTree = "<group>"; };
 		9525AB7F1B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceTitleTableViewCell.swift; sourceTree = "<group>"; };
+		9525AB811B8748010061A1E6 /* HackerspaceMapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceMapTableViewCell.swift; sourceTree = "<group>"; };
+		9525AB831B8889D50061A1E6 /* hackerspaceDataFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hackerspaceDataFunctions.swift; sourceTree = "<group>"; };
 		953161861B73B12A0061A1E6 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
-		9531618A1B74DB930061A1E6 /* TableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		95466B441B8124560061A1E6 /* SearchControllerBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchControllerBaseViewController.swift; sourceTree = "<group>"; };
 		95466B451B8124560061A1E6 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		95466B481B81245E0061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarEmbeddedInNavigationBarViewController.swift; sourceTree = "<group>"; };
@@ -60,16 +85,27 @@
 		95643FC41B729B3E0061A1E6 /* HackerspacesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackerspacesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95643FC91B729B3E0061A1E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95643FCA1B729B3E0061A1E6 /* HackerspacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerspacesTests.swift; sourceTree = "<group>"; };
-		95643FD41B72AC910061A1E6 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		95643FD61B72AD130061A1E6 /* model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = model.swift; sourceTree = "<group>"; };
 		9597A1A81B7921090061A1E6 /* MapArtwork.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapArtwork.swift; sourceTree = "<group>"; };
 		9597A1AA1B79252F0061A1E6 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
 		9597A1AD1B7932100061A1E6 /* DataCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCache.xcdatamodel; sourceTree = "<group>"; };
-		95A21CAC1B7CE9300061A1E6 /* HackerspaceInfoTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceInfoTableViewController.swift; sourceTree = "<group>"; };
-		95D4B74F1B7D6FA90061A1E6 /* HackerspaceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceTableViewController.swift; sourceTree = "<group>"; };
+		95A5948C1B893C530061A1E6 /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = ../carthage_dependecies/Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
+		95A5948D1B893C530061A1E6 /* JSONJoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSONJoy.framework; path = ../carthage_dependecies/Carthage/Build/iOS/JSONJoy.framework; sourceTree = "<group>"; };
+		95A5948E1B893C530061A1E6 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = ../carthage_dependecies/Carthage/Build/iOS/SwiftHTTP.framework; sourceTree = "<group>"; };
+		95A5948F1B893C530061A1E6 /* Swiftz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swiftz.framework; path = ../carthage_dependecies/Carthage/Build/iOS/Swiftz.framework; sourceTree = "<group>"; };
+		95A594941B893E5E0061A1E6 /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
+		95A594951B893E5E0061A1E6 /* JSONJoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSONJoy.framework; path = Carthage/Build/iOS/JSONJoy.framework; sourceTree = "<group>"; };
+		95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = Carthage/Build/iOS/SwiftHTTP.framework; sourceTree = "<group>"; };
+		95A594971B893E5E0061A1E6 /* Swiftz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swiftz.framework; path = Carthage/Build/iOS/Swiftz.framework; sourceTree = "<group>"; };
+		95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Haneke.framework.dSYM; path = Carthage/Build/iOS/Haneke.framework.dSYM; sourceTree = "<group>"; };
+		95A5949F1B893FB60061A1E6 /* JSONJoy.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = JSONJoy.framework.dSYM; path = Carthage/Build/iOS/JSONJoy.framework.dSYM; sourceTree = "<group>"; };
+		95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftHTTP.framework.dSYM; path = Carthage/Build/iOS/SwiftHTTP.framework.dSYM; sourceTree = "<group>"; };
+		95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Swiftz.framework.dSYM; path = Carthage/Build/iOS/Swiftz.framework.dSYM; sourceTree = "<group>"; };
+		95ADEF981B8B53580061A1E6 /* HackerspaceAPIFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceAPIFunctions.swift; sourceTree = "<group>"; };
+		95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
+		95DBD94B1B8CFF360061A1E6 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		95DBD94D1B8CFF3E0061A1E6 /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Box.framework; path = Carthage/Build/iOS/Box.framework; sourceTree = "<group>"; };
 		95E4B90B1B811F330061A1E6 /* DefaultSearchBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSearchBarViewController.swift; sourceTree = "<group>"; };
 		A716B48507D7E59C5E3D6630 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F4F2332604CC665D6C319DD9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +113,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E1C0A039B7DFC7F871CA70E /* Pods.framework in Frameworks */,
+				95DBD94C1B8CFF360061A1E6 /* Result.framework in Frameworks */,
+				95DBD9461B8CFF360061A1E6 /* BrightFutures.framework in Frameworks */,
+				95DBD9471B8CFF360061A1E6 /* Haneke.framework in Frameworks */,
+				95DBD9481B8CFF360061A1E6 /* JSONJoy.framework in Frameworks */,
+				95DBD94E1B8CFF3E0061A1E6 /* Box.framework in Frameworks */,
+				95DBD9491B8CFF360061A1E6 /* SwiftHTTP.framework in Frameworks */,
+				95DBD94A1B8CFF360061A1E6 /* Swiftz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,6 +136,17 @@
 		8178FF0F74739ED96AEB03D5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				95DBD94D1B8CFF3E0061A1E6 /* Box.framework */,
+				95DBD94B1B8CFF360061A1E6 /* Result.framework */,
+				95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */,
+				95A594941B893E5E0061A1E6 /* Haneke.framework */,
+				95A594951B893E5E0061A1E6 /* JSONJoy.framework */,
+				95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */,
+				95A594971B893E5E0061A1E6 /* Swiftz.framework */,
+				95A5948C1B893C530061A1E6 /* Haneke.framework */,
+				95A5948D1B893C530061A1E6 /* JSONJoy.framework */,
+				95A5948E1B893C530061A1E6 /* SwiftHTTP.framework */,
+				95A5948F1B893C530061A1E6 /* Swiftz.framework */,
 				A716B48507D7E59C5E3D6630 /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -104,6 +157,7 @@
 			children = (
 				9525AB7C1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift */,
 				9525AB7F1B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift */,
+				9525AB811B8748010061A1E6 /* HackerspaceMapTableViewCell.swift */,
 			);
 			name = "favorite hackerspace";
 			sourceTree = "<group>";
@@ -111,10 +165,10 @@
 		95643FA41B729B3E0061A1E6 = {
 			isa = PBXGroup;
 			children = (
+				95A594A61B893FC90061A1E6 /* Debug symbols */,
 				95643FAF1B729B3E0061A1E6 /* Hackerspaces */,
 				95643FC71B729B3E0061A1E6 /* HackerspacesTests */,
 				95643FAE1B729B3E0061A1E6 /* Products */,
-				DCC3320AD4ACFE951D6AA437 /* Pods */,
 				8178FF0F74739ED96AEB03D5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -132,13 +186,10 @@
 			isa = PBXGroup;
 			children = (
 				95643FB21B729B3E0061A1E6 /* AppDelegate.swift */,
-				9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */,
-				95A21CAC1B7CE9300061A1E6 /* HackerspaceInfoTableViewController.swift */,
 				95D4B74D1B7D68C80061A1E6 /* Map */,
-				95D4B74E1B7D68DC0061A1E6 /* Explore */,
-				95643FD61B72AD130061A1E6 /* model.swift */,
 				95E4B90A1B811F150061A1E6 /* Embeded search */,
-				953161861B73B12A0061A1E6 /* extensions.swift */,
+				9525AB831B8889D50061A1E6 /* hackerspaceDataFunctions.swift */,
+				95ADEF981B8B53580061A1E6 /* HackerspaceAPIFunctions.swift */,
 				9525AB7E1B8622C70061A1E6 /* favorite hackerspace */,
 				95643FB81B729B3E0061A1E6 /* Main.storyboard */,
 				95643FBB1B729B3E0061A1E6 /* Images.xcassets */,
@@ -151,6 +202,8 @@
 		95643FB01B729B3E0061A1E6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */,
+				953161861B73B12A0061A1E6 /* extensions.swift */,
 				95643FB11B729B3E0061A1E6 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -173,6 +226,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		95A594A61B893FC90061A1E6 /* Debug symbols */ = {
+			isa = PBXGroup;
+			children = (
+				95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */,
+				95A5949F1B893FB60061A1E6 /* JSONJoy.framework.dSYM */,
+				95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */,
+				95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */,
+			);
+			name = "Debug symbols";
+			sourceTree = "<group>";
+		};
 		95D4B74D1B7D68C80061A1E6 /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,16 +245,6 @@
 				9597A1AA1B79252F0061A1E6 /* VCMapView.swift */,
 			);
 			name = Map;
-			sourceTree = "<group>";
-		};
-		95D4B74E1B7D68DC0061A1E6 /* Explore */ = {
-			isa = PBXGroup;
-			children = (
-				95643FD41B72AC910061A1E6 /* SearchViewController.swift */,
-				9531618A1B74DB930061A1E6 /* TableViewController.swift */,
-				95D4B74F1B7D6FA90061A1E6 /* HackerspaceTableViewController.swift */,
-			);
-			name = Explore;
 			sourceTree = "<group>";
 		};
 		95E4B90A1B811F150061A1E6 /* Embeded search */ = {
@@ -204,15 +258,6 @@
 			name = "Embeded search";
 			sourceTree = "<group>";
 		};
-		DCC3320AD4ACFE951D6AA437 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F4F2332604CC665D6C319DD9 /* Pods.debug.xcconfig */,
-				2AAFE8C70F764C41981E37E9 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -220,12 +265,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 95643FCE1B729B3E0061A1E6 /* Build configuration list for PBXNativeTarget "Hackerspaces" */;
 			buildPhases = (
-				8ABB813B39B1B650ACA283CE /* Check Pods Manifest.lock */,
 				95643FA91B729B3E0061A1E6 /* Sources */,
 				95643FAA1B729B3E0061A1E6 /* Frameworks */,
 				95643FAB1B729B3E0061A1E6 /* Resources */,
-				CD1C7C576A228A05721AAEFC /* Embed Pods Frameworks */,
-				5E1A6502155770E61342A646 /* Copy Pods Resources */,
+				95A5949C1B893E7E0061A1E6 /* Carthage copy-frameworks */,
+				95A5949D1B893F630061A1E6 /* Debug */,
 			);
 			buildRules = (
 			);
@@ -314,50 +358,26 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5E1A6502155770E61342A646 /* Copy Pods Resources */ = {
+		95A5949C1B893E7E0061A1E6 /* Carthage copy-frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Haneke.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/JSONJoy.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftHTTP.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Swiftz.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/BrightFutures.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Box.framework",
 			);
-			name = "Copy Pods Resources";
+			name = "Carthage copy-frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		8ABB813B39B1B650ACA283CE /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		CD1C7C576A228A05721AAEFC /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -367,21 +387,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */,
-				95A21CAD1B7CE9300061A1E6 /* HackerspaceInfoTableViewController.swift in Sources */,
-				95643FD71B72AD130061A1E6 /* model.swift in Sources */,
-				9531618B1B74DB930061A1E6 /* TableViewController.swift in Sources */,
 				95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */,
 				9525AB801B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift in Sources */,
 				95466B471B8124560061A1E6 /* SearchResultsViewController.swift in Sources */,
+				9525AB841B8889D50061A1E6 /* hackerspaceDataFunctions.swift in Sources */,
 				95466B491B81245E0061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */,
 				95466B461B8124560061A1E6 /* SearchControllerBaseViewController.swift in Sources */,
 				9525AB7D1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift in Sources */,
 				9597A1A91B7921090061A1E6 /* MapArtwork.swift in Sources */,
 				95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */,
 				9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */,
+				9525AB821B8748010061A1E6 /* HackerspaceMapTableViewCell.swift in Sources */,
+				95ADEF991B8B53580061A1E6 /* HackerspaceAPIFunctions.swift in Sources */,
 				95E4B90C1B811F330061A1E6 /* DefaultSearchBarViewController.swift in Sources */,
-				95D4B7501B7D6FA90061A1E6 /* HackerspaceTableViewController.swift in Sources */,
-				95643FD51B72AC910061A1E6 /* SearchViewController.swift in Sources */,
 				953161871B73B12A0061A1E6 /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,11 +527,15 @@
 		};
 		95643FCF1B729B3E0061A1E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F4F2332604CC665D6C319DD9 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/zephyz/Documents/Projects/iOS/carthage_dependecies/Carthage/Build/iOS,
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Hackerspaces/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -523,11 +545,15 @@
 		};
 		95643FD01B729B3E0061A1E6 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2AAFE8C70F764C41981E37E9 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/zephyz/Documents/Projects/iOS/carthage_dependecies/Carthage/Build/iOS,
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Hackerspaces/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

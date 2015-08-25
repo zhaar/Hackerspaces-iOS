@@ -2,3 +2,5 @@ github "Haneke/HanekeSwift"
 github "daltoniam/JSONJoy-Swift"
 github "daltoniam/SwiftHTTP"
 github "typelift/Swiftz"
+github "Thomvis/BrightFutures"
+

@@ -12,16 +12,18 @@ import SwiftHTTP
 import JSONJoy
 import MapKit
 import Swiftz
+import BrightFutures
 
 class FavoriteHackerspaceTableViewController: UITableViewController {
 
-    var generalInfo = [String : JSONDecoder]()
-    var customInfo = [String : JSONDecoder]()
+    var generalInfo: [String : JSONDecoder]?
+    var customInfo: [String : JSONDecoder]?
     
     private struct storyboard {
         static let CellIdentifier = "Cell"
         static let TitleIdentifier = "TitleCell"
         static let MapIdentifier = "MapCell"
+        static let CustomIdentifier = "CustomCell"
     }
     
     override func viewDidLoad() {
@@ -32,23 +34,35 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
         
     }
     
+    
     func reloadData() {
-        let request = HTTPTask()
-        request.GET("https://fixme.ch/cgi-bin/spaceapi.py", parameters: nil, completionHandler: {(response: HTTPResponse) in
-            dispatch_async(dispatch_get_main_queue()) {
-                if let err = response.error {
-                    println("error: \(err.localizedDescription)")
-                } else if let data = response.responseObject as? NSData {
-                    if let dict = JSONDecoder(data).dictionary {
-                        for (k,v) in dict {
-                            self.generalInfo[k] = v
-                        }
-                        self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
-                    }
-                    self.tableView.reloadData()
-                }
-            }
-        })
+        HackerspaceAPI.loadHackerspaceAPI("https://fixme.ch/cgi-bin/spaceapi.py").onSuccess { (dict: [String : JSONDecoder]) -> Void in
+//            println(dict.description)
+            self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
+            let (g, c) = splitDict(dict) { (key, value) in !key.hasPrefix(SpaceAPIConstants.customAPIPrefix) }
+            self.generalInfo = g
+            self.customInfo = c
+            println("general info \(self.generalInfo)")
+            println("custom info \(self.customInfo)")
+            self.tableView.reloadData()
+//            self.navigationController?.navigationBar.topItem?.title = dict["space"]
+        }
+//        let request = HTTPTask()
+//        request.GET("https://fixme.ch/cgi-bin/spaceapi.py", parameters: nil, completionHandler: {(response: HTTPResponse) in
+//            dispatch_async(dispatch_get_main_queue()) {
+//                if let err = response.error {
+//                    println("error: \(err.localizedDescription)")
+//                } else if let data = response.responseObject as? NSData {
+//                    if let dict = JSONDecoder(data).dictionary {
+//                        for (k,v) in dict {
+//                            self.generalInfo[k] = v
+//                        }
+//                        self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
+//                    }
+//                    self.tableView.reloadData()
+//                }
+//            }
+//        })
     }
 
     // MARK: - Table view data source
@@ -63,8 +77,8 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
         switch(section) {
         case 0: return 1
         case 1: return 1
-        case 2: return generalInfo.count
-        case 3: return customInfo.count
+        case 2: return generalInfo?.count ?? 0
+        case 3: return customInfo?.count ?? 0
         default: return 0
         }
     }
@@ -74,12 +88,16 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
         switch(indexPath.section) {
         case 0 : return reuseTitleCell(indexPath)
         case 1 : return reuseMapCell(indexPath)
-        default :
+        case 2 :
             let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.CellIdentifier, forIndexPath: indexPath) as! UITableViewCell
             
-            let key = generalInfo.keys.array[indexPath.row]
-            cell.textLabel?.text = key
-            cell.detailTextLabel?.text = generalInfo[key]?.description
+            if let key = generalInfo?.keys.array[indexPath.row] {
+                cell.textLabel?.text = key
+                cell.detailTextLabel?.text = generalInfo?[key]?.description
+            }
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.CustomIdentifier, forIndexPath: indexPath) as! UITableViewCell
             return cell
         }
     }
@@ -94,7 +112,7 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     
     func reuseTitleCell(indexPath: NSIndexPath) -> UITableViewCell {
         if let titleCell = tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as? HackerspaceTitleTableViewCell{
-            if let logoURL = self.generalInfo["logo"]?.string {
+            if let logoURL = self.generalInfo?["logo"]?.string {
                 let request = HTTPTask()
                 request.GET(logoURL, parameters: nil) {
                     (response) in
@@ -107,8 +125,8 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
                     }
                 }
             }
-            titleCell.hackerspaceStatus.text = (generalInfo["state"]?.dictionary?["open"]?.bool ?? false) ? "open" : "closed"
-            titleCell.url.text = generalInfo["url"]?.string
+            titleCell.hackerspaceStatus.text = (generalInfo?["state"]?.dictionary?["open"]?.bool ?? false) ? "open" : "closed"
+            titleCell.url.text = generalInfo?["url"]?.string
             return titleCell
         } else {
             println("unknown cell")
