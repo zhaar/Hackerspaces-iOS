@@ -7,37 +7,52 @@
 //
 
 import Foundation
-//import Swiftz
+import Swiftz
 import JSONJoy
 import SwiftHTTP
 import BrightFutures
+import MapKit
 
 struct SpaceAPIConstants {
     static let API = "http://spaceapi.net/directory.json"
     static let customAPIPrefix = "ext_"
+    static let APIlocation = "location"
+    static let APIversion = "api"
+    static let APIname = "space"
+    static let APIlogo = "logo"
+    static let APIurl = "url"
+    static let APIstate = "state"
+    static let APIcontact = "contact"
+    static let APIreport = "issue_report_channels"
+}
+
+class SpaceLocation {
+    let name: String
+    let address: String?
+    let location: CLLocationCoordinate2D
+    init(name: String, address: String?, location: CLLocationCoordinate2D) {
+        self.name = name
+        self.location = location
+        self.address = address
+    }
 }
 
 
-struct SpaceAPI {
-    
-//    var spaceAPI = [String: String]()
-    
-//    static func reloadAPI() {
-//        let request = HTTPTask()
-//        request.GET(SpaceAPIConstants.API, parameters: nil, completionHandler: {(response: HTTPResponse) in
-//            dispatch_async(dispatch_get_main_queue()) {
-//                if let err = response.error {
-//                    println("error: \(err.localizedDescription)")
-//                } else if let data = response.responseObject as? NSData {
-//                    if let dict = JSONDecoder(data).dictionary {
-//                        let keys = dict.keys.array
-//                        keys.foreach { key in  dict[key]?.string >>- { spaceAPI[key] = $0 }}
-//                    }
-//                }
-//                println(self.spaceAPI.description)
-//            }
-//        })
+//extension SpaceLocation : MKAnnotation {
+//    var coordinate: CLLocationCoordinate2D {
+//        return self.location
 //    }
+//    var title: String {
+//        return self.name
+//    }
+//    var subtitle: String = ""
+//}
+
+func fromListToFuture<T,U>(list: [Future<T,U>]) -> Future<[T], U> {
+    return BrightFutures.sequence(list)
+}
+
+struct SpaceAPI {
     
     static func loadAPI() -> Future<[String : String], NSError> {
         let p = Promise<[String: String], NSError>()
@@ -85,23 +100,29 @@ struct SpaceAPI {
         return p.future
     }
     
-//    func reload() {
-//        let request = HTTPTask()
-//        request.GET("https://fixme.ch/cgi-bin/spaceapi.py", parameters: nil) {(response: HTTPResponse) in
-//            dispatch_async(dispatch_get_main_queue()) {
-//                if let err = response.error {
-//                    println("error: \(err.localizedDescription)")
-//                } else if let data = response.responseObject as? NSData {
-//                    if let dict = JSONDecoder(data).dictionary {
-//                        for (k,v) in dict {
-////                            self.generalInfo[k] = v
-//                        }
-////                        self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
-//                    }
-////                    self.tableView.reloadData()
-//                }
-//            }
-//        }
-//    }
+    static func isSpaceOpen(json: [String: JSONDecoder]) -> Bool {
+        return json["state"]?.dictionary?["open"]?.bool ?? false
+    }
     
+    static func extractName(json: [String: JSONDecoder]) -> String {
+        return json[SpaceAPIConstants.APIname]!.string!
+    }
+    
+    static func extractLocationInfo(json: [String: JSONDecoder]) -> SpaceLocation? {
+        let location = json[SpaceAPIConstants.APIlocation]?.dictionary
+        let lat = location?["lat"]?.number >>- {CLLocationDegrees($0)}
+        let lon = location?["lon"]?.number >>- {CLLocationDegrees($0)}
+        let loc = lat >>- {la in lon >>- { lo in CLLocation(latitude: la, longitude: lo)}}
+        return loc >>- {SpaceLocation(name: self.extractName(json), address: location?["address"]?.string, location: $0)}
+    }
+    
+    static func getHackerspaceLocation(url: String) -> Future<SpaceLocation?, NSError> {
+        return loadHackerspaceAPI(url).map { self.extractLocationInfo($0) }
+    }
+    
+    static func getHackerspaceLocations() -> Future<[SpaceLocation?], NSError> {
+        let apiLinks = loadAPI().map { $0.values.array }
+        let hackerspaceJSONs = apiLinks.flatMap { url in BrightFutures.sequence(url.map(self.loadHackerspaceAPI)) }
+        return hackerspaceJSONs.map { $0.map(self.extractLocationInfo) }
+    }
 }

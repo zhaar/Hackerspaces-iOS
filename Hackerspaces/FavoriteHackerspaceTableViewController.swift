@@ -37,37 +37,17 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     
     func reloadData() {
         SpaceAPI.loadHackerspaceAPI("https://fixme.ch/cgi-bin/spaceapi.py").onSuccess { (dict: [String : JSONDecoder]) -> Void in
-//            println(dict.description)
             self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
             let (g, c) = splitDict(dict) { (key, value) in !key.hasPrefix(SpaceAPIConstants.customAPIPrefix) }
             self.generalInfo = g
             self.customInfo = c
             self.tableView.reloadData()
-//            self.navigationController?.navigationBar.topItem?.title = dict["space"]
         }
-//        let request = HTTPTask()
-//        request.GET("https://fixme.ch/cgi-bin/spaceapi.py", parameters: nil, completionHandler: {(response: HTTPResponse) in
-//            dispatch_async(dispatch_get_main_queue()) {
-//                if let err = response.error {
-//                    println("error: \(err.localizedDescription)")
-//                } else if let data = response.responseObject as? NSData {
-//                    if let dict = JSONDecoder(data).dictionary {
-//                        for (k,v) in dict {
-//                            self.generalInfo[k] = v
-//                        }
-//                        self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
-//                    }
-//                    self.tableView.reloadData()
-//                }
-//            }
-//        })
     }
 
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
         return 4
     }
 

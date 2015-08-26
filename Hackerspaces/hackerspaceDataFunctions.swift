@@ -13,12 +13,12 @@ import Swiftz
 
 
 struct MKFunctions {
-    static func spaceCoordinate(json: [String : JSONDecoder]) -> CLLocation? {
-        let locationDict = json["location"]?.dictionary
-        let lat = locationDict?["lat"]?.number >>- {CLLocationDegrees($0)}
-        let lon = locationDict?["lon"]?.number >>- {CLLocationDegrees($0)}
-        return lat >>- {la in lon >>- { lo in CLLocation(latitude: la, longitude: lo)}}
-    }
+//    static func spaceCoordinate(json: [String : JSONDecoder]) -> CLLocation? {
+//        let locationDict = json["location"]?.dictionary
+//        let lat = locationDict?["lat"]?.number >>- {CLLocationDegrees($0)}
+//        let lon = locationDict?["lon"]?.number >>- {CLLocationDegrees($0)}
+//        return lat >>- {la in lon >>- { lo in CLLocation(latitude: la, longitude: lo)}}
+//    }
     
     static func centerMapOnLocation(map: MKMapView, location: CLLocation) {
         let regionRadius: CLLocationDistance = 1000
