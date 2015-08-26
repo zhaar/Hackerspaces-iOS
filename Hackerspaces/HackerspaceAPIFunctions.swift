@@ -13,12 +13,12 @@ import SwiftHTTP
 import BrightFutures
 
 struct SpaceAPIConstants {
-    static let API = "spaceapi.net/directory.json"
+    static let API = "http://spaceapi.net/directory.json"
     static let customAPIPrefix = "ext_"
 }
 
 
-struct HackerspaceAPI {
+struct SpaceAPI {
     
 //    var spaceAPI = [String: String]()
     
@@ -54,10 +54,10 @@ struct HackerspaceAPI {
                         }
                         p.success(api)
                     } else {
-                        p.failure(NSError(domain: "HTTP request format error", code: 125, userInfo: nil))
+                        p.failure(NSError(domain: "HTTP request json cast error: \(JSONDecoder(data).description)", code: 126, userInfo: nil))
                     }
                 } else {
-                    p.failure(NSError(domain: "HTTP request format error", code: 125, userInfo: nil))
+                    p.failure(NSError(domain: "HTTP request data cast error", code: 125, userInfo: nil))
                 }
             }
         }

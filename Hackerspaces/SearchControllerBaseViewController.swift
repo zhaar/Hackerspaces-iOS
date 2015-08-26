@@ -16,8 +16,31 @@ class SearchControllerBaseViewController: UITableViewController {
     }
     
     // MARK: Properties
+    var hackerspaces = [String : String]() {
+        didSet {
+            allResults = hackerspaces.keys.array
+            allResults.sort(<)
+        }
+    }
+    
+    var allResults = [String]() {
+        didSet {
+            visibleResults = allResults
+            self.tableView.reloadData()
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        println("source did load")
+        SpaceAPI.loadAPI().onSuccess {
+            self.hackerspaces = $0
+            }.onFailure {
+                println("failed with error \($0)")
+        }
+    }
 
-    let allResults = ["Here's", "to", "the", "crazy", "ones.", "The", "misfits.", "The", "rebels.", "The", "troublemakers.", "The", "round", "pegs", "in", "the", "square", "holes.", "The", "ones", "who", "see", "things", "differently.", "They're", "not", "fond", "of", "rules.", "And", "they", "have", "no", "respect", "for", "the", "status", "quo.", "You", "can", "quote", "them,", "disagree", "with", "them,", "glorify", "or", "vilify", "them.", "About", "the", "only", "thing", "you", "can't", "do", "is", "ignore", "them.", "Because", "they", "change", "things.", "They", "push", "the", "human", "race", "forward.", "And", "while", "some", "may", "see", "them", "as", "the", "crazy", "ones,", "we", "see", "genius.", "Because", "the", "people", "who", "are", "crazy", "enough", "to", "think", "they", "can", "change", "the", "world,", "are", "the", "ones", "who", "do."]
+//    let allResults = ["Here's", "to", "the", "crazy", "ones.", "The", "misfits.", "The", "rebels.", "The", "troublemakers.", "The", "round", "pegs", "in", "the", "square", "holes.", "The", "ones", "who", "see", "things", "differently.", "They're", "not", "fond", "of", "rules.", "And", "they", "have", "no", "respect", "for", "the", "status", "quo.", "You", "can", "quote", "them,", "disagree", "with", "them,", "glorify", "or", "vilify", "them.", "About", "the", "only", "thing", "you", "can't", "do", "is", "ignore", "them.", "Because", "they", "change", "things.", "They", "push", "the", "human", "race", "forward.", "And", "while", "some", "may", "see", "them", "as", "the", "crazy", "ones,", "we", "see", "genius.", "Because", "the", "people", "who", "are", "crazy", "enough", "to", "think", "they", "can", "change", "the", "world,", "are", "the", "ones", "who", "do."]
 
     lazy var visibleResults: [String] = self.allResults
 
@@ -45,10 +68,9 @@ class SearchControllerBaseViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(TableViewConstants.tableViewCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.tableViewCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        cell.textLabel?.text = visibleResults[indexPath.row]
+        return cell
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.textLabel!.text = visibleResults[indexPath.row]
-    }
 }

@@ -36,14 +36,12 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     
     
     func reloadData() {
-        HackerspaceAPI.loadHackerspaceAPI("https://fixme.ch/cgi-bin/spaceapi.py").onSuccess { (dict: [String : JSONDecoder]) -> Void in
+        SpaceAPI.loadHackerspaceAPI("https://fixme.ch/cgi-bin/spaceapi.py").onSuccess { (dict: [String : JSONDecoder]) -> Void in
 //            println(dict.description)
             self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
             let (g, c) = splitDict(dict) { (key, value) in !key.hasPrefix(SpaceAPIConstants.customAPIPrefix) }
             self.generalInfo = g
             self.customInfo = c
-            println("general info \(self.generalInfo)")
-            println("custom info \(self.customInfo)")
             self.tableView.reloadData()
 //            self.navigationController?.navigationBar.topItem?.title = dict["space"]
         }
