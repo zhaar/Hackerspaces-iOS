@@ -12,6 +12,7 @@ import JSONJoy
 import SwiftHTTP
 import BrightFutures
 import MapKit
+import Haneke
 
 struct SpaceAPIConstants {
     static let API = "http://spaceapi.net/directory.json"
@@ -53,9 +54,34 @@ struct SpaceAPI {
     static func loadAPI() -> Future<[String : String], NSError> {
         let p = Promise<[String: String], NSError>()
         Queue.global.async {
+            let cache = Shared.dataCache
+            cache.fetch(URL: NSURL(string: SpaceAPIConstants.API)!).onSuccess { data in
+                if let dict = JSONDecoder(data).dictionary{
+                    var api = [String : String]()
+                    for key in dict.keys {
+                        if let value = dict[key]?.string {
+                            api[key] = value
+                        }
+                    }
+                    p.success(api)
+                } else {
+                    p.failure(NSError(domain: "HTTP request json cast error: \(JSONDecoder(data).description)", code: 126, userInfo: nil))
+                }
+            }.onFailure { error in
+                    p.failure(error!)
+            }
+        }
+        return p.future
+    }
+    
+    static func loadAPIFromWeb() -> Future<[String : String], NSError> {
+        let p = Promise<[String: String], NSError>()
+        Queue.global.async {
+            
             let req = HTTPTask()
             req.GET(SpaceAPIConstants.API, parameters: nil) { (response: HTTPResponse) in
                 if let data = response.responseObject as? NSData {
+                    Shared.dataCache.set(value: data, key: SpaceAPIConstants.API)
                     if let dict = JSONDecoder(data).dictionary{
                         var api = [String : String]()
                         for key in dict.keys {
@@ -75,11 +101,24 @@ struct SpaceAPI {
         return p.future
     }
     
-    static func loadAPINoError() -> Future<Result<[String : String]>, NoError> {
-        return FutureUtils.futureToResult(loadAPI())
+    static func loadHackerspaceAPI(url: String) -> Future<[String : JSONDecoder], NSError> {
+        let p = Promise<[String : JSONDecoder], NSError>()
+        Queue.global.async {
+            let cache = Shared.dataCache
+            cache.fetch(URL: NSURL(string: url)!).onSuccess { data in
+                if let dict = JSONDecoder(data).dictionary{
+                    p.success(dict)
+                } else {
+                    p.failure(NSError(domain: "HTTP request json cast error: \(JSONDecoder(data).description)", code: 126, userInfo: nil))
+                }
+            }.onFailure { error in
+                    p.failure(error!)
+            }
+        }
+        return p.future
     }
     
-    static func loadHackerspaceAPI(url: String) -> Future<[String : JSONDecoder], NSError> {
+    static func loadHackerspaceAPIFromWeb(url: String) -> Future<[String : JSONDecoder], NSError> {
         let p = Promise<[String: JSONDecoder], NSError>()
         Queue.global.async {
             let req = HTTPTask()
@@ -87,6 +126,7 @@ struct SpaceAPI {
                 if let err = response.error {
                     p.failure(err)
                 } else if let data = response.responseObject as? NSData {
+                    Shared.dataCache.set(value: data, key: url)
                     if let dict = JSONDecoder(data).dictionary {
                         p.success(dict)
                     } else {
@@ -157,38 +197,26 @@ struct SpaceAPI {
         return FutureUtils.flattenOptionalFuture(dictToFutureQuery(dict))
     }
     
-    static func loadAllSpacesAPI() -> Future<Result<[(String, [String: JSONDecoder])]>, NoError> {
-        return loadAPINoError().flatMap { (result: Result<[String : String]>) -> Future<Result<[(String, [String: JSONDecoder])]>, NoError> in
-            switch result {
-            case .Error(let e) : return future(Result.error(e))
-            case .Value(let b) : return self.arrayFutureToFlatFutureArray(b.value).map { Result.value($0)}
-            }
+    static func loadAllSpacesAPI() -> Future<[(String, [String: JSONDecoder])], NSError> {
+        return loadAPI().flatMap { (dict: [String : String]) -> Future<[(String, [String: JSONDecoder])], NSError> in
+            promoteError(self.arrayFutureToFlatFutureArray(dict))
         }
     }
     
-    static func loadAllSpaceAPIAsDict() -> Future<Result<[String : [String : JSONDecoder]]>, NoError> {
-        return loadAllSpacesAPI().map { result in result.flatMap { Result.value(toDict($0)) }}
+    static func loadAllSpaceAPIAsDict() -> Future<[String : [String : JSONDecoder]], NSError> {
+        return loadAllSpacesAPI().map { Dictionary($0) }
     }
     
-    static func getHackerspaceOpens() -> Future<Result<[String : Bool]>, NoError> {
-        return loadAllSpaceAPIAsDict().map { (result: Result<[String : [String : JSONDecoder]]>) in
-            let r = result >>- { (dict: [String : [String : JSONDecoder]]) -> Result<[String : Bool]> in
-                let d = dict.map { (key, value) in (key, SpaceAPI.extractIsSpaceOpen(value))}
-                return Result.value(d)
-            }
+    static func getHackerspaceOpens() -> Future<[String : Bool], NSError> {
+        return loadAllSpaceAPIAsDict().map { (dict: [String : [String : JSONDecoder]]) in
+            let r = dict.map { (key, value) in (key, SpaceAPI.extractIsSpaceOpen(value))}
             return r
         }
     }
     
-    static func getHackerspaceLocations() -> Future<Result<[SpaceLocation?]>, NoError> {
-        return loadAllSpacesAPI().map { (result:Result<[(String, [String : JSONDecoder])]>) -> Result<[SpaceLocation?]> in
-            let r = result >>- { (arrayOfTuples: [(String, [String : JSONDecoder])]) -> Result<[SpaceLocation?]> in
-                let a = arrayOfTuples.map { (tuple:(String, [String : JSONDecoder])) -> SpaceLocation? in
-                    let location = SpaceAPI.extractLocationInfo(tuple.1)
-                    return location
-                }
-                return Result.value(a)
-            }
+    static func getHackerspaceLocations() -> Future<[SpaceLocation?], NSError> {
+        return loadAllSpacesAPI().map { (arr:[(String, [String : JSONDecoder])]) -> [SpaceLocation?] in
+            let r = arr.map { (tuple:(String, [String : JSONDecoder])) -> SpaceLocation? in SpaceAPI.extractLocationInfo(tuple.1) }
             return r
         }
     }

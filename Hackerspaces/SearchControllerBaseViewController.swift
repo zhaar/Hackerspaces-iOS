@@ -33,15 +33,8 @@ class SearchControllerBaseViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SpaceAPI.getHackerspaceOpens().onSuccess { result in
-            switch result {
-            case .Value(let b) :
-                let dict = b.value
-                self.hackerspaces = dict
-            case .Error(let e) :
-                println("failed to retrive hackerspace status with error \(e)")
-            }
-            
+        SpaceAPI.getHackerspaceOpens().onSuccess {
+            self.hackerspaces = $0
         }
     }
 
