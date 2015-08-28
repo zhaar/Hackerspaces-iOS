@@ -19,6 +19,21 @@ func optionalBind<T, U>(optional: T?, f: T -> U?) -> U?
     }
 }
 
+//extension Array<(T,S)> {
+//    func toDict() -> [T : S] {
+//        self.foldl([T : S]()) {
+//            (acc, elem) in
+//            acc[elem.0] = elem.1
+//        }
+//    }
+//}
+func toDict<T,S>(arr: [(T,S)]) -> [T : S] {
+    return arr.foldl([T : S]()) { (var acc, tuple) in
+        acc[tuple.0] = tuple.1
+        return acc
+    }
+}
+
 extension Array {
     
     func foreach(fn: T -> Void) {
