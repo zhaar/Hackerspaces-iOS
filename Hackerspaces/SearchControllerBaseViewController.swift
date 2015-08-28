@@ -10,6 +10,14 @@ import UIKit
 import JSONJoy
 
 class SearchControllerBaseViewController: UITableViewController {
+    
+    @IBAction func refresh(sender: UIRefreshControl) {
+        SpaceAPI.getHackerspaceOpensFromWeb().onSuccess { api in
+            self.hackerspaces = api
+            sender.endRefreshing()
+        }
+    }
+
     // MARK: Types
     
     struct TableViewConstants {
@@ -66,11 +74,12 @@ class SearchControllerBaseViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.tableViewCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
         let name = visibleResults[indexPath.row]
-        cell.textLabel?.text = name
         let isOpen = self.hackerspaces[name]
-        if let detail = cell.detailTextLabel {
-            detail.text = ((isOpen ?? false) ? "⚫︎" : "")
-        }
+        cell.textLabel?.text = name
+        cell.detailTextLabel?.text = ((isOpen ?? false) ? "⚫︎" : "")
+        //workaround a bug where detail is no updated correctly
+        //see: http://stackoverflow.com/questions/25987135/ios-8-uitableviewcell-detail-text-not-correctly-updating
+        cell.layoutSubviews()
         return cell
     }
 }

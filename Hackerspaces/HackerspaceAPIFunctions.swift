@@ -184,7 +184,7 @@ struct SpaceAPI {
     
     @return list of tuple representing the name and the result of the queried url as a future. [(F<name>, F<JSON>)]
     */
-    static func dictToFutureQuery(dictionary: [String : String]) -> [Future<(String, [String : JSONDecoder])?, NoError>] {
+    private static func dictToFutureQuery(dictionary: [String : String]) -> [Future<(String, [String : JSONDecoder])?, NoError>] {
         return map(dictionary) { (key, value) in
             let t = (future(key), SpaceAPI.loadHackerspaceAPI(value))
             let s = future(key).zip(FutureUtils.futureToOptional(t.1))
@@ -193,8 +193,14 @@ struct SpaceAPI {
         }
     }
     
-    static func arrayFutureToFlatFutureArray(dict: [String : String]) -> Future<[(String, [String : JSONDecoder])], NoError> {
+    private static func arrayFutureToFlatFutureArray(dict: [String : String]) -> Future<[(String, [String : JSONDecoder])], NoError> {
         return FutureUtils.flattenOptionalFuture(dictToFutureQuery(dict))
+    }
+    
+    static func loadAllSpacesAPIFromWeb() -> Future<[(String, [String: JSONDecoder])], NSError> {
+        return loadAPIFromWeb().flatMap { (dict: [String : String]) -> Future<[(String, [String: JSONDecoder])], NSError> in
+            promoteError(self.arrayFutureToFlatFutureArray(dict))
+        }
     }
     
     static func loadAllSpacesAPI() -> Future<[(String, [String: JSONDecoder])], NSError> {
@@ -203,8 +209,19 @@ struct SpaceAPI {
         }
     }
     
+    static func loadAllSpaceAPIAsDictFromWeb() -> Future<[String : [String : JSONDecoder]], NSError> {
+        return loadAllSpacesAPIFromWeb().map { Dictionary($0) }
+    }
+    
     static func loadAllSpaceAPIAsDict() -> Future<[String : [String : JSONDecoder]], NSError> {
         return loadAllSpacesAPI().map { Dictionary($0) }
+    }
+    
+    static func getHackerspaceOpensFromWeb() -> Future<[String : Bool], NSError> {
+        return loadAllSpaceAPIAsDictFromWeb().map { (dict: [String : [String : JSONDecoder]]) in
+            let r = dict.map { (key, value) in (key, SpaceAPI.extractIsSpaceOpen(value))}
+            return r
+        }
     }
     
     static func getHackerspaceOpens() -> Future<[String : Bool], NSError> {
