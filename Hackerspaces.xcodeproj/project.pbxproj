@@ -12,6 +12,7 @@
 		9525AB821B8748010061A1E6 /* HackerspaceMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HackerspaceMapTableViewCell.swift */; };
 		9525AB841B8889D50061A1E6 /* hackerspaceDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB831B8889D50061A1E6 /* hackerspaceDataFunctions.swift */; };
 		953161871B73B12A0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
+		953C513B1B8F49190061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
 		95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB21B729B3E0061A1E6 /* AppDelegate.swift */; };
 		95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB61B729B3E0061A1E6 /* MapViewController.swift */; };
 		95643FBA1B729B3E0061A1E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95643FB81B729B3E0061A1E6 /* Main.storyboard */; };
@@ -73,6 +74,7 @@
 		9525AB811B8748010061A1E6 /* HackerspaceMapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceMapTableViewCell.swift; sourceTree = "<group>"; };
 		9525AB831B8889D50061A1E6 /* hackerspaceDataFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hackerspaceDataFunctions.swift; sourceTree = "<group>"; };
 		953161861B73B12A0061A1E6 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
+		953C513A1B8F49190061A1E6 /* FutureUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureUtils.swift; sourceTree = "<group>"; };
 		95643FAD1B729B3E0061A1E6 /* Hackerspaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hackerspaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95643FB11B729B3E0061A1E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95643FB21B729B3E0061A1E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				95D4B74D1B7D68C80061A1E6 /* Map */,
 				95E4B90A1B811F150061A1E6 /* Embeded search */,
 				9525AB831B8889D50061A1E6 /* hackerspaceDataFunctions.swift */,
+				953C513A1B8F49190061A1E6 /* FutureUtils.swift */,
 				95ADEF981B8B53580061A1E6 /* HackerspaceAPIFunctions.swift */,
 				9525AB7E1B8622C70061A1E6 /* favorite hackerspace */,
 				95643FB81B729B3E0061A1E6 /* Main.storyboard */,
@@ -394,6 +397,7 @@
 				95DBD9551B8D0FC30061A1E6 /* SearchControllerBaseViewController.swift in Sources */,
 				95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */,
 				9525AB801B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift in Sources */,
+				953C513B1B8F49190061A1E6 /* FutureUtils.swift in Sources */,
 				9525AB841B8889D50061A1E6 /* hackerspaceDataFunctions.swift in Sources */,
 				95DBD9561B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */,
 				9525AB7D1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift in Sources */,

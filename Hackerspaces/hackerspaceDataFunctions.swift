@@ -24,10 +24,10 @@ struct MKFunctions {
 }
 
 extension Dictionary {
-    func split<Key: Hashable, Val>(dict: [Key : Val], discriminationFunction: (Key, Val) -> Bool) -> ([Key: Val],[Key : Val]) {
-        var target = [Key: Val]()
-        var rest = [Key : Val]()
-        for (k, v) in dict {
+    func split(discriminationFunction: (Key, Value) -> Bool) -> ([Key: Value],[Key : Value]) {
+        var target = [Key: Value]()
+        var rest = [Key : Value]()
+        for (k, v) in self {
             if discriminationFunction(k,v) {
                 target[k] = v
             } else {

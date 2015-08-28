@@ -157,7 +157,7 @@ struct SpaceAPI {
         return FutureUtils.flattenOptionalFuture(dictToFutureQuery(dict))
     }
     
-    static func getAllSpacesAPI() -> Future<Result<[(String, [String: JSONDecoder])]>, NoError> {
+    static func loadAllSpacesAPI() -> Future<Result<[(String, [String: JSONDecoder])]>, NoError> {
         return loadAPINoError().flatMap { (result: Result<[String : String]>) -> Future<Result<[(String, [String: JSONDecoder])]>, NoError> in
             switch result {
             case .Error(let e) : return future(Result.error(e))
@@ -166,8 +166,22 @@ struct SpaceAPI {
         }
     }
     
+    static func loadAllSpaceAPIAsDict() -> Future<Result<[String : [String : JSONDecoder]]>, NoError> {
+        return loadAllSpacesAPI().map { result in result.flatMap { Result.value(toDict($0)) }}
+    }
+    
+    static func getHackerspaceOpens() -> Future<Result<[String : Bool]>, NoError> {
+        return loadAllSpaceAPIAsDict().map { (result: Result<[String : [String : JSONDecoder]]>) in
+            let r = result >>- { (dict: [String : [String : JSONDecoder]]) -> Result<[String : Bool]> in
+                let d = dict.map { (key, value) in (key, SpaceAPI.extractIsSpaceOpen(value))}
+                return Result.value(d)
+            }
+            return r
+        }
+    }
+    
     static func getHackerspaceLocations() -> Future<Result<[SpaceLocation?]>, NoError> {
-        return getAllSpacesAPI().map { (result:Result<[(String, [String : JSONDecoder])]>) -> Result<[SpaceLocation?]> in
+        return loadAllSpacesAPI().map { (result:Result<[(String, [String : JSONDecoder])]>) -> Result<[SpaceLocation?]> in
             let r = result >>- { (arrayOfTuples: [(String, [String : JSONDecoder])]) -> Result<[SpaceLocation?]> in
                 let a = arrayOfTuples.map { (tuple:(String, [String : JSONDecoder])) -> SpaceLocation? in
                     let location = SpaceAPI.extractLocationInfo(tuple.1)

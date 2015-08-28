@@ -14,38 +14,31 @@ struct FutureUtils {
     
     ///Converts a future that can fail into a future of optional with no failure
     static func futureToOptional<T, E: ErrorType>(future: Future<T, E>) -> Future<T?, NoError> {
-        return future.map { t in return t }.recover{ error in return  nil }
+        return future.map { identity($0) }.recover{ _ in nil }
     }
     
+    ///Converts a future with failures to a future of Result with no failure
     static func futureToResult<T, E: ErrorType>(future: Future<T, E>) -> Future<Result<T>, NoError> {
-        return future.map { t in return Result.value(t) }.recover { err in Result.error(err.nsError) }
+        return future.map { Result.value($0) }.recover { Result.error($0.nsError) }
     }
     
     ///Converts a list of futures into a future of list discarding failing futures
     static func successfulFutureList<T, E: ErrorType>(list: [Future<T, E>]) -> Future<[T], NoError> {
-        let results = list.map { (future: Future<T, E>) in self.futureToOptional(future)}
-        return flattenOptionalFuture(results)
+        return flattenOptionalFuture(list.map(futureToOptional))
     }
     
+    ///Converts a list of futures of Option into a future of list of non-nil values
     static func flattenOptionalFuture<T>(list: [Future<T?, NoError>]) -> Future<[T], NoError> {
-        return BrightFutures.sequence(list).map { (arr: [T?]) -> [T] in arr.filter({ elem in elem != nil }).map { $0!}}
+        return BrightFutures.sequence(list).map { (arr: [T?]) -> [T] in arr.filter({ $0 != nil }).map {$0!}}
     }
     
-    static func flatten
     ///Converts a tuple of futures into a future of tuples
     static func unwrapTuple<S,T>(tuple: (Future<S, ErrorType>, Future<T, ErrorType>)) -> Future<(S,T), ErrorType> {
         return tuple.0.zip(tuple.1)
     }
     
-    ///Converts a list of tuple of futures into a future of list of tuple discating tuples containing a failing future
-    static func upwrapListSuccessTuples<S,T>(list: [(Future<S, ErrorType>, Future<T, ErrorType>)]) -> Future<[(S,T)], NoError> {
-        let ls = list.map(unwrapTuple)
-        return successfulFutureList(ls)
-    }
-}
-
-//extension Future<T> {
-//    func wrapError() -> Future<Result<T>, NoError> {
-//        return
+//    ///Converts a list of tuple of futures into a future of list of tuple discating tuples containing a failing future
+//    static func upwrapListSuccessTuples<S,T>(list: [(Future<S, ErrorType>, Future<T, ErrorType>)]) -> Future<[(S,T)], NoError> {
+//        return successfulFutureList(list.map(unwrapTuple))
 //    }
-//}
+}

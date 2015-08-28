@@ -36,12 +36,19 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     
     
     func reloadData() {
-        SpaceAPI.loadHackerspaceAPI("https://fixme.ch/cgi-bin/spaceapi.py").onSuccess { (dict: [String : JSONDecoder]) -> Void in
-            self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
-            let (g, c) = splitDict(dict) { (key, value) in !key.hasPrefix(SpaceAPIConstants.customAPIPrefix) }
-            self.generalInfo = g
-            self.customInfo = c
-            self.tableView.reloadData()
+        SpaceAPI.loadHackerspaceAPINoError("https://fixme.ch/cgi-bin/spaceapi.py").onSuccess { (result: Result<[String : JSONDecoder]>) in
+            switch result {
+                case .Value(let box) :
+                    let dict = box.value
+                    self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
+                    let (g, c) = dict.split { (key: String, value: JSONDecoder) -> Bool in !key.hasPrefix(SpaceAPIConstants.customAPIPrefix) }
+                    self.generalInfo = g
+                    self.customInfo = c
+                    self.tableView.reloadData()
+                
+                case .Error(let e): println("unable to reach api with error \(e)")
+            }
+            return
         }
     }
 
@@ -114,7 +121,8 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     
     func reuseMapCell(indexPath: NSIndexPath) -> UITableViewCell {
         if let mapCell = tableView.dequeueReusableCellWithIdentifier(storyboard.MapIdentifier, forIndexPath: indexPath) as? HackerspaceMapTableViewCell {
-            generalInfo >>- {MKFunctions.spaceCoordinate($0)} >>- { MKFunctions.centerMapOnLocation(mapCell.map, location: $0) }
+            let l = (generalInfo >>- { SpaceAPI.extractLocationInfo($0)})?.location
+            l >>- { MKFunctions.centerMapOnLocation(mapCell.map, location:$0 ) }
             return mapCell
         } else {
             println("unknown cell")
