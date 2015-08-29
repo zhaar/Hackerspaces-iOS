@@ -7,3 +7,28 @@
 //
 
 import Foundation
+import MapKit
+
+
+class SpaceLocation : NSObject{
+    let name: String
+    let address: String?
+    let location: CLLocationCoordinate2D
+    init(name: String, address: String?, location: CLLocationCoordinate2D) {
+        self.name = name
+        self.location = location
+        self.address = address
+    }
+}
+
+extension SpaceLocation : MKAnnotation {
+    var coordinate: CLLocationCoordinate2D {
+        return self.location
+    }
+    var title: String? {
+        return self.name
+    }
+    var subtitle: String? {
+        return self.address
+    }
+}
