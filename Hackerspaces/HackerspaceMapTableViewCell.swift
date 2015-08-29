@@ -13,6 +13,15 @@ import MapKit
 class HackerspaceMapTableViewCell: UITableViewCell {
 
     @IBOutlet weak var map: MKMapView!
+    var location: SpaceLocation? {
+        didSet {
+            if let l = location {
+                map.addAnnotation(l)
+                map.showAnnotations([l], animated: true)
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

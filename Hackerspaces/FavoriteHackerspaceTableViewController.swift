@@ -113,8 +113,7 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     
     func reuseMapCell(indexPath: NSIndexPath) -> UITableViewCell {
         if let mapCell = tableView.dequeueReusableCellWithIdentifier(storyboard.MapIdentifier, forIndexPath: indexPath) as? HackerspaceMapTableViewCell {
-            let l = (generalInfo >>- { SpaceAPI.extractLocationInfo($0)})?.location
-            l >>- { MKFunctions.centerMapOnLocation(mapCell.map, location:$0 ) }
+            generalInfo >>- { SpaceAPI.extractLocationInfo($0)} >>- { mapCell.location = $0 }
             return mapCell
         } else {
             println("unknown cell")
