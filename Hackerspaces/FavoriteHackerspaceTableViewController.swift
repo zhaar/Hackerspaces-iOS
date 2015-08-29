@@ -13,11 +13,17 @@ import JSONJoy
 import MapKit
 import Swiftz
 import BrightFutures
+import Haneke
 
 class FavoriteHackerspaceTableViewController: UITableViewController {
 
+    @IBAction func refresh(sender: UIRefreshControl) {
+        reloadData(fromCache: false, callback: { sender.endRefreshing() })
+    }
+    
     var generalInfo: [String : JSONDecoder]?
     var customInfo: [String : JSONDecoder]?
+    var hackerspaceURL: String? = "https://fixme.ch/cgi-bin/spaceapi.py"
     
     private struct storyboard {
         static let CellIdentifier = "Cell"
