@@ -285,13 +285,18 @@
                             <outlet property="delegate" destination="gdX-aS-qgt" id="ery-pH-bgD"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="vhb-dO-2g3"/>
+                    <navigationItem key="navigationItem" id="vhb-dO-2g3">
+                        <barButtonItem key="rightBarButtonItem" title="Favorite" id="bQS-qQ-tQV"/>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="y5e-68-HfI">
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <action selector="refresh:" destination="gdX-aS-qgt" eventType="valueChanged" id="Xru-s1-yJB"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <outlet property="favoriteStatusButton" destination="bQS-qQ-tQV" id="BCh-Bg-rBW"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQq-6D-sGA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

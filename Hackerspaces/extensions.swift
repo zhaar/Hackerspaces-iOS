@@ -77,6 +77,7 @@ extension Array {
         return result
     }
     
+    ///add element at the end of the array, returns a copy
     func cons(e: Element) -> [Element] {
         var cpy = self
         cpy.append(e)

@@ -21,6 +21,15 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
         reloadData(fromCache: false, callback: { sender.endRefreshing() })
     }
     
+    @IBOutlet weak var favoriteStatusButton: UIBarButtonItem! {
+        didSet {
+            let isfavorited = Model.sharedInstance.listOfFavorites.contains(currentlySelectedHackerspace)
+            favoriteStatusButton.title
+        }
+    }
+    
+    var currentlySelectedHackerspace: String!
+    
     var generalInfo: [String : JSONDecoder]?
     var customInfo: [String : JSONDecoder]?
     var hackerspaceData: HackerspaceDataModel?

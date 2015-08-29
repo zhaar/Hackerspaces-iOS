@@ -7,20 +7,37 @@
 //
 
 import Foundation
+import Swiftz
 
 let favoriteKey = "favorite"
+let favoriteList = "listOfFavorites"
 
 class Model {
-    let defaults = NSUserDefaults.standardUserDefaults()
+    
+    static let defaults = NSUserDefaults.standardUserDefaults()
+    
     var favoriteHackerspaceURL: String? {
         set {
             println("setting new value for prefered hackerspace")
-            defaults.setObject(newValue!, forKey: favoriteKey)
+            Model.defaults.setObject(newValue!, forKey: favoriteKey)
         }
         get {
             println("fetching favorite hackerspace")
-            return defaults.stringForKey(favoriteKey)
+            return Model.defaults.stringForKey(favoriteKey)
         }
     }
+    
+    func listOfFavorites() -> [String] {
+        return (Model.defaults.arrayForKey(favoriteList) >>- { arr in arr.map { obj in obj as! String} }) ?? [String]()
+    }
+    
+    func addToFavorites(url: String) {
+        Model.defaults.setValue(listOfFavorites().cons(url), forKey: favoriteList)
+    }
+    
+    func removeFromFavorites(url: String) {
+        Model.defaults.setValue(listOfFavorites().filter { $0 != url }, forKey: favoriteList)
+    }
+    
     static let sharedInstance = Model()
 }
