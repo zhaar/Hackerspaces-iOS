@@ -57,7 +57,7 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
+        return 3 + (((customInfo?.count > 0) ?? false) ? 1 : 0)
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
