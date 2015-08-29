@@ -91,6 +91,7 @@ class SearchControllerBaseViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         Model.sharedInstance.favoriteHackerspaceURL = self.spaceAPI[visibleResults[indexPath.row]]
+        self.tabBarController?.selectedIndex = 0
     }
 
 }
