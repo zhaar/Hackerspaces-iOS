@@ -28,6 +28,7 @@
 		95ADEF991B8B53580061A1E6 /* HackerspaceAPIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADEF981B8B53580061A1E6 /* HackerspaceAPIFunctions.swift */; };
 		95DB77FD1B912B0F0061A1E6 /* HackerspaceMapInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB77FC1B912B0F0061A1E6 /* HackerspaceMapInfo.swift */; };
 		95DB77FF1B9142D60061A1E6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB77FE1B9142D60061A1E6 /* Constants.swift */; };
+		95DB78011B9149660061A1E6 /* sharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB78001B9149660061A1E6 /* sharedData.swift */; };
 		95DBD9461B8CFF360061A1E6 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */; };
 		95DBD9471B8CFF360061A1E6 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594941B893E5E0061A1E6 /* Haneke.framework */; };
 		95DBD9481B8CFF360061A1E6 /* JSONJoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594951B893E5E0061A1E6 /* JSONJoy.framework */; };
@@ -104,6 +105,7 @@
 		95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
 		95DB77FC1B912B0F0061A1E6 /* HackerspaceMapInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceMapInfo.swift; sourceTree = "<group>"; };
 		95DB77FE1B9142D60061A1E6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		95DB78001B9149660061A1E6 /* sharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sharedData.swift; sourceTree = "<group>"; };
 		95DBD94B1B8CFF360061A1E6 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		95DBD94D1B8CFF3E0061A1E6 /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Box.framework; path = Carthage/Build/iOS/Box.framework; sourceTree = "<group>"; };
 		95DBD94F1B8D0FC30061A1E6 /* DefaultSearchBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSearchBarViewController.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				95DB77FE1B9142D60061A1E6 /* Constants.swift */,
 				95ADEF981B8B53580061A1E6 /* HackerspaceAPIFunctions.swift */,
 				95DB77FC1B912B0F0061A1E6 /* HackerspaceMapInfo.swift */,
+				95DB78001B9149660061A1E6 /* sharedData.swift */,
 				9525AB7E1B8622C70061A1E6 /* favorite hackerspace */,
 				95643FB81B729B3E0061A1E6 /* Main.storyboard */,
 				95643FBB1B729B3E0061A1E6 /* Images.xcassets */,
@@ -410,6 +413,7 @@
 				9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */,
 				9525AB821B8748010061A1E6 /* HackerspaceMapTableViewCell.swift in Sources */,
 				95ADEF991B8B53580061A1E6 /* HackerspaceAPIFunctions.swift in Sources */,
+				95DB78011B9149660061A1E6 /* sharedData.swift in Sources */,
 				95DBD9531B8D0FC30061A1E6 /* DefaultSearchBarViewController.swift in Sources */,
 				953161871B73B12A0061A1E6 /* extensions.swift in Sources */,
 				95DB77FF1B9142D60061A1E6 /* Constants.swift in Sources */,

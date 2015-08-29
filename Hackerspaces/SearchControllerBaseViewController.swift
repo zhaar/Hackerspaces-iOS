@@ -32,6 +32,8 @@ class SearchControllerBaseViewController: UITableViewController {
         }
     }
     
+    var spaceAPI = [String : String]()
+    
     var allResults = [String]() {
         didSet {
             visibleResults = allResults
@@ -41,8 +43,12 @@ class SearchControllerBaseViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SpaceAPI.getHackerspaceOpens().onSuccess {
-            self.hackerspaces = $0
+        SpaceAPI.loadAPI().onSuccess {
+            self.spaceAPI = $0
+        }.andThen { _ in
+            SpaceAPI.getHackerspaceOpens().onSuccess {
+                self.hackerspaces = $0
+            }
         }
     }
 
@@ -82,4 +88,9 @@ class SearchControllerBaseViewController: UITableViewController {
         cell.layoutSubviews()
         return cell
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        Model.sharedInstance.favoriteHackerspaceURL = self.spaceAPI[visibleResults[indexPath.row]]
+    }
+
 }

@@ -23,7 +23,6 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     
     var generalInfo: [String : JSONDecoder]?
     var customInfo: [String : JSONDecoder]?
-    var hackerspaceURL: String? = "https://fixme.ch/cgi-bin/spaceapi.py"
     
     private struct storyboard {
         static let CellIdentifier = "Cell"
@@ -31,18 +30,14 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
         static let MapIdentifier = "MapCell"
         static let CustomIdentifier = "CustomCell"
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//        tableView.estimatedRowHeight = tableView.rowHeight
-//        tableView.rowHeight = UITableViewAutomaticDimension
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         reloadData()
-        
     }
     
-    
     func reloadData(fromCache: Bool = true, callback: (() -> Void)? = nil) {
-        if let url = hackerspaceURL {
+        if let url = Model.sharedInstance.favoriteHackerspaceURL {
             (fromCache ? SpaceAPI.loadHackerspaceAPI : SpaceAPI.loadHackerspaceAPIFromWeb)(url).onSuccess { dict in
                 self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
                 let (g, c) = dict.split { (key: String, value: JSONDecoder) -> Bool in !key.hasPrefix(SpaceAPIConstants.customAPIPrefix) }
@@ -99,9 +94,9 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     
     func reuseTitleCell(indexPath: NSIndexPath) -> UITableViewCell {
         if let titleCell = tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as? HackerspaceTitleTableViewCell{
-            if let logoURL = self.generalInfo?["logo"]?.string {
-                titleCell.logo.hnk_setImageFromURL(NSURL(string: logoURL)!)
-            }
+            
+            generalInfo?["logo"]?.string >>- { NSURL(string: $0) } >>- { titleCell.logo.hnk_setImageFromURL($0) }
+            
             titleCell.hackerspaceStatus.text = (generalInfo?["state"]?.dictionary?["open"]?.bool ?? false) ? "open" : "closed"
             titleCell.url.text = generalInfo?["url"]?.string
             return titleCell
