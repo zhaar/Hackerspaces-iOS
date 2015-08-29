@@ -30,6 +30,13 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
-        performSegueWithIdentifier(UIConstants.ShowHSSegue, sender: view)
+        if let annotation = view.annotation as? SpaceLocation {
+            SpaceAPI.loadAPI().onSuccess { dict in
+                Model.sharedInstance.favoriteHackerspaceURL = dict[annotation.name]
+                self.tabBarController?.selectedIndex = 0
+            }
+        }
+
+//        performSegueWithIdentifier(UIConstants.ShowHSSegue, sender: view)
     }
 }
