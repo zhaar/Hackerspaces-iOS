@@ -13,22 +13,25 @@ extension MapViewController: MKMapViewDelegate {
     
     // 1
     func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
-        if let annotation = annotation as? Artwork {
-            let identifier = "pin"
-            var view: MKPinAnnotationView
-            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
-                as? MKPinAnnotationView { // 2
-                    dequeuedView.annotation = annotation
-                    view = dequeuedView
-            } else {
-                // 3
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-                view.canShowCallout = true
-                view.calloutOffset = CGPoint(x: -5, y: 5)
-                view.rightCalloutAccessoryView = UIButton.buttonWithType(.DetailDisclosure) as! UIView
-            }
-            return view
+        var view = mapView.dequeueReusableAnnotationViewWithIdentifier(UIConstants.AnnotationViewReuseIdentifier)
+        
+        if view == nil {
+            return nil
+//            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: UIConstants.AnnotationViewReuseIdentifier)
+//            view.canShowCallout = true
+        } else {
+            view.annotation = annotation
         }
-        return nil
+        
+        if let l = annotation as? SpaceLocation {
+            if l.open {
+                let label = UILabel(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+                label.text = UIConstants.SpaceIsOpenMark
+                label.textColor = UIColor(red: 0, green: 255, blue: 0, alpha: 1)
+                view.leftCalloutAccessoryView = label
+            }
+        }
+        
+        return view
     }
 }

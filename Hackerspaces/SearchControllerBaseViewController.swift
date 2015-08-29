@@ -76,7 +76,7 @@ class SearchControllerBaseViewController: UITableViewController {
         let name = visibleResults[indexPath.row]
         let isOpen = self.hackerspaces[name]
         cell.textLabel?.text = name
-        cell.detailTextLabel?.text = ((isOpen ?? false) ? "⚫︎" : "")
+        cell.detailTextLabel?.text = ((isOpen ?? false) ? UIConstants.SpaceIsOpenMark : "")
         //workaround a bug where detail is no updated correctly
         //see: http://stackoverflow.com/questions/25987135/ios-8-uitableviewcell-detail-text-not-correctly-updating
         cell.layoutSubviews()

@@ -30,7 +30,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func centerMapOnLocation(location: CLLocation) {
-        let regionRadius: CLLocationDistance = 1000
+        let regionRadius: CLLocationDistance = 5000
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
             regionRadius * 2.0, regionRadius * 2.0)
         map.setRegion(coordinateRegion, animated: true)
@@ -38,6 +38,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SpaceAPI.getHackerspaceLocations().onSuccess { array in
+            self.map.addAnnotations(array.filter { $0 != nil }.map { $0! })
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
