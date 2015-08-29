@@ -41,20 +41,16 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     }
     
     
-    func reloadData() {
-        SpaceAPI.loadHackerspaceAPINoError("https://fixme.ch/cgi-bin/spaceapi.py").onSuccess { (result: Result<[String : JSONDecoder]>) in
-            switch result {
-                case .Value(let box) :
-                    let dict = box.value
-                    self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
-                    let (g, c) = dict.split { (key: String, value: JSONDecoder) -> Bool in !key.hasPrefix(SpaceAPIConstants.customAPIPrefix) }
-                    self.generalInfo = g
-                    self.customInfo = c
-                    self.tableView.reloadData()
-                
-                case .Error(let e): println("unable to reach api with error \(e)")
+    func reloadData(fromCache: Bool = true, callback: (() -> Void)? = nil) {
+        if let url = hackerspaceURL {
+            (fromCache ? SpaceAPI.loadHackerspaceAPI : SpaceAPI.loadHackerspaceAPIFromWeb)(url).onSuccess { dict in
+                self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
+                let (g, c) = dict.split { (key: String, value: JSONDecoder) -> Bool in !key.hasPrefix(SpaceAPIConstants.customAPIPrefix) }
+                self.generalInfo = g
+                self.customInfo = c
+                self.tableView.reloadData()
+                callback >>- { $0() }
             }
-            return
         }
     }
 
@@ -104,17 +100,7 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     func reuseTitleCell(indexPath: NSIndexPath) -> UITableViewCell {
         if let titleCell = tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as? HackerspaceTitleTableViewCell{
             if let logoURL = self.generalInfo?["logo"]?.string {
-                let request = HTTPTask()
-                request.GET(logoURL, parameters: nil) {
-                    (response) in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        if let err = response.error {
-                            println("error: \(err.localizedDescription)")
-                        } else if let data = response.responseObject as? NSData {
-                            titleCell.logo.image = UIImage(data: data)
-                        }
-                    }
-                }
+                titleCell.logo.hnk_setImageFromURL(NSURL(string: logoURL)!)
             }
             titleCell.hackerspaceStatus.text = (generalInfo?["state"]?.dictionary?["open"]?.bool ?? false) ? "open" : "closed"
             titleCell.url.text = generalInfo?["url"]?.string

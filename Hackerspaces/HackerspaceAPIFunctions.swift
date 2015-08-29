@@ -77,12 +77,11 @@ struct SpaceAPI {
     static func loadAPIFromWeb() -> Future<[String : String], NSError> {
         let p = Promise<[String: String], NSError>()
         Queue.global.async {
-            
             let req = HTTPTask()
             req.GET(SpaceAPIConstants.API, parameters: nil) { (response: HTTPResponse) in
                 if let data = response.responseObject as? NSData {
                     Shared.dataCache.set(value: data, key: SpaceAPIConstants.API)
-                    if let dict = JSONDecoder(data).dictionary{
+                    if let dict = JSONDecoder(data).dictionary {
                         var api = [String : String]()
                         for key in dict.keys {
                             if let value = dict[key]?.string {
@@ -144,23 +143,6 @@ struct SpaceAPI {
         return FutureUtils.futureToResult(loadHackerspaceAPI(url))
     }
     
-    static func extractIsSpaceOpen(json: [String: JSONDecoder]) -> Bool {
-        return json["state"]?.dictionary?["open"]?.bool ?? false
-    }
-    
-    static func extractName(json: [String: JSONDecoder]) -> String {
-        return json[SpaceAPIConstants.APIname]!.string!
-    }
-    
-    ///returns the location from a json file, returns nil if unable to parse
-    static func extractLocationInfo(json: [String: JSONDecoder]) -> SpaceLocation? {
-        let location = json[SpaceAPIConstants.APIlocation]?.dictionary
-        let lat = location?["lat"]?.number >>- {CLLocationDegrees($0)}
-        let lon = location?["lon"]?.number >>- {CLLocationDegrees($0)}
-        let loc = lat >>- {la in lon >>- { lo in CLLocationCoordinate2D(latitude: la, longitude: lo)}}
-        return loc >>- {SpaceLocation(name: self.extractName(json), address: location?["address"]?.string, location: $0)}
-    }
-    
     static func getHackerspaceLocation(url: String) -> Future<SpaceLocation?, NSError> {
         return loadHackerspaceAPI(url).map { self.extractLocationInfo($0) }
     }
@@ -197,44 +179,44 @@ struct SpaceAPI {
         return FutureUtils.flattenOptionalFuture(dictToFutureQuery(dict))
     }
     
-    static func loadAllSpacesAPIFromWeb() -> Future<[(String, [String: JSONDecoder])], NSError> {
-        return loadAPIFromWeb().flatMap { (dict: [String : String]) -> Future<[(String, [String: JSONDecoder])], NSError> in
+    static func loadAllSpacesAPI(fromCache: Bool = true) -> Future<[(String, [String: JSONDecoder])], NSError> {
+        return (fromCache ? loadAPI() : loadAPIFromWeb()).flatMap { (dict: [String : String]) -> Future<[(String, [String: JSONDecoder])], NSError> in
             promoteError(self.arrayFutureToFlatFutureArray(dict))
         }
     }
     
-    static func loadAllSpacesAPI() -> Future<[(String, [String: JSONDecoder])], NSError> {
-        return loadAPI().flatMap { (dict: [String : String]) -> Future<[(String, [String: JSONDecoder])], NSError> in
-            promoteError(self.arrayFutureToFlatFutureArray(dict))
-        }
+    static func loadAllSpaceAPIAsDict(fromCache: Bool = true) -> Future<[String : [String : JSONDecoder]], NSError> {
+        return loadAllSpacesAPI(fromCache: fromCache).map { Dictionary($0) }
     }
     
-    static func loadAllSpaceAPIAsDictFromWeb() -> Future<[String : [String : JSONDecoder]], NSError> {
-        return loadAllSpacesAPIFromWeb().map { Dictionary($0) }
-    }
-    
-    static func loadAllSpaceAPIAsDict() -> Future<[String : [String : JSONDecoder]], NSError> {
-        return loadAllSpacesAPI().map { Dictionary($0) }
-    }
-    
-    static func getHackerspaceOpensFromWeb() -> Future<[String : Bool], NSError> {
-        return loadAllSpaceAPIAsDictFromWeb().map { (dict: [String : [String : JSONDecoder]]) in
+    static func getHackerspaceOpens(fromCache: Bool = true) -> Future<[String : Bool], NSError> {
+        return loadAllSpaceAPIAsDict(fromCache: fromCache).map { (dict: [String : [String : JSONDecoder]]) in
             let r = dict.map { (key, value) in (key, SpaceAPI.extractIsSpaceOpen(value))}
             return r
         }
     }
     
-    static func getHackerspaceOpens() -> Future<[String : Bool], NSError> {
-        return loadAllSpaceAPIAsDict().map { (dict: [String : [String : JSONDecoder]]) in
-            let r = dict.map { (key, value) in (key, SpaceAPI.extractIsSpaceOpen(value))}
-            return r
-        }
-    }
-    
-    static func getHackerspaceLocations() -> Future<[SpaceLocation?], NSError> {
-        return loadAllSpacesAPI().map { (arr:[(String, [String : JSONDecoder])]) -> [SpaceLocation?] in
+    static func getHackerspaceLocations(fromCache: Bool = true) -> Future<[SpaceLocation?], NSError> {
+        return loadAllSpacesAPI(fromCache: fromCache).map { (arr:[(String, [String : JSONDecoder])]) -> [SpaceLocation?] in
             let r = arr.map { (tuple:(String, [String : JSONDecoder])) -> SpaceLocation? in SpaceAPI.extractLocationInfo(tuple.1) }
             return r
         }
+    }
+    
+    static func extractIsSpaceOpen(json: [String: JSONDecoder]) -> Bool {
+        return json["state"]?.dictionary?["open"]?.bool ?? false
+    }
+    
+    static func extractName(json: [String: JSONDecoder]) -> String {
+        return json[SpaceAPIConstants.APIname]!.string!
+    }
+    
+    ///returns the location from a json file, returns nil if unable to parse
+    static func extractLocationInfo(json: [String: JSONDecoder]) -> SpaceLocation? {
+        let location = json[SpaceAPIConstants.APIlocation]?.dictionary
+        let lat = location?["lat"]?.number >>- {CLLocationDegrees($0)}
+        let lon = location?["lon"]?.number >>- {CLLocationDegrees($0)}
+        let loc = lat >>- {la in lon >>- { lo in CLLocationCoordinate2D(latitude: la, longitude: lo)}}
+        return loc >>- {SpaceLocation(name: self.extractName(json), address: location?["address"]?.string, location: $0)}
     }
 }

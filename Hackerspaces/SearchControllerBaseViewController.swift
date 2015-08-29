@@ -12,7 +12,7 @@ import JSONJoy
 class SearchControllerBaseViewController: UITableViewController {
     
     @IBAction func refresh(sender: UIRefreshControl) {
-        SpaceAPI.getHackerspaceOpensFromWeb().onSuccess { api in
+        SpaceAPI.getHackerspaceOpens(fromCache: false).onSuccess { api in
             self.hackerspaces = api
             sender.endRefreshing()
         }
