@@ -40,7 +40,7 @@
                     </tabBarItem>
                     <connections>
                         <outlet property="map" destination="VJY-Zk-YcC" id="fu8-JM-fUO"/>
-                        <segue destination="gdX-aS-qgt" kind="show" id="Crd-9N-DJ1"/>
+                        <segue destination="gdX-aS-qgt" kind="show" id="6ss-ub-D3N"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -450,6 +450,6 @@
         <image name="logo-inverted-alpha-white-scaled" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Crd-9N-DJ1"/>
+        <segue reference="6ss-ub-D3N"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -25,4 +25,5 @@ struct SpaceAPIConstants {
 struct UIConstants {
     static let AnnotationViewReuseIdentifier = "spaceLocation"
     static let SpaceIsOpenMark = "⚫︎"
+    static let ShowHSSegue = "ShowHackerspaceSegue"
 }

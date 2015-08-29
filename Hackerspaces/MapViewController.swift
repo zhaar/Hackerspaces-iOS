@@ -11,7 +11,11 @@ import MapKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
 
-    @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var map: MKMapView! {
+        didSet {
+            map.delegate = self
+        }
+    }
     
     let locationManager = CLLocationManager()
     
