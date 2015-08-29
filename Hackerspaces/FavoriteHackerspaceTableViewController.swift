@@ -23,10 +23,12 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     
     var generalInfo: [String : JSONDecoder]?
     var customInfo: [String : JSONDecoder]?
+    var hackerspaceData: HackerspaceDataModel?
     
     private struct storyboard {
         static let CellIdentifier = "Cell"
         static let TitleIdentifier = "TitleCell"
+        static let GeneralInfoIdentifier = "GeneralInfoCell"
         static let MapIdentifier = "MapCell"
         static let CustomIdentifier = "CustomCell"
     }
@@ -43,6 +45,7 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
                 let (g, c) = dict.split { (key: String, value: JSONDecoder) -> Bool in !key.hasPrefix(SpaceAPIConstants.customAPIPrefix) }
                 self.generalInfo = g
                 self.customInfo = c
+                self.hackerspaceData = parseHackerspaceDataModel(dict)
                 self.tableView.reloadData()
                 callback >>- { $0() }
             }
@@ -59,8 +62,9 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
         switch(section) {
         case 0: return 1
         case 1: return 1
-        case 2: return generalInfo?.count ?? 0
-        case 3: return customInfo?.count ?? 0
+        case 2: return 1
+        case 3: return generalInfo?.count ?? 0
+        case 4: return customInfo?.count ?? 0
         default: return 0
         }
     }
@@ -69,8 +73,9 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         switch(indexPath.section) {
         case 0 : return reuseTitleCell(indexPath)
-        case 1 : return reuseMapCell(indexPath)
-        case 2 :
+        case 1 : return reuseGeneralInfoCell(indexPath)
+        case 2 : return reuseMapCell(indexPath)
+        case 3 :
             let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.CellIdentifier, forIndexPath: indexPath) as! UITableViewCell
             
             if let key = generalInfo?.keys.array[indexPath.row] {
@@ -86,19 +91,16 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch(section) {
-        case 2: return "General Info"
-        case 3: return "Custom Info"
+        case 3: return "General Info"
+        case 4: return "Custom Info"
         default: return nil
         }
     }
     
     func reuseTitleCell(indexPath: NSIndexPath) -> UITableViewCell {
         if let titleCell = tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as? HackerspaceTitleTableViewCell{
-            
+            titleCell.logo.image = nil
             generalInfo?["logo"]?.string >>- { NSURL(string: $0) } >>- { titleCell.logo.hnk_setImageFromURL($0) }
-            
-            titleCell.hackerspaceStatus.text = (generalInfo?["state"]?.dictionary?["open"]?.bool ?? false) ? "open" : "closed"
-            titleCell.url.text = generalInfo?["url"]?.string
             return titleCell
         } else {
             println("unknown cell")
@@ -116,10 +118,27 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
         }
     }
     
+    func reuseGeneralInfoCell(indexPath: NSIndexPath) -> UITableViewCell {
+        if let mapCell = tableView.dequeueReusableCellWithIdentifier(storyboard.GeneralInfoIdentifier, forIndexPath: indexPath) as? HSGeneralInfoTableViewCell {
+            if let info = generalInfo {
+                mapCell.HSStatus.text = SpaceAPI.extractIsSpaceOpen(info) ? "Open" : "Closed"
+                mapCell.HSUrl.text = hackerspaceData?.websiteURL
+                mapCell.HSLastUpdateTime.text = hackerspaceData?.state.lastChange?.description
+                mapCell.openningMessageLabel.text = hackerspaceData?.state.message
+                mapCell.HSUsedAPI.text = "space api v " + (hackerspaceData?.api ?? "")
+             }
+            return mapCell
+        } else {
+            println("unknown cell")
+            return tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        }
+    }
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch(indexPath.section) {
         case 0: return CGFloat(150)
-        case 1: return CGFloat(200)
+        case 1: return CGFloat(138)
+        case 2: return CGFloat(200)
         default: return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
         }
     }

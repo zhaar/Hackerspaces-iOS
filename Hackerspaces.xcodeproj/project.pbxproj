@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9525AB7D1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift */; };
-		9525AB801B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift */; };
-		9525AB821B8748010061A1E6 /* HackerspaceMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HackerspaceMapTableViewCell.swift */; };
-		9525AB841B8889D50061A1E6 /* hackerspaceDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB831B8889D50061A1E6 /* hackerspaceDataFunctions.swift */; };
+		9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */; };
+		9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */; };
+		9525AB841B8889D50061A1E6 /* HSDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB831B8889D50061A1E6 /* HSDataFunctions.swift */; };
 		953161871B73B12A0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
 		953C513B1B8F49190061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
 		95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB21B729B3E0061A1E6 /* AppDelegate.swift */; };
@@ -19,15 +19,16 @@
 		95643FBC1B729B3E0061A1E6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95643FBB1B729B3E0061A1E6 /* Images.xcassets */; };
 		95643FBF1B729B3E0061A1E6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95643FBD1B729B3E0061A1E6 /* LaunchScreen.xib */; };
 		95643FCB1B729B3E0061A1E6 /* HackerspacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FCA1B729B3E0061A1E6 /* HackerspacesTests.swift */; };
-		9573A2891B91EB310061A1E6 /* HackerspaceDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2881B91EB310061A1E6 /* HackerspaceDataModel.swift */; };
+		9573A2891B91EB310061A1E6 /* HSDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2881B91EB310061A1E6 /* HSDataModel.swift */; };
+		9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */; };
 		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
 		9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */; };
 		95A594A21B893FB60061A1E6 /* Haneke.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */; };
 		95A594A31B893FB60061A1E6 /* JSONJoy.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A5949F1B893FB60061A1E6 /* JSONJoy.framework.dSYM */; };
 		95A594A41B893FB60061A1E6 /* SwiftHTTP.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */; };
 		95A594A51B893FB60061A1E6 /* Swiftz.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */; };
-		95ADEF991B8B53580061A1E6 /* HackerspaceAPIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADEF981B8B53580061A1E6 /* HackerspaceAPIFunctions.swift */; };
-		95DB77FD1B912B0F0061A1E6 /* HackerspaceMapInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB77FC1B912B0F0061A1E6 /* HackerspaceMapInfo.swift */; };
+		95ADEF991B8B53580061A1E6 /* SpaceAPIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */; };
+		95DB77FD1B912B0F0061A1E6 /* HSMapInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */; };
 		95DB77FF1B9142D60061A1E6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB77FE1B9142D60061A1E6 /* Constants.swift */; };
 		95DB78011B9149660061A1E6 /* sharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB78001B9149660061A1E6 /* sharedData.swift */; };
 		95DBD9461B8CFF360061A1E6 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */; };
@@ -73,9 +74,9 @@
 
 /* Begin PBXFileReference section */
 		9525AB7C1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteHackerspaceTableViewController.swift; sourceTree = "<group>"; };
-		9525AB7F1B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceTitleTableViewCell.swift; sourceTree = "<group>"; };
-		9525AB811B8748010061A1E6 /* HackerspaceMapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceMapTableViewCell.swift; sourceTree = "<group>"; };
-		9525AB831B8889D50061A1E6 /* hackerspaceDataFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hackerspaceDataFunctions.swift; sourceTree = "<group>"; };
+		9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSTitleTableViewCell.swift; sourceTree = "<group>"; };
+		9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSMapTableViewCell.swift; sourceTree = "<group>"; };
+		9525AB831B8889D50061A1E6 /* HSDataFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSDataFunctions.swift; sourceTree = "<group>"; };
 		953161861B73B12A0061A1E6 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		953C513A1B8F49190061A1E6 /* FutureUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureUtils.swift; sourceTree = "<group>"; };
 		95643FAD1B729B3E0061A1E6 /* Hackerspaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hackerspaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,7 +89,8 @@
 		95643FC41B729B3E0061A1E6 /* HackerspacesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackerspacesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95643FC91B729B3E0061A1E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95643FCA1B729B3E0061A1E6 /* HackerspacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerspacesTests.swift; sourceTree = "<group>"; };
-		9573A2881B91EB310061A1E6 /* HackerspaceDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceDataModel.swift; sourceTree = "<group>"; };
+		9573A2881B91EB310061A1E6 /* HSDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSDataModel.swift; sourceTree = "<group>"; };
+		9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
 		9597A1AA1B79252F0061A1E6 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
 		9597A1AD1B7932100061A1E6 /* DataCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCache.xcdatamodel; sourceTree = "<group>"; };
 		95A5948C1B893C530061A1E6 /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = ../carthage_dependecies/Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
@@ -103,9 +105,9 @@
 		95A5949F1B893FB60061A1E6 /* JSONJoy.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = JSONJoy.framework.dSYM; path = Carthage/Build/iOS/JSONJoy.framework.dSYM; sourceTree = "<group>"; };
 		95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftHTTP.framework.dSYM; path = Carthage/Build/iOS/SwiftHTTP.framework.dSYM; sourceTree = "<group>"; };
 		95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Swiftz.framework.dSYM; path = Carthage/Build/iOS/Swiftz.framework.dSYM; sourceTree = "<group>"; };
-		95ADEF981B8B53580061A1E6 /* HackerspaceAPIFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceAPIFunctions.swift; sourceTree = "<group>"; };
+		95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceAPIFunctions.swift; sourceTree = "<group>"; };
 		95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
-		95DB77FC1B912B0F0061A1E6 /* HackerspaceMapInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceMapInfo.swift; sourceTree = "<group>"; };
+		95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSMapInfo.swift; sourceTree = "<group>"; };
 		95DB77FE1B9142D60061A1E6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		95DB78001B9149660061A1E6 /* sharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sharedData.swift; sourceTree = "<group>"; };
 		95DBD94B1B8CFF360061A1E6 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
@@ -166,8 +168,9 @@
 			isa = PBXGroup;
 			children = (
 				9525AB7C1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift */,
-				9525AB7F1B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift */,
-				9525AB811B8748010061A1E6 /* HackerspaceMapTableViewCell.swift */,
+				9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */,
+				9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */,
+				9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */,
 			);
 			name = "favorite hackerspace";
 			sourceTree = "<group>";
@@ -198,13 +201,13 @@
 				95643FB21B729B3E0061A1E6 /* AppDelegate.swift */,
 				95D4B74D1B7D68C80061A1E6 /* Map */,
 				95E4B90A1B811F150061A1E6 /* Embeded search */,
-				9525AB831B8889D50061A1E6 /* hackerspaceDataFunctions.swift */,
 				953C513A1B8F49190061A1E6 /* FutureUtils.swift */,
 				95DB77FE1B9142D60061A1E6 /* Constants.swift */,
-				95ADEF981B8B53580061A1E6 /* HackerspaceAPIFunctions.swift */,
-				95DB77FC1B912B0F0061A1E6 /* HackerspaceMapInfo.swift */,
 				95DB78001B9149660061A1E6 /* sharedData.swift */,
-				9573A2881B91EB310061A1E6 /* HackerspaceDataModel.swift */,
+				95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */,
+				9525AB831B8889D50061A1E6 /* HSDataFunctions.swift */,
+				95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */,
+				9573A2881B91EB310061A1E6 /* HSDataModel.swift */,
 				9525AB7E1B8622C70061A1E6 /* favorite hackerspace */,
 				95643FB81B729B3E0061A1E6 /* Main.storyboard */,
 				95643FBB1B729B3E0061A1E6 /* Images.xcassets */,
@@ -405,18 +408,19 @@
 				95DBD95A1B8D10120061A1E6 /* SearchResultsViewController.swift in Sources */,
 				95DBD9551B8D0FC30061A1E6 /* SearchControllerBaseViewController.swift in Sources */,
 				95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */,
-				9525AB801B868D160061A1E6 /* HackerspaceTitleTableViewCell.swift in Sources */,
-				95DB77FD1B912B0F0061A1E6 /* HackerspaceMapInfo.swift in Sources */,
+				9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */,
+				95DB77FD1B912B0F0061A1E6 /* HSMapInfo.swift in Sources */,
 				953C513B1B8F49190061A1E6 /* FutureUtils.swift in Sources */,
-				9525AB841B8889D50061A1E6 /* hackerspaceDataFunctions.swift in Sources */,
+				9525AB841B8889D50061A1E6 /* HSDataFunctions.swift in Sources */,
 				95DBD9561B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */,
 				9525AB7D1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift in Sources */,
-				9573A2891B91EB310061A1E6 /* HackerspaceDataModel.swift in Sources */,
+				9573A2891B91EB310061A1E6 /* HSDataModel.swift in Sources */,
 				95DBD9581B8D0FF20061A1E6 /* SearchShowResultsInSourceViewController.swift in Sources */,
 				95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */,
 				9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */,
-				9525AB821B8748010061A1E6 /* HackerspaceMapTableViewCell.swift in Sources */,
-				95ADEF991B8B53580061A1E6 /* HackerspaceAPIFunctions.swift in Sources */,
+				9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */,
+				95ADEF991B8B53580061A1E6 /* SpaceAPIFunctions.swift in Sources */,
+				9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */,
 				95DB78011B9149660061A1E6 /* sharedData.swift in Sources */,
 				95DBD9531B8D0FC30061A1E6 /* DefaultSearchBarViewController.swift in Sources */,
 				953161871B73B12A0061A1E6 /* extensions.swift in Sources */,

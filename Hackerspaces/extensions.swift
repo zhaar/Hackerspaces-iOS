@@ -19,14 +19,41 @@ func optionalBind<T, U>(optional: T?, f: T -> U?) -> U?
     }
 }
 
-//extension Array<(T,S)> {
-//    func toDict() -> [T : S] {
-//        self.foldl([T : S]()) {
-//            (acc, elem) in
-//            acc[elem.0] = elem.1
-//        }
-//    }
-//}
+extension Dictionary {
+    func split(discriminationFunction: (Key, Value) -> Bool) -> ([Key: Value],[Key : Value]) {
+        var target = [Key: Value]()
+        var rest = [Key : Value]()
+        for (k, v) in self {
+            if discriminationFunction(k,v) {
+                target[k] = v
+            } else {
+                rest[k] = v
+            }
+        }
+        return (target, rest)
+    }
+    
+}
+
+extension Dictionary {
+    init(_ pairs: [Element]) {
+        self.init()
+        for (k, v) in pairs {
+            self[k] = v
+        }
+    }
+}
+
+extension Dictionary {
+    func map<OutKey: Hashable, OutValue>(transform: Element -> (OutKey, OutValue)) -> [OutKey: OutValue] {
+        return Dictionary<OutKey, OutValue>(Swift.map(self, transform))
+    }
+    
+    func filter(includeElement: Element -> Bool) -> [Key: Value] {
+        return Dictionary(Swift.filter(self, includeElement))
+    }
+}
+
 func toDict<T,S>(arr: [(T,S)]) -> [T : S] {
     return arr.foldl([T : S]()) { (var acc, tuple) in
         acc[tuple.0] = tuple.1
