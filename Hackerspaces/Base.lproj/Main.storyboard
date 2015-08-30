@@ -387,6 +387,9 @@
                             <action selector="refresh:" destination="0bH-UZ-e6C" eventType="valueChanged" id="9oh-aZ-5uW"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <segue destination="gdX-aS-qgt" kind="show" identifier="ShowHackerspaceFromSearch" id="IQW-P7-rF8"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kWM-ws-sQo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -457,4 +460,7 @@
         <image name="Compass Filled" width="25" height="25"/>
         <image name="logo-inverted-alpha-white-scaled" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="IQW-P7-rF8"/>
+    </inferredMetricsTieBreakers>
 </document>

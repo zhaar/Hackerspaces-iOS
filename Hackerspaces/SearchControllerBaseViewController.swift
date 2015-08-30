@@ -91,7 +91,7 @@ class SearchControllerBaseViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         Model.sharedInstance.selectedHackerspace = self.spaceAPI[visibleResults[indexPath.row]]
-        self.tabBarController?.selectedIndex = 0
+        performSegueWithIdentifier(UIConstants.showHSSearch, sender: self.tableView(self.tableView, cellForRowAtIndexPath: indexPath))
     }
 
 }
