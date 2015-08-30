@@ -17,18 +17,30 @@ import Haneke
 
 class FavoriteHackerspaceTableViewController: UITableViewController {
 
+    
+    // MARK: - Outlets & Actions
     @IBAction func refresh(sender: UIRefreshControl) {
         reloadData(fromCache: false, callback: { sender.endRefreshing() })
     }
     
     @IBOutlet weak var favoriteStatusButton: UIBarButtonItem! {
         didSet {
-            let isfavorited = Model.sharedInstance.listOfFavorites.contains(currentlySelectedHackerspace)
-            favoriteStatusButton.title
+            updateFavoriteButton()
         }
     }
     
-    var currentlySelectedHackerspace: String!
+    @IBAction func MarkAsFavorite(sender: UIBarButtonItem) {
+        if let h = currentlySelectedHackerspace {
+            Model.sharedInstance.addToFavorites(h)
+            updateFavoriteButton()
+        }
+    }
+    
+    var currentlySelectedHackerspace: String? {
+        get {
+            return Model.sharedInstance.selectedHackerspace
+        }
+    }
     
     var generalInfo: [String : JSONDecoder]?
     var customInfo: [String : JSONDecoder]?
@@ -42,13 +54,17 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
         static let CustomIdentifier = "CustomCell"
     }
 
+    
+    // MARK: - View controller lifecycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         reloadData()
+        updateFavoriteButton()
+
     }
     
     func reloadData(fromCache: Bool = true, callback: (() -> Void)? = nil) {
-        if let url = Model.sharedInstance.favoriteHackerspaceURL {
+        if let url = Model.sharedInstance.selectedHackerspace {
             (fromCache ? SpaceAPI.loadHackerspaceAPI : SpaceAPI.loadHackerspaceAPIFromWeb)(url).onSuccess { dict in
                 self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
                 let (g, c) = dict.split { (key: String, value: JSONDecoder) -> Bool in !key.hasPrefix(SpaceAPIConstants.customAPIPrefix) }
@@ -58,6 +74,19 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
                 self.tableView.reloadData()
                 callback >>- { $0() }
             }
+        }
+    }
+    
+    func updateFavoriteButton() {
+        if let h = currentlySelectedHackerspace {
+            let isfavorited = contains(Model.sharedInstance.listOfFavorites(),h ) ?? false
+            favoriteStatusButton.enabled = !isfavorited
+            favoriteStatusButton.title = isfavorited ? "" : "favorite"
+            println("hackerspace selected button is " + (!isfavorited ? "disabled" : "enabled"))
+        } else {
+            println("currently no hackerspace selected, favorite disabled")
+            favoriteStatusButton.enabled = false
+            favoriteStatusButton.title = ""
         }
     }
 

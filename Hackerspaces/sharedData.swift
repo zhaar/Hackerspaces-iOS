@@ -9,21 +9,19 @@
 import Foundation
 import Swiftz
 
-let favoriteKey = "favorite"
+let selected = "favorite"
 let favoriteList = "listOfFavorites"
 
 class Model {
     
     static let defaults = NSUserDefaults.standardUserDefaults()
     
-    var favoriteHackerspaceURL: String? {
+    var selectedHackerspace: String? {
         set {
-            println("setting new value for prefered hackerspace")
-            Model.defaults.setObject(newValue!, forKey: favoriteKey)
+            Model.defaults.setObject(newValue!, forKey: selected)
         }
         get {
-            println("fetching favorite hackerspace")
-            return Model.defaults.stringForKey(favoriteKey)
+            return Model.defaults.stringForKey(selected)
         }
     }
     

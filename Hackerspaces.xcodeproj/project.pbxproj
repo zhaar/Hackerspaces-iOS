@@ -10,7 +10,6 @@
 		9525AB7D1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift */; };
 		9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */; };
 		9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */; };
-		9525AB841B8889D50061A1E6 /* HSDataFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB831B8889D50061A1E6 /* HSDataFunctions.swift */; };
 		953161871B73B12A0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
 		953C513B1B8F49190061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
 		95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB21B729B3E0061A1E6 /* AppDelegate.swift */; };
@@ -76,7 +75,6 @@
 		9525AB7C1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteHackerspaceTableViewController.swift; sourceTree = "<group>"; };
 		9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSTitleTableViewCell.swift; sourceTree = "<group>"; };
 		9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSMapTableViewCell.swift; sourceTree = "<group>"; };
-		9525AB831B8889D50061A1E6 /* HSDataFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSDataFunctions.swift; sourceTree = "<group>"; };
 		953161861B73B12A0061A1E6 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		953C513A1B8F49190061A1E6 /* FutureUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureUtils.swift; sourceTree = "<group>"; };
 		95643FAD1B729B3E0061A1E6 /* Hackerspaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hackerspaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,7 +203,6 @@
 				95DB77FE1B9142D60061A1E6 /* Constants.swift */,
 				95DB78001B9149660061A1E6 /* sharedData.swift */,
 				95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */,
-				9525AB831B8889D50061A1E6 /* HSDataFunctions.swift */,
 				95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */,
 				9573A2881B91EB310061A1E6 /* HSDataModel.swift */,
 				9525AB7E1B8622C70061A1E6 /* favorite hackerspace */,
@@ -411,7 +408,6 @@
 				9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */,
 				95DB77FD1B912B0F0061A1E6 /* HSMapInfo.swift in Sources */,
 				953C513B1B8F49190061A1E6 /* FutureUtils.swift in Sources */,
-				9525AB841B8889D50061A1E6 /* HSDataFunctions.swift in Sources */,
 				95DBD9561B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */,
 				9525AB7D1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift in Sources */,
 				9573A2891B91EB310061A1E6 /* HSDataModel.swift in Sources */,
