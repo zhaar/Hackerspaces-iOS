@@ -27,4 +27,5 @@ struct UIConstants {
     static let SpaceIsOpenMark = "⚫︎"
     static let ShowHSSegue = "ShowHackerspaceSegue"
     static let showHSSearch = "ShowHackerspaceFromSearch"
+    static let showHSMap = "ShowHackerspaceFromMap"
 }

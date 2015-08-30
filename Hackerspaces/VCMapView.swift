@@ -33,10 +33,8 @@ extension MapViewController: MKMapViewDelegate {
         if let annotation = view.annotation as? SpaceLocation {
             SpaceAPI.loadAPI().onSuccess { dict in
                 Model.sharedInstance.selectedHackerspace = dict[annotation.name]
-                self.tabBarController?.selectedIndex = 0
+                self.performSegueWithIdentifier(UIConstants.showHSMap, sender: annotation)
             }
         }
-
-//        performSegueWithIdentifier(UIConstants.ShowHSSegue, sender: view)
     }
 }

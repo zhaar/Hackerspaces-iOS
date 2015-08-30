@@ -81,7 +81,7 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
         if let h = currentlySelectedHackerspace {
             let isfavorited = contains(Model.sharedInstance.listOfFavorites(),h ) ?? false
             favoriteStatusButton.enabled = !isfavorited
-            favoriteStatusButton.title = isfavorited ? "" : "favorite"
+            favoriteStatusButton.title = isfavorited ? "" : "Favorite"
             println("hackerspace selected button is " + (!isfavorited ? "disabled" : "enabled"))
         } else {
             println("currently no hackerspace selected, favorite disabled")

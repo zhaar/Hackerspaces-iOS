@@ -33,13 +33,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="VJY-Zk-YcC" secondAttribute="trailing" constant="-16" id="zzB-1d-ri7"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Map" image="Compass" selectedImage="Compass Filled" id="cPa-gy-q4n">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Compass Filled"/>
-                        </userDefinedRuntimeAttributes>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" title="Map" id="IIZ-GL-omg"/>
                     <connections>
                         <outlet property="map" destination="VJY-Zk-YcC" id="fu8-JM-fUO"/>
+                        <segue destination="gdX-aS-qgt" kind="show" identifier="ShowHackerspaceFromMap" id="yfL-vi-Wcl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
@@ -49,7 +46,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="616" y="-98"/>
+            <point key="canvasLocation" x="1428" y="-98"/>
         </scene>
         <!--Favorite Hackerspace Table View Controller-->
         <scene sceneID="eOu-B7-sDS">
@@ -304,7 +301,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fQq-6D-sGA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1368" y="672"/>
+            <point key="canvasLocation" x="1428" y="672"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -318,7 +315,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="BnR-7o-sYH" kind="relationship" relationship="viewControllers" id="7hd-xg-ql0"/>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="V3a-3r-BYp" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="lWN-EN-kDN" kind="relationship" relationship="viewControllers" id="tBR-a5-SLN"/>
                     </connections>
                 </tabBarController>
@@ -454,6 +451,29 @@
             </objects>
             <point key="canvasLocation" x="1428" y="2200"/>
         </scene>
+        <!--Map-->
+        <scene sceneID="ulv-rI-cWI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V3a-3r-BYp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Map" image="Compass" selectedImage="Compass Filled" id="cPa-gy-q4n">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="selectedImage" value="Compass Filled"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jRW-U1-FNM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="gqT-uP-0Zg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BDg-bi-Zfd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="616" y="-98"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Compass" width="25" height="25"/>
@@ -461,6 +481,6 @@
         <image name="logo-inverted-alpha-white-scaled" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IQW-P7-rF8"/>
+        <segue reference="yfL-vi-Wcl"/>
     </inferredMetricsTieBreakers>
 </document>
