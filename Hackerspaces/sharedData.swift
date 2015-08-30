@@ -29,6 +29,10 @@ class Model {
         return (Model.defaults.arrayForKey(favoriteList) >>- { arr in arr.map { obj in obj as! String} }) ?? [String]()
     }
     
+    func setListOfFavorites(list: [String]) {
+        Model.defaults.setValue(list, forKey: favoriteList)
+    }
+    
     func addToFavorites(url: String) {
         Model.defaults.setValue(listOfFavorites().cons(url), forKey: favoriteList)
     }

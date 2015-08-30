@@ -10,8 +10,6 @@ import UIKit
 
 class FavoriteHSTableViewController: UITableViewController {
 
-    var favorites = Model.sharedInstance.listOfFavorites()
-    
     var nameForURL: [String: String] = [String: String]()
     
     override func viewDidLoad() {
@@ -42,17 +40,17 @@ class FavoriteHSTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return favorites.count
+        return Model.sharedInstance.listOfFavorites().count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(UIConstants.favoriteHSCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
-        cell.textLabel?.text = nameForURL[favorites[indexPath.row]]
+        cell.textLabel?.text = nameForURL[Model.sharedInstance.listOfFavorites()[indexPath.row]]
         return cell
     }
 
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        Model.sharedInstance.selectedHackerspace = favorites[indexPath.row]
+        Model.sharedInstance.selectedHackerspace = Model.sharedInstance.listOfFavorites()[indexPath.row]
         performSegueWithIdentifier(UIConstants.showHSFavorite, sender: self.tableView(tableView, cellForRowAtIndexPath: indexPath))
     }
     
@@ -62,10 +60,14 @@ class FavoriteHSTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if (editingStyle == UITableViewCellEditingStyle.Delete) {
-            Model.sharedInstance.removeFromFavorites(self.favorites[indexPath.row])
-            favorites = favorites.filter { $0 != self.favorites[indexPath.row] }
+            Model.sharedInstance.removeFromFavorites(Model.sharedInstance.listOfFavorites()[indexPath.row])
             tableView.reloadData()
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
     }
     /*
     // Override to support conditional editing of the table view.
