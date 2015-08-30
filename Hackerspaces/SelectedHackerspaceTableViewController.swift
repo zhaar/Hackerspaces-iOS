@@ -15,7 +15,7 @@ import Swiftz
 import BrightFutures
 import Haneke
 
-class FavoriteHackerspaceTableViewController: UITableViewController {
+class SelectedHackerspaceTableViewController: UITableViewController {
 
     
     // MARK: - Outlets & Actions
@@ -82,9 +82,7 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
             let isfavorited = contains(Model.sharedInstance.listOfFavorites(),h ) ?? false
             favoriteStatusButton.enabled = !isfavorited
             favoriteStatusButton.title = isfavorited ? "" : "Favorite"
-            println("hackerspace selected button is " + (!isfavorited ? "disabled" : "enabled"))
         } else {
-            println("currently no hackerspace selected, favorite disabled")
             favoriteStatusButton.enabled = false
             favoriteStatusButton.title = ""
         }

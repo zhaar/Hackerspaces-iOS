@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9525AB7D1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift */; };
+		9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */; };
 		9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */; };
 		9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */; };
 		953161871B73B12A0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
@@ -20,6 +20,7 @@
 		95643FCB1B729B3E0061A1E6 /* HackerspacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FCA1B729B3E0061A1E6 /* HackerspacesTests.swift */; };
 		9573A2891B91EB310061A1E6 /* HSDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2881B91EB310061A1E6 /* HSDataModel.swift */; };
 		9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */; };
+		9573A2901B93209D0061A1E6 /* FavoriteHSTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A28F1B93209D0061A1E6 /* FavoriteHSTableViewController.swift */; };
 		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
 		9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */; };
 		95A594A21B893FB60061A1E6 /* Haneke.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */; };
@@ -72,7 +73,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9525AB7C1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteHackerspaceTableViewController.swift; sourceTree = "<group>"; };
+		9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedHackerspaceTableViewController.swift; sourceTree = "<group>"; };
 		9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSTitleTableViewCell.swift; sourceTree = "<group>"; };
 		9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSMapTableViewCell.swift; sourceTree = "<group>"; };
 		953161861B73B12A0061A1E6 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
@@ -89,6 +90,7 @@
 		95643FCA1B729B3E0061A1E6 /* HackerspacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerspacesTests.swift; sourceTree = "<group>"; };
 		9573A2881B91EB310061A1E6 /* HSDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSDataModel.swift; sourceTree = "<group>"; };
 		9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
+		9573A28F1B93209D0061A1E6 /* FavoriteHSTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteHSTableViewController.swift; sourceTree = "<group>"; };
 		9597A1AA1B79252F0061A1E6 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
 		9597A1AD1B7932100061A1E6 /* DataCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCache.xcdatamodel; sourceTree = "<group>"; };
 		95A5948C1B893C530061A1E6 /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = ../carthage_dependecies/Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
@@ -162,15 +164,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		9525AB7E1B8622C70061A1E6 /* favorite hackerspace */ = {
+		9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */ = {
 			isa = PBXGroup;
 			children = (
-				9525AB7C1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift */,
+				9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */,
 				9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */,
 				9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */,
 				9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */,
 			);
-			name = "favorite hackerspace";
+			name = "Selected Hackerspace";
 			sourceTree = "<group>";
 		};
 		95643FA41B729B3E0061A1E6 = {
@@ -200,12 +202,13 @@
 				95D4B74D1B7D68C80061A1E6 /* Map */,
 				95E4B90A1B811F150061A1E6 /* Embeded search */,
 				953C513A1B8F49190061A1E6 /* FutureUtils.swift */,
+				9573A28E1B930FFC0061A1E6 /* Favorite list */,
 				95DB77FE1B9142D60061A1E6 /* Constants.swift */,
 				95DB78001B9149660061A1E6 /* sharedData.swift */,
 				95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */,
 				95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */,
 				9573A2881B91EB310061A1E6 /* HSDataModel.swift */,
-				9525AB7E1B8622C70061A1E6 /* favorite hackerspace */,
+				9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */,
 				95643FB81B729B3E0061A1E6 /* Main.storyboard */,
 				95643FBB1B729B3E0061A1E6 /* Images.xcassets */,
 				95643FBD1B729B3E0061A1E6 /* LaunchScreen.xib */,
@@ -241,6 +244,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9573A28E1B930FFC0061A1E6 /* Favorite list */ = {
+			isa = PBXGroup;
+			children = (
+				9573A28F1B93209D0061A1E6 /* FavoriteHSTableViewController.swift */,
+			);
+			name = "Favorite list";
+			sourceTree = "<group>";
+		};
 		95A594A61B893FC90061A1E6 /* Debug symbols */ = {
 			isa = PBXGroup;
 			children = (
@@ -266,8 +277,8 @@
 			children = (
 				95DBD9571B8D0FF20061A1E6 /* SearchShowResultsInSourceViewController.swift */,
 				95DBD94F1B8D0FC30061A1E6 /* DefaultSearchBarViewController.swift */,
-				95DBD9591B8D10120061A1E6 /* SearchResultsViewController.swift */,
 				95DBD9511B8D0FC30061A1E6 /* SearchControllerBaseViewController.swift */,
+				95DBD9591B8D10120061A1E6 /* SearchResultsViewController.swift */,
 				95DBD9521B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift */,
 			);
 			name = "Embeded search";
@@ -403,13 +414,14 @@
 			files = (
 				9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */,
 				95DBD95A1B8D10120061A1E6 /* SearchResultsViewController.swift in Sources */,
+				9573A2901B93209D0061A1E6 /* FavoriteHSTableViewController.swift in Sources */,
 				95DBD9551B8D0FC30061A1E6 /* SearchControllerBaseViewController.swift in Sources */,
 				95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */,
 				9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */,
 				95DB77FD1B912B0F0061A1E6 /* HSMapInfo.swift in Sources */,
 				953C513B1B8F49190061A1E6 /* FutureUtils.swift in Sources */,
 				95DBD9561B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */,
-				9525AB7D1B8622C10061A1E6 /* FavoriteHackerspaceTableViewController.swift in Sources */,
+				9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */,
 				9573A2891B91EB310061A1E6 /* HSDataModel.swift in Sources */,
 				95DBD9581B8D0FF20061A1E6 /* SearchShowResultsInSourceViewController.swift in Sources */,
 				95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */,
