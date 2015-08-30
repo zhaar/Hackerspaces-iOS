@@ -93,7 +93,7 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3 + (((customInfo?.count > 0) ?? false) ? 1 : 0)
+        return 4 + (((customInfo?.count > 0) ?? false) ? 1 : 0)
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -113,24 +113,15 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
         case 0 : return reuseTitleCell(indexPath)
         case 1 : return reuseGeneralInfoCell(indexPath)
         case 2 : return reuseMapCell(indexPath)
-        case 3 :
-            let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.CellIdentifier, forIndexPath: indexPath) as! UITableViewCell
-            
-            if let key = generalInfo?.keys.array[indexPath.row] {
-                cell.textLabel?.text = key
-                cell.detailTextLabel?.text = generalInfo?[key]?.description
-            }
-            return cell
-        default:
-            let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.CustomIdentifier, forIndexPath: indexPath) as! UITableViewCell
-            return cell
+        case 3 : return reuseRawDataCell(indexPath)
+        default: return reuseCustomDataCell(indexPath)
         }
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch(section) {
-        case 3: return "General Info"
-        case 4: return "Custom Info"
+        case 3: return "Raw Data"
+        case 4: return "Custom Data"
         default: return nil
         }
     }
@@ -170,6 +161,26 @@ class FavoriteHackerspaceTableViewController: UITableViewController {
             println("unknown cell")
             return tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as! UITableViewCell
         }
+    }
+    
+    func reuseRawDataCell(indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.CellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        
+        if let key = generalInfo?.keys.array[indexPath.row] {
+            cell.textLabel?.text = key
+            cell.detailTextLabel?.text = generalInfo?[key]?.description
+        }
+        return cell
+    }
+    
+    func reuseCustomDataCell(indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.CustomIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        
+        if let key = customInfo?.keys.array[indexPath.row] {
+            cell.textLabel?.text = key
+            cell.detailTextLabel?.text = customInfo?[key]?.description
+        }
+        return cell
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
