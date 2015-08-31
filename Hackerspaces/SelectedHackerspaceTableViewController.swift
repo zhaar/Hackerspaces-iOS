@@ -58,6 +58,8 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     // MARK: - View controller lifecycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.estimatedRowHeight = 200
+        tableView.rowHeight = UITableViewAutomaticDimension
         reloadData()
         updateFavoriteButton()
 
@@ -148,9 +150,11 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     func reuseGeneralInfoCell(indexPath: NSIndexPath) -> UITableViewCell {
         if let mapCell = tableView.dequeueReusableCellWithIdentifier(storyboard.GeneralInfoIdentifier, forIndexPath: indexPath) as? HSGeneralInfoTableViewCell {
             if let info = generalInfo {
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
                 mapCell.HSStatus.text = SpaceAPI.extractIsSpaceOpen(info) ? "Open" : "Closed"
                 mapCell.HSUrl.text = hackerspaceData?.websiteURL
-                mapCell.HSLastUpdateTime.text = hackerspaceData?.state.lastChange?.description
+                mapCell.HSLastUpdateTime.text = hackerspaceData?.state.lastChange >>- { dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: NSTimeInterval($0))) }
                 mapCell.openningMessageLabel.text = hackerspaceData?.state.message
                 mapCell.HSUsedAPI.text = "space api v " + (hackerspaceData?.api ?? "")
              }
@@ -162,32 +166,24 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     }
     
     func reuseRawDataCell(indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.CellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.CellIdentifier, forIndexPath: indexPath) as! RawDataTableViewCell
         
         if let key = generalInfo?.keys.array[indexPath.row] {
-            cell.textLabel?.text = key
-            cell.detailTextLabel?.text = generalInfo?[key]?.description
+            cell.dataTitle.text = key
+            cell.dataContent.text = generalInfo?[key]?.description
+            cell.layoutIfNeeded()
         }
         return cell
     }
     
     func reuseCustomDataCell(indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.CustomIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.CustomIdentifier, forIndexPath: indexPath) as! RawDataTableViewCell
         
         if let key = customInfo?.keys.array[indexPath.row] {
-            cell.textLabel?.text = key
-            cell.detailTextLabel?.text = customInfo?[key]?.description
+            cell.dataTitle.text = key
+            cell.dataContent.text = customInfo?[key]?.description
         }
         return cell
-    }
-    
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        switch(indexPath.section) {
-        case 0: return CGFloat(150)
-        case 1: return CGFloat(138)
-        case 2: return CGFloat(200)
-        default: return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
-        }
     }
     
     /*
