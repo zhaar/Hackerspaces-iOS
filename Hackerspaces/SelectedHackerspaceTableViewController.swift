@@ -93,7 +93,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4 + (((customInfo?.count > 0) ?? false) ? 1 : 0)
+        return 3
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -123,6 +123,15 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         case 3: return "Raw Data"
         case 4: return "Custom Data"
         default: return nil
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0: return 150
+        case 1: return 132
+        case 2: return 150
+        default : return UITableViewAutomaticDimension
         }
     }
     
@@ -170,7 +179,8 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         
         if let key = generalInfo?.keys.array[indexPath.row] {
             cell.dataTitle.text = key
-            cell.dataContent.text = generalInfo?[key]?.description
+            cell.dataContent.text = generalInfo?[key]?.print()
+
             cell.layoutIfNeeded()
         }
         return cell
@@ -181,8 +191,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         
         if let key = customInfo?.keys.array[indexPath.row] {
             cell.dataTitle.text = key
-            cell.dataContent.text = customInfo?[key]?.description
-        }
+            cell.dataContent.text = customInfo?[key]?.print()        }
         return cell
     }
     
