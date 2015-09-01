@@ -32,23 +32,27 @@ class SearchControllerBaseViewController: UITableViewController {
         }
     }
     
-    var spaceAPI = [String : String]()
+    var spaceAPI = [String : String]() {
+        didSet {
+            SpaceAPI.getHackerspaceOpens().onSuccess {
+                self.hackerspaces = $0
+            }
+        }
+    }
     
     var allResults = [String]() {
         didSet {
             visibleResults = allResults
             self.tableView.reloadData()
+            self.refreshControl?.endRefreshing()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.refreshControl?.beginRefreshing()
         SpaceAPI.loadAPI().onSuccess {
             self.spaceAPI = $0
-        }.andThen { _ in
-            SpaceAPI.getHackerspaceOpens().onSuccess {
-                self.hackerspaces = $0
-            }
         }
     }
 

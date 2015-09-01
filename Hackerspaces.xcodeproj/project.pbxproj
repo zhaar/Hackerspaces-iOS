@@ -340,6 +340,11 @@
 					95643FAC1B729B3E0061A1E6 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 9PXQEQ2PNN;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					95643FC31B729B3E0061A1E6 = {
 						CreatedOnToolsVersion = 6.4;
