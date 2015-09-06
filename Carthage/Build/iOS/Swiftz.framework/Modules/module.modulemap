@@ -1,6 +1,0 @@
-framework module Swiftz {
-  umbrella header "Swiftz.h"
-
-  export *
-  module * { export * }
-}

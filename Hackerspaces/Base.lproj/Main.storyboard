@@ -71,7 +71,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Favorites" id="Hsc-2q-g4T"/>
                     <connections>
-                        <segue destination="gdX-aS-qgt" kind="show" identifier="ShowHackerspaceFromFavoriteList" id="su7-4a-xGp"/>
+                        <segue destination="gdX-aS-qgt" kind="show" identifier="ShowHackerspaceFromFavoriteList" id="fGm-qX-qXM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qc9-6I-K3Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -266,7 +266,7 @@
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="space api v 0.13" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGo-tL-cOM">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="space api v 0.13" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGo-tL-cOM">
                                             <rect key="frame" x="507" y="8" width="85" height="13.5"/>
                                             <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -338,7 +338,7 @@
                                 <tableViewCellContentView key="contentView" autoresizesSubviews="NO" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AgR-6h-pYf" id="x9r-Oz-QC8">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <mapView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34X-RW-VcZ">
+                                        <mapView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" misplaced="YES" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsUserLocation="YES" showsBuildings="NO" showsPointsOfInterest="NO" translatesAutoresizingMaskIntoConstraints="NO" id="34X-RW-VcZ">
                                             <rect key="frame" x="1" y="8" width="598" height="55"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="139" id="BkI-lo-hDj"/>
@@ -474,11 +474,11 @@
             </objects>
             <point key="canvasLocation" x="-252" y="672"/>
         </scene>
-        <!--Hackerspace-->
+        <!--Hackerspaces-->
         <scene sceneID="1IJ-mk-gIZ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BnR-7o-sYH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Hackerspace" image="logo-inverted-alpha-white-scaled" id="5qZ-X7-h1l"/>
+                    <tabBarItem key="tabBarItem" title="Hackerspaces" id="5qZ-X7-h1l"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8v8-pZ-GGF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -535,6 +535,9 @@
                             <action selector="refresh:" destination="0bH-UZ-e6C" eventType="valueChanged" id="9oh-aZ-5uW"/>
                         </connections>
                     </refreshControl>
+                    <connections>
+                        <segue destination="gdX-aS-qgt" kind="show" identifier="ShowHackerspaceFromSearch" id="aJy-NA-KwG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kWM-ws-sQo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -553,7 +556,6 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="0bH-UZ-e6C" kind="relationship" relationship="rootViewController" id="hbI-5C-f58"/>
-                        <segue destination="gdX-aS-qgt" kind="show" identifier="ShowHackerspaceFromSearch" id="Wfx-lL-FMb"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mK9-3q-y96" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -628,9 +630,8 @@
     <resources>
         <image name="Compass" width="25" height="25"/>
         <image name="Compass Filled" width="25" height="25"/>
-        <image name="logo-inverted-alpha-white-scaled" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="su7-4a-xGp"/>
+        <segue reference="aJy-NA-KwG"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -39,10 +39,8 @@
 		95DBD94A1B8CFF360061A1E6 /* Swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594971B893E5E0061A1E6 /* Swiftz.framework */; };
 		95DBD94C1B8CFF360061A1E6 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DBD94B1B8CFF360061A1E6 /* Result.framework */; };
 		95DBD94E1B8CFF3E0061A1E6 /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DBD94D1B8CFF3E0061A1E6 /* Box.framework */; };
-		95DBD9531B8D0FC30061A1E6 /* DefaultSearchBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBD94F1B8D0FC30061A1E6 /* DefaultSearchBarViewController.swift */; };
 		95DBD9551B8D0FC30061A1E6 /* SearchControllerBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBD9511B8D0FC30061A1E6 /* SearchControllerBaseViewController.swift */; };
 		95DBD9561B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBD9521B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift */; };
-		95DBD9581B8D0FF20061A1E6 /* SearchShowResultsInSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBD9571B8D0FF20061A1E6 /* SearchShowResultsInSourceViewController.swift */; };
 		95DBD95A1B8D10120061A1E6 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBD9591B8D10120061A1E6 /* SearchResultsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -114,10 +112,8 @@
 		95DB78001B9149660061A1E6 /* sharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sharedData.swift; sourceTree = "<group>"; };
 		95DBD94B1B8CFF360061A1E6 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		95DBD94D1B8CFF3E0061A1E6 /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Box.framework; path = Carthage/Build/iOS/Box.framework; sourceTree = "<group>"; };
-		95DBD94F1B8D0FC30061A1E6 /* DefaultSearchBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultSearchBarViewController.swift; sourceTree = "<group>"; };
 		95DBD9511B8D0FC30061A1E6 /* SearchControllerBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchControllerBaseViewController.swift; sourceTree = "<group>"; };
 		95DBD9521B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarEmbeddedInNavigationBarViewController.swift; sourceTree = "<group>"; };
-		95DBD9571B8D0FF20061A1E6 /* SearchShowResultsInSourceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchShowResultsInSourceViewController.swift; sourceTree = "<group>"; };
 		95DBD9591B8D10120061A1E6 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		A716B48507D7E59C5E3D6630 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -278,8 +274,6 @@
 		95E4B90A1B811F150061A1E6 /* Embeded search */ = {
 			isa = PBXGroup;
 			children = (
-				95DBD9571B8D0FF20061A1E6 /* SearchShowResultsInSourceViewController.swift */,
-				95DBD94F1B8D0FC30061A1E6 /* DefaultSearchBarViewController.swift */,
 				95DBD9511B8D0FC30061A1E6 /* SearchControllerBaseViewController.swift */,
 				95DBD9591B8D10120061A1E6 /* SearchResultsViewController.swift */,
 				95DBD9521B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift */,
@@ -432,14 +426,12 @@
 				95DBD9561B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */,
 				9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */,
 				9573A2891B91EB310061A1E6 /* HSDataModel.swift in Sources */,
-				95DBD9581B8D0FF20061A1E6 /* SearchShowResultsInSourceViewController.swift in Sources */,
 				95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */,
 				9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */,
 				9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */,
 				95ADEF991B8B53580061A1E6 /* SpaceAPIFunctions.swift in Sources */,
 				9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */,
 				95DB78011B9149660061A1E6 /* sharedData.swift in Sources */,
-				95DBD9531B8D0FC30061A1E6 /* DefaultSearchBarViewController.swift in Sources */,
 				953161871B73B12A0061A1E6 /* extensions.swift in Sources */,
 				95DB77FF1B9142D60061A1E6 /* Constants.swift in Sources */,
 			);

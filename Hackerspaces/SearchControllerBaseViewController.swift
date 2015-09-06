@@ -94,9 +94,15 @@ class SearchControllerBaseViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        Model.sharedInstance.selectedHackerspace = self.spaceAPI[visibleResults[indexPath.row]]
-        let cell = self.tableView(self.tableView, cellForRowAtIndexPath: indexPath)
-        navigationController?.performSegueWithIdentifier(UIConstants.showHSSearch, sender: cell)
+        performSegueWithIdentifier(UIConstants.showHSSearch, sender: self.spaceAPI[visibleResults[indexPath.row]])
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        println("preparing for segue")
+        if let SHVC = segue.destinationViewController as? SelectedHackerspaceTableViewController {
+            println("target is a hackerspace table view")
+            SHVC.prepare(sender as! String)
+        }
     }
 
 }

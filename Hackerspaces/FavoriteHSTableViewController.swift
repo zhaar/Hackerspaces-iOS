@@ -49,9 +49,14 @@ class FavoriteHSTableViewController: UITableViewController {
         return cell
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let SHVC = segue.destinationViewController as? SelectedHackerspaceTableViewController {
+            SHVC.prepare(sender as! String)
+        }
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        Model.sharedInstance.selectedHackerspace = Model.sharedInstance.listOfFavorites()[indexPath.row]
-        performSegueWithIdentifier(UIConstants.showHSFavorite, sender: self.tableView(tableView, cellForRowAtIndexPath: indexPath))
+        performSegueWithIdentifier(UIConstants.showHSFavorite, sender: Model.sharedInstance.listOfFavorites()[indexPath.row])
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {

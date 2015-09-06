@@ -29,11 +29,16 @@ extension MapViewController: MKMapViewDelegate {
         return nil
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let SHVC = segue.destinationViewController as? SelectedHackerspaceTableViewController {
+            SHVC.prepare(sender as! String)
+        }
+    }
+    
     func mapView(mapView: MKMapView!, annotationView view: MKAnnotationView!, calloutAccessoryControlTapped control: UIControl!) {
         if let annotation = view.annotation as? SpaceLocation {
             SpaceAPI.loadAPI().onSuccess { dict in
-                Model.sharedInstance.selectedHackerspace = dict[annotation.name]
-                self.performSegueWithIdentifier(UIConstants.showHSMap, sender: annotation)
+                self.performSegueWithIdentifier(UIConstants.showHSMap, sender: dict[annotation.name])
             }
         }
     }

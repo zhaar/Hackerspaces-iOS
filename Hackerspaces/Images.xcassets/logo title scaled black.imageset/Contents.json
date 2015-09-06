@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Compass-25.png"
+      "filename" : "logo-title-scaled-black@1x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Compass-50.png"
+      "filename" : "logo-title-scaled-black@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "Compass-75.png"
+      "filename" : "logo-title-scaled-black@3x.png"
     }
   ],
   "info" : {

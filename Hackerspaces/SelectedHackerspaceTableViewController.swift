@@ -36,11 +36,11 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         }
     }
     
-    var currentlySelectedHackerspace: String? {
-        get {
-            return Model.sharedInstance.selectedHackerspace
-        }
+    func prepare(url: String) {
+        currentlySelectedHackerspace = url
     }
+    
+    var currentlySelectedHackerspace: String?
     
     var generalInfo: [String : JSONDecoder]?
     var customInfo: [String : JSONDecoder]?
@@ -58,15 +58,15 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     // MARK: - View controller lifecycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        println("view did appear, current url = \(currentlySelectedHackerspace)")
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         reloadData()
         updateFavoriteButton()
-
     }
     
     func reloadData(fromCache: Bool = true, callback: (() -> Void)? = nil) {
-        if let url = Model.sharedInstance.selectedHackerspace {
+        if let url = currentlySelectedHackerspace {
             (fromCache ? SpaceAPI.loadHackerspaceAPI : SpaceAPI.loadHackerspaceAPIFromWeb)(url).onSuccess { dict in
                 self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
                 let (g, c) = dict.split { (key: String, value: JSONDecoder) -> Bool in !key.hasPrefix(SpaceAPIConstants.customAPIPrefix) }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchBarEmbeddedInNavigationBarViewController: SearchControllerBaseViewController {
+class SearchBarEmbeddedInNavigationBarViewController: SearchResultsViewController , UISearchBarDelegate {
     // MARK: Properties
     
     // `searchController` is set in viewDidLoad(_:).
@@ -20,12 +20,14 @@ class SearchBarEmbeddedInNavigationBarViewController: SearchControllerBaseViewCo
         super.viewDidLoad()
         
         // Create the search results view controller and use it for the UISearchController.
-        let searchResultsController = storyboard!.instantiateViewControllerWithIdentifier(SearchResultsViewController.StoryboardConstants.identifier) as! SearchResultsViewController
+//        let searchResultsController = storyboard!.instantiateViewControllerWithIdentifier(SearchResultsViewController.StoryboardConstants.identifier) as! SearchResultsViewController
         
         // Create the search controller and make it perform the results updating.
-        searchController = UISearchController(searchResultsController: searchResultsController)
-        searchController.searchResultsUpdater = searchResultsController
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
         searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.delegate = self
         
         // Configure the search controller's search bar. For more information on how to configure
         // search bars, see the "Search Bar" group under "Search".
@@ -36,5 +38,9 @@ class SearchBarEmbeddedInNavigationBarViewController: SearchControllerBaseViewCo
         navigationItem.titleView = searchController.searchBar
 
         definesPresentationContext = true
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        filterString = nil
     }
 }

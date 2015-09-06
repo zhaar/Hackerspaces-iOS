@@ -12,11 +12,7 @@ class HackerspaceTitleTableViewCell: UITableViewCell {
 
     @IBOutlet weak var logo: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        println("custom cell nib")
-        // Initialization code
-    }
+
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
