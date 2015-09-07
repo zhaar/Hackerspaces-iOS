@@ -20,12 +20,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     
     @IBAction func resetMap(sender: UILongPressGestureRecognizer) {
-        centerMapOnLocation(locationManager.location)
+        if let location = locationManager.location {
+            centerMapOnLocation(location)
+        }
     }
+    
     func checkLocationAuthorizationStatus() {
         if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
             map.showsUserLocation = true
-            map.userTrackingMode = MKUserTrackingMode.Follow
+            map.userTrackingMode = MKUserTrackingMode.None
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.startUpdatingLocation()
         } else {
