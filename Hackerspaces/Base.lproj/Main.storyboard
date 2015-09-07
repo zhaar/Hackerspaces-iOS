@@ -474,11 +474,11 @@
             </objects>
             <point key="canvasLocation" x="-252" y="672"/>
         </scene>
-        <!--Hackerspaces-->
+        <!--Navigation Controller-->
         <scene sceneID="1IJ-mk-gIZ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BnR-7o-sYH" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Hackerspaces" image="logo inverted alpha white scaled" id="5qZ-X7-h1l"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="5qZ-X7-h1l"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8v8-pZ-GGF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -630,7 +630,6 @@
     <resources>
         <image name="Compass" width="25" height="25"/>
         <image name="Compass Filled" width="25" height="25"/>
-        <image name="logo inverted alpha white scaled" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="aJy-NA-KwG"/>
