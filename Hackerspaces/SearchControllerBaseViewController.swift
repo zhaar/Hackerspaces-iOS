@@ -98,9 +98,7 @@ class SearchControllerBaseViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println("preparing for segue")
         if let SHVC = segue.destinationViewController as? SelectedHackerspaceTableViewController {
-            println("target is a hackerspace table view")
             SHVC.prepare(sender as! String)
         }
     }

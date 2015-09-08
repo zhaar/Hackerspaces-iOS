@@ -58,7 +58,6 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     // MARK: - View controller lifecycle
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        println("view did appear, current url = \(currentlySelectedHackerspace)")
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         reloadData()
@@ -141,7 +140,6 @@ class SelectedHackerspaceTableViewController: UITableViewController {
             generalInfo?["logo"]?.string >>- { NSURL(string: $0) } >>- { titleCell.logo.hnk_setImageFromURL($0) }
             return titleCell
         } else {
-            println("unknown cell")
             return tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as! UITableViewCell
         }
     }
@@ -151,7 +149,6 @@ class SelectedHackerspaceTableViewController: UITableViewController {
             generalInfo >>- { SpaceAPI.extractLocationInfo($0)} >>- { mapCell.location = $0 }
             return mapCell
         } else {
-            println("unknown cell")
             return tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as! UITableViewCell
         }
     }
@@ -169,7 +166,6 @@ class SelectedHackerspaceTableViewController: UITableViewController {
              }
             return mapCell
         } else {
-            println("unknown cell")
             return tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as! UITableViewCell
         }
     }
