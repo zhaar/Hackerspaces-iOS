@@ -46,12 +46,12 @@ extension Dictionary {
 
 extension Dictionary {
     func map<OutKey: Hashable, OutValue>(transform: Element -> (OutKey, OutValue)) -> [OutKey: OutValue] {
-        return Dictionary<OutKey, OutValue>(Swift.map(self, transform))
+        return Dictionary<OutKey, OutValue>(self.map(transform))
     }
     
-    func filter(includeElement: Element -> Bool) -> [Key: Value] {
-        return Dictionary(Swift.filter(self, includeElement))
-    }
+//    func filter(includeElement: Element -> Bool) -> [Key: Value] {
+//        return Dictionary(self.filter(includeElement))
+//    }
 }
 
 func toDict<T,S>(arr: [(T,S)]) -> [T : S] {
@@ -63,13 +63,13 @@ func toDict<T,S>(arr: [(T,S)]) -> [T : S] {
 
 extension Array {
     
-    func foreach(fn: T -> Void) {
+    func foreach(fn: Element -> Void) {
         for e in self {
             fn(e)
         }
     }
     
-    func foldl<S>(initial: S,fn: (acc:S, elem: T) -> S) -> S {
+    func foldl<S>(initial: S,fn: (acc:S, elem: Element) -> S) -> S {
         var result = initial
         for e in self {
             result = fn(acc: result, elem: e)
@@ -78,26 +78,26 @@ extension Array {
     }
     
     ///add element at the end of the array, returns a copy
-    func cons(e: Element) -> [Element] {
-        var cpy = self
-        cpy.append(e)
-        return cpy
-    }
+//    func cons(e: Element) -> [Element] {
+//        var cpy = self
+//        cpy.append(e)
+//        return cpy
+//    }
     
-    func groupBy<S>(fn: T -> S) -> [S: [T]] {
-        var dic = [S: [T]]()
+    func groupBy<S>(fn: Element -> S) -> [S: [Element]] {
+        var dic = [S: [Element]]()
         for e in self {
             let key = fn(e)
             dic[key] = dic[key]?.cons(e) ?? [e]
         }
         return dic
     }
-    
-    func immutableSort(isOrderedBefore: (T, T) -> Bool) -> [Element] {
-        var cpy = self
-        cpy.sort(isOrderedBefore)
-        return cpy
-    }
+//    
+//    func immutableSort(isOrderedBefore: (Element, Element) -> Bool) -> [Element] {
+//        var cpy = self
+//        cpy.sort(isOrderedBefore)
+//        return cpy
+//    }
     
 }
 
@@ -117,7 +117,7 @@ extension Dictionary {
 extension String {
     
     subscript (i: Int) -> Character {
-        return self[advance(self.startIndex, i)]
+        return self[self.startIndex.advancedBy(i)]
     }
     
     subscript (i: Int) -> String {
@@ -125,6 +125,6 @@ extension String {
     }
     
     subscript (r: Range<Int>) -> String {
-        return substringWithRange(Range(start: advance(startIndex, r.startIndex), end: advance(startIndex, r.endIndex)))
+        return substringWithRange(Range(start: startIndex.advancedBy(r.startIndex), end: startIndex.advancedBy(r.endIndex)))
     }
 }

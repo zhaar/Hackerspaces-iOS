@@ -20,7 +20,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     
     // MARK: - Outlets & Actions
     @IBAction func refresh(sender: UIRefreshControl) {
-        reloadData(fromCache: false, callback: { sender.endRefreshing() })
+        reloadData(false, callback: { sender.endRefreshing() })
     }
     
     @IBOutlet weak var favoriteStatusButton: UIBarButtonItem! {
@@ -80,7 +80,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     
     func updateFavoriteButton() {
         if let h = currentlySelectedHackerspace {
-            let isfavorited = contains(Model.sharedInstance.listOfFavorites(),h ) ?? false
+            let isfavorited = Model.sharedInstance.listOfFavorites().contains(h) ?? false
             favoriteStatusButton.enabled = !isfavorited
             favoriteStatusButton.title = isfavorited ? "" : "Favorite"
         } else {
@@ -140,7 +140,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
             generalInfo?["logo"]?.string >>- { NSURL(string: $0) } >>- { titleCell.logo.hnk_setImageFromURL($0) }
             return titleCell
         } else {
-            return tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as! UITableViewCell
+            return tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath)
         }
     }
     
@@ -149,7 +149,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
             generalInfo >>- { SpaceAPI.extractLocationInfo($0)} >>- { mapCell.location = $0 }
             return mapCell
         } else {
-            return tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as! UITableViewCell
+            return tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath)
         }
     }
     
@@ -166,14 +166,14 @@ class SelectedHackerspaceTableViewController: UITableViewController {
              }
             return mapCell
         } else {
-            return tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath) as! UITableViewCell
+            return tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath)
         }
     }
     
     func reuseRawDataCell(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.CellIdentifier, forIndexPath: indexPath) as! RawDataTableViewCell
         
-        if let key = generalInfo?.keys.array[indexPath.row] {
+        if let key = (generalInfo.map { d in Array(d.keys)[indexPath.row]}) {
             cell.dataTitle.text = key
             cell.dataContent.text = generalInfo?[key]?.print()
 
@@ -185,7 +185,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     func reuseCustomDataCell(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(storyboard.CustomIdentifier, forIndexPath: indexPath) as! RawDataTableViewCell
         
-        if let key = customInfo?.keys.array[indexPath.row] {
+        if let key = (customInfo.map {Array($0.keys)[indexPath.row]}) {
             cell.dataTitle.text = key
             cell.dataContent.text = customInfo?[key]?.print()        }
         return cell

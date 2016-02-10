@@ -32,7 +32,7 @@ struct SpaceAPI {
                 } else {
                     p.failure(NSError(domain: "HTTP request json cast error: \(JSONDecoder(data).description)", code: 126, userInfo: nil))
                 }
-            }.onFailure { error in
+                }.onFailure { error in
                     p.failure(error!)
             }
         }
@@ -42,11 +42,11 @@ struct SpaceAPI {
     static func loadAPIFromWeb() -> Future<[String : String], NSError> {
         let p = Promise<[String: String], NSError>()
         Queue.global.async {
-            let req = HTTPTask()
-            req.GET(SpaceAPIConstants.API, parameters: nil) { (response: HTTPResponse) in
-                if let data = response.responseObject as? NSData {
-                    Shared.dataCache.set(value: data, key: SpaceAPIConstants.API)
-                    if let dict = JSONDecoder(data).dictionary {
+            do {
+                let req = try HTTP.GET(SpaceAPIConstants.API)
+                req.start { response in
+                    Shared.dataCache.set(value: response.data, key: SpaceAPIConstants.API)
+                    if let dict = JSONDecoder(response.data).dictionary {
                         var api = [String : String]()
                         for key in dict.keys {
                             if let value = dict[key]?.string {
@@ -55,11 +55,11 @@ struct SpaceAPI {
                         }
                         p.success(api)
                     } else {
-                        p.failure(NSError(domain: "HTTP request json cast error: \(JSONDecoder(data).description)", code: 126, userInfo: nil))
+                        p.failure(NSError(domain: "HTTP GET response cast", code: 124, userInfo: nil))
                     }
-                } else {
-                    p.failure(NSError(domain: "HTTP request data cast error", code: 125, userInfo: nil))
                 }
+            } catch let err {
+                p.failure(NSError(domain: "HTTP GET request failed with error: \(err)", code: 123, userInfo: nil))
             }
         }
         return p.future
@@ -75,7 +75,7 @@ struct SpaceAPI {
                 } else {
                     p.failure(NSError(domain: "HTTP request json cast error: \(JSONDecoder(data).description)", code: 126, userInfo: nil))
                 }
-            }.onFailure { error in
+                }.onFailure { error in
                     p.failure(error!)
             }
         }
@@ -85,28 +85,30 @@ struct SpaceAPI {
     static func loadHackerspaceAPIFromWeb(url: String) -> Future<[String : JSONDecoder], NSError> {
         let p = Promise<[String: JSONDecoder], NSError>()
         Queue.global.async {
-            let req = HTTPTask()
-            req.GET(url, parameters: nil) {(response: HTTPResponse) in
-                if let err = response.error {
-                    p.failure(err)
-                } else if let data = response.responseObject as? NSData {
-                    Shared.dataCache.set(value: data, key: url)
-                    if let dict = JSONDecoder(data).dictionary {
-                        p.success(dict)
+            do {
+                let req = try HTTP.GET(url)
+                req.start { response in
+                    if let err = response.error {
+                        p.failure(err)
                     } else {
-                        p.failure(NSError(domain: "HTTP GET data cast", code: 123, userInfo: nil))
+                        Shared.dataCache.set(value: response.data, key: url)
+                        if let dict = JSONDecoder(response.data).dictionary {
+                            p.success(dict)
+                        } else {
+                            p.failure(NSError(domain: "HTTP GET data cast", code: 123, userInfo: nil))
+                        }
                     }
-                } else {
-                    p.failure(NSError(domain: "HTTP GET response cast", code: 124, userInfo: nil))
                 }
+            } catch {
+                p.failure(NSError(domain: "HTTP GET request failed", code: 124, userInfo: nil))
             }
         }
         return p.future
     }
     
-    static func loadHackerspaceAPINoError(url: String) -> Future<Result<[String : JSONDecoder]>, NoError> {
-        return FutureUtils.futureToResult(loadHackerspaceAPI(url))
-    }
+//    static func loadHackerspaceAPINoError(url: String) -> Future<[String : JSONDecoder], BrightFutures.NoError> {
+//        return FutureUtils.futureToResult(loadHackerspaceAPI(url))
+//    }
     
     static func getHackerspaceLocation(url: String) -> Future<SpaceLocation?, NSError> {
         return loadHackerspaceAPI(url).map { self.extractLocationInfo($0) }
@@ -116,10 +118,10 @@ struct SpaceAPI {
         return t.0.zip(t.1)
     }
     
-    static func listTupleToListFuture(list: [(Future<String, NoError>, Future<[String : JSONDecoder], NoError>)]) -> Future<[(String, [String: JSONDecoder])], NoError> {
+    static func listTupleToListFuture(list: [(Future<String, NoError>, Future<[String : JSONDecoder], NoError>)]) -> Future<[(String, [String: JSONDecoder])], BrightFutures.NoError> {
         let m: [Future<(String, [String: JSONDecoder]), NoError>]  = list.map { (tuple: (Future<String, NoError>, Future<[String : JSONDecoder], NoError>)) -> Future<(String, [String: JSONDecoder]), NoError> in
-        tuple.0.zip(tuple.1)}
-        return BrightFutures.sequence(m)
+            tuple.0.zip(tuple.1)}
+        return m.sequence()
     }
     
     /*!
@@ -131,8 +133,8 @@ struct SpaceAPI {
     
     @return list of tuple representing the name and the result of the queried url as a future. [(F<name>, F<JSON>)]
     */
-    private static func dictToFutureQuery(dictionary: [String : String]) -> [Future<(String, [String : JSONDecoder])?, NoError>] {
-        return map(dictionary) { (key, value) in
+    private static func dictToFutureQuery(dictionary: [String : String]) -> [Future<(String, [String : JSONDecoder])?, BrightFutures.NoError>] {
+        return dictionary.map { (key, value) in
             let t = (future(key), SpaceAPI.loadHackerspaceAPI(value))
             let s = future(key).zip(FutureUtils.futureToOptional(t.1))
             let r = s.map { (tuple: (String, [String : JSONDecoder]?)) -> (String, [String : JSONDecoder])? in tuple.1 == nil ? nil : (tuple.0, tuple.1!)}
@@ -146,23 +148,23 @@ struct SpaceAPI {
     
     static func loadAllSpacesAPI(fromCache: Bool = true) -> Future<[(String, [String: JSONDecoder])], NSError> {
         return (fromCache ? loadAPI() : loadAPIFromWeb()).flatMap { (dict: [String : String]) -> Future<[(String, [String: JSONDecoder])], NSError> in
-            promoteError(self.arrayFutureToFlatFutureArray(dict))
+            self.arrayFutureToFlatFutureArray(dict).promoteError()
         }
     }
     
     static func loadAllSpaceAPIAsDict(fromCache: Bool = true) -> Future<[String : [String : JSONDecoder]], NSError> {
-        return loadAllSpacesAPI(fromCache: fromCache).map { Dictionary($0) }
+        return loadAllSpacesAPI(fromCache).map { Dictionary($0) }
     }
     
     static func getHackerspaceOpens(fromCache: Bool = true) -> Future<[String : Bool], NSError> {
-        return loadAllSpaceAPIAsDict(fromCache: fromCache).map { (dict: [String : [String : JSONDecoder]]) in
+        return loadAllSpaceAPIAsDict(fromCache).map { (dict: [String : [String : JSONDecoder]]) in
             let r = dict.map { (key, value) in (key, SpaceAPI.extractIsSpaceOpen(value))}
             return r
         }
     }
     
     static func getHackerspaceLocations(fromCache: Bool = true) -> Future<[SpaceLocation?], NSError> {
-        return loadAllSpacesAPI(fromCache: fromCache).map { (arr:[(String, [String : JSONDecoder])]) -> [SpaceLocation?] in
+        return loadAllSpacesAPI(fromCache).map { (arr:[(String, [String : JSONDecoder])]) -> [SpaceLocation?] in
             let r = arr.map { (tuple:(String, [String : JSONDecoder])) -> SpaceLocation? in SpaceAPI.extractLocationInfo(tuple.1) }
             return r
         }

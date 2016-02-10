@@ -22,6 +22,9 @@
 		9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */; };
 		9573A2901B93209D0061A1E6 /* FavoriteHSTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A28F1B93209D0061A1E6 /* FavoriteHSTableViewController.swift */; };
 		9573A2AF1B936F960061A1E6 /* RawDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */; };
+		958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */; };
+		958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */; };
+		958B31AD1C6A89E3000EF9E1 /* Swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594971B893E5E0061A1E6 /* Swiftz.framework */; };
 		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
 		9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */; };
 		95A594A21B893FB60061A1E6 /* Haneke.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */; };
@@ -32,13 +35,9 @@
 		95DB77FD1B912B0F0061A1E6 /* HSMapInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */; };
 		95DB77FF1B9142D60061A1E6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB77FE1B9142D60061A1E6 /* Constants.swift */; };
 		95DB78011B9149660061A1E6 /* sharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB78001B9149660061A1E6 /* sharedData.swift */; };
-		95DBD9461B8CFF360061A1E6 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */; };
 		95DBD9471B8CFF360061A1E6 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594941B893E5E0061A1E6 /* Haneke.framework */; };
 		95DBD9481B8CFF360061A1E6 /* JSONJoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594951B893E5E0061A1E6 /* JSONJoy.framework */; };
-		95DBD9491B8CFF360061A1E6 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */; };
-		95DBD94A1B8CFF360061A1E6 /* Swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594971B893E5E0061A1E6 /* Swiftz.framework */; };
 		95DBD94C1B8CFF360061A1E6 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DBD94B1B8CFF360061A1E6 /* Result.framework */; };
-		95DBD94E1B8CFF3E0061A1E6 /* Box.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DBD94D1B8CFF3E0061A1E6 /* Box.framework */; };
 		95DBD9551B8D0FC30061A1E6 /* SearchControllerBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBD9511B8D0FC30061A1E6 /* SearchControllerBaseViewController.swift */; };
 		95DBD9561B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBD9521B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift */; };
 		95DBD95A1B8D10120061A1E6 /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBD9591B8D10120061A1E6 /* SearchResultsViewController.swift */; };
@@ -124,12 +123,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				95DBD94C1B8CFF360061A1E6 /* Result.framework in Frameworks */,
-				95DBD9461B8CFF360061A1E6 /* BrightFutures.framework in Frameworks */,
+				958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */,
+				958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */,
 				95DBD9471B8CFF360061A1E6 /* Haneke.framework in Frameworks */,
 				95DBD9481B8CFF360061A1E6 /* JSONJoy.framework in Frameworks */,
-				95DBD94E1B8CFF3E0061A1E6 /* Box.framework in Frameworks */,
-				95DBD9491B8CFF360061A1E6 /* SwiftHTTP.framework in Frameworks */,
-				95DBD94A1B8CFF360061A1E6 /* Swiftz.framework in Frameworks */,
+				958B31AD1C6A89E3000EF9E1 /* Swiftz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,7 +326,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Fixme;
 				TargetAttributes = {
 					95643FAC1B729B3E0061A1E6 = {
@@ -398,7 +396,6 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Swiftz.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/BrightFutures.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Box.framework",
 			);
 			name = "Carthage copy-frameworks";
 			outputPaths = (
@@ -496,6 +493,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -571,6 +569,7 @@
 				);
 				INFOPLIST_FILE = Hackerspaces/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "moe.zephyz.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -590,6 +589,7 @@
 				);
 				INFOPLIST_FILE = Hackerspaces/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "moe.zephyz.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -610,6 +610,7 @@
 				);
 				INFOPLIST_FILE = HackerspacesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.fixme.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hackerspaces.app/Hackerspaces";
 			};
@@ -625,6 +626,7 @@
 				);
 				INFOPLIST_FILE = HackerspacesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "ch.fixme.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hackerspaces.app/Hackerspaces";
 			};

@@ -44,7 +44,7 @@ class FavoriteHSTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(UIConstants.favoriteHSCellReuseIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(UIConstants.favoriteHSCellReuseIdentifier, forIndexPath: indexPath) 
         cell.textLabel?.text = nameForURL[Model.sharedInstance.listOfFavorites()[indexPath.row]]
         return cell
     }

@@ -12,7 +12,7 @@ import JSONJoy
 class SearchControllerBaseViewController: UITableViewController {
     
     @IBAction func refresh(sender: UIRefreshControl) {
-        SpaceAPI.getHackerspaceOpens(fromCache: false).onSuccess { api in
+        SpaceAPI.getHackerspaceOpens(false).onSuccess { api in
             self.hackerspaces = api
             sender.endRefreshing()
         }
@@ -27,8 +27,8 @@ class SearchControllerBaseViewController: UITableViewController {
     // MARK: Properties
     var hackerspaces = [String : Bool]() {
         didSet {
-            allResults = hackerspaces.keys.array
-            allResults.sort(<)
+            allResults = Array(hackerspaces.keys)
+            allResults.sortInPlace(<)
         }
     }
     
@@ -82,7 +82,7 @@ class SearchControllerBaseViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.tableViewCellIdentifier, forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.tableViewCellIdentifier, forIndexPath: indexPath) 
         let name = visibleResults[indexPath.row]
         let isOpen = self.hackerspaces[name]
         cell.textLabel?.text = name
