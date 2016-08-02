@@ -10,6 +10,7 @@
 		9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */; };
 		9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */; };
 		9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */; };
+		952852891D50E8200061A1E6 /* JSONJoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594951B893E5E0061A1E6 /* JSONJoy.framework */; };
 		953161871B73B12A0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
 		953C513B1B8F49190061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
 		95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB21B729B3E0061A1E6 /* AppDelegate.swift */; };
@@ -36,7 +37,6 @@
 		95DB77FF1B9142D60061A1E6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB77FE1B9142D60061A1E6 /* Constants.swift */; };
 		95DB78011B9149660061A1E6 /* sharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB78001B9149660061A1E6 /* sharedData.swift */; };
 		95DBD9471B8CFF360061A1E6 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594941B893E5E0061A1E6 /* Haneke.framework */; };
-		95DBD9481B8CFF360061A1E6 /* JSONJoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594951B893E5E0061A1E6 /* JSONJoy.framework */; };
 		95DBD94C1B8CFF360061A1E6 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DBD94B1B8CFF360061A1E6 /* Result.framework */; };
 		95DBD9551B8D0FC30061A1E6 /* SearchControllerBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBD9511B8D0FC30061A1E6 /* SearchControllerBaseViewController.swift */; };
 		95DBD9561B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBD9521B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift */; };
@@ -126,7 +126,7 @@
 				958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */,
 				958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */,
 				95DBD9471B8CFF360061A1E6 /* Haneke.framework in Frameworks */,
-				95DBD9481B8CFF360061A1E6 /* JSONJoy.framework in Frameworks */,
+				952852891D50E8200061A1E6 /* JSONJoy.framework in Frameworks */,
 				958B31AD1C6A89E3000EF9E1 /* Swiftz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

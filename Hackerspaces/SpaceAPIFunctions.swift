@@ -11,6 +11,7 @@ import Swiftz
 import JSONJoy
 import SwiftHTTP
 import BrightFutures
+import Result
 import MapKit
 import Haneke
 
@@ -118,7 +119,7 @@ struct SpaceAPI {
         return t.0.zip(t.1)
     }
     
-    static func listTupleToListFuture(list: [(Future<String, NoError>, Future<[String : JSONDecoder], NoError>)]) -> Future<[(String, [String: JSONDecoder])], BrightFutures.NoError> {
+    static func listTupleToListFuture(list: [(Future<String, NoError>, Future<[String : JSONDecoder], NoError>)]) -> Future<[(String, [String: JSONDecoder])], NoError> {
         let m: [Future<(String, [String: JSONDecoder]), NoError>]  = list.map { (tuple: (Future<String, NoError>, Future<[String : JSONDecoder], NoError>)) -> Future<(String, [String: JSONDecoder]), NoError> in
             tuple.0.zip(tuple.1)}
         return m.sequence()
@@ -133,7 +134,7 @@ struct SpaceAPI {
     
     @return list of tuple representing the name and the result of the queried url as a future. [(F<name>, F<JSON>)]
     */
-    private static func dictToFutureQuery(dictionary: [String : String]) -> [Future<(String, [String : JSONDecoder])?, BrightFutures.NoError>] {
+    private static func dictToFutureQuery(dictionary: [String : String]) -> [Future<(String, [String : JSONDecoder])?, NoError>] {
         return dictionary.map { (key, value) in
             let t = (future(key), SpaceAPI.loadHackerspaceAPI(value))
             let s = future(key).zip(FutureUtils.futureToOptional(t.1))

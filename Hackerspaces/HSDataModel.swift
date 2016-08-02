@@ -59,20 +59,9 @@ private func parseContactObject(contact: [String: JSONDecoder]) -> ContactObject
     return ContactObject(phone: contact["phone"]?.string, sip: contact["sip"]?.string, keyMasters: keymasters, ircURL: contact["irc"]?.string, twitterHandle: contact["twitter"]?.string, facebook: contact["facebook"]?.string, googlePlus: contact["google"]?.dictionary?["plus"]?.string, identica: contact["identica"]?.string, foursquareID: contact["foursquare"]?.string, email: contact["email"]?.string, mailingList: contact["ml"]?.string, jabber: contact["jabber"]?.string, issue_mail: contact["issue_mail"]?.string)
 }
 
-private func parseKeymasters(keymasters: [JSONDecoder]) -> [MemberObject]? {
-    let members: [MemberObject?] =  keymasters.map { json in
-        if let member = json.dictionary {
-            return parseMember(member)
-        } else { return nil }
-        }
-    return members.foldl(Optional<Array<MemberObject>>()) { (var acc, member) in
-        if let m = member {
-            acc?.append(m)
-            return acc
-        } else {
-            return nil
-        }
-    }
+private func parseKeymasters(keymasters: [JSONDecoder]) -> [MemberObject] {
+    let members: [MemberObject?] =  keymasters.map {$0.dictionary.map(parseMember)}
+    return Array(members.flatten())
 }
 
 private func parseMember(member: [String: JSONDecoder]) -> MemberObject {
