@@ -159,15 +159,13 @@ struct SpaceAPI {
     
     static func getHackerspaceOpens(fromCache: Bool = true) -> Future<[String : Bool], NSError> {
         return loadAllSpaceAPIAsDict(fromCache).map { (dict: [String : [String : JSONDecoder]]) in
-            let r = dict.map { (key, value) in (key, SpaceAPI.extractIsSpaceOpen(value))}
-            return r
+            return dict.map { (key, value) in (key, SpaceAPI.extractIsSpaceOpen(value))}
         }
     }
     
     static func getHackerspaceLocations(fromCache: Bool = true) -> Future<[SpaceLocation?], NSError> {
         return loadAllSpacesAPI(fromCache).map { (arr:[(String, [String : JSONDecoder])]) -> [SpaceLocation?] in
-            let r = arr.map { (tuple:(String, [String : JSONDecoder])) -> SpaceLocation? in SpaceAPI.extractLocationInfo(tuple.1) }
-            return r
+            return arr.map { (tuple:(String, [String : JSONDecoder])) -> SpaceLocation? in SpaceAPI.extractLocationInfo(tuple.1) }
         }
     }
     

@@ -54,6 +54,10 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         static let CustomIdentifier = "CustomCell"
     }
 
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        refreshControl?.endRefreshing()
+    }
     
     // MARK: - View controller lifecycle
     override func viewWillAppear(animated: Bool) {

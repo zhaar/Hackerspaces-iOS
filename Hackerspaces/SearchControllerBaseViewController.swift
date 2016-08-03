@@ -55,6 +55,11 @@ class SearchControllerBaseViewController: UITableViewController {
             self.spaceAPI = $0
         }
     }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        refreshControl?.endRefreshing()
+    }
 
     lazy var visibleResults: [String] = self.allResults
 
