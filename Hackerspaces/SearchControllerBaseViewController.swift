@@ -9,6 +9,21 @@
 import UIKit
 import JSONJoy
 
+enum SpaceOpeningState: String {
+    case Open = "open"
+    case Closed = "closed"
+    case Loading = "loading"
+    case Unresponsive = "unresponsive"
+}
+
+extension Bool {
+    var asOpeningState: SpaceOpeningState {
+        get {
+            return self ? SpaceOpeningState.Open : SpaceOpeningState.Closed
+        }
+    }
+}
+
 class SearchControllerBaseViewController: UITableViewController {
     
     @IBAction func refresh(sender: UIRefreshControl) {
@@ -35,10 +50,23 @@ class SearchControllerBaseViewController: UITableViewController {
     var spaceAPI = [String : String]() {
         didSet {
             self.hackerspaces = spaceAPI.map { _ in SpaceOpeningState.Loading }
-            SpaceAPI.getHackerspaceOpeningState().onSuccess {
-                self.hackerspaces = $0
+            spaceAPI.forEach { (hs, address) in
+                let jsonData = SpaceAPI.loadHackerspaceAPI(address)
+                let openingState = jsonData.map(SpaceAPI.extractIsSpaceOpen)
+                openingState.onSuccess {
+                        self.updateHackerspaceStatus($0.asOpeningState, forKey: hs)
+                    }.onFailure(callback: { error in
+                        self.updateHackerspaceStatus(SpaceOpeningState.Unresponsive, forKey: hs)
+                    })
+                
             }
         }
+    }
+    
+    func updateHackerspaceStatus(status: SpaceOpeningState, forKey name: String) -> () {
+        var cpy = self.hackerspaces
+        cpy.updateValue(status, forKey: name)
+        self.hackerspaces = cpy
     }
     
     var allResults = [String]() {
