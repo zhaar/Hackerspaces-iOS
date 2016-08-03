@@ -12,8 +12,8 @@ import JSONJoy
 class SearchControllerBaseViewController: UITableViewController {
     
     @IBAction func refresh(sender: UIRefreshControl) {
-        SpaceAPI.getHackerspaceOpens(false).onSuccess { api in
-            self.hackerspaces = api
+        SpaceAPI.loadAPIFromWeb().onSuccess { api in
+            self.spaceAPI = api
             sender.endRefreshing()
         }
     }
@@ -25,7 +25,7 @@ class SearchControllerBaseViewController: UITableViewController {
     }
     
     // MARK: Properties
-    var hackerspaces = [String : Bool]() {
+    var hackerspaces = [String : SpaceOpeningState]() {
         didSet {
             allResults = Array(hackerspaces.keys)
             allResults.sortInPlace(<)
@@ -34,7 +34,8 @@ class SearchControllerBaseViewController: UITableViewController {
     
     var spaceAPI = [String : String]() {
         didSet {
-            SpaceAPI.getHackerspaceOpens().onSuccess {
+            self.hackerspaces = spaceAPI.map { _ in SpaceOpeningState.Loading }
+            SpaceAPI.getHackerspaceOpeningState().onSuccess {
                 self.hackerspaces = $0
             }
         }
@@ -91,7 +92,7 @@ class SearchControllerBaseViewController: UITableViewController {
         let name = visibleResults[indexPath.row]
         let isOpen = self.hackerspaces[name]
         cell.textLabel?.text = name
-        cell.detailTextLabel?.text = ((isOpen ?? false) ? UIConstants.SpaceIsOpenMark : "")
+        cell.detailTextLabel?.text = (isOpen ?? SpaceOpeningState.Closed).rawValue
         //workaround a bug where detail is no updated correctly
         //see: http://stackoverflow.com/questions/25987135/ios-8-uitableviewcell-detail-text-not-correctly-updating
         cell.layoutSubviews()

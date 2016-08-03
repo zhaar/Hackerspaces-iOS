@@ -161,6 +161,13 @@ struct SpaceAPI {
         return loadAllSpaceAPIAsDict(fromCache).map { $0.map(SpaceAPI.extractIsSpaceOpen) }
     }
     
+    static func getHackerspaceOpeningState(fromCache: Bool = true) -> Future<[String: SpaceOpeningState], NSError> {
+        return getHackerspaceOpens(fromCache).map { $0.map {
+            return $0 ? SpaceOpeningState.Open : SpaceOpeningState.Closed
+            }
+        }
+    }
+    
     static func getHackerspaceLocations(fromCache: Bool = true) -> Future<[SpaceLocation?], NSError> {
         return loadAllSpacesAPI(fromCache).map { (arr:[(String, [String : JSONDecoder])]) -> [SpaceLocation?] in
             return arr.map { (tuple:(String, [String : JSONDecoder])) -> SpaceLocation? in SpaceAPI.extractLocationInfo(tuple.1) }
