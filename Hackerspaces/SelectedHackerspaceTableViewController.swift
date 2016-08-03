@@ -72,7 +72,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         if let url = currentlySelectedHackerspace {
             (fromCache ? SpaceAPI.loadHackerspaceAPI : SpaceAPI.loadHackerspaceAPIFromWeb)(url).onSuccess { dict in
                 self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
-                let (g, c) = dict.split { (key: String, value: JSONDecoder) -> Bool in !key.hasPrefix(SpaceAPIConstants.customAPIPrefix) }
+                let (g, c) = dict.split { (key: String, value: JSONDecoder) -> Bool in !key.hasPrefix(SpaceAPIConstants.customAPIPrefix.rawValue) }
                 self.generalInfo = g
                 self.customInfo = c
                 self.hackerspaceData = parseHackerspaceDataModel(dict)

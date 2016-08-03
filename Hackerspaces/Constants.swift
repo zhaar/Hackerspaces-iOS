@@ -8,18 +8,18 @@
 
 import Foundation
 
-
-struct SpaceAPIConstants {
-    static let API = "http://spaceapi.net/directory.json"
-    static let customAPIPrefix = "ext_"
-    static let APIlocation = "location"
-    static let APIversion = "api"
-    static let APIname = "space"
-    static let APIlogo = "logo"
-    static let APIurl = "url"
-    static let APIstate = "state"
-    static let APIcontact = "contact"
-    static let APIreport = "issue_report_channels"
+enum SpaceAPIConstants : String{
+    case SpaceAPI = "https://spaceapi.net/directory.json"
+    case FIXMEAPI = "https://spaceapi.fixme.ch/directory.json"
+    case customAPIPrefix = "ext_"
+    case APIlocation = "location"
+    case APIversion = "api"
+    case APIname = "space"
+    case APIlogo = "logo"
+    case APIurl = "url"
+    case APIstate = "state"
+    case APIcontact = "contact"
+    case APIreport = "issue_report_channels"
 }
 
 struct UIConstants {

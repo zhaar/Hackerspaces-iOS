@@ -16,7 +16,7 @@ class FavoriteHSTableViewController: UITableViewController {
         super.viewDidLoad()
 
         SpaceAPI.loadAPI().onSuccess { api in
-            self.nameForURL = api.map { (key, value) in (value, key)}
+            self.nameForURL = api
             self.tableView.reloadData()
         }
         // Uncomment the following line to preserve selection between presentations

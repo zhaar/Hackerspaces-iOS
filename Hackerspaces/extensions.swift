@@ -44,23 +44,6 @@ extension Dictionary {
     }
 }
 
-extension Dictionary {
-    func map<OutKey: Hashable, OutValue>(transform: Element -> (OutKey, OutValue)) -> [OutKey: OutValue] {
-        return Dictionary<OutKey, OutValue>(self.map(transform))
-    }
-    
-//    func filter(includeElement: Element -> Bool) -> [Key: Value] {
-//        return Dictionary(self.filter(includeElement))
-//    }
-}
-
-func toDict<T,S>(arr: [(T,S)]) -> [T : S] {
-    return arr.foldl([T : S]()) { (var acc, tuple) in
-        acc[tuple.0] = tuple.1
-        return acc
-    }
-}
-
 extension Array {
     
     func foreach(fn: Element -> Void) {
@@ -77,13 +60,6 @@ extension Array {
         return result
     }
     
-    ///add element at the end of the array, returns a copy
-//    func cons(e: Element) -> [Element] {
-//        var cpy = self
-//        cpy.append(e)
-//        return cpy
-//    }
-    
     func groupBy<S>(fn: Element -> S) -> [S: [Element]] {
         var dic = [S: [Element]]()
         for e in self {
@@ -92,13 +68,6 @@ extension Array {
         }
         return dic
     }
-//    
-//    func immutableSort(isOrderedBefore: (Element, Element) -> Bool) -> [Element] {
-//        var cpy = self
-//        cpy.sort(isOrderedBefore)
-//        return cpy
-//    }
-    
 }
 
 extension Dictionary {
@@ -111,20 +80,5 @@ extension Dictionary {
         var cpy = self
         cpy[key] = val
         return cpy
-    }
-}
-
-extension String {
-    
-    subscript (i: Int) -> Character {
-        return self[self.startIndex.advancedBy(i)]
-    }
-    
-    subscript (i: Int) -> String {
-        return String(self[i] as Character)
-    }
-    
-    subscript (r: Range<Int>) -> String {
-        return substringWithRange(Range(start: startIndex.advancedBy(r.startIndex), end: startIndex.advancedBy(r.endIndex)))
     }
 }

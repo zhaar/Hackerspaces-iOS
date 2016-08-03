@@ -21,7 +21,7 @@ struct SpaceAPI {
         let p = Promise<[String: String], NSError>()
         Queue.global.async {
             let cache = Shared.dataCache
-            cache.fetch(URL: NSURL(string: SpaceAPIConstants.API)!).onSuccess { data in
+            cache.fetch(URL: NSURL(string: SpaceAPIConstants.FIXMEAPI.rawValue)!).onSuccess { data in
                 if let dict = JSONDecoder(data).dictionary{
                     var api = [String : String]()
                     for key in dict.keys {
@@ -44,9 +44,9 @@ struct SpaceAPI {
         let p = Promise<[String: String], NSError>()
         Queue.global.async {
             do {
-                let req = try HTTP.GET(SpaceAPIConstants.API)
+                let req = try HTTP.GET(SpaceAPIConstants.FIXMEAPI.rawValue)
                 req.start { response in
-                    Shared.dataCache.set(value: response.data, key: SpaceAPIConstants.API)
+                    Shared.dataCache.set(value: response.data, key: SpaceAPIConstants.FIXMEAPI.rawValue)
                     if let dict = JSONDecoder(response.data).dictionary {
                         var api = [String : String]()
                         for key in dict.keys {
@@ -158,9 +158,7 @@ struct SpaceAPI {
     }
     
     static func getHackerspaceOpens(fromCache: Bool = true) -> Future<[String : Bool], NSError> {
-        return loadAllSpaceAPIAsDict(fromCache).map { (dict: [String : [String : JSONDecoder]]) in
-            return dict.map { (key, value) in (key, SpaceAPI.extractIsSpaceOpen(value))}
-        }
+        return loadAllSpaceAPIAsDict(fromCache).map { $0.map(SpaceAPI.extractIsSpaceOpen) }
     }
     
     static func getHackerspaceLocations(fromCache: Bool = true) -> Future<[SpaceLocation?], NSError> {
@@ -174,12 +172,12 @@ struct SpaceAPI {
     }
     
     static func extractName(json: [String: JSONDecoder]) -> String {
-        return json[SpaceAPIConstants.APIname]!.string!
+        return json[SpaceAPIConstants.APIname.rawValue]!.string!
     }
     
     ///returns the location from a json file, returns nil if unable to parse
     static func extractLocationInfo(json: [String: JSONDecoder]) -> SpaceLocation? {
-        let location = json[SpaceAPIConstants.APIlocation]?.dictionary
+        let location = json[SpaceAPIConstants.APIlocation.rawValue]?.dictionary
         let lat = location?["lat"]?.number >>- {CLLocationDegrees($0)}
         let lon = location?["lon"]?.number >>- {CLLocationDegrees($0)}
         let loc = lat >>- {la in lon >>- { lo in CLLocationCoordinate2D(latitude: la, longitude: lo)}}

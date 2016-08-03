@@ -11,14 +11,14 @@ import JSONJoy
 import Swiftz
 
 func parseHackerspaceDataModel(json: [String: JSONDecoder]) -> HackerspaceDataModel? {
-    let apiVersion = json[SpaceAPIConstants.APIversion]?.string
+    let apiVersion = json[SpaceAPIConstants.APIversion.rawValue]?.string
     let name = SpaceAPI.extractName(json)
-    let logo = json[SpaceAPIConstants.APIlogo]?.string
-    let websiteURL = json[SpaceAPIConstants.APIurl]?.string
-    let state = json[SpaceAPIConstants.APIstate]?.dictionary >>- { parseStateObject($0) }
-    let location = json[SpaceAPIConstants.APIlocation]?.dictionary >>- { parseLocationObject($0) }
-    let contact = json[SpaceAPIConstants.APIcontact]?.dictionary >>- { parseContactObject($0) }
-    let reportChannel = json[SpaceAPIConstants.APIreport]?.array >>- { parseReportChannel($0) }
+    let logo = json[SpaceAPIConstants.APIlogo.rawValue]?.string
+    let websiteURL = json[SpaceAPIConstants.APIurl.rawValue]?.string
+    let state = json[SpaceAPIConstants.APIstate.rawValue]?.dictionary >>- { parseStateObject($0) }
+    let location = json[SpaceAPIConstants.APIlocation.rawValue]?.dictionary >>- { parseLocationObject($0) }
+    let contact = json[SpaceAPIConstants.APIcontact.rawValue]?.dictionary >>- { parseContactObject($0) }
+    let reportChannel = json[SpaceAPIConstants.APIreport.rawValue]?.array >>- { parseReportChannel($0) }
     if (apiVersion == nil) || (logo == nil) || (logo == nil) || (websiteURL == nil) || (location == nil) || (contact == nil) || (reportChannel == nil) || (state == nil){
         return nil
     } else {
