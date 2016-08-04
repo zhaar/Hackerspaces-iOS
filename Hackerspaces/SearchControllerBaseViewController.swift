@@ -8,6 +8,28 @@
 
 import UIKit
 import JSONJoy
+import BrightFutures
+
+extension SearchControllerBaseViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = tableView.indexPathForRowAtPoint(location) else { return nil }
+        let hsName = visibleResults[indexPath.row]
+        guard let state = hackerspaces[hsName] else { return nil }
+        if state == .Unresponsive || state == .Loading { return nil }
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let hackerspaceViewController = storyboard.instantiateViewControllerWithIdentifier("HackerspaceDetail") as! SelectedHackerspaceTableViewController
+        hackerspaceViewController.loadOrigin = LoadOrigin.dataModel(data: parsedHackerspaceStates[hsName]!)
+        let cellRect = tableView.rectForRowAtIndexPath(indexPath)
+        let sourceRect = previewingContext.sourceView.convertRect(cellRect, toView: tableView)
+        previewingContext.sourceRect = sourceRect
+        return hackerspaceViewController
+    }
+    
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        showViewController(viewControllerToCommit, sender: self)
+    }
+}
 
 enum SpaceOpeningState: String {
     case Open = "open"
@@ -80,12 +102,17 @@ class SearchControllerBaseViewController: UITableViewController {
         }
     }
     
+    // MARK: Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshControl?.beginRefreshing()
         SpaceAPI.loadAPI().onSuccess {
             self.spaceAPI = $0
         }
+        
+//      Force touch code
+        registerForPreviewingWithDelegate(self, sourceView: tableView)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -119,7 +146,7 @@ class SearchControllerBaseViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.tableViewCellIdentifier, forIndexPath: indexPath) 
+        let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.tableViewCellIdentifier, forIndexPath: indexPath)
         let name = visibleResults[indexPath.row]
         let isOpen = self.hackerspaces[name]
         cell.textLabel?.text = name
@@ -132,7 +159,7 @@ class SearchControllerBaseViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let hsName = visibleResults[indexPath.row]
-        let state = hackerspaces[hsName].map { $0 == .Unresponsive }
+        let state = hackerspaces[hsName].map { $0 == .Unresponsive || $0 == .Loading }
         switch state {
             case .Some(true): print("trying to segue into unresponsive hackerspace")
             case .Some(false): performSegueWithIdentifier(UIConstants.showHSSearch, sender: hsName)
@@ -140,9 +167,9 @@ class SearchControllerBaseViewController: UITableViewController {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if let SHVC = segue.destinationViewController as? SelectedHackerspaceTableViewController {
-            let parsedData = parsedHackerspaceStates[(sender as! String?)!]
+            let parsedData = parsedHackerspaceStates[sender as! String]
             SHVC.prepare(parsedData!)
         }
     }
