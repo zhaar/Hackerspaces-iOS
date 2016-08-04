@@ -47,17 +47,20 @@ class SearchControllerBaseViewController: UITableViewController {
         }
     }
     
+    var parsedHackerspaceStates: [String: HackerspaceDataModel] = [String: HackerspaceDataModel]()
+    
     var spaceAPI = [String : String]() {
         didSet {
             self.hackerspaces = spaceAPI.map { _ in SpaceOpeningState.Loading }
             spaceAPI.forEach { (hs, address) in
-                let jsonData = SpaceAPI.loadHackerspaceAPI(address)
-                let openingState = jsonData.map(SpaceAPI.extractIsSpaceOpen)
-                openingState.onSuccess {
-                        self.updateHackerspaceStatus($0.asOpeningState, forKey: hs)
-                    }.onFailure(callback: { error in
+                let jsonData = SpaceAPI.loadHackerspaceAPI(address).map(parseHackerspaceDataModel)
+                jsonData.filter {$0 != nil}.map {$0!}.onSuccess { data in
+                        self.parsedHackerspaceStates.updateValue(data, forKey: hs)
+                        let status = data.state.open
+                        self.updateHackerspaceStatus(status.asOpeningState, forKey: hs)
+                    }.onFailure { error in
                         self.updateHackerspaceStatus(SpaceOpeningState.Unresponsive, forKey: hs)
-                    })
+                    }
                 
             }
         }
@@ -128,12 +131,19 @@ class SearchControllerBaseViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier(UIConstants.showHSSearch, sender: self.spaceAPI[visibleResults[indexPath.row]])
+        let hsName = visibleResults[indexPath.row]
+        let state = hackerspaces[hsName].map { $0 == .Unresponsive }
+        switch state {
+            case .Some(true): print("trying to segue into unresponsive hackerspace")
+            case .Some(false): performSegueWithIdentifier(UIConstants.showHSSearch, sender: hsName)
+            case .None: print("couldn't find data for hackerspace \"\(hsName)\"")
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let SHVC = segue.destinationViewController as? SelectedHackerspaceTableViewController {
-            SHVC.prepare(sender as! String)
+            let parsedData = parsedHackerspaceStates[(sender as! String?)!]
+            SHVC.prepare(parsedData!)
         }
     }
 

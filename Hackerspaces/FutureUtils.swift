@@ -18,11 +18,6 @@ struct FutureUtils {
         return future.map(identity).recover{ _ in nil }
     }
     
-    ///Converts a future with failures to a future of Result with no failure
-//    static func futureToResult<T, E: ErrorType>(future: Future<T, E>) -> Future<Result<T, E>, Result.NoError> {
-//        return future.map { Result($0) }.recover { Result.Failure($0) }
-//    }
-    
     ///Converts a list of futures into a future of list discarding failing futures
     static func successfulFutureList<T, E: ErrorType>(list: [Future<T, E>]) -> Future<[T], NoError> {
         return flattenOptionalFuture(list.map(futureToOptional))
@@ -32,10 +27,4 @@ struct FutureUtils {
     static func flattenOptionalFuture<T>(list: [Future<T?, NoError>]) -> Future<[T], NoError> {
         return list.sequence().map { $0.flatMap(identity)}
     }
-//    
-//    ///Converts a tuple of futures into a future of tuples
-//    static func unwrapTuple<S,T>(tuple: (Future<S, ErrorType>, Future<T, ErrorType>)) -> Future<(S,T), ErrorType> {
-//        return tuple.0.zip(tuple.1)
-//    }
-    
 }

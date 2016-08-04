@@ -16,15 +16,6 @@ class Model {
     
     static let defaults = NSUserDefaults.standardUserDefaults()
     
-//    var selectedHackerspace: String? {
-//        set {
-//            Model.defaults.setObject(newValue!, forKey: selected)
-//        }
-//        get {
-//            return Model.defaults.stringForKey(selected)
-//        }
-//    }
-    
     func listOfFavorites() -> [String] {
         return (Model.defaults.arrayForKey(favoriteList) >>- { arr in arr.map { obj in obj as! String} }) ?? [String]()
     }

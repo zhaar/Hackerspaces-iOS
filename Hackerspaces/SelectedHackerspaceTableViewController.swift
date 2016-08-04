@@ -91,7 +91,6 @@ class SelectedHackerspaceTableViewController: UITableViewController {
             case .url(let url) : loadFromURL(url)
             case .dataModel(let data) :
                 self.hackerspaceData = data
-                reloadData()
                 updateFavoriteButton()
         }
     }

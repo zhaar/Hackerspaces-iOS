@@ -107,10 +107,6 @@ struct SpaceAPI {
         return p.future
     }
     
-//    static func loadHackerspaceAPINoError(url: String) -> Future<[String : JSONDecoder], BrightFutures.NoError> {
-//        return FutureUtils.futureToResult(loadHackerspaceAPI(url))
-//    }
-    
     static func getHackerspaceLocation(url: String) -> Future<SpaceLocation?, NSError> {
         return loadHackerspaceAPI(url).map { self.extractLocationInfo($0) }
     }
