@@ -185,9 +185,7 @@ struct SpaceAPI {
     ///returns the location from a json file, returns nil if unable to parse
     static func extractLocationInfo(json: [String: JSONDecoder]) -> SpaceLocation? {
         let location = json[SpaceAPIConstants.APIlocation.rawValue]?.dictionary
-        let lat = location?["lat"]?.number >>- {CLLocationDegrees($0)}
-        let lon = location?["lon"]?.number >>- {CLLocationDegrees($0)}
-        let loc = lat >>- {la in lon >>- { lo in CLLocationCoordinate2D(latitude: la, longitude: lo)}}
-        return loc >>- {SpaceLocation(name: self.extractName(json), address: location?["address"]?.string, location: $0)}
+        let name = self.extractName(json)
+        return location >>- {parseLocationObject($0, withName: name)}
     }
 }

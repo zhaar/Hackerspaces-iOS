@@ -9,6 +9,7 @@
 import Foundation
 import JSONJoy
 import Swiftz
+import MapKit
 
 func parseHackerspaceDataModel(json: [String: JSONDecoder]) -> HackerspaceDataModel? {
     let apiVersion = json[SpaceAPIConstants.APIversion.rawValue]?.string
@@ -16,14 +17,12 @@ func parseHackerspaceDataModel(json: [String: JSONDecoder]) -> HackerspaceDataMo
     let logo = json[SpaceAPIConstants.APIlogo.rawValue]?.string
     let websiteURL = json[SpaceAPIConstants.APIurl.rawValue]?.string
     let state = json[SpaceAPIConstants.APIstate.rawValue]?.dictionary >>- { parseStateObject($0) }
-    let location = json[SpaceAPIConstants.APIlocation.rawValue]?.dictionary >>- { parseLocationObject($0) }
+    let location = json[SpaceAPIConstants.APIlocation.rawValue]?.dictionary >>- { parseLocationObject($0, withName: name) }
     let contact = json[SpaceAPIConstants.APIcontact.rawValue]?.dictionary >>- { parseContactObject($0) }
     let reportChannel = json[SpaceAPIConstants.APIreport.rawValue]?.array >>- { parseReportChannel($0) }
-    if (apiVersion == nil) || (logo == nil) || (logo == nil) || (websiteURL == nil) || (location == nil) || (contact == nil) || (reportChannel == nil) || (state == nil){
-        return nil
-    } else {
-        return HackerspaceDataModel(api: apiVersion!, name: name, logoURL: logo!, websiteURL: websiteURL!, state: state!, location: location!, contact: contact!, issue_report_channel: reportChannel!)
-    }
+    return apiVersion >>- { api in logo >>- { log in websiteURL >>- { web in location >>- { loc in contact >>- {cont in reportChannel >>- {report in state >>- { s in
+        HackerspaceDataModel(api: api, name: name, logoURL: log, websiteURL: web, state: s, location: loc, contact: cont, issue_report_channel: report)}}}}}}}
+
 }
 
 private func parseStateObject(state: [String: JSONDecoder]) -> StateObject {
@@ -43,15 +42,12 @@ private func parseIconObject(icon: [String : JSONDecoder]?) -> IconObject? {
     return icon >>- { json in json["open"]?.string >>- { open in json["closed"]?.string >>- { closed in IconObject(openURL: open, closedURL: closed)}}}
 }
 
-private func parseLocationObject(location: [String : JSONDecoder]) -> LocationObject? {
-    let lat = location["lat"]?.number
-    let lon = location["lon"]?.number
+func parseLocationObject(location: [String : JSONDecoder], withName name: String) -> SpaceLocation? {
+    let lat = location["lat"]?.number >>- {CLLocationDegrees($0)}
+    let lon = location["lon"]?.number >>- {CLLocationDegrees($0)}
+    let loc = lat >>- {la in lon >>- { lo in CLLocationCoordinate2D(latitude: la, longitude: lo)}}
     let addr = location["address"]?.string
-    if lat == nil || lon == nil {
-        return nil
-    } else {
-        return LocationObject(latitude: lat!.floatValue, longitude: lon!.floatValue, address: addr)
-    }
+    return loc >>- {SpaceLocation(name: name, address: addr, location: $0)}
 }
 
 private func parseContactObject(contact: [String: JSONDecoder]) -> ContactObject {
@@ -80,7 +76,7 @@ struct HackerspaceDataModel {
     let logoURL: String
     let websiteURL: String
     let state: StateObject
-    let location: LocationObject
+    let location: SpaceLocation
     let contact: ContactObject
     let issue_report_channel: [String]
     let cam: [String]? = nil

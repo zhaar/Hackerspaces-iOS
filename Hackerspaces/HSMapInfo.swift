@@ -10,16 +10,16 @@ import Foundation
 import MapKit
 
 
-class SpaceLocation : NSObject{
+class SpaceLocation : NSObject {
     let name: String
     let address: String?
-    let open: Bool
+//    let open: Bool
     let location: CLLocationCoordinate2D
-    init(name: String, address: String?, location: CLLocationCoordinate2D, open: Bool = false) {
+    init(name: String, address: String?, location: CLLocationCoordinate2D) {
         self.name = name
         self.location = location
         self.address = address
-        self.open = open
+//        self.open = open
     }
 }
 
