@@ -15,17 +15,12 @@ import Swiftz
 import BrightFutures
 import Haneke
 
-enum LoadOrigin {
-    case url(String)
-    case dataModel(data: HackerspaceDataModel)
-}
-
 class SelectedHackerspaceTableViewController: UITableViewController {
 
     
     // MARK: - Outlets & Actions
     @IBAction func refresh(sender: UIRefreshControl) {
-        reloadData(false, callback: { sender.endRefreshing() })
+        reloadData((currentHackerspaceURL, nil), fromCache: false, callback: sender.endRefreshing)
     }
     
     @IBOutlet weak var favoriteStatusButton: UIBarButtonItem! {
@@ -35,24 +30,23 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     }
     
     @IBAction func MarkAsFavorite(sender: UIBarButtonItem) {
-        if let h = currentlySelectedHackerspace {
+        if let h = currentHackerspaceURL {
             Model.sharedInstance.addToFavorites(h)
             updateFavoriteButton()
         }
     }
     
     func prepare(url: String) {
-        self.loadOrigin = LoadOrigin.url(url)
+        self.loadOrigin = (url, nil)
     }
     
-    func prepare(model: HackerspaceDataModel) {
-        self.loadOrigin = LoadOrigin.dataModel(data: model)
+    func prepare(url url: String, model: HackerspaceDataModel) {
+        self.loadOrigin = (url, model)
     }
     
-    var currentlySelectedHackerspace: String?
-
-    var loadOrigin: LoadOrigin?
-    var hackerspaceData: HackerspaceDataModel?
+    private var loadOrigin: (String, HackerspaceDataModel?)!
+    private var hackerspaceData: HackerspaceDataModel!
+    private var currentHackerspaceURL: String!
     
     private struct storyboard {
         static let CellIdentifier = "Cell"
@@ -72,12 +66,12 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
-        reloadData()
+        reloadData(loadOrigin)
         updateFavoriteButton()
     }
     
     
-    func reloadData(fromCache: Bool = true, callback: (() -> Void)? = nil) {
+    func reloadData(source: (String, HackerspaceDataModel?), fromCache: Bool = true, callback: (() -> Void)? = nil) {
         func loadFromURL(url: String) {
             (fromCache ? SpaceAPI.loadHackerspaceAPI : SpaceAPI.loadHackerspaceAPIFromWeb)(url).onSuccess { dict in
                 self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
@@ -87,16 +81,20 @@ class SelectedHackerspaceTableViewController: UITableViewController {
             }
         }
         
-        switch loadOrigin! {
-            case .url(let url) : loadFromURL(url)
-            case .dataModel(let data) :
-                self.hackerspaceData = data
-                updateFavoriteButton()
+        let (url, model) = source
+        
+        switch model {
+            case .Some(let m):
+                self.hackerspaceData = m
+                self.currentHackerspaceURL = url
+            case .None :
+                loadFromURL(url)
         }
+        updateFavoriteButton()
     }
     
     func updateFavoriteButton() {
-        if let h = currentlySelectedHackerspace {
+        if let h = currentHackerspaceURL {
             let isfavorited = Model.sharedInstance.listOfFavorites().contains(h) ?? false
             favoriteStatusButton.enabled = !isfavorited
             favoriteStatusButton.title = isfavorited ? "" : "Favorite"

@@ -19,7 +19,7 @@ extension SearchControllerBaseViewController: UIViewControllerPreviewingDelegate
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let hackerspaceViewController = storyboard.instantiateViewControllerWithIdentifier("HackerspaceDetail") as! SelectedHackerspaceTableViewController
-        hackerspaceViewController.loadOrigin = LoadOrigin.dataModel(data: parsedHackerspaceStates[hsName]!)
+        hackerspaceViewController.prepare(url: spaceAPI[hsName]! , model: parsedHackerspaceStates[hsName]!)
         let cellRect = tableView.rectForRowAtIndexPath(indexPath)
         let sourceRect = previewingContext.sourceView.convertRect(cellRect, toView: tableView)
         previewingContext.sourceRect = sourceRect
@@ -169,8 +169,10 @@ class SearchControllerBaseViewController: UITableViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
         if let SHVC = segue.destinationViewController as? SelectedHackerspaceTableViewController {
-            let parsedData = parsedHackerspaceStates[sender as! String]
-            SHVC.prepare(parsedData!)
+            let hackerspaceKey = sender as! String
+            let parsedData = parsedHackerspaceStates[hackerspaceKey]!
+            let hackerspaceURL = spaceAPI[hackerspaceKey]!
+            SHVC.prepare(url: hackerspaceURL , model: parsedData)
         }
     }
 
