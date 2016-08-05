@@ -40,12 +40,12 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         self.loadOrigin = (url, nil)
     }
     
-    func prepare(url url: String, model: HackerspaceDataModel) {
+    func prepare(url url: String, model: ParsedHackerspaceData) {
         self.loadOrigin = (url, model)
     }
     
-    private var loadOrigin: (String, HackerspaceDataModel?)!
-    private var hackerspaceData: HackerspaceDataModel!
+    private var loadOrigin: (String, ParsedHackerspaceData?)!
+    private var hackerspaceData: ParsedHackerspaceData!
     private var currentHackerspaceURL: String!
     
     private struct storyboard {
@@ -71,7 +71,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     }
     
     
-    func reloadData(source: (String, HackerspaceDataModel?), fromCache: Bool = true, callback: (() -> Void)? = nil) {
+    func reloadData(source: (String, ParsedHackerspaceData?), fromCache: Bool = true, callback: (() -> Void)? = nil) {
         func loadFromURL(url: String) {
             (fromCache ? SpaceAPI.loadHackerspaceAPI : SpaceAPI.loadHackerspaceAPIFromWeb)(url).onSuccess { dict in
                 self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string

@@ -11,7 +11,7 @@ import JSONJoy
 import Swiftz
 import MapKit
 
-func parseHackerspaceDataModel(json: [String: JSONDecoder]) -> HackerspaceDataModel? {
+func parseHackerspaceDataModel(json: [String: JSONDecoder]) -> ParsedHackerspaceData? {
     let apiVersion = json[SpaceAPIConstants.APIversion.rawValue]?.string
     let name = SpaceAPI.extractName(json)
     let logo = json[SpaceAPIConstants.APIlogo.rawValue]?.string
@@ -21,7 +21,7 @@ func parseHackerspaceDataModel(json: [String: JSONDecoder]) -> HackerspaceDataMo
     let contact = json[SpaceAPIConstants.APIcontact.rawValue]?.dictionary >>- { parseContactObject($0) }
     let reportChannel = json[SpaceAPIConstants.APIreport.rawValue]?.array >>- { parseReportChannel($0) }
     return apiVersion >>- { api in logo >>- { log in websiteURL >>- { web in location >>- { loc in contact >>- {cont in reportChannel >>- {report in state >>- { s in
-        HackerspaceDataModel(api: api, name: name, logoURL: log, websiteURL: web, state: s, location: loc, contact: cont, issue_report_channel: report)}}}}}}}
+        ParsedHackerspaceData(api: api, name: name, logoURL: log, websiteURL: web, state: s, location: loc, contact: cont, issue_report_channel: report)}}}}}}}
 
 }
 
@@ -70,7 +70,7 @@ private func parseReportChannel(channels: [JSONDecoder]) -> [String] {
         }.filter { $0 != nil }.map { $0! }
 }
 
-struct HackerspaceDataModel {
+struct ParsedHackerspaceData {
     let api: String
     let name: String
     let logoURL: String

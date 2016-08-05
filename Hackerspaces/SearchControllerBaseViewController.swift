@@ -15,11 +15,10 @@ extension SearchControllerBaseViewController: UIViewControllerPreviewingDelegate
         guard let indexPath = tableView.indexPathForRowAtPoint(location) else { return nil }
         let hsName = visibleResults[indexPath.row]
         guard let state = hackerspaces[hsName] else { return nil }
-        if state == .Unresponsive || state == .Loading { return nil }
-
+        guard case .Finished(let data) = state else {return nil}
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let hackerspaceViewController = storyboard.instantiateViewControllerWithIdentifier("HackerspaceDetail") as! SelectedHackerspaceTableViewController
-        hackerspaceViewController.prepare(url: spaceAPI[hsName]! , model: parsedHackerspaceStates[hsName]!)
+        hackerspaceViewController.prepare(url: data.api , model: data)
         let cellRect = tableView.rectForRowAtIndexPath(indexPath)
         let sourceRect = previewingContext.sourceView.convertRect(cellRect, toView: tableView)
         previewingContext.sourceRect = sourceRect
@@ -31,17 +30,16 @@ extension SearchControllerBaseViewController: UIViewControllerPreviewingDelegate
     }
 }
 
-enum SpaceOpeningState: String {
-    case Open = "open"
-    case Closed = "closed"
-    case Loading = "loading"
-    case Unresponsive = "unresponsive"
-}
-
-extension Bool {
-    var asOpeningState: SpaceOpeningState {
-        get {
-            return self ? SpaceOpeningState.Open : SpaceOpeningState.Closed
+enum NetworkState {
+    case Finished(ParsedHackerspaceData)
+    case Loading
+    case Unresponsive(errorMessage: String)
+    var stateMessage: String { get {
+            switch self {
+            case .Finished(let data): return data.state.open ? "open"  : "closed"
+            case .Loading: return "loading"
+            case .Unresponsive(_): return "unresponsive"
+            }
         }
     }
 }
@@ -49,9 +47,19 @@ extension Bool {
 class SearchControllerBaseViewController: UITableViewController {
     
     @IBAction func refresh(sender: UIRefreshControl) {
-        SpaceAPI.loadAPIFromWeb().onSuccess { api in
-            self.spaceAPI = api
+        SpaceAPI.loadAPIFromWeb().onComplete { _ in
             sender.endRefreshing()
+        }.onSuccess { api in
+            self.hackerspaces = api.map { _ in NetworkState.Loading }
+            sender.endRefreshing()
+            api.forEach { (hs, address) in
+                let jsonData = SpaceAPI.loadHackerspaceAPI(address).map(parseHackerspaceDataModel)
+                jsonData.filter {$0 != nil}.map {$0!}.map {NetworkState.Finished($0)}.onSuccess { data in
+                    self.hackerspaces.updateValue(data, forKey: hs)
+                    }.onFailure { error in
+                        self.updateHackerspaceStatus(NetworkState.Unresponsive(errorMessage: "error while loading: \(error)"), forKey: hs)
+                }
+            }
         }
     }
 
@@ -62,33 +70,14 @@ class SearchControllerBaseViewController: UITableViewController {
     }
     
     // MARK: Properties
-    var hackerspaces = [String : SpaceOpeningState]() {
+    var hackerspaces = [String : NetworkState]() {
         didSet {
             allResults = Array(hackerspaces.keys)
             allResults.sortInPlace(<)
         }
     }
     
-    var parsedHackerspaceStates: [String: HackerspaceDataModel] = [String: HackerspaceDataModel]()
-    
-    var spaceAPI = [String : String]() {
-        didSet {
-            self.hackerspaces = spaceAPI.map { _ in SpaceOpeningState.Loading }
-            spaceAPI.forEach { (hs, address) in
-                let jsonData = SpaceAPI.loadHackerspaceAPI(address).map(parseHackerspaceDataModel)
-                jsonData.filter {$0 != nil}.map {$0!}.onSuccess { data in
-                        self.parsedHackerspaceStates.updateValue(data, forKey: hs)
-                        let status = data.state.open
-                        self.updateHackerspaceStatus(status.asOpeningState, forKey: hs)
-                    }.onFailure { error in
-                        self.updateHackerspaceStatus(SpaceOpeningState.Unresponsive, forKey: hs)
-                    }
-                
-            }
-        }
-    }
-    
-    func updateHackerspaceStatus(status: SpaceOpeningState, forKey name: String) -> () {
+    func updateHackerspaceStatus(status: NetworkState, forKey name: String) -> () {
         var cpy = self.hackerspaces
         cpy.updateValue(status, forKey: name)
         self.hackerspaces = cpy
@@ -107,9 +96,7 @@ class SearchControllerBaseViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshControl?.beginRefreshing()
-        SpaceAPI.loadAPI().onSuccess {
-            self.spaceAPI = $0
-        }
+        self.refresh(refreshControl!)
         
 //      Force touch code
         registerForPreviewingWithDelegate(self, sourceView: tableView)
@@ -150,7 +137,7 @@ class SearchControllerBaseViewController: UITableViewController {
         let name = visibleResults[indexPath.row]
         let isOpen = self.hackerspaces[name]
         cell.textLabel?.text = name
-        cell.detailTextLabel?.text = (isOpen ?? SpaceOpeningState.Closed).rawValue
+        cell.detailTextLabel?.text = isOpen?.stateMessage ?? "not found"
         //workaround a bug where detail is no updated correctly
         //see: http://stackoverflow.com/questions/25987135/ios-8-uitableviewcell-detail-text-not-correctly-updating
         cell.layoutSubviews()
@@ -159,20 +146,22 @@ class SearchControllerBaseViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let hsName = visibleResults[indexPath.row]
-        let state = hackerspaces[hsName].map { $0 == .Unresponsive || $0 == .Loading }
+        let state = hackerspaces[hsName]
         switch state {
-            case .Some(true): print("trying to segue into unresponsive hackerspace")
-            case .Some(false): performSegueWithIdentifier(UIConstants.showHSSearch, sender: hsName)
+            case .Some(.Finished(_)): performSegueWithIdentifier(UIConstants.showHSSearch, sender: hsName)
+            case .Some(.Unresponsive(let message)):  print("trying to segue into unresponsive hackerspace: \(message)")
+            case .Some(.Loading): print("still loading")
             case .None: print("couldn't find data for hackerspace \"\(hsName)\"")
         }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        if let SHVC = segue.destinationViewController as? SelectedHackerspaceTableViewController {
-            let hackerspaceKey = sender as! String
-            let parsedData = parsedHackerspaceStates[hackerspaceKey]!
-            let hackerspaceURL = spaceAPI[hackerspaceKey]!
-            SHVC.prepare(url: hackerspaceURL , model: parsedData)
+        guard let SHVC = segue.destinationViewController as? SelectedHackerspaceTableViewController else {return}
+        guard let hackerspaceKey = sender as? String else {return print("cannot prepare for segue, sender was not a string, instead it was: \(sender)")}
+        guard let data = hackerspaces[hackerspaceKey]  else {return print("could not find hackerspace with name \(hackerspaceKey)")}
+        switch data {
+            case .Finished(let data): SHVC.prepare(url: data.api, model: data)
+            case _ : print("could not segue into hackerspace with no data")
         }
     }
 
