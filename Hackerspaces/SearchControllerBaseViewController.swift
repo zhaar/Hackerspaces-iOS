@@ -18,7 +18,7 @@ extension SearchControllerBaseViewController: UIViewControllerPreviewingDelegate
         guard case .Finished(let data) = state else {return nil}
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let hackerspaceViewController = storyboard.instantiateViewControllerWithIdentifier("HackerspaceDetail") as! SelectedHackerspaceTableViewController
-        hackerspaceViewController.prepare(url: data.api , model: data)
+        hackerspaceViewController.prepare(data)
         let cellRect = tableView.rectForRowAtIndexPath(indexPath)
         let sourceRect = previewingContext.sourceView.convertRect(cellRect, toView: tableView)
         previewingContext.sourceRect = sourceRect
@@ -160,7 +160,7 @@ class SearchControllerBaseViewController: UITableViewController {
         guard let hackerspaceKey = sender as? String else {return print("cannot prepare for segue, sender was not a string, instead it was: \(sender)")}
         guard let data = hackerspaces[hackerspaceKey]  else {return print("could not find hackerspace with name \(hackerspaceKey)")}
         switch data {
-            case .Finished(let data): SHVC.prepare(url: data.api, model: data)
+            case .Finished(let data): SHVC.prepare(data)
             case _ : print("could not segue into hackerspace with no data")
         }
     }

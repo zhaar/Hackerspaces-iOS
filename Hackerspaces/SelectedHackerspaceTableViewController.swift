@@ -1,12 +1,3 @@
-
-//
-//  FavoriteHackerspaceTableViewController.swift
-//  Hackerspaces
-//
-//  Created by zephyz on 20/08/15.
-//  Copyright (c) 2015 Fixme. All rights reserved.
-//
-
 import UIKit
 import SwiftHTTP
 import JSONJoy
@@ -17,36 +8,30 @@ import Haneke
 
 class SelectedHackerspaceTableViewController: UITableViewController {
 
-    
     // MARK: - Outlets & Actions
     @IBAction func refresh(sender: UIRefreshControl) {
-        reloadData((currentHackerspaceURL, nil), fromCache: false, callback: sender.endRefreshing)
+        reloadData(.Left(hackerspaceData.api), fromCache: false, callback: sender.endRefreshing)
     }
     
-    @IBOutlet weak var favoriteStatusButton: UIBarButtonItem! {
-        didSet {
-            updateFavoriteButton()
-        }
-    }
+    @IBOutlet weak var favoriteStatusButton: UIBarButtonItem!
     
     @IBAction func MarkAsFavorite(sender: UIBarButtonItem) {
-        if let h = currentHackerspaceURL {
-            Model.sharedInstance.addToFavorites(h)
-            updateFavoriteButton()
-        }
+        let h = hackerspaceData.api
+        Model.sharedInstance.addToFavorites(h)
+        updateFavoriteButton()
     }
     
     func prepare(url: String) {
-        self.loadOrigin = (url, nil)
+        self.loadOrigin = Either.Left(url)
     }
     
-    func prepare(url url: String, model: ParsedHackerspaceData) {
-        self.loadOrigin = (url, model)
+    func prepare(model: ParsedHackerspaceData) {
+        self.loadOrigin = Either.Right(model)
     }
     
-    private var loadOrigin: (String, ParsedHackerspaceData?)!
+    typealias LoadOrigin = Either<String, ParsedHackerspaceData>
+    private var loadOrigin: LoadOrigin!
     private var hackerspaceData: ParsedHackerspaceData!
-    private var currentHackerspaceURL: String!
     
     private struct storyboard {
         static let CellIdentifier = "Cell"
@@ -71,37 +56,31 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     }
     
     
-    func reloadData(source: (String, ParsedHackerspaceData?), fromCache: Bool = true, callback: (() -> Void)? = nil) {
-        func loadFromURL(url: String) {
-            (fromCache ? SpaceAPI.loadHackerspaceAPI : SpaceAPI.loadHackerspaceAPIFromWeb)(url).onSuccess { dict in
-                self.navigationController?.navigationBar.topItem?.title = dict["space"]?.string
-                self.hackerspaceData = parseHackerspaceDataModel(dict)
-                self.tableView.reloadData()
+    func reloadData(source: LoadOrigin, fromCache: Bool = true, callback: (() -> Void)? = nil) {
+        func applyDataModel(hackerspaceData: ParsedHackerspaceData) -> () {
+            self.hackerspaceData = hackerspaceData
+            self.navigationController?.navigationBar.topItem?.title = hackerspaceData.name
+            self.tableView.reloadData()
+            updateFavoriteButton()
+        }
+        
+        switch source {
+            case .Right(let m):
+                applyDataModel(m)
                 callback >>- { $0() }
+            case .Left(let url) :
+                SpaceAPI.loadHackerspace(url).map(parseHackerspaceDataModel).filter {$0 != nil}.map{$0!}.onSuccess(callback: applyDataModel).onComplete {_ in
+                    self.refreshControl?.endRefreshing()
+                    callback >>- { $0() }
             }
         }
-        
-        let (url, model) = source
-        
-        switch model {
-            case .Some(let m):
-                self.hackerspaceData = m
-                self.currentHackerspaceURL = url
-            case .None :
-                loadFromURL(url)
-        }
-        updateFavoriteButton()
     }
     
     func updateFavoriteButton() {
-        if let h = currentHackerspaceURL {
-            let isfavorited = Model.sharedInstance.listOfFavorites().contains(h) ?? false
-            favoriteStatusButton.enabled = !isfavorited
-            favoriteStatusButton.title = isfavorited ? "" : "Favorite"
-        } else {
-            favoriteStatusButton.enabled = false
-            favoriteStatusButton.title = ""
-        }
+        let h = hackerspaceData.api
+        let isfavorited = Model.sharedInstance.listOfFavorites().contains(h) ?? false
+        favoriteStatusButton.enabled = !isfavorited
+        favoriteStatusButton.title = isfavorited ? "" : "Favorite"
     }
 
     // MARK: - Table view data source

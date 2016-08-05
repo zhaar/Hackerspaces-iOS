@@ -66,6 +66,10 @@ struct SpaceAPI {
         return p.future
     }
     
+    static func loadHackerspace(url: String, fromCache: Bool = true) -> Future<[String : JSONDecoder], NSError> {
+        return (fromCache ? SpaceAPI.loadHackerspaceAPI : SpaceAPI.loadHackerspaceAPIFromWeb)(url)
+    }
+    
     static func loadHackerspaceAPI(url: String) -> Future<[String : JSONDecoder], NSError> {
         let p = Promise<[String : JSONDecoder], NSError>()
         Queue.global.async {
