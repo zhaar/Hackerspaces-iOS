@@ -32,7 +32,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         }.onSuccess { api in
             self.hackerspaces = api.map { _ in NetworkState.Loading }
             api.forEach { (hs, address) in
-                SpaceAPI.getParsedHackerspace(address).map {NetworkState.Finished($0)}.onSuccess { data in
+                SpaceAPI.getParsedHackerspace(address, name: hs).map {NetworkState.Finished($0)}.onSuccess { data in
                     self.hackerspaces.updateValue(data, forKey: hs)
                     }.onFailure { error in
                         self.updateHackerspaceStatus(NetworkState.Unresponsive(errorMessage: "error while loading: \(error)"), forKey: hs)

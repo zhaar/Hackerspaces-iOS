@@ -9,6 +9,15 @@
 import Foundation
 import MapKit
 
+class HSInfoCarrier: NSObject {
+    let hsName: String
+    let hsAPI: String
+    init(name: String, url: String) {
+        self.hsName = name
+        self.hsAPI = url
+    }
+}
+
 extension MapViewController: MKMapViewDelegate {
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
@@ -30,14 +39,15 @@ extension MapViewController: MKMapViewDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let SHVC = segue.destinationViewController as? SelectedHackerspaceTableViewController {
-            SHVC.prepare(sender as! String)
+            let info = sender as! HSInfoCarrier
+            SHVC.prepare(info.hsName, url: info.hsAPI)
         }
     }
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let annotation = view.annotation as? SpaceLocation {
             SpaceAPI.loadAPI().onSuccess { dict in
-                self.performSegueWithIdentifier(UIConstants.showHSMap, sender: dict[annotation.name])
+                self.performSegueWithIdentifier(UIConstants.showHSMap, sender: HSInfoCarrier(name: annotation.name, url: dict[annotation.name]!))
             }
         }
     }

@@ -11,7 +11,7 @@ import JSONJoy
 import Swiftz
 import MapKit
 
-func parseHackerspaceDataModel(json: [String: JSONDecoder], url: String) -> ParsedHackerspaceData? {
+func parseHackerspaceDataModel(json: [String: JSONDecoder], name apiName: String, url: String) -> ParsedHackerspaceData? {
     let apiVersion = json[SpaceAPIConstants.APIversion.rawValue]?.string
     let name = SpaceAPI.extractName(json)
     let logo = json[SpaceAPIConstants.APIlogo.rawValue]?.string
@@ -21,7 +21,7 @@ func parseHackerspaceDataModel(json: [String: JSONDecoder], url: String) -> Pars
     let contact = json[SpaceAPIConstants.APIcontact.rawValue]?.dictionary >>- { parseContactObject($0) }
     let reportChannel = json[SpaceAPIConstants.APIreport.rawValue]?.array >>- { parseReportChannel($0) }
     return apiVersion >>- { api in logo >>- { log in websiteURL >>- { web in location >>- { loc in contact >>- {cont in reportChannel >>- {report in state >>- { s in
-        ParsedHackerspaceData(apiVersion: api, apiEndpoint: url, name: name, logoURL: log, websiteURL: web, state: s, location: loc, contact: cont, issue_report_channel: report)}}}}}}}
+        ParsedHackerspaceData(apiVersion: api, apiEndpoint: url, apiName: apiName, name: name, logoURL: log, websiteURL: web, state: s, location: loc, contact: cont, issue_report_channel: report)}}}}}}}
 
 }
 
@@ -73,6 +73,7 @@ private func parseReportChannel(channels: [JSONDecoder]) -> [String] {
 struct ParsedHackerspaceData {
     let apiVersion: String
     let apiEndpoint: String
+    let apiName: String
     let name: String
     let logoURL: String
     let websiteURL: String
@@ -84,6 +85,9 @@ struct ParsedHackerspaceData {
     let spaceFed: SpaceFedObject? = nil
     let events: [eventObject]? = nil
     let projects: String? = nil
+    var apiInfo: (name: String, url: String) {
+        return (name: apiName, url: apiEndpoint)
+    }
     //missing
     //let sensors: 
     //let feeds:
