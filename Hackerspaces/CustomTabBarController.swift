@@ -26,7 +26,7 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
             }
         }
         switch self.viewControllers?.indexOf(viewController) {
-            case .Some(1) : setDataSourceForView(self.viewControllers?[1], dataSource: future(SharedData.sharedInstance.favoritesDictionary).promoteError)
+        case .Some(1) : setDataSourceForView(self.viewControllers?[1], dataSource: {_ in future(SharedData.sharedInstance.favoritesDictionary).promoteError()})
             case .Some(2) : setDataSourceForView(self.viewControllers?[2], dataSource: SpaceAPI.loadAPIFromWeb)
             case _: ()
         }

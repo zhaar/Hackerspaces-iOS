@@ -11,6 +11,7 @@
 		9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */; };
 		9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */; };
 		952852891D50E8200061A1E6 /* JSONJoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594951B893E5E0061A1E6 /* JSONJoy.framework */; };
+		952915411D5A94B20061A1E6 /* FavoriteHackerspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */; };
 		953161871B73B12A0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
 		953C513B1B8F49190061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
 		954F351E1D57FF0F0061A1E6 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */; };
@@ -74,6 +75,7 @@
 		9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedHackerspaceTableViewController.swift; sourceTree = "<group>"; };
 		9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSTitleTableViewCell.swift; sourceTree = "<group>"; };
 		9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSMapTableViewCell.swift; sourceTree = "<group>"; };
+		952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteHackerspace.swift; sourceTree = "<group>"; };
 		953161861B73B12A0061A1E6 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		953C513A1B8F49190061A1E6 /* FutureUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureUtils.swift; sourceTree = "<group>"; };
 		954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */,
 				95DB77FE1B9142D60061A1E6 /* Constants.swift */,
 				95DB78001B9149660061A1E6 /* sharedData.swift */,
+				952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */,
 				95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */,
 				95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */,
 				9573A2881B91EB310061A1E6 /* HSDataModel.swift */,
@@ -403,6 +406,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				952915411D5A94B20061A1E6 /* FavoriteHackerspace.swift in Sources */,
 				9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */,
 				95DBD95A1B8D10120061A1E6 /* SearchResultsViewController.swift in Sources */,
 				95DBD9551B8D0FC30061A1E6 /* HackerspaceBaseTableViewController.swift in Sources */,

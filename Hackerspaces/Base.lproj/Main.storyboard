@@ -499,10 +499,10 @@
             </objects>
             <point key="canvasLocation" x="616" y="672"/>
         </scene>
-        <!--Hackerspace Base Table View Controller-->
+        <!--Favorite Hackerspace Table View Controller-->
         <scene sceneID="OjV-kA-5Cw">
             <objects>
-                <tableViewController id="o2D-fQ-c3y" customClass="HackerspaceBaseTableViewController" customModule="Hackerspaces" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="o2D-fQ-c3y" customClass="FavoriteHackerspaceTableViewController" customModule="Hackerspaces" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="8Xe-Hc-jQr">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -816,6 +816,6 @@
         <image name="Settings_Filled" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aJy-NA-KwG"/>
+        <segue reference="d7n-5n-iWm"/>
     </inferredMetricsTieBreakers>
 </document>
