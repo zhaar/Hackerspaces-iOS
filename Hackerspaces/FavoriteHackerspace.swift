@@ -16,6 +16,12 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
         title = "Favorites"
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.refreshControl?.beginRefreshing()
+        self.refresh(refreshControl!)
+    }
+    
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let hackerspaceToDelete = visibleResults[indexPath.row]
