@@ -49,38 +49,6 @@
             </objects>
             <point key="canvasLocation" x="1428" y="-98"/>
         </scene>
-        <!--Favorites-->
-        <scene sceneID="6VZ-Ir-4cH">
-            <objects>
-                <tableViewController id="z5k-Zu-z37" customClass="FavoriteHSTableViewController" customModule="Hackerspaces" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Y9U-hW-jXq">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FavoriteHSCell" id="DZX-ni-GcB">
-                                <rect key="frame" x="0.0" y="86" width="600" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DZX-ni-GcB" id="n4a-pS-bno">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="z5k-Zu-z37" id="7Ur-xh-n7G"/>
-                            <outlet property="delegate" destination="z5k-Zu-z37" id="HHh-Gv-Q9G"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Favorites" id="Hsc-2q-g4T"/>
-                    <connections>
-                        <segue destination="gdX-aS-qgt" kind="show" identifier="ShowHackerspaceFromFavoriteList" id="fGm-qX-qXM"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qc9-6I-K3Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1428" y="672"/>
-        </scene>
         <!--Selected Hackerspace Table View Controller-->
         <scene sceneID="eOu-B7-sDS">
             <objects>
@@ -491,10 +459,10 @@
             </objects>
             <point key="canvasLocation" x="2278" y="672"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Custom Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController id="49e-Tb-3d3" customClass="CustomTabBarController" customModule="Hackerspaces" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
@@ -515,7 +483,7 @@
         <!--Navigation Controller-->
         <scene sceneID="1IJ-mk-gIZ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BnR-7o-sYH" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Favorite Nav" automaticallyAdjustsScrollViewInsets="NO" id="BnR-7o-sYH" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="5qZ-X7-h1l"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8v8-pZ-GGF">
@@ -524,12 +492,63 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="z5k-Zu-z37" kind="relationship" relationship="rootViewController" id="iP3-bn-Ppq"/>
+                        <segue destination="o2D-fQ-c3y" kind="relationship" relationship="rootViewController" id="87Y-cx-nSe"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JVA-mN-3Fi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="616" y="672"/>
+        </scene>
+        <!--Hackerspace Base Table View Controller-->
+        <scene sceneID="OjV-kA-5Cw">
+            <objects>
+                <tableViewController id="o2D-fQ-c3y" customClass="HackerspaceBaseTableViewController" customModule="Hackerspaces" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="8Xe-Hc-jQr">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="searchResultsCell" textLabel="6pn-LV-kyo" detailTextLabel="ZkI-J6-mtj" style="IBUITableViewCellStyleValue1" id="Vno-9M-Rhk">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vno-9M-Rhk" id="p6j-i8-nXn">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Search results cell" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="6pn-LV-kyo">
+                                            <rect key="frame" x="15" y="12" width="133" height="19.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ZkI-J6-mtj">
+                                            <rect key="frame" x="543.5" y="12" width="41.5" height="19.5"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="o2D-fQ-c3y" id="pfn-Y6-SIb"/>
+                            <outlet property="delegate" destination="o2D-fQ-c3y" id="Ect-76-KWO"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Oqi-RQ-Qfc"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="rzv-p7-vko">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
+                    <connections>
+                        <segue destination="gdX-aS-qgt" kind="show" identifier="ShowHackerspaceFromSearch" id="d7n-5n-iWm"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WBh-0s-cdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1428" y="672"/>
         </scene>
         <!--Search Bar Embedded in Navigation Bar-->
         <scene sceneID="Ly0-1s-5oH">
@@ -571,11 +590,8 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Search Bar Embedded in Navigation Bar" id="y1Y-vH-UMJ"/>
-                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="jb9-ZT-cN2">
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="2HQ-Mt-MJG">
                         <autoresizingMask key="autoresizingMask"/>
-                        <connections>
-                            <action selector="refresh:" destination="0bH-UZ-e6C" eventType="valueChanged" id="9oh-aZ-5uW"/>
-                        </connections>
                     </refreshControl>
                     <connections>
                         <segue destination="gdX-aS-qgt" kind="show" identifier="ShowHackerspaceFromSearch" id="aJy-NA-KwG"/>

@@ -7,30 +7,37 @@
 //
 
 import Foundation
-import Swiftz
 
 let selected = "favorite"
 let favoriteList = "listOfFavorites"
+let favoriteDictKey = "DictionaryOfFavorites"
+let parsedDataList = "listOfParsedHackerspaceData"
 
-class Model {
+class SharedData {
     
+    typealias HackerspaceAPIURL = String
     static let defaults = NSUserDefaults.standardUserDefaults()
     
-    func listOfFavorites() -> [String] {
-        return (Model.defaults.arrayForKey(favoriteList) >>- { arr in arr.map { obj in obj as! String} }) ?? [String]()
+    func favoritesDictionary() -> [String: HackerspaceAPIURL] {
+        return SharedData.defaults.dictionaryForKey(favoriteDictKey)?.map { value in value as! HackerspaceAPIURL} ?? [String: HackerspaceAPIURL]()
     }
     
-    func setListOfFavorites(list: [String]) {
-        Model.defaults.setValue(list, forKey: favoriteList)
+    func addToFavoriteDictionary(hackerspace: (String, String)) {
+        let (name, apiEndpoint) = hackerspace
+        setFavoritesDictionary(favoritesDictionary().insert(name, v: apiEndpoint))
     }
     
-    func addToFavorites(url: String) {
-        Model.defaults.setValue(listOfFavorites().cons(url), forKey: favoriteList)
+    func removeFromFavoritesList(name: String) {
+        setFavoritesDictionary(favoritesDictionary().delete(name))
     }
     
-    func removeFromFavorites(url: String) {
-        Model.defaults.setValue(listOfFavorites().filter { $0 != url }, forKey: favoriteList)
+    func setFavoritesDictionary(dict: [String : HackerspaceAPIURL]) {
+        SharedData.defaults.setObject(dict, forKey: favoriteDictKey)
     }
     
-    static let sharedInstance = Model()
+    func deleteAllDebug() {
+        setFavoritesDictionary([String: HackerspaceAPIURL]())
+    }
+    
+    static let sharedInstance = SharedData()
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchResultsViewController: SearchControllerBaseViewController, UISearchResultsUpdating {
+class SearchResultsViewController: HackerspaceBaseTableViewController, UISearchResultsUpdating {
     // MARK: Types
     
     struct StoryboardConstants {

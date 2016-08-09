@@ -10,26 +10,6 @@ import UIKit
 import JSONJoy
 import BrightFutures
 
-extension SearchControllerBaseViewController: UIViewControllerPreviewingDelegate {
-    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let indexPath = tableView.indexPathForRowAtPoint(location) else { return nil }
-        let hsName = visibleResults[indexPath.row]
-        guard let state = hackerspaces[hsName] else { return nil }
-        guard case .Finished(let data) = state else {return nil}
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let hackerspaceViewController = storyboard.instantiateViewControllerWithIdentifier("HackerspaceDetail") as! SelectedHackerspaceTableViewController
-        hackerspaceViewController.prepare(data)
-        let cellRect = tableView.rectForRowAtIndexPath(indexPath)
-        let sourceRect = previewingContext.sourceView.convertRect(cellRect, toView: tableView)
-        previewingContext.sourceRect = sourceRect
-        return hackerspaceViewController
-    }
-    
-    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        showViewController(viewControllerToCommit, sender: self)
-    }
-}
-
 enum NetworkState {
     case Finished(ParsedHackerspaceData)
     case Loading
@@ -44,17 +24,15 @@ enum NetworkState {
     }
 }
 
-class SearchControllerBaseViewController: UITableViewController {
-    
-    @IBAction func refresh(sender: UIRefreshControl) {
-        SpaceAPI.loadAPIFromWeb().onComplete { _ in
+class HackerspaceBaseTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
+        
+    func refresh(sender: UIRefreshControl) {
+        dataSource().onComplete { _ in
             sender.endRefreshing()
         }.onSuccess { api in
             self.hackerspaces = api.map { _ in NetworkState.Loading }
-            sender.endRefreshing()
             api.forEach { (hs, address) in
-                let jsonData = SpaceAPI.loadHackerspaceAPI(address).map(parseHackerspaceDataModel)
-                jsonData.filter {$0 != nil}.map {$0!}.map {NetworkState.Finished($0)}.onSuccess { data in
+                SpaceAPI.getParsedHackerspace(address).map {NetworkState.Finished($0)}.onSuccess { data in
                     self.hackerspaces.updateValue(data, forKey: hs)
                     }.onFailure { error in
                         self.updateHackerspaceStatus(NetworkState.Unresponsive(errorMessage: "error while loading: \(error)"), forKey: hs)
@@ -62,6 +40,8 @@ class SearchControllerBaseViewController: UITableViewController {
             }
         }
     }
+    
+    var dataSource: () -> Future<[String: String], NSError> = SpaceAPI.loadAPIFromWeb
 
     // MARK: Types
     
@@ -95,6 +75,7 @@ class SearchControllerBaseViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.refreshControl?.addTarget(self, action: #selector(HackerspaceBaseTableViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl?.beginRefreshing()
         self.refresh(refreshControl!)
         
@@ -124,6 +105,25 @@ class SearchControllerBaseViewController: UITableViewController {
 
             tableView.reloadData()
         }
+    }
+    
+    // MARK: PreviewingDelegate
+    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = tableView.indexPathForRowAtPoint(location) else { return nil }
+        let hsName = visibleResults[indexPath.row]
+        guard let state = hackerspaces[hsName] else { return nil }
+        guard case .Finished(let data) = state else {return nil}
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let hackerspaceViewController = storyboard.instantiateViewControllerWithIdentifier("HackerspaceDetail") as! SelectedHackerspaceTableViewController
+        hackerspaceViewController.prepare(data)
+        let cellRect = tableView.rectForRowAtIndexPath(indexPath)
+        let sourceRect = previewingContext.sourceView.convertRect(cellRect, toView: tableView)
+        previewingContext.sourceRect = sourceRect
+        return hackerspaceViewController
+    }
+    
+    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
+        showViewController(viewControllerToCommit, sender: self)
     }
     
     // MARK: UITableViewDataSource

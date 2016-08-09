@@ -10,14 +10,13 @@ class SelectedHackerspaceTableViewController: UITableViewController {
 
     // MARK: - Outlets & Actions
     @IBAction func refresh(sender: UIRefreshControl) {
-        reloadData(.Left(hackerspaceData.api), fromCache: false, callback: sender.endRefreshing)
+        reloadData(.Left(hackerspaceData.apiEndpoint), fromCache: false, callback: sender.endRefreshing)
     }
     
     @IBOutlet weak var favoriteStatusButton: UIBarButtonItem!
     
     @IBAction func MarkAsFavorite(sender: UIBarButtonItem) {
-        let h = hackerspaceData.api
-        Model.sharedInstance.addToFavorites(h)
+        SharedData.sharedInstance.addToFavoriteDictionary((hackerspaceData.name, hackerspaceData.apiEndpoint))
         updateFavoriteButton()
     }
     
@@ -52,14 +51,12 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         reloadData(loadOrigin)
-        updateFavoriteButton()
     }
     
     
     func reloadData(source: LoadOrigin, fromCache: Bool = true, callback: (() -> Void)? = nil) {
         func applyDataModel(hackerspaceData: ParsedHackerspaceData) -> () {
             self.hackerspaceData = hackerspaceData
-            self.navigationController?.navigationBar.topItem?.title = hackerspaceData.name
             self.tableView.reloadData()
             updateFavoriteButton()
         }
@@ -69,7 +66,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
                 applyDataModel(m)
                 callback >>- { $0() }
             case .Left(let url) :
-                SpaceAPI.loadHackerspace(url).map(parseHackerspaceDataModel).filter {$0 != nil}.map{$0!}.onSuccess(callback: applyDataModel).onComplete {_ in
+                SpaceAPI.loadHackerspace(url).map {parseHackerspaceDataModel($0, url: url)}.filter {$0 != nil}.map{$0!}.onSuccess(callback: applyDataModel).onComplete {_ in
                     self.refreshControl?.endRefreshing()
                     callback >>- { $0() }
             }
@@ -77,8 +74,8 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     }
     
     func updateFavoriteButton() {
-        let h = hackerspaceData.api
-        let isfavorited = Model.sharedInstance.listOfFavorites().contains(h) ?? false
+        let h = hackerspaceData.name
+        let isfavorited = SharedData.sharedInstance.favoritesDictionary().keys.contains(h) ?? false
         favoriteStatusButton.enabled = !isfavorited
         favoriteStatusButton.title = isfavorited ? "" : "Favorite"
     }
@@ -152,7 +149,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
                 mapCell.HSUrl.text = data.websiteURL
                 mapCell.HSLastUpdateTime.text = data.state.lastChange >>- { dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: NSTimeInterval($0))) }
                 mapCell.openningMessageLabel.text = hackerspaceData?.state.message
-                mapCell.HSUsedAPI.text = "space api v " + (hackerspaceData?.api ?? "")
+                mapCell.HSUsedAPI.text = "space api v " + (hackerspaceData?.apiVersion ?? "")
              }
             return mapCell
         } else {

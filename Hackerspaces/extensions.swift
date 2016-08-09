@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import BrightFutures
 
 func optionalBind<T, U>(optional: T?, f: T -> U?) -> U?
 {
