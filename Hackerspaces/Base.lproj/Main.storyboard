@@ -439,7 +439,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="vhb-dO-2g3">
-                        <barButtonItem key="rightBarButtonItem" title="Favorite" id="bQS-qQ-tQV">
+                        <barButtonItem key="rightBarButtonItem" image="Star-empty" id="bQS-qQ-tQV">
                             <connections>
                                 <action selector="MarkAsFavorite:" destination="gdX-aS-qgt" id="mDR-Hb-xLf"/>
                             </connections>
@@ -813,6 +813,7 @@
         <image name="Compass Filled" width="25" height="25"/>
         <image name="Settings" width="25" height="25"/>
         <image name="Settings_Filled" width="25" height="25"/>
+        <image name="Star-empty" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="d7n-5n-iWm"/>

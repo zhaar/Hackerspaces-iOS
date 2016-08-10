@@ -16,9 +16,16 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     @IBOutlet weak var favoriteStatusButton: UIBarButtonItem!
     
     @IBAction func MarkAsFavorite(sender: UIBarButtonItem) {
-        SharedData.addToFavoriteDictionary((hackerspaceData.apiName, hackerspaceData.apiEndpoint))
+        if isFavorite {
+            SharedData.removeFromFavoritesList(hackerspaceData.apiName)
+        } else {
+            SharedData.addToFavoriteDictionary((hackerspaceData.apiName, hackerspaceData.apiEndpoint))
+        }
         updateFavoriteButton()
     }
+    
+    let addToFavorites = UIImage(named: "Star-empty")
+    let removeFromFavorites = UIImage(named: "Star-full")
     
     func prepare(name: String, url: String) {
         self.loadOrigin = Either.Left((name: name, url: url))
@@ -31,6 +38,11 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     typealias LoadOrigin = Either<(name: String, url: String), ParsedHackerspaceData>
     private var loadOrigin: LoadOrigin!
     private var hackerspaceData: ParsedHackerspaceData!
+    var isFavorite: Bool {
+        get {
+            return SharedData.favoritesDictionary().keys.contains(hackerspaceData.apiName) ?? false
+        }
+    }
     
     private struct storyboard {
         static let CellIdentifier = "Cell"
@@ -74,10 +86,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     }
     
     func updateFavoriteButton() {
-        let h = hackerspaceData.apiName
-        let isfavorited = SharedData.favoritesDictionary().keys.contains(h) ?? false
-        favoriteStatusButton.enabled = !isfavorited
-        favoriteStatusButton.title = isfavorited ? "" : "Favorite"
+        favoriteStatusButton.image = isFavorite ? removeFromFavorites : addToFavorites
     }
 
     // MARK: - Table view data source
