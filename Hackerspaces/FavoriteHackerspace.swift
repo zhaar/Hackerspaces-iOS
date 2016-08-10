@@ -30,4 +30,21 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
     }
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if visibleResults.count == 0 {
+            let instructions = UILabel(frame: self.tableView.bounds)
+            instructions.attributedText = NSAttributedString(string: "Select your favorite hackerspace from search or map")
+            instructions.textAlignment = .Center
+            instructions.textColor = UIColor.blackColor()
+            instructions.numberOfLines = 0
+            tableView.backgroundView = instructions
+            tableView.separatorStyle = .None
+            return 1
+        } else {
+            tableView.separatorStyle = .SingleLine
+            tableView.backgroundView = nil
+            return 1
+        }
+    }
 }
