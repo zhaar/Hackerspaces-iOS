@@ -14,6 +14,14 @@ enum NetworkState {
     case Finished(ParsedHackerspaceData)
     case Loading
     case Unresponsive(errorMessage: String)
+    var isDone: Bool {
+        get {
+            switch self {
+            case .Finished(_): return true
+            case _ : return false
+            }
+        }
+    }
     var stateMessage: String { get {
             switch self {
             case .Finished(let data): return data.state.open ? "open"  : "closed"
@@ -134,9 +142,11 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.tableViewCellIdentifier, forIndexPath: indexPath)
         let name = visibleResults[indexPath.row]
-        let isOpen = self.hackerspaces[name]
+        let state = self.hackerspaces[name]
         cell.textLabel?.text = name
-        cell.detailTextLabel?.text = isOpen?.stateMessage ?? "not found"
+        cell.detailTextLabel?.text = state?.stateMessage ?? "not found"
+        cell.selectionStyle = state?.isDone ?? true ? .Default : .None
+
         //workaround a bug where detail is no updated correctly
         //see: http://stackoverflow.com/questions/25987135/ios-8-uitableviewcell-detail-text-not-correctly-updating
         cell.layoutSubviews()
