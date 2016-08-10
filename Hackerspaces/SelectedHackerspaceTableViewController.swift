@@ -16,7 +16,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     @IBOutlet weak var favoriteStatusButton: UIBarButtonItem!
     
     @IBAction func MarkAsFavorite(sender: UIBarButtonItem) {
-        SharedData.sharedInstance.addToFavoriteDictionary((hackerspaceData.apiName, hackerspaceData.apiEndpoint))
+        SharedData.addToFavoriteDictionary((hackerspaceData.apiName, hackerspaceData.apiEndpoint))
         updateFavoriteButton()
     }
     
@@ -75,7 +75,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     
     func updateFavoriteButton() {
         let h = hackerspaceData.apiName
-        let isfavorited = SharedData.sharedInstance.favoritesDictionary().keys.contains(h) ?? false
+        let isfavorited = SharedData.favoritesDictionary().keys.contains(h) ?? false
         favoriteStatusButton.enabled = !isfavorited
         favoriteStatusButton.title = isfavorited ? "" : "Favorite"
     }

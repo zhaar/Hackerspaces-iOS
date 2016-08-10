@@ -78,8 +78,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         self.refreshControl?.addTarget(self, action: #selector(HackerspaceBaseTableViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl?.beginRefreshing()
         self.refresh(refreshControl!)
-        
-//      Force touch code
+        // Force touch code
         registerForPreviewingWithDelegate(self, sourceView: tableView)
     }
     

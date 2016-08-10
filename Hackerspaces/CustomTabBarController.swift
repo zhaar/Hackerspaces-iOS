@@ -11,25 +11,29 @@ import BrightFutures
 
 class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.delegate = self
-        setDataSourceForView(self.viewControllers?[0], dataSource: {_ in future(SharedData.sharedInstance.favoritesDictionary).promoteError()})
-    }
+    let favoriteTableViewIndex = 0
+    let searchTableViewIndex = 2
+    let preferencesDataSource: () -> Future<[String: String], NSError> = {_ in future(SharedData.favoritesDictionary).promoteError()}
     
-    func setDataSourceForView(nav: UIViewController?, dataSource: () -> Future<[String: String], NSError>) {
-        if let n = nav as? UINavigationController {
-            let s = n.childViewControllers.map {$0 as? HackerspaceBaseTableViewController}.filter {$0 != nil}[0]
-            if let searchVC = s {
-                searchVC.dataSource = dataSource
+    func setDataSourceForView(viewController: UIViewController?, dataSource: () -> Future<[String: String], NSError>) {
+        if let nav = viewController as? UINavigationController {
+            let hsTableView = nav.childViewControllers.map {$0 as? HackerspaceBaseTableViewController}.filter {$0 != nil}[0]
+            if let tableView = hsTableView {
+                tableView.dataSource = dataSource
             }
         }
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.delegate = self
+        setDataSourceForView(self.viewControllers?[0], dataSource: preferencesDataSource)
+    }
+    
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
         switch self.viewControllers?.indexOf(viewController) {
-            case .Some(0): setDataSourceForView(self.viewControllers?[0], dataSource: {_ in future(SharedData.sharedInstance.favoritesDictionary).promoteError()})
-            case .Some(2): setDataSourceForView(self.viewControllers?[2], dataSource: SpaceAPI.loadAPIFromWeb)
+            case .Some(favoriteTableViewIndex): setDataSourceForView(self.viewControllers?[favoriteTableViewIndex], dataSource: preferencesDataSource)
+            case .Some(searchTableViewIndex): setDataSourceForView(self.viewControllers?[searchTableViewIndex], dataSource: SpaceAPI.loadAPIFromWeb)
             case _: ()
         }
     }

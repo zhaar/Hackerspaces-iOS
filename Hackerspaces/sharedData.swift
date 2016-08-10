@@ -13,31 +13,29 @@ let favoriteList = "listOfFavorites"
 let favoriteDictKey = "DictionaryOfFavorites"
 let parsedDataList = "listOfParsedHackerspaceData"
 
-class SharedData {
+struct SharedData {
     
     typealias HackerspaceAPIURL = String
     static let defaults = NSUserDefaults.standardUserDefaults()
     
-    func favoritesDictionary() -> [String: HackerspaceAPIURL] {
+    static func favoritesDictionary() -> [String: HackerspaceAPIURL] {
         return SharedData.defaults.dictionaryForKey(favoriteDictKey)?.map { value in value as! HackerspaceAPIURL} ?? [String: HackerspaceAPIURL]()
     }
     
-    func addToFavoriteDictionary(hackerspace: (String, String)) {
+    static func addToFavoriteDictionary(hackerspace: (String, String)) {
         let (name, apiEndpoint) = hackerspace
         setFavoritesDictionary(favoritesDictionary().insert(name, v: apiEndpoint))
     }
     
-    func removeFromFavoritesList(name: String) {
+    static func removeFromFavoritesList(name: String) {
         setFavoritesDictionary(favoritesDictionary().delete(name))
     }
     
-    func setFavoritesDictionary(dict: [String : HackerspaceAPIURL]) {
+    static func setFavoritesDictionary(dict: [String : HackerspaceAPIURL]) {
         SharedData.defaults.setObject(dict, forKey: favoriteDictKey)
     }
     
-    func deleteAllDebug() {
+    static func deleteAllDebug() {
         setFavoritesDictionary([String: HackerspaceAPIURL]())
     }
-    
-    static let sharedInstance = SharedData()
 }
