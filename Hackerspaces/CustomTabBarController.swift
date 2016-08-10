@@ -13,14 +13,12 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     let favoriteTableViewIndex = 0
     let searchTableViewIndex = 2
-    let preferencesDataSource: () -> Future<[String: String], NSError> = {_ in future(SharedData.favoritesDictionary).promoteError()}
+    let preferencesDataSource: () -> Future<[String: String], NSError> = {_ in future(SharedData.favoritesDictionary).onSuccess(callback: SharedData.updateIconShortcuts).promoteError()}
     
     func setDataSourceForView(viewController: UIViewController?, dataSource: () -> Future<[String: String], NSError>) {
         if let nav = viewController as? UINavigationController {
             let hsTableView = nav.childViewControllers.map {$0 as? HackerspaceBaseTableViewController}.filter {$0 != nil}[0]
-            if let tableView = hsTableView {
-                tableView.dataSource = dataSource
-            }
+            hsTableView?.dataSource = dataSource
         }
     }
     

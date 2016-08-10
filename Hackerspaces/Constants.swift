@@ -30,4 +30,6 @@ struct UIConstants {
     static let showHSMap = "ShowHackerspaceFromMap"
     static let showHSFavorite = "ShowHackerspaceFromFavoriteList"
     static let showHSResult = "ShowhackerspaceFromResult"
+    static let hackerspaceViewShortcut = "moe.zephyz.hackerspaces.hackerspace_view_shortcut"
+    static let searchViewShortcut = "moe.zephyz.hackerspaces.search_shortcut"
 }

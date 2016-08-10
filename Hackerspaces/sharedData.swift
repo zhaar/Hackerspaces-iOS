@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Fixme. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 let selected = "favorite"
 let favoriteList = "listOfFavorites"
@@ -32,10 +32,18 @@ struct SharedData {
     }
     
     static func setFavoritesDictionary(dict: [String : HackerspaceAPIURL]) {
+        updateIconShortcuts(dict)
         SharedData.defaults.setObject(dict, forKey: favoriteDictKey)
     }
     
     static func deleteAllDebug() {
         setFavoritesDictionary([String: HackerspaceAPIURL]())
+    }
+    
+    static func updateIconShortcuts(dict: [String: String]) {
+        let shorts = dict.map { key, value in
+            UIApplicationShortcutItem(type: UIConstants.hackerspaceViewShortcut, localizedTitle: key, localizedSubtitle: nil, icon: nil, userInfo: ["name": key, "url": value])
+        }
+        UIApplication.sharedApplication().shortcutItems = shorts
     }
 }
