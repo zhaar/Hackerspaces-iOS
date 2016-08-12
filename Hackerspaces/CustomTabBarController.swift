@@ -15,11 +15,16 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     let searchTableViewIndex = 2
     let preferencesDataSource: () -> Future<[String: String], NSError> = {_ in future(SharedData.favoritesDictionary).onSuccess(callback: SharedData.updateIconShortcuts).promoteError()}
     
-    func setDataSourceForView(viewController: UIViewController?, dataSource: () -> Future<[String: String], NSError>) {
+    func getHackerspaceTableFromViewController(viewController: UIViewController?) -> HackerspaceBaseTableViewController? {
         if let nav = viewController as? UINavigationController {
-            let hsTableView = nav.childViewControllers.map {$0 as? HackerspaceBaseTableViewController}.filter {$0 != nil}[0]
-            hsTableView?.dataSource = dataSource
+            return nav.childViewControllers.map {$0 as? HackerspaceBaseTableViewController}.filter {$0 != nil}[0]
+        } else {
+            return nil
         }
+    }
+    
+    func setDataSourceForView(viewController: UIViewController?, dataSource: () -> Future<[String: String], NSError>) {
+        getHackerspaceTableFromViewController(viewController)?.dataSource = dataSource
     }
     
     override func viewDidLoad() {

@@ -14,11 +14,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    //Returns true if the shortcut item was handled, false otherwise.
+    func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
+        let tabs = self.window!.rootViewController as? CustomTabBarController
+        switch shortcutItem.type {
+            case UIConstants.hackerspaceViewShortcut:
+
+                if let tabVC = tabs {
+                    tabVC.selectedIndex = 0
+                    let hsName = shortcutItem.userInfo!["name"]! as! String
+                    let hsUrl = shortcutItem.userInfo!["url"]! as! String
+                    let navigationController = tabVC.viewControllers?[0] as? UINavigationController
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let hackerspaceViewController = storyboard.instantiateViewControllerWithIdentifier("HackerspaceDetail") as! SelectedHackerspaceTableViewController
+                    hackerspaceViewController.prepare(hsName, url: hsUrl)
+                    navigationController?.pushViewController(hackerspaceViewController, animated: false)
+                }
+                return true
+            case UIConstants.searchViewShortcut:
+                tabs?.selectedIndex = 2
+                return true
+            case _ : return false
+        }
+    }
     
+    func application(application: UIApplication, performActionForShortcutItem shortcutItem: UIApplicationShortcutItem, completionHandler: (Bool) -> Void) {
+ 
+        completionHandler(handleShortcutItem(shortcutItem))
+    }
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+       
+        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsShortcutItemKey] as? UIApplicationShortcutItem {
+            return !handleShortcutItem(shortcutItem)
+        }
         return true
     }
 
