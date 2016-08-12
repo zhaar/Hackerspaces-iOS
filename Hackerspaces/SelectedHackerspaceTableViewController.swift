@@ -15,7 +15,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     
     @IBOutlet weak var favoriteStatusButton: UIBarButtonItem!
     
-    @IBAction func MarkAsFavorite(sender: UIBarButtonItem) {
+    @IBAction func MarkAsFavorite(sender: UIBarButtonItem?) {
         if isFavorite {
             SharedData.removeFromFavoritesList(hackerspaceData.apiName)
         } else {
@@ -164,6 +164,16 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         } else {
             return tableView.dequeueReusableCellWithIdentifier(storyboard.TitleIdentifier, forIndexPath: indexPath)
         }
+    }
+    
+    override func previewActionItems() -> [UIPreviewActionItem] {
+        let addToFavs = UIPreviewAction(title: "Add Favorites", style: .Default, handler: { action, controller in
+            self.MarkAsFavorite(nil)
+        })
+        let removeFromFavs = UIPreviewAction(title: "Remove Favorite", style: .Destructive) { action, controller in
+            self.MarkAsFavorite(nil)
+        }
+        return isFavorite ? [removeFromFavs] : [addToFavs]
     }
 
     

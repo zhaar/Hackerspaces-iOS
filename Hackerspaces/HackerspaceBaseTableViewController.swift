@@ -84,12 +84,15 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: #selector(HackerspaceBaseTableViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
-        self.refreshControl?.beginRefreshing()
-        self.refresh(refreshControl!)
         // Force touch code
         registerForPreviewingWithDelegate(self, sourceView: tableView)
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.refresh(refreshControl!)
+    }
+
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         refreshControl?.endRefreshing()
