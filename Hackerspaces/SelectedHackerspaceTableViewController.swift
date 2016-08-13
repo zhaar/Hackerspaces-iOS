@@ -35,6 +35,8 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         self.loadOrigin = Either.Right(model)
     }
     
+    var previewDeleteAction : (() -> ())? = nil
+
     typealias LoadOrigin = Either<(name: String, url: String), ParsedHackerspaceData>
     private var loadOrigin: LoadOrigin!
     private var hackerspaceData: ParsedHackerspaceData!
@@ -167,12 +169,12 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     }
     
     override func previewActionItems() -> [UIPreviewActionItem] {
-        let addToFavs = UIPreviewAction(title: "Add Favorites", style: .Default, handler: { action, controller in
+        let callback: (UIPreviewAction, UIViewController) -> () =  { action, controller in
             self.MarkAsFavorite(nil)
-        })
-        let removeFromFavs = UIPreviewAction(title: "Remove Favorite", style: .Destructive) { action, controller in
-            self.MarkAsFavorite(nil)
+            self.previewDeleteAction >>- {$0()}
         }
+        let addToFavs = UIPreviewAction(title: "Add Favorite", style: .Default, handler: callback )
+        let removeFromFavs = UIPreviewAction(title: "Remove Favorite", style: .Destructive, handler: callback)
         return isFavorite ? [removeFromFavs] : [addToFavs]
     }
 

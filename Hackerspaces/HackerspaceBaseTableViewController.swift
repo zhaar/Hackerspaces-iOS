@@ -85,12 +85,8 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         super.viewDidLoad()
         self.refreshControl?.addTarget(self, action: #selector(HackerspaceBaseTableViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         // Force touch code
-        registerForPreviewingWithDelegate(self, sourceView: tableView)
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewDidAppear(animated)
         self.refresh(refreshControl!)
+        registerForPreviewingWithDelegate(self, sourceView: tableView)
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -117,6 +113,11 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         }
     }
     
+    func previewActionCallback() -> () {
+        print("callback from hackerspace table")
+        return
+    }
+    
     // MARK: PreviewingDelegate
     func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = tableView.indexPathForRowAtPoint(location) else { return nil }
@@ -126,6 +127,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let hackerspaceViewController = storyboard.instantiateViewControllerWithIdentifier("HackerspaceDetail") as! SelectedHackerspaceTableViewController
         hackerspaceViewController.prepare(data)
+        hackerspaceViewController.previewDeleteAction = self.previewActionCallback
         let cellRect = tableView.rectForRowAtIndexPath(indexPath)
         let sourceRect = previewingContext.sourceView.convertRect(cellRect, toView: tableView)
         previewingContext.sourceRect = sourceRect

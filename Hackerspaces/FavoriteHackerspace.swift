@@ -18,10 +18,9 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.refreshControl?.beginRefreshing()
         self.refresh(refreshControl!)
     }
-    
+        
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == .Delete {
             let hackerspaceToDelete = visibleResults[indexPath.row]
@@ -46,5 +45,10 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
             tableView.backgroundView = nil
             return 1
         }
+    }
+    
+    override func previewActionCallback() {
+        print("refreshing from callback")
+        self.refresh(refreshControl!)
     }
 }
