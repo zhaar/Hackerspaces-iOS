@@ -38,11 +38,12 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
             sender.endRefreshing()
             }.onSuccess { api in
                 self.hackerspaces = api.map { _ in NetworkState.loading }
-                api.forEach { (hs, address) in
-                    SpaceAPI.getParsedHackerspace(address, name: hs).map {NetworkState.finished($0)}
+                api.forEach { (hs, url) in
+                    SpaceAPI.getParsedHackerspace(url: url, name: hs, fromCache: false).map { NetworkState.finished($0) }
                         .onSuccess { data in
                             self.hackerspaces.updateValue(data, forKey: hs)
-                        }.onFailure { error in
+                        }
+                        .onFailure { error in
                             self.updateHackerspaceStatus(NetworkState.unresponsive(errorMessage: "error while loading: \(error)"), forKey: hs)
                     }
                 }
@@ -121,9 +122,9 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     // MARK: PreviewingDelegate
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         guard let indexPath = tableView.indexPathForRow(at: location),
-              let hsName = visibleResults.safeIndex(indexPath.row),
-              let state = hackerspaces[hsName],
-              case .finished(let data) = state else { return nil }
+            let hsName = visibleResults.safeIndex(indexPath.row),
+            let state = hackerspaces[hsName],
+            case .finished(let data) = state else { return nil }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let hackerspaceViewController = storyboard.instantiateViewController(withIdentifier: "HackerspaceDetail") as! SelectedHackerspaceTableViewController
         hackerspaceViewController.prepare(data)
