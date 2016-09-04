@@ -18,6 +18,8 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     let locationManager = CLLocationManager()
+    var refreshButton: UIBarButtonItem!
+    var loadingIndicator: UIBarButtonItem!
     
     @IBAction func resetMap(sender: UILongPressGestureRecognizer) {
         if let location = locationManager.location {
@@ -42,12 +44,28 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             regionRadius * 2.0, regionRadius * 2.0)
         map.setRegion(coordinateRegion, animated: true)
     }
+        
+    func refresh(sender: UIBarButtonItem) {
+        self.navigationItem.rightBarButtonItem = loadingIndicator
+        self.map.removeAnnotations(map.annotations)
+        SpaceAPI.loadHackerspaceList(fromCache: true).map { hsList in
+            hsList.map { name, url in
+                SpaceAPI.getParsedHackerspace(url, name: name, fromCache: false).onSuccess { parsed in
+                    self.map.addAnnotation(parsed.location)}
+                }.sequence().onComplete { _ in
+                    self.navigationItem.rightBarButtonItem = self.refreshButton
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SpaceAPI.getHackerspaceLocations().onSuccess { array in
-            self.map.addAnnotations(array.filter { $0 != nil }.map { $0! })
-        }
+        refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: #selector(refresh))
+        self.navigationItem.rightBarButtonItem = refreshButton
+        let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        indicator.startAnimating()
+        loadingIndicator = UIBarButtonItem(customView: indicator)
+        refresh(refreshButton)
     }
     
     override func viewDidAppear(animated: Bool) {

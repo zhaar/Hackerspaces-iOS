@@ -66,7 +66,12 @@ struct SpaceAPI {
         return p.future
     }
     
-    static func loadHackerspace(url: String, fromCache: Bool = true) -> Future<[String : JSONDecoder], NSError> {
+    static func loadHackerspaceList(fromCache fromCache: Bool) -> Future<[String: String], NSError> {
+        return fromCache ? loadAPI() : loadAPIFromWeb()
+    }
+    
+    typealias URL = String
+    static func loadHackerspaceData(url: String, fromCache: Bool = true) -> Future<[URL : JSONDecoder], NSError> {
         return (fromCache ? SpaceAPI.loadHackerspaceAPI : SpaceAPI.loadHackerspaceAPIFromWeb)(url)
     }
     
@@ -111,13 +116,15 @@ struct SpaceAPI {
         return p.future
     }
     
-    static func getParsedHackerspace(url: String, name: String, fromCache cache: Bool = true) -> Future<ParsedHackerspaceData, NSError> {
-        return  loadHackerspace(url, fromCache: cache).map {parseHackerspaceDataModel($0, name: name, url: url)}.flatMap { parsed -> Result<ParsedHackerspaceData, NSError> in
-            switch parsed {
+    static func parseHackerspace(json: [String : JSONDecoder], url: String, name: String) -> Result<ParsedHackerspaceData, NSError>{
+        switch parseHackerspaceDataModel(json, name: name, url: url) {
             case .Some(let p): return Result(value: p)
             case .None : return Result(error: NSError(domain: "parse Error", code: -1, userInfo: nil))
-            }
         }
+    }
+    
+    static func getParsedHackerspace(url: String, name: String, fromCache cache: Bool = true) -> Future<ParsedHackerspaceData, NSError> {
+        return loadHackerspaceData(url, fromCache: cache).flatMap { dict in parseHackerspace(dict, url: url, name: name)}
         
     }
     
