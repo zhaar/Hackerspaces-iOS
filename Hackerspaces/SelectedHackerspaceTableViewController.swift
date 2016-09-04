@@ -11,9 +11,9 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     @IBAction func refresh(_ sender: UIRefreshControl) {
         reloadData(.Left(hackerspaceData.apiInfo), fromCache: false, callback: sender.endRefreshing)
     }
-    
+
     @IBOutlet weak var favoriteStatusButton: UIBarButtonItem!
-    
+
     @IBAction func MarkAsFavorite(_ sender: UIBarButtonItem?) {
         if isFavorite {
             SharedData.removeFromFavoritesList(hackerspaceData.apiName)
@@ -22,18 +22,18 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         }
         updateFavoriteButton()
     }
-    
+
     let addToFavorites = UIImage(named: "Star-empty")
     let removeFromFavorites = UIImage(named: "Star-full")
-    
+
     func prepare(_ name: String, url: String) {
         self.loadOrigin = Either.Left((name: name, url: url))
     }
-    
+
     func prepare(_ model: ParsedHackerspaceData) {
         self.loadOrigin = Either.Right(model)
     }
-    
+
     var previewDeleteAction : (() -> ())? = nil
 
     typealias LoadOrigin = Either<(name: String, url: String), ParsedHackerspaceData>
@@ -44,7 +44,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
             return SharedData.favoritesDictionary().keys.contains(hackerspaceData.apiName)
         }
     }
-    
+
     fileprivate struct storyboard {
         static let CellIdentifier = "Cell"
         static let TitleIdentifier = "TitleCell"
@@ -57,7 +57,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         super.viewWillDisappear(animated)
         refreshControl?.endRefreshing()
     }
-    
+
     // MARK: - View controller lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -65,28 +65,30 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         reloadData(loadOrigin)
     }
-    
-    
+
+
     func reloadData(_ source: LoadOrigin, fromCache: Bool = true, callback: (() -> Void)? = nil) {
         func applyDataModel(_ hackerspaceData: ParsedHackerspaceData) -> () {
             self.hackerspaceData = hackerspaceData
             self.tableView.reloadData()
             updateFavoriteButton()
         }
-        
+
         switch source {
-            case .Right(let m):
-                applyDataModel(m)
-                callback?()
-            case .Left(let (name,url)) :
-                SpaceAPI.loadHackerspace(url, fromCache: false).flatMap { parseHackerspaceDataModel(json: $0, name: name, url: url) }
-                    .onSuccess(callback: applyDataModel).onComplete {_ in
+        case .Right(let m):
+            applyDataModel(m)
+            callback?()
+        case .Left(let (name,url)) :
+
+            SpaceAPI.loadHackerspaceData(url: url,fromCache: false)
+                .flatMap { parseHackerspaceDataModel(json: $0, name: name, url: url) }
+                .onSuccess(callback: applyDataModel).onComplete { _ in
                     self.refreshControl?.endRefreshing()
                     callback?()
             }
         }
     }
-    
+
     func updateFavoriteButton() {
         favoriteStatusButton.image = isFavorite ? removeFromFavorites : addToFavorites
     }
@@ -106,7 +108,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         }
     }
 
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch(indexPath.section) {
         case 0 : return reuseTitleCell(indexPath)
@@ -114,7 +116,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         default : return reuseMapCell(indexPath)
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch(section) {
         case 3: return "Raw Data"
@@ -122,7 +124,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         default: return nil
         }
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0: return 150
@@ -131,7 +133,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         default : return UITableViewAutomaticDimension
         }
     }
-    
+
     func reuseTitleCell(_ indexPath: IndexPath) -> UITableViewCell {
         if let titleCell = tableView.dequeueReusableCell(withIdentifier: storyboard.TitleIdentifier, for: indexPath) as? HackerspaceTitleTableViewCell{
             titleCell.logo.image = nil
@@ -141,7 +143,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
             return tableView.dequeueReusableCell(withIdentifier: storyboard.TitleIdentifier, for: indexPath)
         }
     }
-    
+
     func reuseMapCell(_ indexPath: IndexPath) -> UITableViewCell {
         if let mapCell = tableView.dequeueReusableCell(withIdentifier: storyboard.MapIdentifier, for: indexPath) as? HackerspaceMapTableViewCell {
             mapCell.location = hackerspaceData?.location
@@ -150,7 +152,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
             return tableView.dequeueReusableCell(withIdentifier: storyboard.TitleIdentifier, for: indexPath)
         }
     }
-    
+
     func reuseGeneralInfoCell(_ indexPath: IndexPath) -> UITableViewCell {
         if let mapCell = tableView.dequeueReusableCell(withIdentifier: storyboard.GeneralInfoIdentifier, for: indexPath) as? HSGeneralInfoTableViewCell {
             if let data = hackerspaceData {
@@ -161,13 +163,13 @@ class SelectedHackerspaceTableViewController: UITableViewController {
                 mapCell.HSLastUpdateTime.text = data.state.lastChange >>- { dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval($0))) }
                 mapCell.openningMessageLabel.text = hackerspaceData?.state.message
                 mapCell.HSUsedAPI.text = "space api v " + (hackerspaceData?.apiVersion ?? "")
-             }
+            }
             return mapCell
         } else {
             return tableView.dequeueReusableCell(withIdentifier: storyboard.TitleIdentifier, for: indexPath)
         }
     }
-    
+
     override var previewActionItems : [UIPreviewActionItem] {
         let callback: (UIPreviewAction, UIViewController) -> () =  { action, controller in
             self.MarkAsFavorite(nil)
