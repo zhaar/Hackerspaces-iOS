@@ -12,6 +12,18 @@ import MapKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
 
+
+    @IBOutlet weak var centerButtonOutlet: UIButton! {
+        didSet {
+            centerButtonOutlet.setImage(centerButtonOutlet.currentImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: UIControlState.normal)
+            centerButtonOutlet.tintColor = UIColor.init(colorLiteralRed: 0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
+        }
+    }
+
+    @IBAction func centerButton(sender: UIButton) {
+        locationManager.location.forEach(centerMapOnLocation)
+    }
+    
     @IBOutlet weak var map: MKMapView! {
         didSet {
             map.delegate = self
@@ -49,7 +61,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func refresh(sender: UIBarButtonItem) {
         self.navigationItem.rightBarButtonItem = loadingIndicator
         self.map.removeAnnotations(map.annotations)
-        let _ = SpaceAPI.loadHackerspaceList(fromCache: true).map { hsList in
+        let _ = SpaceAPI.loadHackerspaceList(fromCache: false).map { hsList in
             hsList.map { name, url in
                 SpaceAPI.getParsedHackerspace(url: url, name: name, fromCache: false)
                     .onSuccess { self.map.addAnnotation($0.location) }

@@ -39,14 +39,12 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
         setDataSourceForView(self.viewControllers?[0], dataSource: preferencesDataSource)
     }
-    
+
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         switch self.viewControllers?.index(of: viewController) {
-            case .some(favoriteTableViewIndex): setDataSourceForView(self.viewControllers?[favoriteTableViewIndex], dataSource: preferencesDataSource)
-            case .some(searchTableViewIndex): setDataSourceForView(self.viewControllers?[searchTableViewIndex], dataSource: SpaceAPI.loadAPIFromWeb)
-            case _: ()
+        case .some(favoriteTableViewIndex): setDataSourceForView(self.viewControllers?[favoriteTableViewIndex], dataSource: preferencesDataSource)
+        case .some(searchTableViewIndex): setDataSourceForView(self.viewControllers?[searchTableViewIndex], dataSource: {_ in SpaceAPI.loadHackerspaceList(fromCache: false) })
+        case _: ()
         }
     }
-    
-    
 }

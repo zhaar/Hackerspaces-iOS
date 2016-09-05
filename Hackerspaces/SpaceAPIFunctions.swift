@@ -23,7 +23,7 @@ struct SpaceAPI {
         return api.map(tuplesAsDict)
     }
 
-    static func loadAPI() -> Future<[String : String], NSError> {
+    static private func loadAPI() -> Future<[String : String], NSError> {
         let p = Promise<[String: String], NSError>()
         DispatchQueue.global().async {
             let cache = Shared.dataCache
@@ -40,7 +40,7 @@ struct SpaceAPI {
         return p.future
     }
 
-    static func loadAPIFromWeb() -> Future<[String : String], NSError> {
+    static private func loadAPIFromWeb() -> Future<[String : String], NSError> {
         let p = Promise<[String: String], NSError>()
         DispatchQueue.global().async {
             do {
@@ -60,12 +60,13 @@ struct SpaceAPI {
         return p.future
     }
 
-    
+
     static func loadHackerspaceList(fromCache: Bool) -> Future<[String: String], NSError> {
-        return fromCache ? loadAPI() : loadAPIFromWeb()
+        return fromCache ? loadAPI() : (loadAPIFromWeb().recoverWith { _ in print("fetching from cache"); return loadAPI()})
     }
     
     typealias HSURL = String
+
     static func loadHackerspaceData(url: String, fromCache: Bool = true) -> Future<[HSURL : JSONValue], NSError> {
         return (fromCache ? SpaceAPI.loadHackerspaceAPI : SpaceAPI.loadHackerspaceAPIFromWeb)(url)
     }
@@ -112,15 +113,6 @@ struct SpaceAPI {
         }
         return p.future
     }
-//<<<<<<< HEAD
-//
-//    static func getParsedHackerspace(url: String, name: String, fromCache cache: Bool = true) -> Future<ParsedHackerspaceData, NSError> {
-//        return  loadHackerspace(url, fromCache: cache)
-//            .map { parseHackerspaceDataModel(json: $0, name: name, url: url) }
-//            .flatMap { parsed -> Result<ParsedHackerspaceData, NSError> in
-//                parsed.map(Result.init(value: )) ?? Result(error: NSError(domain: "parse Error", code: -1, userInfo: nil))
-//        }
-//=======
 
     static func parseHackerspace(json: [String : JSONValue], url: String, name: String) -> Result<ParsedHackerspaceData, NSError>{
         return parseHackerspaceDataModel(json: json, name: name, url: url).map(Result.init(value:)) ?? Result(error: NSError(domain: "parse Error", code: -1, userInfo: nil))
