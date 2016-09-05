@@ -11,6 +11,17 @@ import MapKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
 
+
+    @IBOutlet weak var centerButtonOutlet: UIButton! {
+        didSet {
+            centerButtonOutlet.setImage(centerButtonOutlet.currentImage?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: UIControlState.Normal)
+            centerButtonOutlet.tintColor = UIColor.init(colorLiteralRed: 0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
+        }
+    }
+    @IBAction func centerButton(sender: UIButton) {
+        locationManager.location.forEach(centerMapOnLocation)
+    }
+    
     @IBOutlet weak var map: MKMapView! {
         didSet {
             map.delegate = self
@@ -20,12 +31,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     let locationManager = CLLocationManager()
     var refreshButton: UIBarButtonItem!
     var loadingIndicator: UIBarButtonItem!
-    
-    @IBAction func resetMap(sender: UILongPressGestureRecognizer) {
-        if let location = locationManager.location {
-            centerMapOnLocation(location)
-        }
-    }
     
     func checkLocationAuthorizationStatus() {
         if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
@@ -48,7 +53,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func refresh(sender: UIBarButtonItem) {
         self.navigationItem.rightBarButtonItem = loadingIndicator
         self.map.removeAnnotations(map.annotations)
-        SpaceAPI.loadHackerspaceList(fromCache: true).map { hsList in
+        SpaceAPI.loadHackerspaceList(fromCache: false).map { hsList in
             hsList.map { name, url in
                 SpaceAPI.getParsedHackerspace(url, name: name, fromCache: false).onSuccess { parsed in
                     self.map.addAnnotation(parsed.location)}

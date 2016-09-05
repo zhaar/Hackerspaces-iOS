@@ -49,7 +49,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         }
     }
     
-    var dataSource: () -> Future<[String: String], NSError> = SpaceAPI.loadAPIFromWeb
+    var dataSource: () -> Future<[String: String], NSError> = { _ in SpaceAPI.loadHackerspaceList(fromCache: true)}
 
     // MARK: Types
     

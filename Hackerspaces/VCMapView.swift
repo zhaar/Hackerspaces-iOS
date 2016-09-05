@@ -46,7 +46,7 @@ extension MapViewController: MKMapViewDelegate {
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let annotation = view.annotation as? SpaceLocation {
-            SpaceAPI.loadAPI().onSuccess { dict in
+            SpaceAPI.loadHackerspaceList(fromCache: false).onSuccess { dict in
                 self.performSegueWithIdentifier(UIConstants.showHSMap, sender: HSInfoCarrier(name: annotation.name, url: dict[annotation.name]!))
             }
         }

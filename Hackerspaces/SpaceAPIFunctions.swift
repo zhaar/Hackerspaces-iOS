@@ -17,7 +17,7 @@ import Haneke
 
 struct SpaceAPI {
     
-    static func loadAPI() -> Future<[String : String], NSError> {
+    static private func loadAPI() -> Future<[String : String], NSError> {
         let p = Promise<[String: String], NSError>()
         Queue.global.async {
             let cache = Shared.dataCache
@@ -40,7 +40,7 @@ struct SpaceAPI {
         return p.future
     }
     
-    static func loadAPIFromWeb() -> Future<[String : String], NSError> {
+    static private func loadAPIFromWeb() -> Future<[String : String], NSError> {
         let p = Promise<[String: String], NSError>()
         Queue.global.async {
             do {
@@ -67,7 +67,7 @@ struct SpaceAPI {
     }
     
     static func loadHackerspaceList(fromCache fromCache: Bool) -> Future<[String: String], NSError> {
-        return fromCache ? loadAPI() : loadAPIFromWeb()
+        return fromCache ? loadAPI() : (loadAPIFromWeb().recoverWith { _ in print("fetching from cache"); return loadAPI()})
     }
     
     typealias URL = String
