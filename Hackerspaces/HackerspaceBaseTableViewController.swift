@@ -12,7 +12,8 @@ import BrightFutures
 enum NetworkState {
     case finished(ParsedHackerspaceData)
     case loading
-    case unresponsive(errorMessage: String)
+    case unresponsive(error: NSError)
+
     var isDone: Bool {
         get {
             switch self {
@@ -36,16 +37,25 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     func refresh(_ sender: UIRefreshControl) {
         dataSource().onComplete { _ in
             sender.endRefreshing()
-            }.onSuccess { api in
-                self.hackerspaces = api.map { _ in NetworkState.loading }
-                api.forEach { (hs, url) in
-                    SpaceAPI.getParsedHackerspace(url: url, name: hs, fromCache: false).map { NetworkState.finished($0) }
-                        .onSuccess { data in
-                            self.hackerspaces.updateValue(data, forKey: hs)
-                        }
-                        .onFailure { error in
-                            self.updateHackerspaceStatus(NetworkState.unresponsive(errorMessage: "error while loading: \(error)"), forKey: hs)
+        }.onSuccess { api in
+            self.hackerspaces = api.map { _ in NetworkState.loading }
+            api.forEach { (hs, url) in
+                SpaceAPI.getParsedHackerspace(url: url, name: hs, fromCache: false).map { NetworkState.finished($0) }
+                    .onSuccess { data in
+                        self.hackerspaces.updateValue(data, forKey: hs)
                     }
+                    .onFailure { error in
+                        self.hackerspaces.updateValue(NetworkState.unresponsive(error: error), forKey: hs)
+                }
+//=======
+//        }.onSuccess { api in
+//            self.hackerspaces = api.map { _ in NetworkState.Loading }
+//            api.forEach { (hs, address) in
+//                SpaceAPI.getParsedHackerspace(address, name: hs, fromCache: false).map {NetworkState.Finished($0)}.onSuccess { data in
+//                    self.hackerspaces.updateValue(data, forKey: hs)
+//                }.onFailure { error in
+//                    self.hackerspaces.updateValue(NetworkState.Unresponsive(error: error), forKey: hs)
+//>>>>>>> display error as alert when unresponsive
                 }
         }
     }
@@ -164,9 +174,10 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         let state = hackerspaces[hsName]
         switch state {
         case .some(.finished(_)): performSegue(withIdentifier: UIConstants.showHSSearch, sender: hsName)
-        case .some(.unresponsive(let message)):  print("trying to segue into unresponsive hackerspace: \(message)")
+        case .some(.unresponsive(let err)): handleUnresponsiveError(error: err)
         case .some(.loading): print("still loading")
         case .none: print("couldn't find data for hackerspace \"\(hsName)\"")
+
         }
     }
 
@@ -179,5 +190,25 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         case _ : print("could not segue into hackerspace with no data")
         }
     }
-    
+
+    func handleUnresponsiveError(error: NSError) -> () {
+        let title = "Hackerspace Unresponsive"
+
+        if (error.code == -1 && error.domain == "parse Error") {
+            let alert = UIAlertController(title: title, message: "An error occured while parsing data. Either the data is corrupted or the format doesn't comply with SpaceAPI v0.13", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alert.addAction(action)
+            present(alert, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: title, message: "Unknown Error", preferredStyle: .alert)
+            let okaction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            let detailaction = UIAlertAction(title: "More details", style: .default, handler: {_ in print("\(error)")})
+            alert.addAction(okaction)
+            alert.addAction(detailaction)
+            present(alert, animated: true, completion: nil)
+        }
+        
+        
+    }
+
 }

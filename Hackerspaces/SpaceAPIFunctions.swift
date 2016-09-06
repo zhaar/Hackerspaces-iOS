@@ -64,7 +64,7 @@ struct SpaceAPI {
     static func loadHackerspaceList(fromCache: Bool) -> Future<[String: String], NSError> {
         return fromCache ? loadAPI() : (loadAPIFromWeb().recoverWith { _ in print("fetching from cache"); return loadAPI()})
     }
-    
+
     typealias HSURL = String
 
     static func loadHackerspaceData(url: String, fromCache: Bool = true) -> Future<[HSURL : JSONValue], NSError> {
@@ -103,7 +103,7 @@ struct SpaceAPI {
                         if let dict = JSONObject.parse(fromData: response.data)?.asObject {
                             p.success(dict)
                         } else {
-                            p.failure(NSError(domain: "HTTP GET data cast", code: 123, userInfo: nil))
+                            p.failure(NSError(domain: HTTPGetCastError.errorMessage, code: HTTPGetCastError.errorCode, userInfo: ["data recived": response.text!]))
                         }
                     }
                 }
@@ -117,7 +117,7 @@ struct SpaceAPI {
     static func parseHackerspace(json: [String : JSONValue], url: String, name: String) -> Result<ParsedHackerspaceData, NSError>{
         return parseHackerspaceDataModel(json: json, name: name, url: url).map(Result.init(value:)) ?? Result(error: NSError(domain: "parse Error", code: -1, userInfo: nil))
     }
-    
+
     static func getParsedHackerspace(url: String, name: String, fromCache cache: Bool = true) -> Future<ParsedHackerspaceData, NSError> {
         return loadHackerspaceData(url: url, fromCache: cache).flatMap { parseHackerspace(json: $0, url: url, name: name) }
     }
