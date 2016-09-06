@@ -13,7 +13,7 @@ import BrightFutures
 enum NetworkState {
     case Finished(ParsedHackerspaceData)
     case Loading
-    case Unresponsive(errorMessage: String)
+    case Unresponsive(error: NSError)
     var isDone: Bool {
         get {
             switch self {
@@ -42,8 +42,8 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
             api.forEach { (hs, address) in
                 SpaceAPI.getParsedHackerspace(address, name: hs, fromCache: false).map {NetworkState.Finished($0)}.onSuccess { data in
                     self.hackerspaces.updateValue(data, forKey: hs)
-                    }.onFailure { error in
-                        self.updateHackerspaceStatus(NetworkState.Unresponsive(errorMessage: "error while loading: \(error)"), forKey: hs)
+                }.onFailure { error in
+                    self.hackerspaces.updateValue(NetworkState.Unresponsive(error: error), forKey: hs)
                 }
             }
         }
@@ -63,12 +63,6 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
             allResults = Array(hackerspaces.keys)
             allResults.sortInPlace(<)
         }
-    }
-    
-    func updateHackerspaceStatus(status: NetworkState, forKey name: String) -> () {
-        var cpy = self.hackerspaces
-        cpy.updateValue(status, forKey: name)
-        self.hackerspaces = cpy
     }
     
     var allResults = [String]() {
@@ -163,7 +157,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         let state = hackerspaces[hsName]
         switch state {
             case .Some(.Finished(_)): performSegueWithIdentifier(UIConstants.showHSSearch, sender: hsName)
-            case .Some(.Unresponsive(let message)):  print("trying to segue into unresponsive hackerspace: \(message)")
+            case .Some(.Unresponsive(let err)):  handleUnresponsiveError(err)
             case .Some(.Loading): print("still loading")
             case .None: print("couldn't find data for hackerspace \"\(hsName)\"")
         }
@@ -177,6 +171,25 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
             case .Finished(let data): SHVC.prepare(data)
             case _ : print("could not segue into hackerspace with no data")
         }
+    }
+    
+    func handleUnresponsiveError(error: NSError) -> () {
+        let title = "Hackerspace Unresponsive"
+        if (error.code == -1 && error.domain == "parse Error") {
+            let alert = UIAlertController(title: title, message: "An error occured while parsing data. Either the data is corrupted or the format doesn't comply with SpaceAPI v0.13", preferredStyle: .Alert)
+            let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            alert.addAction(action)
+            presentViewController(alert, animated: true, completion: nil)
+        } else {
+            let alert = UIAlertController(title: title, message: "Unknown Error", preferredStyle: .Alert)
+            let okaction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            let detailaction = UIAlertAction(title: "More details", style: .Default, handler: {_ in print("\(error)")})
+            alert.addAction(okaction)
+            alert.addAction(detailaction)
+            presentViewController(alert, animated: true, completion: nil)
+        }
+        
+        
     }
 
 }

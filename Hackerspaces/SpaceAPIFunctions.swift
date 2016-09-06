@@ -105,7 +105,7 @@ struct SpaceAPI {
                         if let dict = JSONDecoder(response.data).dictionary {
                             p.success(dict)
                         } else {
-                            p.failure(NSError(domain: "HTTP GET data cast", code: 123, userInfo: nil))
+                            p.failure(NSError(domain: HTTPGetCastError.errorMessage, code: HTTPGetCastError.errorCode, userInfo: ["data recived": response.text!]))
                         }
                     }
                 }
@@ -119,7 +119,7 @@ struct SpaceAPI {
     static func parseHackerspace(json: [String : JSONDecoder], url: String, name: String) -> Result<ParsedHackerspaceData, NSError>{
         switch parseHackerspaceDataModel(json, name: name, url: url) {
             case .Some(let p): return Result(value: p)
-            case .None : return Result(error: NSError(domain: "parse Error", code: -1, userInfo: nil))
+            case .None : return Result(error: NSError(domain: ParseErrorType.errorMessage, code: ParseErrorType.errorCode, userInfo: nil))
         }
     }
     

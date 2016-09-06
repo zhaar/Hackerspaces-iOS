@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum SpaceAPIConstants : String{
+enum SpaceAPIConstants : String {
     case SpaceAPI = "https://spaceapi.net/directory.json"
     case FIXMEAPI = "https://spaceapi.fixme.ch/directory.json"
     case customAPIPrefix = "ext_"
@@ -20,6 +20,16 @@ enum SpaceAPIConstants : String{
     case APIstate = "state"
     case APIcontact = "contact"
     case APIreport = "issue_report_channels"
+}
+
+enum ParseErrorType {
+    static let errorCode = -1
+    static let errorMessage = "Parse error"
+}
+
+enum HTTPGetCastError {
+    static let errorCode = 123
+    static let errorMessage = "HTTP GET data cast"
 }
 
 struct UIConstants {
