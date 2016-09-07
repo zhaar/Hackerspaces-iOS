@@ -22,14 +22,11 @@ enum SpaceAPIConstants : String {
     case APIreport = "issue_report_channels"
 }
 
-enum ParseErrorType {
-    static let errorCode = -1
-    static let errorMessage = "Parse error"
-}
-
-enum HTTPGetCastError {
-    static let errorCode = 123
-    static let errorMessage = "HTTP GET data cast"
+enum SpaceAPIError: ErrorType {
+    case ParseError
+    case DataCastError(data: NSData)
+    case UnknownError(error: NSError)
+    case HTTPRequestError(error: ErrorType)
 }
 
 struct UIConstants {

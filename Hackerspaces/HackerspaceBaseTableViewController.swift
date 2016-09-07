@@ -13,7 +13,7 @@ import BrightFutures
 enum NetworkState {
     case Finished(ParsedHackerspaceData)
     case Loading
-    case Unresponsive(error: NSError)
+    case Unresponsive(error: SpaceAPIError)
     var isDone: Bool {
         get {
             switch self {
@@ -49,7 +49,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         }
     }
     
-    var dataSource: () -> Future<[String: String], NSError> = { _ in SpaceAPI.loadHackerspaceList(fromCache: true)}
+    var dataSource: () -> Future<[String: String], SpaceAPIError> = { _ in SpaceAPI.loadHackerspaceList(fromCache: true)}
 
     // MARK: Types
     
@@ -173,23 +173,28 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         }
     }
     
-    func handleUnresponsiveError(error: NSError) -> () {
+    func handleUnresponsiveError(error: SpaceAPIError) -> () {
         let title = "Hackerspace Unresponsive"
-        if (error.code == -1 && error.domain == "parse Error") {
-            let alert = UIAlertController(title: title, message: "An error occured while parsing data. Either the data is corrupted or the format doesn't comply with SpaceAPI v0.13", preferredStyle: .Alert)
-            let action = UIAlertAction(title: "Ok", style: .Default, handler: nil)
-            alert.addAction(action)
-            presentViewController(alert, animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: title, message: "Unknown Error", preferredStyle: .Alert)
-            let okaction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
-            let detailaction = UIAlertAction(title: "More details", style: .Default, handler: {_ in print("\(error)")})
-            alert.addAction(okaction)
-            alert.addAction(detailaction)
-            presentViewController(alert, animated: true, completion: nil)
+        var actions:[UIAlertAction] = [UIAlertAction(title: "Ok", style: .Default, handler: nil)]
+        let moreDetailsAction = UIAlertAction(title: "More details", style: .Default, handler: nil)
+        var message = ""
+        switch error {
+        case .DataCastError(data: let data):
+            message = "Could not parse data as JSON"
+            print(data.base64EncodedStringWithOptions(.Encoding64CharacterLineLength))
+            actions.append(moreDetailsAction)
+        case .HTTPRequestError(error: let error):
+            message = "Http request error"
+            print("\(error)")
+        case .ParseError:
+            message = "An error occured while parsing data. Maybe the data doesn't comply with SpaceAPI v0.13"
+        case .UnknownError(error: let error):
+            message = "Unknown error"
+            print(error.description)
+            actions.append(moreDetailsAction)
         }
-        
-        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        actions.foreach { alert.addAction($0) }
+        presentViewController(alert, animated: true, completion: nil)
     }
-
 }
