@@ -11,6 +11,7 @@ import BrightFutures
 import Swiftz
 import Result
 
+
 struct FutureUtils {
 
     ///Converts a future that can fail into a future of optional with no failure
@@ -30,7 +31,7 @@ struct FutureUtils {
 
 }
 
-enum UnwrapError<E: Error>: Error {
+public enum UnwrapError<E: Error>: Error {
     case wrapped(E)
     case foundNil
 }
@@ -46,7 +47,7 @@ enum NilConversion<T, E: Error> {
 }
 
 
-func bind<T, U, E: Error>(_ f: @escaping (T) -> U?) -> (Future<T, E>) -> Future<U, UnwrapError<E>> {
+public func bind<T, U, E: Error>(_ f: @escaping (T) -> U?) -> (Future<T, E>) -> Future<U, UnwrapError<E>> {
     return { fut in
         let fn = NilConversion<U, E>.nilToResult • f
         return fut.mapError({UnwrapError.wrapped($0)}).flatMap(fn)
@@ -54,6 +55,7 @@ func bind<T, U, E: Error>(_ f: @escaping (T) -> U?) -> (Future<T, E>) -> Future<
 }
 
 extension Future {
+
 
     func flatMap<U>(_ f: @escaping (T) -> U?) -> Future<U, UnwrapError<E>> {
         return bind(f)(self)

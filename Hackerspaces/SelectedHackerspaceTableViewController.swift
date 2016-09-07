@@ -4,6 +4,7 @@ import MapKit
 import Swiftz
 import BrightFutures
 import Haneke
+import JSONWrapper
 
 class SelectedHackerspaceTableViewController: UITableViewController {
 
@@ -78,10 +79,12 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         case .Right(let m):
             applyDataModel(m)
             callback?()
-        case .Left(let (name,url)) :
+        case .Left(let (name,url)):
 
             SpaceAPI.loadHackerspaceData(url: url,fromCache: false)
+//            let f2: Future<[String : JSONValue], UnwrapError<SpaceAPIError>> = f.flatMap { .some($0) }
                 .flatMap { parseHackerspaceDataModel(json: $0, name: name, url: url) }
+
                 .onSuccess(callback: applyDataModel).onComplete { _ in
                     self.refreshControl?.endRefreshing()
                     callback?()

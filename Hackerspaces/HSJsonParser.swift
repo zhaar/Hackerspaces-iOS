@@ -46,7 +46,7 @@ func parseHackerspaceDataModel(json: [String: JSONValue], name apiName: String, 
 
     if
         let apiVersion = json[SpaceAPIConstants.APIversion.rawValue]?.asString,
-        let name = SpaceAPI.extractName(json),
+        let name = json[SpaceAPIConstants.APIname.rawValue]?.asString, 
         let logo = json[SpaceAPIConstants.APIlogo.rawValue]?.asString,
         let websiteURL = json[SpaceAPIConstants.APIurl.rawValue]?.asString,
         let state = json[SpaceAPIConstants.APIstate.rawValue]?.asObject >>- parseStateObject,

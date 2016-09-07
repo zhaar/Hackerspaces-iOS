@@ -13,7 +13,6 @@
 		9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */; };
 		952915411D5A94B20061A1E6 /* FavoriteHackerspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */; };
 		953161871B73B12A0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
-		953C513B1B8F49190061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
 		954C57021E89C7C40061A1E6 /* FPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C57011E89C7C40061A1E6 /* FPUtils.swift */; };
 		954F351E1D57FF0F0061A1E6 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */; };
 		95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB21B729B3E0061A1E6 /* AppDelegate.swift */; };
@@ -41,6 +40,7 @@
 		958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */; };
 		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
 		9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */; };
+		959D61AE1F3B79DB0061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
 		95A594A21B893FB60061A1E6 /* Haneke.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */; };
 		95A594A41B893FB60061A1E6 /* SwiftHTTP.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */; };
 		95A594A51B893FB60061A1E6 /* Swiftz.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */; };
@@ -435,7 +435,6 @@
 				95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */,
 				9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */,
 				95DB77FD1B912B0F0061A1E6 /* HSMapInfo.swift in Sources */,
-				953C513B1B8F49190061A1E6 /* FutureUtils.swift in Sources */,
 				954F351E1D57FF0F0061A1E6 /* CustomTabBarController.swift in Sources */,
 				9573A2AF1B936F960061A1E6 /* RawDataTableViewCell.swift in Sources */,
 				95DBD9561B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */,
@@ -444,6 +443,7 @@
 				95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */,
 				9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */,
 				9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */,
+				959D61AE1F3B79DB0061A1E6 /* FutureUtils.swift in Sources */,
 				95ADEF991B8B53580061A1E6 /* SpaceAPIFunctions.swift in Sources */,
 				9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */,
 				95DB78011B9149660061A1E6 /* sharedData.swift in Sources */,
