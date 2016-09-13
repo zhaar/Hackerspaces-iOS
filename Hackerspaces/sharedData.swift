@@ -42,7 +42,7 @@ struct SharedData {
     
     static func updateIconShortcuts(_ dict: [String: HackerspaceAPIURL]) -> () {
         let shorts = dict.map { key, value in
-            UIApplicationShortcutItem(type: UIConstants.hackerspaceViewShortcut, localizedTitle: key, localizedSubtitle: nil, icon: nil, userInfo: ["name": key, "url": value])
+            UIApplicationShortcutItem(type: UIConstants.hackerspaceViewShortcut.rawValue, localizedTitle: key, localizedSubtitle: nil, icon: nil, userInfo: ["name": key, "url": value])
         }
         UIApplication.shared.shortcutItems = shorts
     }

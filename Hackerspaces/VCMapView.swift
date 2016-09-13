@@ -23,17 +23,16 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         guard let annotation = annotation as? SpaceLocation else { return nil }
         var view: MKPinAnnotationView
-        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: UIConstants.AnnotationViewReuseIdentifier)
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: UIConstants.AnnotationViewReuseIdentifier.rawValue)
             as? MKPinAnnotationView {
             dequeuedView.annotation = annotation
             view = dequeuedView
         } else {
-            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: UIConstants.AnnotationViewReuseIdentifier)
+            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: UIConstants.AnnotationViewReuseIdentifier.rawValue)
             view.canShowCallout = true
             view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
         return view
-
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -46,7 +45,7 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let annotation = view.annotation as? SpaceLocation {
             SpaceAPI.loadHackerspaceList(fromCache: false).onSuccess { dict in
-                self.performSegue(withIdentifier: UIConstants.showHSMap, sender: HSInfoCarrier(name: annotation.name, url: dict[annotation.name]!))
+                self.performSegue(withIdentifier: UIConstants.showHSMap.rawValue, sender: HSInfoCarrier(name: annotation.name, url: dict[annotation.name]!))
             }
         }
     }

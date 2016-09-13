@@ -29,14 +29,15 @@ enum SpaceAPIError: Error {
     case HTTPRequestError(error: Error)
 }
 
-struct UIConstants {
-    static let AnnotationViewReuseIdentifier = "spaceLocation"
-    static let SpaceIsOpenMark = "⚫︎"
-    static let favoriteHSCellReuseIdentifier = "FavoriteHSCell"
-    static let showHSSearch = "ShowHackerspaceFromSearch"
-    static let showHSMap = "ShowHackerspaceFromMap"
-    static let showHSFavorite = "ShowHackerspaceFromFavoriteList"
-    static let showHSResult = "ShowhackerspaceFromResult"
-    static let hackerspaceViewShortcut = "moe.zephyz.hackerspaces.hackerspace_view_shortcut"
-    static let searchViewShortcut = "moe.zephyz.hackerspaces.search_shortcut"
+enum UIConstants: String {
+    case AnnotationViewReuseIdentifier = "spaceLocation"
+    case SpaceIsOpenMark = "⚫︎"
+    case favoriteHSCellReuseIdentifier = "FavoriteHSCell"
+    case showHSSearch = "ShowHackerspaceFromSearch"
+    case showHSMap = "ShowHackerspaceFromMap"
+    case showHSFavorite = "ShowHackerspaceFromFavoriteList"
+    case showHSResult = "ShowhackerspaceFromResult"
+    case hackerspaceViewShortcut = "moe.zephyz.hackerspaces.hackerspace_view_shortcut"
+    case searchViewShortcut = "moe.zephyz.hackerspaces.search_shortcut"
+    case showErrorDetail = "ShowErrorDetail"
 }
