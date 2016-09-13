@@ -156,7 +156,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         let hsName = visibleResults[indexPath.row]
         let state = hackerspaces[hsName]
         switch state {
-            case .Some(.Finished(_)): performSegueWithIdentifier(UIConstants.showHSSearch, sender: hsName)
+            case .Some(.Finished(_)): performSegueWithIdentifier(UIConstants.showHSSearch.rawValue, sender: hsName)
             case .Some(.Unresponsive(let err)):  handleUnresponsiveError(err)
             case .Some(.Loading): print("still loading")
             case .None: print("couldn't find data for hackerspace \"\(hsName)\"")

@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
         let tabs = self.window!.rootViewController as? CustomTabBarController
         switch shortcutItem.type {
-            case UIConstants.hackerspaceViewShortcut:
+            case UIConstants.hackerspaceViewShortcut.rawValue:
 
                 if let tabVC = tabs {
                     tabVC.selectedIndex = 0
@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     navigationController?.pushViewController(hackerspaceViewController, animated: false)
                 }
                 return true
-            case UIConstants.searchViewShortcut:
+            case UIConstants.searchViewShortcut.rawValue:
                 tabs?.selectedIndex = 2
                 return true
             case _ : return false

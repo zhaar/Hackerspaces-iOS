@@ -23,12 +23,12 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? SpaceLocation {
             var view: MKPinAnnotationView
-            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(UIConstants.AnnotationViewReuseIdentifier)
+            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(UIConstants.AnnotationViewReuseIdentifier.rawValue)
                 as? MKPinAnnotationView {
                     dequeuedView.annotation = annotation
                     view = dequeuedView
             } else {
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: UIConstants.AnnotationViewReuseIdentifier)
+                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: UIConstants.AnnotationViewReuseIdentifier.rawValue)
                 view.canShowCallout = true
                 view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
             }
@@ -47,7 +47,7 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let annotation = view.annotation as? SpaceLocation {
             SpaceAPI.loadHackerspaceList(fromCache: false).onSuccess { dict in
-                self.performSegueWithIdentifier(UIConstants.showHSMap, sender: HSInfoCarrier(name: annotation.name, url: dict[annotation.name]!))
+                self.performSegueWithIdentifier(UIConstants.showHSMap.rawValue, sender: HSInfoCarrier(name: annotation.name, url: dict[annotation.name]!))
             }
         }
     }
