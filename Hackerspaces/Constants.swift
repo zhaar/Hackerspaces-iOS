@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import JSONWrapper
 
 enum SpaceAPIConstants : String {
     case SpaceAPI = "https://spaceapi.net/directory.json"
@@ -23,10 +24,10 @@ enum SpaceAPIConstants : String {
 }
 
 enum SpaceAPIError: Error {
-    case ParseError
-    case DataCastError(data: Data)
-    case UnknownError(error: Error)
-    case HTTPRequestError(error: Error)
+    case parseError([String : JSONValue])
+    case dataCastError(data: Data)
+    case unknownError(error: Error)
+    case httpRequestError(error: Error)
 }
 
 enum UIConstants: String {

@@ -188,26 +188,29 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     }
 
     func handleUnresponsiveError(error: SpaceAPIError) -> () {
+        
+        func messageHandler(err: SpaceAPIError) -> (String, String?) {
+            switch error {
+            case .dataCastError(data: let data):
+                return ("Could not parse data as JSON", data.description)
+            case .httpRequestError(error: _):
+                return ("Unknown HTTP error", nil)
+            case .parseError(let json):
+                let json = json.description
+                return ("An error occured while parsing data. Maybe the data doesn't comply with SpaceAPI v0.13", "\ncould not parse:  \(json)")
+            case .unknownError(error: let error):
+                return ("Unknown error", error.localizedDescription)
+            }
+        }
+        
         let title = "Hackerspace Unresponsive"
         var actions:[UIAlertAction] = [UIAlertAction(title: "Ok", style: .default, handler: nil)]
-        var message = ""
-        switch error {
-        case .DataCastError(data: let data):
-            message = "Could not parse data as JSON"
-            actions.append(UIAlertAction(title: "More details", style: .default, handler: {_ in
-                self.performSegue(withIdentifier: UIConstants.showErrorDetail.rawValue, sender: String.init(data: data, encoding: .utf8))
-            }))
-        case .HTTPRequestError(error: _):
-            message = "Http request error"
-        case .ParseError:
-            message = "An error occured while parsing data. Maybe the data doesn't comply with SpaceAPI v0.13"
-        case .UnknownError(error: let error):
-            message = "Unknown error"
-            print(error.localizedDescription)
-//            actions.append(moreDetailsAction)
-        }
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
+        let (msg, sender) = messageHandler(err: error)
+        sender.forEach { s in actions.append(UIAlertAction(title: "More details", style: .default, handler: {_ in
+            self.performSegue(withIdentifier: UIConstants.showErrorDetail.rawValue, sender: s)
+        }))}
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         actions.foreach(alert.addAction)
         actions.append(UIAlertAction(title: "More details", style: .default, handler: {_ in
             self.performSegue(withIdentifier: UIConstants.showErrorDetail.rawValue, sender: error.localizedDescription)

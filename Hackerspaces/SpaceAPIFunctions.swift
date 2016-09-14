@@ -33,10 +33,10 @@ struct SpaceAPI {
                     if let api = parseAPI(data: data) {
                         p.success(api)
                     } else {
-                        p.failure(SpaceAPIError.DataCastError(data: data))
+                        p.failure(SpaceAPIError.dataCastError(data: data))
                     }
                 }.onFailure { error in
-                    p.failure(SpaceAPIError.UnknownError(error: error!))
+                    p.failure(SpaceAPIError.unknownError(error: error!))
             }
         }
         return p.future
@@ -52,11 +52,11 @@ struct SpaceAPI {
                     if let api = parseAPI(data: response.data) {
                         p.success(api)
                     } else {
-                        p.failure(SpaceAPIError.DataCastError(data: response.data))
+                        p.failure(SpaceAPIError.dataCastError(data: response.data))
                     }
                 }
             } catch let err {
-                p.failure(SpaceAPIError.HTTPRequestError(error: err))
+                p.failure(SpaceAPIError.httpRequestError(error: err))
             }
         }
         return p.future
@@ -76,11 +76,11 @@ struct SpaceAPI {
                     if let dict = JSONObject.parse(fromData: data)?.asObject {
                         p.success(dict)
                     } else {
-                        p.failure(SpaceAPIError.DataCastError(data: data))
+                        p.failure(SpaceAPIError.dataCastError(data: data))
                     }
                 }
                 .onFailure { (err: Error?) in
-                    p.failure(SpaceAPIError.UnknownError(error: err!))
+                    p.failure(SpaceAPIError.unknownError(error: err!))
             }
         }
         return p.future
@@ -93,18 +93,18 @@ struct SpaceAPI {
                 let req = try HTTP.GET(url)
                 req.start { response in
                     if let err = response.error {
-                        p.failure(SpaceAPIError.UnknownError(error: err))
+                        p.failure(SpaceAPIError.unknownError(error: err))
                     } else {
                         Shared.dataCache.set(value: response.data, key: url)
                         if let dict = JSONObject.parse(fromData: response.data)?.asObject {
                             p.success(dict)
                         } else {
-                            p.failure(SpaceAPIError.DataCastError(data: response.data))
+                            p.failure(SpaceAPIError.dataCastError(data: response.data))
                         }
                     }
                 }
             } catch let err {
-                p.failure(SpaceAPIError.HTTPRequestError(error: err))
+                p.failure(SpaceAPIError.httpRequestError(error: err))
             }
         }
         return p.future
@@ -115,7 +115,7 @@ struct SpaceAPI {
     }
 
     static func parseHackerspace(json: [String : JSONValue], url: String, name: String) -> Result<ParsedHackerspaceData, SpaceAPIError>{
-        return parseHackerspaceDataModel(json: json, name: name, url: url).map(Result.init(value:)) ?? Result(error: SpaceAPIError.ParseError)
+        return parseHackerspaceDataModel(json: json, name: name, url: url).map(Result.init(value:)) ?? Result(error: SpaceAPIError.parseError(json))
     }
 
     static func getParsedHackerspace(url: String, name: String, fromCache cache: Bool = true) -> Future<ParsedHackerspaceData, SpaceAPIError> {
