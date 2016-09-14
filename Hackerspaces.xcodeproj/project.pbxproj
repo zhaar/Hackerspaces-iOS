@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9514F8611F30E06B0061A1E6 /* HSJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2881B91EB310061A1E6 /* HSJsonParser.swift */; };
+		950AF2981D88CC500068F29E /* DisplayErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950AF2971D88CC500068F29E /* DisplayErrorViewController.swift */; };
 		9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */; };
 		9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */; };
 		9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */; };
@@ -29,7 +29,6 @@
 		9564551D1F3142A50061A1E6 /* SpaceAPIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */; };
 		9564551E1F3142CE0061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
 		9564551F1F31446B0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
-		9573A2891B91EB310061A1E6 /* HSJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2881B91EB310061A1E6 /* HSJsonParser.swift */; };
 		9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */; };
 		9573A2AF1B936F960061A1E6 /* RawDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */; };
 		957BF3E81F3918E30061A1E6 /* JSONWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957BF3E71F3918E30061A1E6 /* JSONWrapper.framework */; };
@@ -41,6 +40,8 @@
 		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
 		9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */; };
 		959D61AE1F3B79DB0061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
+		959D61B01F3B7E350061A1E6 /* HSJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */; };
+		959D61B11F3B80450061A1E6 /* HSJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */; };
 		95A594A21B893FB60061A1E6 /* Haneke.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */; };
 		95A594A41B893FB60061A1E6 /* SwiftHTTP.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */; };
 		95A594A51B893FB60061A1E6 /* Swiftz.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */; };
@@ -94,6 +95,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		950AF2971D88CC500068F29E /* DisplayErrorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayErrorViewController.swift; sourceTree = "<group>"; };
 		9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedHackerspaceTableViewController.swift; sourceTree = "<group>"; };
 		9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSTitleTableViewCell.swift; sourceTree = "<group>"; };
 		9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSMapTableViewCell.swift; sourceTree = "<group>"; };
@@ -113,12 +115,12 @@
 		95643FC91B729B3E0061A1E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95643FCA1B729B3E0061A1E6 /* HackerspacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerspacesTests.swift; sourceTree = "<group>"; };
 		956455161F3140410061A1E6 /* Swiftz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swiftz.framework; path = Carthage/Build/iOS/Swiftz.framework; sourceTree = "<group>"; };
-		9573A2881B91EB310061A1E6 /* HSJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSJsonParser.swift; sourceTree = "<group>"; };
 		9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
 		9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawDataTableViewCell.swift; sourceTree = "<group>"; };
 		957BF3E71F3918E30061A1E6 /* JSONWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSONWrapper.framework; path = Carthage/Build/iOS/JSONWrapper.framework; sourceTree = "<group>"; };
 		9597A1AA1B79252F0061A1E6 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
 		9597A1AD1B7932100061A1E6 /* DataCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCache.xcdatamodel; sourceTree = "<group>"; };
+		959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSJsonParser.swift; sourceTree = "<group>"; };
 		95A5948C1B893C530061A1E6 /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = ../carthage_dependecies/Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
 		95A5948E1B893C530061A1E6 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = ../carthage_dependecies/Carthage/Build/iOS/SwiftHTTP.framework; sourceTree = "<group>"; };
 		95A594941B893E5E0061A1E6 /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
@@ -180,6 +182,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		950AF2961D88CC2C0068F29E /* Error display */ = {
+			isa = PBXGroup;
+			children = (
+				950AF2971D88CC500068F29E /* DisplayErrorViewController.swift */,
+			);
+			name = "Error display";
+			sourceTree = "<group>";
+		};
 		9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */ = {
 			isa = PBXGroup;
 			children = (
@@ -216,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				95643FB21B729B3E0061A1E6 /* AppDelegate.swift */,
+				950AF2961D88CC2C0068F29E /* Error display */,
 				95D4B74D1B7D68C80061A1E6 /* Map */,
 				95E4B90A1B811F150061A1E6 /* Embeded search */,
 				9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */,
@@ -223,8 +234,8 @@
 				95DB78001B9149660061A1E6 /* sharedData.swift */,
 				952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */,
 				95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */,
+				959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */,
 				95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */,
-				9573A2881B91EB310061A1E6 /* HSJsonParser.swift */,
 				954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */,
 				953C513A1B8F49190061A1E6 /* FutureUtils.swift */,
 				954C57011E89C7C40061A1E6 /* FPUtils.swift */,
@@ -439,9 +450,10 @@
 				9573A2AF1B936F960061A1E6 /* RawDataTableViewCell.swift in Sources */,
 				95DBD9561B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */,
 				9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */,
-				9573A2891B91EB310061A1E6 /* HSJsonParser.swift in Sources */,
+				950AF2981D88CC500068F29E /* DisplayErrorViewController.swift in Sources */,
 				95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */,
 				9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */,
+				959D61B01F3B7E350061A1E6 /* HSJsonParser.swift in Sources */,
 				9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */,
 				959D61AE1F3B79DB0061A1E6 /* FutureUtils.swift in Sources */,
 				95ADEF991B8B53580061A1E6 /* SpaceAPIFunctions.swift in Sources */,
@@ -461,8 +473,8 @@
 				9564551F1F31446B0061A1E6 /* extensions.swift in Sources */,
 				9564551E1F3142CE0061A1E6 /* FutureUtils.swift in Sources */,
 				95643FCB1B729B3E0061A1E6 /* HackerspacesTests.swift in Sources */,
-				9514F8611F30E06B0061A1E6 /* HSJsonParser.swift in Sources */,
 				9564551B1F3141ED0061A1E6 /* HSMapInfo.swift in Sources */,
+				959D61B11F3B80450061A1E6 /* HSJsonParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -467,10 +467,10 @@
             </objects>
             <point key="canvasLocation" x="2278" y="672"/>
         </scene>
-        <!--View Controller-->
+        <!--Display Error View Controller-->
         <scene sceneID="jLc-q9-caa">
             <objects>
-                <viewController id="N2j-av-cOT" sceneMemberID="viewController">
+                <viewController id="N2j-av-cOT" customClass="DisplayErrorViewController" customModule="Hackerspaces" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="51x-55-pkY"/>
                         <viewControllerLayoutGuide type="bottom" id="Ifr-lN-1VA"/>
@@ -480,7 +480,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="error message" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fNu-T4-MGZ">
-                                <rect key="frame" x="20" y="64" width="560" height="487"/>
+                                <rect key="frame" x="20" y="0.0" width="560" height="551"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -489,12 +489,15 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="fNu-T4-MGZ" firstAttribute="top" secondItem="51x-55-pkY" secondAttribute="bottom" id="DGG-ef-bBz"/>
-                            <constraint firstItem="fNu-T4-MGZ" firstAttribute="leading" secondItem="hJi-Ov-6LG" secondAttribute="leadingMargin" id="PLF-Yb-Ffp"/>
-                            <constraint firstItem="fNu-T4-MGZ" firstAttribute="bottom" secondItem="Ifr-lN-1VA" secondAttribute="top" id="PuJ-m4-nle"/>
-                            <constraint firstItem="fNu-T4-MGZ" firstAttribute="trailing" secondItem="hJi-Ov-6LG" secondAttribute="trailingMargin" id="zc6-sg-f2N"/>
+                            <constraint firstItem="fNu-T4-MGZ" firstAttribute="bottom" secondItem="Ifr-lN-1VA" secondAttribute="top" id="2wW-CD-hmp"/>
+                            <constraint firstItem="fNu-T4-MGZ" firstAttribute="top" secondItem="hJi-Ov-6LG" secondAttribute="top" id="ILe-h5-7ii"/>
+                            <constraint firstItem="fNu-T4-MGZ" firstAttribute="leading" secondItem="hJi-Ov-6LG" secondAttribute="leadingMargin" id="JzF-GQ-pQa"/>
+                            <constraint firstItem="fNu-T4-MGZ" firstAttribute="trailing" secondItem="hJi-Ov-6LG" secondAttribute="trailingMargin" id="eAy-XL-jis"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="errorTextField" destination="fNu-T4-MGZ" id="099-Or-F7p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iCz-su-U13" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -584,7 +587,7 @@
                     </refreshControl>
                     <connections>
                         <segue destination="gdX-aS-qgt" kind="show" identifier="ShowHackerspaceFromSearch" id="d7n-5n-iWm"/>
-                        <segue destination="N2j-av-cOT" kind="show" identifier="ShowErrorDetail" id="nWg-lu-fbm"/>
+                        <segue destination="N2j-av-cOT" kind="show" identifier="ShowErrorDetail" id="6FG-YR-C4j"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WBh-0s-cdJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -636,6 +639,7 @@
                     </refreshControl>
                     <connections>
                         <segue destination="gdX-aS-qgt" kind="show" identifier="ShowHackerspaceFromSearch" id="aJy-NA-KwG"/>
+                        <segue destination="N2j-av-cOT" kind="show" identifier="ShowErrorDetail" id="p7Y-uC-0uV"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kWM-ws-sQo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -860,5 +864,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="d7n-5n-iWm"/>
+        <segue reference="6FG-YR-C4j"/>
     </inferredMetricsTieBreakers>
 </document>

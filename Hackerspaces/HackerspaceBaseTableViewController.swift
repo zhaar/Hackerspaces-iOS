@@ -172,37 +172,46 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
-        guard let SHVC = segue.destination as? SelectedHackerspaceTableViewController else {return}
-        guard let hackerspaceKey = sender as? String else {return print("cannot prepare for segue, sender was not a string, instead it was: \(sender)")}
-        guard let data = hackerspaces[hackerspaceKey]  else {return print("could not find hackerspace with name \(hackerspaceKey)")}
-        switch data {
-        case .finished(let data): SHVC.prepare(data)
-        case _ : print("could not segue into hackerspace with no data")
+        switch segue.destination {
+        case let SHVC as SelectedHackerspaceTableViewController :
+            guard let hackerspaceKey = sender as? String else {return print("cannot prepare for segue, sender was not a string, instead it was: \(sender)")}
+            guard let data = hackerspaces[hackerspaceKey]  else {return print("could not find hackerspace with name \(hackerspaceKey)")}
+            switch data {
+            case .finished(let data): SHVC.prepare(data)
+            case _ : print("could not segue into hackerspace with no data")
+            }
+        case let errorVC as DisplayErrorViewController :
+            errorVC.prepare(message: sender as! String)
+        case _: return
+
         }
     }
 
     func handleUnresponsiveError(error: SpaceAPIError) -> () {
         let title = "Hackerspace Unresponsive"
         var actions:[UIAlertAction] = [UIAlertAction(title: "Ok", style: .default, handler: nil)]
-        let moreDetailsAction = UIAlertAction(title: "More details", style: .default, handler: nil)
         var message = ""
         switch error {
         case .DataCastError(data: let data):
             message = "Could not parse data as JSON"
-            print(data.base64EncodedData(options: NSData.Base64EncodingOptions.lineLength64Characters))
-            actions.append(moreDetailsAction)
-        case .HTTPRequestError(error: let error):
+            actions.append(UIAlertAction(title: "More details", style: .default, handler: {_ in
+                self.performSegue(withIdentifier: UIConstants.showErrorDetail.rawValue, sender: String.init(data: data, encoding: .utf8))
+            }))
+        case .HTTPRequestError(error: _):
             message = "Http request error"
-            print("\(error)")
         case .ParseError:
             message = "An error occured while parsing data. Maybe the data doesn't comply with SpaceAPI v0.13"
         case .UnknownError(error: let error):
             message = "Unknown error"
             print(error.localizedDescription)
-            actions.append(moreDetailsAction)
+//            actions.append(moreDetailsAction)
         }
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        actions.foreach { alert.addAction($0) }
+
+        actions.foreach(alert.addAction)
+        actions.append(UIAlertAction(title: "More details", style: .default, handler: {_ in
+            self.performSegue(withIdentifier: UIConstants.showErrorDetail.rawValue, sender: error.localizedDescription)
+        }))
         present(alert, animated: true, completion: nil)
     }
 }
