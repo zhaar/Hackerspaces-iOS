@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		950AF2981D88CC500068F29E /* DisplayErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950AF2971D88CC500068F29E /* DisplayErrorViewController.swift */; };
 		9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */; };
 		9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */; };
 		9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */; };
@@ -71,6 +72,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		950AF2971D88CC500068F29E /* DisplayErrorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayErrorViewController.swift; sourceTree = "<group>"; };
 		9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedHackerspaceTableViewController.swift; sourceTree = "<group>"; };
 		9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSTitleTableViewCell.swift; sourceTree = "<group>"; };
 		9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSMapTableViewCell.swift; sourceTree = "<group>"; };
@@ -160,6 +162,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		950AF2961D88CC2C0068F29E /* Error display */ = {
+			isa = PBXGroup;
+			children = (
+				950AF2971D88CC500068F29E /* DisplayErrorViewController.swift */,
+			);
+			name = "Error display";
+			sourceTree = "<group>";
+		};
 		9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */ = {
 			isa = PBXGroup;
 			children = (
@@ -196,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				95643FB21B729B3E0061A1E6 /* AppDelegate.swift */,
+				950AF2961D88CC2C0068F29E /* Error display */,
 				95D4B74D1B7D68C80061A1E6 /* Map */,
 				95E4B90A1B811F150061A1E6 /* Embeded search */,
 				9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */,
@@ -415,6 +426,7 @@
 				95DBD9561B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */,
 				9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */,
 				9573A2891B91EB310061A1E6 /* HSDataModel.swift in Sources */,
+				950AF2981D88CC500068F29E /* DisplayErrorViewController.swift in Sources */,
 				95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */,
 				9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */,
 				9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */,
