@@ -17,9 +17,9 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     
     @IBAction func MarkAsFavorite(sender: UIBarButtonItem?) {
         if isFavorite {
-            SharedData.removeFromFavoritesList(hackerspaceData.apiName)
+            UserDefaults.removeFromFavoritesList(hackerspaceData.apiName)
         } else {
-            SharedData.addToFavoriteDictionary((hackerspaceData.apiName, hackerspaceData.apiEndpoint))
+            UserDefaults.addToFavoriteDictionary((hackerspaceData.apiName, hackerspaceData.apiEndpoint))
         }
         updateFavoriteButton()
     }
@@ -42,7 +42,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     private var hackerspaceData: ParsedHackerspaceData!
     var isFavorite: Bool {
         get {
-            return SharedData.favoritesDictionary().keys.contains(hackerspaceData.apiName) ?? false
+            return UserDefaults.favoritesDictionary().keys.contains(hackerspaceData.apiName) ?? false
         }
     }
     

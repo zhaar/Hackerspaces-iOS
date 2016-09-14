@@ -811,6 +811,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Settings" id="ACy-bB-ysG"/>
+                    <connections>
+                        <outlet property="toggle" destination="p4K-al-Ao8" id="fqj-Ct-Luj"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yTa-2q-DOp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="p4K-al-Ao8">

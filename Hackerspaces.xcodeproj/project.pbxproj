@@ -37,7 +37,7 @@
 		95ADEF991B8B53580061A1E6 /* SpaceAPIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */; };
 		95DB77FD1B912B0F0061A1E6 /* HSMapInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */; };
 		95DB77FF1B9142D60061A1E6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB77FE1B9142D60061A1E6 /* Constants.swift */; };
-		95DB78011B9149660061A1E6 /* sharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB78001B9149660061A1E6 /* sharedData.swift */; };
+		95DB78011B9149660061A1E6 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB78001B9149660061A1E6 /* UserDefaults.swift */; };
 		95DBD9471B8CFF360061A1E6 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594941B893E5E0061A1E6 /* Haneke.framework */; };
 		95DBD94C1B8CFF360061A1E6 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95DBD94B1B8CFF360061A1E6 /* Result.framework */; };
 		95DBD9551B8D0FC30061A1E6 /* HackerspaceBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBD9511B8D0FC30061A1E6 /* HackerspaceBaseTableViewController.swift */; };
@@ -112,7 +112,7 @@
 		95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
 		95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSMapInfo.swift; sourceTree = "<group>"; };
 		95DB77FE1B9142D60061A1E6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		95DB78001B9149660061A1E6 /* sharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sharedData.swift; sourceTree = "<group>"; };
+		95DB78001B9149660061A1E6 /* UserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaults.swift; sourceTree = "<group>"; };
 		95DBD94B1B8CFF360061A1E6 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
 		95DBD94D1B8CFF3E0061A1E6 /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Box.framework; path = Carthage/Build/iOS/Box.framework; sourceTree = "<group>"; };
 		95DBD9511B8D0FC30061A1E6 /* HackerspaceBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceBaseTableViewController.swift; sourceTree = "<group>"; };
@@ -222,7 +222,7 @@
 				95E4B90A1B811F150061A1E6 /* Embeded search */,
 				9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */,
 				95DB77FE1B9142D60061A1E6 /* Constants.swift */,
-				95DB78001B9149660061A1E6 /* sharedData.swift */,
+				95DB78001B9149660061A1E6 /* UserDefaults.swift */,
 				952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */,
 				95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */,
 				95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */,
@@ -444,7 +444,7 @@
 				95ADEF991B8B53580061A1E6 /* SpaceAPIFunctions.swift in Sources */,
 				950AF29B1D89BB7C0068F29E /* PrefPaneTableViewController.swift in Sources */,
 				9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */,
-				95DB78011B9149660061A1E6 /* sharedData.swift in Sources */,
+				95DB78011B9149660061A1E6 /* UserDefaults.swift in Sources */,
 				953161871B73B12A0061A1E6 /* extensions.swift in Sources */,
 				95DB77FF1B9142D60061A1E6 /* Constants.swift in Sources */,
 			);

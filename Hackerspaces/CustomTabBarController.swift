@@ -13,7 +13,7 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     let favoriteTableViewIndex = 0
     let searchTableViewIndex = 2
-    let preferencesDataSource: () -> Future<[String: String], SpaceAPIError> = {_ in future(SharedData.favoritesDictionary).onSuccess(callback: SharedData.updateIconShortcuts).promoteError()}
+    let preferencesDataSource: () -> Future<[String: String], SpaceAPIError> = {_ in future(UserDefaults.favoritesDictionary).onSuccess(callback: UserDefaults.updateIconShortcuts).promoteError()}
     
     func getHackerspaceTableFromViewController(viewController: UIViewController?) -> HackerspaceBaseTableViewController? {
         if let nav = viewController as? UINavigationController {
