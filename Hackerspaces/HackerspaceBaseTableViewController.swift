@@ -196,7 +196,6 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
             case .httpRequestError(error: _):
                 return ("Unknown HTTP error", nil)
             case .parseError(let json):
-                let json = json.description
                 return ("An error occured while parsing data. Maybe the data doesn't comply with SpaceAPI v0.13", "\ncould not parse:  \(json)")
             case .unknownError(error: let error):
                 return ("Unknown error", error.localizedDescription)
