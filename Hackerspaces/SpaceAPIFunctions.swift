@@ -120,7 +120,7 @@ struct SpaceAPI {
     static func parseHackerspace(json: [String : JSONDecoder], url: String, name: String) -> Result<ParsedHackerspaceData, SpaceAPIError>{
         switch parseHackerspaceDataModel(json, name: name, url: url) {
             case .Some(let p): return Result(value: p)
-            case .None : return Result(error: SpaceAPIError.ParseError)
+            case .None : return Result(error: SpaceAPIError.ParseError(json: JSONDecoder(json).print()))
         }
     }
     

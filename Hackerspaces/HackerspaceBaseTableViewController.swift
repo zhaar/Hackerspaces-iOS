@@ -183,12 +183,11 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         func messageHandler(err: SpaceAPIError) -> (String, String?) {
             switch error {
             case .DataCastError(data: let data):
-                return ("Could not parse data as JSON", data.description)
+                return ("Could not parse data", data.description)
             case .HTTPRequestError(error: _):
                 return ("Unknown HTTP error", nil)
-            case .ParseError(data: let data):
-                let json = NSString(data: data, encoding: NSUTF16StringEncoding) ?? "<Encoding error>"
-                return ("An error occured while parsing data. Maybe the data doesn't comply with SpaceAPI v0.13", "\(JSONDecoder(data).print())\nrecieved data:  \(json)")
+            case .ParseError(json: let json):
+                return ("An error occured while parsing data. Maybe the data doesn't comply with SpaceAPI v0.13", "received: \(json)")
             case .UnknownError(error: let error):
                 return ("Unknown error", error.description)
             }
