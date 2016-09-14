@@ -41,9 +41,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     fileprivate var loadOrigin: LoadOrigin!
     fileprivate var hackerspaceData: ParsedHackerspaceData!
     var isFavorite: Bool {
-        get {
             return SharedData.favoritesDictionary().keys.contains(hackerspaceData.apiName)
-        }
     }
 
     fileprivate struct storyboard {

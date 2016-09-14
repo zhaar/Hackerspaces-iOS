@@ -17,11 +17,13 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
 
     let preferencesDataSource: () -> Future<[String: SharedData.HackerspaceAPIURL], SpaceAPIError> = {
 
-        Future(value: SharedData.favoritesDictionary()).promoteError()
+        Future(value: SharedData.favoritesDictionary())
+            .promoteError()
             .onSuccess(callback: SharedData.updateIconShortcuts)
     }
 
     func getHackerspaceTableFromViewController(_ viewController: UIViewController?) -> HackerspaceBaseTableViewController? {
+
         if let nav = viewController as? UINavigationController {
             return nav.childViewControllers.map {$0 as? HackerspaceBaseTableViewController}.filter {$0 != nil}[0]
         } else {

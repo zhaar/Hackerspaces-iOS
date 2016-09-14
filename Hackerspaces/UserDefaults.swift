@@ -12,11 +12,24 @@ let selected = "favorite"
 let favoriteList = "listOfFavorites"
 let favoriteDictKey = "DictionaryOfFavorites"
 let parsedDataList = "listOfParsedHackerspaceData"
+let debugModeKey = "debugModeKey"
 
 struct SharedData {
     
     typealias HackerspaceAPIURL = String
     static let defaults = UserDefaults.standard
+    
+    static func isInDebugMode() -> Bool {
+        return defaults.bool(forKey: debugModeKey)
+    }
+    
+    static func setDebugMode(value: Bool) -> () {
+        defaults.set(value, forKey: debugModeKey)
+    }
+    
+    static func toggleDebugMode() -> () {
+        setDebugMode(value: !isInDebugMode())
+    }
     
     static func favoritesDictionary() -> [String: HackerspaceAPIURL] {
         return SharedData.defaults.dictionary(forKey: favoriteDictKey)?.map { value in value as! HackerspaceAPIURL} ?? [String: HackerspaceAPIURL]()
@@ -34,6 +47,7 @@ struct SharedData {
     static func setFavoritesDictionary(_ dict: [String : HackerspaceAPIURL]) {
         updateIconShortcuts(dict)
         SharedData.defaults.set(dict, forKey: favoriteDictKey)
+
     }
     
     static func deleteAllDebug() {
