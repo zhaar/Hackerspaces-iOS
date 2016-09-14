@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		950AF2981D88CC500068F29E /* DisplayErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950AF2971D88CC500068F29E /* DisplayErrorViewController.swift */; };
+		950AF29B1D89BB7C0068F29E /* PrefPaneTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950AF29A1D89BB7C0068F29E /* PrefPaneTableViewController.swift */; };
 		9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */; };
 		9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */; };
 		9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */; };
@@ -96,6 +97,7 @@
 
 /* Begin PBXFileReference section */
 		950AF2971D88CC500068F29E /* DisplayErrorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DisplayErrorViewController.swift; sourceTree = "<group>"; };
+		950AF29A1D89BB7C0068F29E /* PrefPaneTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefPaneTableViewController.swift; sourceTree = "<group>"; };
 		9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectedHackerspaceTableViewController.swift; sourceTree = "<group>"; };
 		9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSTitleTableViewCell.swift; sourceTree = "<group>"; };
 		9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSMapTableViewCell.swift; sourceTree = "<group>"; };
@@ -190,6 +192,14 @@
 			name = "Error display";
 			sourceTree = "<group>";
 		};
+		950AF2991D89BB500068F29E /* Preference pane */ = {
+			isa = PBXGroup;
+			children = (
+				950AF29A1D89BB7C0068F29E /* PrefPaneTableViewController.swift */,
+			);
+			name = "Preference pane";
+			sourceTree = "<group>";
+		};
 		9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				95643FB21B729B3E0061A1E6 /* AppDelegate.swift */,
+				950AF2991D89BB500068F29E /* Preference pane */,
 				950AF2961D88CC2C0068F29E /* Error display */,
 				95D4B74D1B7D68C80061A1E6 /* Map */,
 				95E4B90A1B811F150061A1E6 /* Embeded search */,
@@ -457,6 +468,7 @@
 				9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */,
 				959D61AE1F3B79DB0061A1E6 /* FutureUtils.swift in Sources */,
 				95ADEF991B8B53580061A1E6 /* SpaceAPIFunctions.swift in Sources */,
+				950AF29B1D89BB7C0068F29E /* PrefPaneTableViewController.swift in Sources */,
 				9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */,
 				95DB78011B9149660061A1E6 /* sharedData.swift in Sources */,
 				953161871B73B12A0061A1E6 /* extensions.swift in Sources */,
