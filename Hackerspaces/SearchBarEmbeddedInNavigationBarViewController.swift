@@ -31,7 +31,7 @@ class SearchBarEmbeddedInNavigationBarViewController: SearchResultsViewControlle
         
         // Configure the search controller's search bar. For more information on how to configure
         // search bars, see the "Search Bar" group under "Search".
-        searchController.searchBar.searchBarStyle = .Minimal
+        searchController.searchBar.searchBarStyle = .minimal
         searchController.searchBar.placeholder = NSLocalizedString("Search", comment: "")
         
         // Include the search bar within the navigation bar.
@@ -40,7 +40,7 @@ class SearchBarEmbeddedInNavigationBarViewController: SearchResultsViewControlle
         definesPresentationContext = true
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         filterString = nil
     }
 }

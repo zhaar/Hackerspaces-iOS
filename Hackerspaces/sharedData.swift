@@ -16,34 +16,34 @@ let parsedDataList = "listOfParsedHackerspaceData"
 struct SharedData {
     
     typealias HackerspaceAPIURL = String
-    static let defaults = NSUserDefaults.standardUserDefaults()
+    static let defaults = UserDefaults.standard
     
     static func favoritesDictionary() -> [String: HackerspaceAPIURL] {
-        return SharedData.defaults.dictionaryForKey(favoriteDictKey)?.map { value in value as! HackerspaceAPIURL} ?? [String: HackerspaceAPIURL]()
+        return SharedData.defaults.dictionary(forKey: favoriteDictKey)?.map { value in value as! HackerspaceAPIURL} ?? [String: HackerspaceAPIURL]()
     }
     
-    static func addToFavoriteDictionary(hackerspace: (String, String)) {
+    static func addToFavoriteDictionary(_ hackerspace: (String, String)) {
         let (name, apiEndpoint) = hackerspace
         setFavoritesDictionary(favoritesDictionary().insert(name, v: apiEndpoint))
     }
     
-    static func removeFromFavoritesList(name: String) {
+    static func removeFromFavoritesList(_ name: String) {
         setFavoritesDictionary(favoritesDictionary().delete(name))
     }
     
-    static func setFavoritesDictionary(dict: [String : HackerspaceAPIURL]) {
+    static func setFavoritesDictionary(_ dict: [String : HackerspaceAPIURL]) {
         updateIconShortcuts(dict)
-        SharedData.defaults.setObject(dict, forKey: favoriteDictKey)
+        SharedData.defaults.set(dict, forKey: favoriteDictKey)
     }
     
     static func deleteAllDebug() {
         setFavoritesDictionary([String: HackerspaceAPIURL]())
     }
     
-    static func updateIconShortcuts(dict: [String: String]) {
+    static func updateIconShortcuts(_ dict: [String: String]) {
         let shorts = dict.map { key, value in
             UIApplicationShortcutItem(type: UIConstants.hackerspaceViewShortcut, localizedTitle: key, localizedSubtitle: nil, icon: nil, userInfo: ["name": key, "url": value])
         }
-        UIApplication.sharedApplication().shortcutItems = shorts
+        UIApplication.shared.shortcutItems = shorts
     }
 }

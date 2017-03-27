@@ -7,11 +7,10 @@
 //
 
 import Foundation
-import JSONJoy
 import Swiftz
 import MapKit
 
-func parseHackerspaceDataModel(json: [String: JSONDecoder], name apiName: String, url: String) -> ParsedHackerspaceData? {
+func parseHackerspaceDataModel(_ json: [String: JSONDecoder], name apiName: String, url: String) -> ParsedHackerspaceData? {
     let apiVersion = json[SpaceAPIConstants.APIversion.rawValue]?.string
     let name = SpaceAPI.extractName(json)
     let logo = json[SpaceAPIConstants.APIlogo.rawValue]?.string
@@ -25,7 +24,7 @@ func parseHackerspaceDataModel(json: [String: JSONDecoder], name apiName: String
 
 }
 
-private func parseStateObject(state: [String: JSONDecoder]) -> StateObject {
+private func parseStateObject(_ state: [String: JSONDecoder]) -> StateObject {
     let o = state["open"]
     var isOpen: Bool? = o?.bool
     isOpen = isOpen ?? (o?.number == 1)
@@ -35,14 +34,14 @@ private func parseStateObject(state: [String: JSONDecoder]) -> StateObject {
     let trigger = state["trigger_person"]?.string
     let icon = parseIconObject(state["icon"]?.dictionary)
     let message = state["message"]?.string
-    return StateObject(open: open, lastChange: lastChange?.integerValue, trigger_person: trigger, message: message, icon: icon)
+    return StateObject(open: open, lastChange: lastChange?.intValue, trigger_person: trigger, message: message, icon: icon)
 }
 
-private func parseIconObject(icon: [String : JSONDecoder]?) -> IconObject? {
+private func parseIconObject(_ icon: [String : JSONDecoder]?) -> IconObject? {
     return icon >>- { json in json["open"]?.string >>- { open in json["closed"]?.string >>- { closed in IconObject(openURL: open, closedURL: closed)}}}
 }
 
-func parseLocationObject(location: [String : JSONDecoder], withName name: String) -> SpaceLocation? {
+func parseLocationObject(_ location: [String : JSONDecoder], withName name: String) -> SpaceLocation? {
     let lat = location["lat"]?.number >>- {CLLocationDegrees($0)}
     let lon = location["lon"]?.number >>- {CLLocationDegrees($0)}
     let loc = lat >>- {la in lon >>- { lo in CLLocationCoordinate2D(latitude: la, longitude: lo)}}
@@ -50,21 +49,21 @@ func parseLocationObject(location: [String : JSONDecoder], withName name: String
     return loc >>- {SpaceLocation(name: name, address: addr, location: $0)}
 }
 
-private func parseContactObject(contact: [String: JSONDecoder]) -> ContactObject {
+private func parseContactObject(_ contact: [String: JSONDecoder]) -> ContactObject {
     let keymasters = contact["keymasters"]?.array >>- { parseKeymasters($0) }
     return ContactObject(phone: contact["phone"]?.string, sip: contact["sip"]?.string, keyMasters: keymasters, ircURL: contact["irc"]?.string, twitterHandle: contact["twitter"]?.string, facebook: contact["facebook"]?.string, googlePlus: contact["google"]?.dictionary?["plus"]?.string, identica: contact["identica"]?.string, foursquareID: contact["foursquare"]?.string, email: contact["email"]?.string, mailingList: contact["ml"]?.string, jabber: contact["jabber"]?.string, issue_mail: contact["issue_mail"]?.string)
 }
 
-private func parseKeymasters(keymasters: [JSONDecoder]) -> [MemberObject] {
+private func parseKeymasters(_ keymasters: [JSONDecoder]) -> [MemberObject] {
     let members: [MemberObject?] =  keymasters.map {$0.dictionary.map(parseMember)}
-    return Array(members.flatten())
+    return Array(members.joined())
 }
 
-private func parseMember(member: [String: JSONDecoder]) -> MemberObject {
+private func parseMember(_ member: [String: JSONDecoder]) -> MemberObject {
     return MemberObject(name: member["name"]?.string, irc_nick: member["irc_nick"]?.string, phone: member["phone"]?.string, email: member["email"]?.string, twitterHandle: member["twitter"]?.string)
 }
 
-private func parseReportChannel(channels: [JSONDecoder]) -> [String] {
+private func parseReportChannel(_ channels: [JSONDecoder]) -> [String] {
     return channels.map { json in
         json.string
         }.filter { $0 != nil }.map { $0! }

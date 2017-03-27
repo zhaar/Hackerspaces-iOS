@@ -10,10 +10,11 @@
 		9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */; };
 		9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */; };
 		9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */; };
-		952852891D50E8200061A1E6 /* JSONJoy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594951B893E5E0061A1E6 /* JSONJoy.framework */; };
 		952915411D5A94B20061A1E6 /* FavoriteHackerspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */; };
 		953161871B73B12A0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
 		953C513B1B8F49190061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
+		954C57001E89BFC70061A1E6 /* JSONDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C56FF1E89BFC70061A1E6 /* JSONDecoding.swift */; };
+		954C57021E89C7C40061A1E6 /* FPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C57011E89C7C40061A1E6 /* FPUtils.swift */; };
 		954F351E1D57FF0F0061A1E6 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */; };
 		95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB21B729B3E0061A1E6 /* AppDelegate.swift */; };
 		95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB61B729B3E0061A1E6 /* MapViewController.swift */; };
@@ -30,7 +31,6 @@
 		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
 		9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */; };
 		95A594A21B893FB60061A1E6 /* Haneke.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */; };
-		95A594A31B893FB60061A1E6 /* JSONJoy.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A5949F1B893FB60061A1E6 /* JSONJoy.framework.dSYM */; };
 		95A594A41B893FB60061A1E6 /* SwiftHTTP.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */; };
 		95A594A51B893FB60061A1E6 /* Swiftz.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */; };
 		95ADEF991B8B53580061A1E6 /* SpaceAPIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */; };
@@ -62,7 +62,6 @@
 			dstSubfolderSpec = 16;
 			files = (
 				95A594A21B893FB60061A1E6 /* Haneke.framework.dSYM in Debug */,
-				95A594A31B893FB60061A1E6 /* JSONJoy.framework.dSYM in Debug */,
 				95A594A41B893FB60061A1E6 /* SwiftHTTP.framework.dSYM in Debug */,
 				95A594A51B893FB60061A1E6 /* Swiftz.framework.dSYM in Debug */,
 			);
@@ -78,6 +77,8 @@
 		952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteHackerspace.swift; sourceTree = "<group>"; };
 		953161861B73B12A0061A1E6 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		953C513A1B8F49190061A1E6 /* FutureUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureUtils.swift; sourceTree = "<group>"; };
+		954C56FF1E89BFC70061A1E6 /* JSONDecoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDecoding.swift; sourceTree = "<group>"; };
+		954C57011E89C7C40061A1E6 /* FPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPUtils.swift; sourceTree = "<group>"; };
 		954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		95643FAD1B729B3E0061A1E6 /* Hackerspaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hackerspaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95643FB11B729B3E0061A1E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -95,11 +96,9 @@
 		9597A1AA1B79252F0061A1E6 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
 		9597A1AD1B7932100061A1E6 /* DataCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCache.xcdatamodel; sourceTree = "<group>"; };
 		95A5948C1B893C530061A1E6 /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = ../carthage_dependecies/Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
-		95A5948D1B893C530061A1E6 /* JSONJoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSONJoy.framework; path = ../carthage_dependecies/Carthage/Build/iOS/JSONJoy.framework; sourceTree = "<group>"; };
 		95A5948E1B893C530061A1E6 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = ../carthage_dependecies/Carthage/Build/iOS/SwiftHTTP.framework; sourceTree = "<group>"; };
 		95A5948F1B893C530061A1E6 /* Swiftz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swiftz.framework; path = ../carthage_dependecies/Carthage/Build/iOS/Swiftz.framework; sourceTree = "<group>"; };
 		95A594941B893E5E0061A1E6 /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
-		95A594951B893E5E0061A1E6 /* JSONJoy.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSONJoy.framework; path = Carthage/Build/iOS/JSONJoy.framework; sourceTree = "<group>"; };
 		95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = Carthage/Build/iOS/SwiftHTTP.framework; sourceTree = "<group>"; };
 		95A594971B893E5E0061A1E6 /* Swiftz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swiftz.framework; path = Carthage/Build/iOS/Swiftz.framework; sourceTree = "<group>"; };
 		95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Haneke.framework.dSYM; path = Carthage/Build/iOS/Haneke.framework.dSYM; sourceTree = "<group>"; };
@@ -112,11 +111,9 @@
 		95DB77FE1B9142D60061A1E6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		95DB78001B9149660061A1E6 /* sharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = sharedData.swift; sourceTree = "<group>"; };
 		95DBD94B1B8CFF360061A1E6 /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
-		95DBD94D1B8CFF3E0061A1E6 /* Box.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Box.framework; path = Carthage/Build/iOS/Box.framework; sourceTree = "<group>"; };
 		95DBD9511B8D0FC30061A1E6 /* HackerspaceBaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HackerspaceBaseTableViewController.swift; sourceTree = "<group>"; };
 		95DBD9521B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchBarEmbeddedInNavigationBarViewController.swift; sourceTree = "<group>"; };
 		95DBD9591B8D10120061A1E6 /* SearchResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
-		A716B48507D7E59C5E3D6630 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,7 +125,6 @@
 				958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */,
 				958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */,
 				95DBD9471B8CFF360061A1E6 /* Haneke.framework in Frameworks */,
-				952852891D50E8200061A1E6 /* JSONJoy.framework in Frameworks */,
 				958B31AD1C6A89E3000EF9E1 /* Swiftz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -146,18 +142,14 @@
 		8178FF0F74739ED96AEB03D5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				95DBD94D1B8CFF3E0061A1E6 /* Box.framework */,
 				95DBD94B1B8CFF360061A1E6 /* Result.framework */,
 				95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */,
 				95A594941B893E5E0061A1E6 /* Haneke.framework */,
-				95A594951B893E5E0061A1E6 /* JSONJoy.framework */,
 				95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */,
 				95A594971B893E5E0061A1E6 /* Swiftz.framework */,
 				95A5948C1B893C530061A1E6 /* Haneke.framework */,
-				95A5948D1B893C530061A1E6 /* JSONJoy.framework */,
 				95A5948E1B893C530061A1E6 /* SwiftHTTP.framework */,
 				95A5948F1B893C530061A1E6 /* Swiftz.framework */,
-				A716B48507D7E59C5E3D6630 /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -172,6 +164,14 @@
 				9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */,
 			);
 			name = "Selected Hackerspace";
+			sourceTree = "<group>";
+		};
+		954C56FE1E89BFBA0061A1E6 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				954C56FF1E89BFC70061A1E6 /* JSONDecoding.swift */,
+			);
+			name = JSON;
 			sourceTree = "<group>";
 		};
 		95643FA41B729B3E0061A1E6 = {
@@ -209,6 +209,8 @@
 				9573A2881B91EB310061A1E6 /* HSDataModel.swift */,
 				954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */,
 				953C513A1B8F49190061A1E6 /* FutureUtils.swift */,
+				954C57011E89C7C40061A1E6 /* FPUtils.swift */,
+				954C56FE1E89BFBA0061A1E6 /* JSON */,
 				95643FB81B729B3E0061A1E6 /* Main.storyboard */,
 				95643FBB1B729B3E0061A1E6 /* Images.xcassets */,
 				95643FBD1B729B3E0061A1E6 /* LaunchScreen.xib */,
@@ -321,12 +323,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = Fixme;
 				TargetAttributes = {
 					95643FAC1B729B3E0061A1E6 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 9PXQEQ2PNN;
+						LastSwiftMigration = 0820;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -335,6 +338,7 @@
 					};
 					95643FC31B729B3E0061A1E6 = {
 						CreatedOnToolsVersion = 6.4;
+						LastSwiftMigration = 0820;
 						TestTargetID = 95643FAC1B729B3E0061A1E6;
 					};
 				};
@@ -386,7 +390,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Haneke.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/JSONJoy.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftHTTP.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Swiftz.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/BrightFutures.framework",
@@ -407,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				952915411D5A94B20061A1E6 /* FavoriteHackerspace.swift in Sources */,
+				954C57021E89C7C40061A1E6 /* FPUtils.swift in Sources */,
 				9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */,
 				95DBD95A1B8D10120061A1E6 /* SearchResultsViewController.swift in Sources */,
 				95DBD9551B8D0FC30061A1E6 /* HackerspaceBaseTableViewController.swift in Sources */,
@@ -424,6 +428,7 @@
 				9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */,
 				95ADEF991B8B53580061A1E6 /* SpaceAPIFunctions.swift in Sources */,
 				9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */,
+				954C57001E89BFC70061A1E6 /* JSONDecoding.swift in Sources */,
 				95DB78011B9149660061A1E6 /* sharedData.swift in Sources */,
 				953161871B73B12A0061A1E6 /* extensions.swift in Sources */,
 				95DB77FF1B9142D60061A1E6 /* Constants.swift in Sources */,
@@ -481,8 +486,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -527,8 +534,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -547,6 +556,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -567,6 +577,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "moe.zephyz.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -586,6 +597,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "moe.zephyz.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -603,6 +615,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.fixme.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hackerspaces.app/Hackerspaces";
 			};
 			name = Debug;
@@ -616,6 +629,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.fixme.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hackerspaces.app/Hackerspaces";
 			};
 			name = Release;

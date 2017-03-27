@@ -7,26 +7,25 @@
 */
 
 import UIKit
-import JSONJoy
 import BrightFutures
 
 enum NetworkState {
-    case Finished(ParsedHackerspaceData)
-    case Loading
-    case Unresponsive(errorMessage: String)
+    case finished(ParsedHackerspaceData)
+    case loading
+    case unresponsive(errorMessage: String)
     var isDone: Bool {
         get {
             switch self {
-            case .Finished(_): return true
+            case .finished(_): return true
             case _ : return false
             }
         }
     }
     var stateMessage: String { get {
             switch self {
-            case .Finished(let data): return data.state.open ? "open"  : "closed"
-            case .Loading: return "loading"
-            case .Unresponsive(_): return "unresponsive"
+            case .finished(let data): return data.state.open ? "open"  : "closed"
+            case .loading: return "loading"
+            case .unresponsive(_): return "unresponsive"
             }
         }
     }
@@ -34,16 +33,16 @@ enum NetworkState {
 
 class HackerspaceBaseTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
         
-    func refresh(sender: UIRefreshControl) {
+    func refresh(_ sender: UIRefreshControl) {
         dataSource().onComplete { _ in
             sender.endRefreshing()
         }.onSuccess { api in
-            self.hackerspaces = api.map { _ in NetworkState.Loading }
+            self.hackerspaces = api.map { _ in NetworkState.loading }
             api.forEach { (hs, address) in
-                SpaceAPI.getParsedHackerspace(address, name: hs).map {NetworkState.Finished($0)}.onSuccess { data in
+                SpaceAPI.getParsedHackerspace(address, name: hs).map {NetworkState.finished($0)}.onSuccess { data in
                     self.hackerspaces.updateValue(data, forKey: hs)
                     }.onFailure { error in
-                        self.updateHackerspaceStatus(NetworkState.Unresponsive(errorMessage: "error while loading: \(error)"), forKey: hs)
+                        self.updateHackerspaceStatus(NetworkState.unresponsive(errorMessage: "error while loading: \(error)"), forKey: hs)
                 }
             }
         }
@@ -61,11 +60,11 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     var hackerspaces = [String : NetworkState]() {
         didSet {
             allResults = Array(hackerspaces.keys)
-            allResults.sortInPlace(<)
+            allResults.sort(by: <)
         }
     }
     
-    func updateHackerspaceStatus(status: NetworkState, forKey name: String) -> () {
+    func updateHackerspaceStatus(_ status: NetworkState, forKey name: String) -> () {
         var cpy = self.hackerspaces
         cpy.updateValue(status, forKey: name)
         self.hackerspaces = cpy
@@ -83,13 +82,13 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.refreshControl?.addTarget(self, action: #selector(HackerspaceBaseTableViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(HackerspaceBaseTableViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         // Force touch code
         self.refresh(refreshControl!)
-        registerForPreviewingWithDelegate(self, sourceView: tableView)
+        registerForPreviewing(with: self, sourceView: tableView)
     }
 
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         refreshControl?.endRefreshing()
     }
@@ -106,7 +105,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
                 // Filter the results using a predicate based on the filter string.
                 let filterPredicate = NSPredicate(format: "self contains[c] %@", argumentArray: [filterString!])
 
-                visibleResults = allResults.filter { filterPredicate.evaluateWithObject($0) }
+                visibleResults = allResults.filter { filterPredicate.evaluate(with: $0) }
             }
 
             tableView.reloadData()
@@ -119,38 +118,38 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     }
     
     // MARK: PreviewingDelegate
-    func previewingContext(previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let indexPath = tableView.indexPathForRowAtPoint(location) else { return nil }
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        guard let indexPath = tableView.indexPathForRow(at: location) else { return nil }
         let hsName = visibleResults[indexPath.row]
         guard let state = hackerspaces[hsName] else { return nil }
-        guard case .Finished(let data) = state else {return nil}
+        guard case .finished(let data) = state else {return nil}
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let hackerspaceViewController = storyboard.instantiateViewControllerWithIdentifier("HackerspaceDetail") as! SelectedHackerspaceTableViewController
+        let hackerspaceViewController = storyboard.instantiateViewController(withIdentifier: "HackerspaceDetail") as! SelectedHackerspaceTableViewController
         hackerspaceViewController.prepare(data)
         hackerspaceViewController.previewDeleteAction = self.previewActionCallback
-        let cellRect = tableView.rectForRowAtIndexPath(indexPath)
-        let sourceRect = previewingContext.sourceView.convertRect(cellRect, toView: tableView)
+        let cellRect = tableView.rectForRow(at: indexPath)
+        let sourceRect = previewingContext.sourceView.convert(cellRect, to: tableView)
         previewingContext.sourceRect = sourceRect
         return hackerspaceViewController
     }
     
-    func previewingContext(previewingContext: UIViewControllerPreviewing, commitViewController viewControllerToCommit: UIViewController) {
-        showViewController(viewControllerToCommit, sender: self)
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
     }
     
     // MARK: UITableViewDataSource
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return visibleResults.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TableViewConstants.tableViewCellIdentifier, forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: TableViewConstants.tableViewCellIdentifier, for: indexPath)
         let name = visibleResults[indexPath.row]
         let state = self.hackerspaces[name]
         cell.textLabel?.text = name
         cell.detailTextLabel?.text = state?.stateMessage ?? "not found"
-        cell.selectionStyle = state?.isDone ?? true ? .Default : .None
+        cell.selectionStyle = state?.isDone ?? true ? .default : .none
 
         //workaround a bug where detail is no updated correctly
         //see: http://stackoverflow.com/questions/25987135/ios-8-uitableviewcell-detail-text-not-correctly-updating
@@ -158,23 +157,23 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let hsName = visibleResults[indexPath.row]
         let state = hackerspaces[hsName]
         switch state {
-            case .Some(.Finished(_)): performSegueWithIdentifier(UIConstants.showHSSearch, sender: hsName)
-            case .Some(.Unresponsive(let message)):  print("trying to segue into unresponsive hackerspace: \(message)")
-            case .Some(.Loading): print("still loading")
-            case .None: print("couldn't find data for hackerspace \"\(hsName)\"")
+            case .some(.finished(_)): performSegue(withIdentifier: UIConstants.showHSSearch, sender: hsName)
+            case .some(.unresponsive(let message)):  print("trying to segue into unresponsive hackerspace: \(message)")
+            case .some(.loading): print("still loading")
+            case .none: print("couldn't find data for hackerspace \"\(hsName)\"")
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
-        guard let SHVC = segue.destinationViewController as? SelectedHackerspaceTableViewController else {return}
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
+        guard let SHVC = segue.destination as? SelectedHackerspaceTableViewController else {return}
         guard let hackerspaceKey = sender as? String else {return print("cannot prepare for segue, sender was not a string, instead it was: \(sender)")}
         guard let data = hackerspaces[hackerspaceKey]  else {return print("could not find hackerspace with name \(hackerspaceKey)")}
         switch data {
-            case .Finished(let data): SHVC.prepare(data)
+            case .finished(let data): SHVC.prepare(data)
             case _ : print("could not segue into hackerspace with no data")
         }
     }

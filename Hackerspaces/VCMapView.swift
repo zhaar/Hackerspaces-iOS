@@ -20,34 +20,34 @@ class HSInfoCarrier: NSObject {
 
 extension MapViewController: MKMapViewDelegate {
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if let annotation = annotation as? SpaceLocation {
             var view: MKPinAnnotationView
-            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(UIConstants.AnnotationViewReuseIdentifier)
+            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: UIConstants.AnnotationViewReuseIdentifier)
                 as? MKPinAnnotationView {
                     dequeuedView.annotation = annotation
                     view = dequeuedView
             } else {
                 view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: UIConstants.AnnotationViewReuseIdentifier)
                 view.canShowCallout = true
-                view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             }
             return view
         }
         return nil
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let SHVC = segue.destinationViewController as? SelectedHackerspaceTableViewController {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let SHVC = segue.destination as? SelectedHackerspaceTableViewController {
             let info = sender as! HSInfoCarrier
             SHVC.prepare(info.hsName, url: info.hsAPI)
         }
     }
     
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let annotation = view.annotation as? SpaceLocation {
             SpaceAPI.loadAPI().onSuccess { dict in
-                self.performSegueWithIdentifier(UIConstants.showHSMap, sender: HSInfoCarrier(name: annotation.name, url: dict[annotation.name]!))
+                self.performSegue(withIdentifier: UIConstants.showHSMap, sender: HSInfoCarrier(name: annotation.name, url: dict[annotation.name]!))
             }
         }
     }

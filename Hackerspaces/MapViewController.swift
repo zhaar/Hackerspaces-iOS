@@ -19,16 +19,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
     
-    @IBAction func resetMap(sender: UILongPressGestureRecognizer) {
+    @IBAction func resetMap(_ sender: UILongPressGestureRecognizer) {
         if let location = locationManager.location {
             centerMapOnLocation(location)
         }
     }
     
     func checkLocationAuthorizationStatus() {
-        if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             map.showsUserLocation = true
-            map.userTrackingMode = MKUserTrackingMode.None
+            map.userTrackingMode = MKUserTrackingMode.none
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.startUpdatingLocation()
         } else {
@@ -36,7 +36,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    func centerMapOnLocation(location: CLLocation) {
+    func centerMapOnLocation(_ location: CLLocation) {
         let regionRadius: CLLocationDistance = 5000
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
             regionRadius * 2.0, regionRadius * 2.0)
@@ -50,7 +50,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkLocationAuthorizationStatus()
     }

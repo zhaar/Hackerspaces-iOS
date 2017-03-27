@@ -12,36 +12,36 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.leftBarButtonItem = editButtonItem()
+        navigationItem.leftBarButtonItem = editButtonItem
         title = "Favorites"
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.refresh(refreshControl!)
     }
         
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             let hackerspaceToDelete = visibleResults[indexPath.row]
             SharedData.removeFromFavoritesList(hackerspaceToDelete)
-            visibleResults.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            visibleResults.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         if visibleResults.count == 0 {
             let instructions = UILabel(frame: self.tableView.bounds)
             instructions.attributedText = NSAttributedString(string: "Select your favorite hackerspace from search or map")
-            instructions.textAlignment = .Center
-            instructions.textColor = UIColor.blackColor()
+            instructions.textAlignment = .center
+            instructions.textColor = UIColor.black
             instructions.numberOfLines = 0
             tableView.backgroundView = instructions
-            tableView.separatorStyle = .None
+            tableView.separatorStyle = .none
             return 1
         } else {
-            tableView.separatorStyle = .SingleLine
+            tableView.separatorStyle = .singleLine
             tableView.backgroundView = nil
             return 1
         }
