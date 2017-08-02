@@ -35,8 +35,16 @@ extension Dictionary {
     
 }
 
+func tuplesAsDict<K: Hashable, V, S: Sequence>(seq: S) -> [K : V] where S.Iterator.Element == (K, V) {
+    var dict: [K : V] = [:]
+    seq.forEach { tuple in
+        dict[tuple.0] = tuple.1
+    }
+    return dict
+}
+
 extension Dictionary {
-    init(_ pairs: [Element]) {
+    init(pairs: [Element]) {
         self.init()
         for (k, v) in pairs {
             self[k] = v

@@ -112,7 +112,7 @@ struct SpaceAPI {
     }
     
     static func getParsedHackerspace(_ url: String, name: String) -> Future<ParsedHackerspaceData, NSError> {
-        return  loadHackerspace(url, fromCache: true).map {parseHackerspaceDataModel($0, name: name, url: url)}.flatMap { parsed -> Result<ParsedHackerspaceData, NSError> in
+        return  loadHackerspace(url, fromCache: true).map {parseHackerspaceDataModel(json: $0, name: name, url: url)}.flatMap { parsed -> Result<ParsedHackerspaceData, NSError> in
             switch parsed {
             case .some(let p): return Result(value: p)
             case .none : return Result(error: NSError(domain: "parse Error", code: -1, userInfo: nil))
@@ -164,7 +164,7 @@ struct SpaceAPI {
     }
     
     static func loadAllSpaceAPIAsDict(_ fromCache: Bool = true) -> Future<[String : [String : JSONDecoder]], NSError> {
-        return loadAllSpacesAPI(fromCache).map { Dictionary($0) }
+        return loadAllSpacesAPI(fromCache).map(tuplesAsDict)
     }
     
     static func getHackerspaceLocations(_ fromCache: Bool = true) -> Future<[SpaceLocation?], NSError> {

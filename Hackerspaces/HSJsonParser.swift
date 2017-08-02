@@ -10,14 +10,14 @@ import Foundation
 import Swiftz
 import MapKit
 
-func parseHackerspaceDataModel(_ json: [String: JSONDecoder], name apiName: String, url: String) -> ParsedHackerspaceData? {
+func parseHackerspaceDataModel(json: [String: JSONDecoder], name apiName: String, url: String) -> ParsedHackerspaceData? {
     let apiVersion = json[SpaceAPIConstants.APIversion.rawValue]?.string
     let name = SpaceAPI.extractName(json)
     let logo = json[SpaceAPIConstants.APIlogo.rawValue]?.string
     let websiteURL = json[SpaceAPIConstants.APIurl.rawValue]?.string
     let state = json[SpaceAPIConstants.APIstate.rawValue]?.dictionary >>- { parseStateObject($0) }
     let location = json[SpaceAPIConstants.APIlocation.rawValue]?.dictionary >>- { parseLocationObject($0, withName: name) }
-    let contact = json[SpaceAPIConstants.APIcontact.rawValue]?.dictionary >>- { parseContactObject($0) }
+    let contact = json[SpaceAPIConstants.APIcontact.rawValue]?.dictionary >>- parseContactObject
     let reportChannel = json[SpaceAPIConstants.APIreport.rawValue]?.array >>- { parseReportChannel($0) }
     return apiVersion >>- { api in logo >>- { log in websiteURL >>- { web in location >>- { loc in contact >>- {cont in reportChannel >>- {report in state >>- { s in
         ParsedHackerspaceData(apiVersion: api, apiEndpoint: url, apiName: apiName, name: name, logoURL: log, websiteURL: web, state: s, location: loc, contact: cont, issue_report_channel: report)}}}}}}}

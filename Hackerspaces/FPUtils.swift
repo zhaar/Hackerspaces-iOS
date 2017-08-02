@@ -12,3 +12,4 @@ import Swiftz
 func map<A, B, F: Functor>(_ fn: @escaping (A) -> B) -> (F) -> F.FB where F.A == A, F.B == B {
     return { f in f.fmap(fn) }
 }
+

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9514F85F1F30DFB70061A1E6 /* JSONDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C56FF1E89BFC70061A1E6 /* JSONDecoding.swift */; };
+		9514F8611F30E06B0061A1E6 /* HSJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2881B91EB310061A1E6 /* HSJsonParser.swift */; };
 		9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */; };
 		9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */; };
 		9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */; };
@@ -22,12 +24,19 @@
 		95643FBC1B729B3E0061A1E6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 95643FBB1B729B3E0061A1E6 /* Images.xcassets */; };
 		95643FBF1B729B3E0061A1E6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95643FBD1B729B3E0061A1E6 /* LaunchScreen.xib */; };
 		95643FCB1B729B3E0061A1E6 /* HackerspacesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FCA1B729B3E0061A1E6 /* HackerspacesTests.swift */; };
-		9573A2891B91EB310061A1E6 /* HSDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2881B91EB310061A1E6 /* HSDataModel.swift */; };
+		956455171F3140410061A1E6 /* Swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 956455161F3140410061A1E6 /* Swiftz.framework */; };
+		956455181F3140410061A1E6 /* Swiftz.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 956455161F3140410061A1E6 /* Swiftz.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9564551A1F3140A30061A1E6 /* Swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 956455161F3140410061A1E6 /* Swiftz.framework */; };
+		9564551B1F3141ED0061A1E6 /* HSMapInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */; };
+		9564551C1F3141FD0061A1E6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB77FE1B9142D60061A1E6 /* Constants.swift */; };
+		9564551D1F3142A50061A1E6 /* SpaceAPIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */; };
+		9564551E1F3142CE0061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
+		9564551F1F31446B0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
+		9573A2891B91EB310061A1E6 /* HSJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2881B91EB310061A1E6 /* HSJsonParser.swift */; };
 		9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */; };
 		9573A2AF1B936F960061A1E6 /* RawDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */; };
 		958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */; };
 		958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */; };
-		958B31AD1C6A89E3000EF9E1 /* Swiftz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594971B893E5E0061A1E6 /* Swiftz.framework */; };
 		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
 		9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */; };
 		95A594A21B893FB60061A1E6 /* Haneke.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */; };
@@ -55,6 +64,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		956455191F3140410061A1E6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				956455181F3140410061A1E6 /* Swiftz.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		95A5949D1B893F630061A1E6 /* Debug */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -90,17 +110,16 @@
 		95643FC41B729B3E0061A1E6 /* HackerspacesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HackerspacesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		95643FC91B729B3E0061A1E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95643FCA1B729B3E0061A1E6 /* HackerspacesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HackerspacesTests.swift; sourceTree = "<group>"; };
-		9573A2881B91EB310061A1E6 /* HSDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSDataModel.swift; sourceTree = "<group>"; };
+		956455161F3140410061A1E6 /* Swiftz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swiftz.framework; path = Carthage/Build/iOS/Swiftz.framework; sourceTree = "<group>"; };
+		9573A2881B91EB310061A1E6 /* HSJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSJsonParser.swift; sourceTree = "<group>"; };
 		9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
 		9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawDataTableViewCell.swift; sourceTree = "<group>"; };
 		9597A1AA1B79252F0061A1E6 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
 		9597A1AD1B7932100061A1E6 /* DataCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCache.xcdatamodel; sourceTree = "<group>"; };
 		95A5948C1B893C530061A1E6 /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = ../carthage_dependecies/Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
 		95A5948E1B893C530061A1E6 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = ../carthage_dependecies/Carthage/Build/iOS/SwiftHTTP.framework; sourceTree = "<group>"; };
-		95A5948F1B893C530061A1E6 /* Swiftz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swiftz.framework; path = ../carthage_dependecies/Carthage/Build/iOS/Swiftz.framework; sourceTree = "<group>"; };
 		95A594941B893E5E0061A1E6 /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
 		95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = Carthage/Build/iOS/SwiftHTTP.framework; sourceTree = "<group>"; };
-		95A594971B893E5E0061A1E6 /* Swiftz.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swiftz.framework; path = Carthage/Build/iOS/Swiftz.framework; sourceTree = "<group>"; };
 		95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Haneke.framework.dSYM; path = Carthage/Build/iOS/Haneke.framework.dSYM; sourceTree = "<group>"; };
 		95A5949F1B893FB60061A1E6 /* JSONJoy.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = JSONJoy.framework.dSYM; path = Carthage/Build/iOS/JSONJoy.framework.dSYM; sourceTree = "<group>"; };
 		95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftHTTP.framework.dSYM; path = Carthage/Build/iOS/SwiftHTTP.framework.dSYM; sourceTree = "<group>"; };
@@ -123,9 +142,9 @@
 			files = (
 				95DBD94C1B8CFF360061A1E6 /* Result.framework in Frameworks */,
 				958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */,
+				956455171F3140410061A1E6 /* Swiftz.framework in Frameworks */,
 				958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */,
 				95DBD9471B8CFF360061A1E6 /* Haneke.framework in Frameworks */,
-				958B31AD1C6A89E3000EF9E1 /* Swiftz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9564551A1F3140A30061A1E6 /* Swiftz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,14 +162,13 @@
 		8178FF0F74739ED96AEB03D5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				956455161F3140410061A1E6 /* Swiftz.framework */,
 				95DBD94B1B8CFF360061A1E6 /* Result.framework */,
 				95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */,
 				95A594941B893E5E0061A1E6 /* Haneke.framework */,
 				95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */,
-				95A594971B893E5E0061A1E6 /* Swiftz.framework */,
 				95A5948C1B893C530061A1E6 /* Haneke.framework */,
 				95A5948E1B893C530061A1E6 /* SwiftHTTP.framework */,
-				95A5948F1B893C530061A1E6 /* Swiftz.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -206,7 +225,7 @@
 				952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */,
 				95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */,
 				95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */,
-				9573A2881B91EB310061A1E6 /* HSDataModel.swift */,
+				9573A2881B91EB310061A1E6 /* HSJsonParser.swift */,
 				954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */,
 				953C513A1B8F49190061A1E6 /* FutureUtils.swift */,
 				954C57011E89C7C40061A1E6 /* FPUtils.swift */,
@@ -288,6 +307,7 @@
 				95643FAB1B729B3E0061A1E6 /* Resources */,
 				95A5949C1B893E7E0061A1E6 /* Carthage copy-frameworks */,
 				95A5949D1B893F630061A1E6 /* Debug */,
+				956455191F3140410061A1E6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -422,7 +442,7 @@
 				9573A2AF1B936F960061A1E6 /* RawDataTableViewCell.swift in Sources */,
 				95DBD9561B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */,
 				9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */,
-				9573A2891B91EB310061A1E6 /* HSDataModel.swift in Sources */,
+				9573A2891B91EB310061A1E6 /* HSJsonParser.swift in Sources */,
 				95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */,
 				9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */,
 				9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */,
@@ -439,7 +459,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9564551C1F3141FD0061A1E6 /* Constants.swift in Sources */,
+				9564551D1F3142A50061A1E6 /* SpaceAPIFunctions.swift in Sources */,
+				9514F85F1F30DFB70061A1E6 /* JSONDecoding.swift in Sources */,
+				9564551F1F31446B0061A1E6 /* extensions.swift in Sources */,
+				9564551E1F3142CE0061A1E6 /* FutureUtils.swift in Sources */,
 				95643FCB1B729B3E0061A1E6 /* HackerspacesTests.swift in Sources */,
+				9514F8611F30E06B0061A1E6 /* HSJsonParser.swift in Sources */,
+				9564551B1F3141ED0061A1E6 /* HSMapInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -569,7 +596,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/Carthage/Build/iOS/\n$(PROJECT_DIR)/Carthage/Build/iOS/\n$(PROJECT_DIR)/Carthage/Build/iOS/\n$(PROJECT_DIR)/Carthage/Build/iOS/\n$(PROJECT_DIR)/Carthage/Build/iOS/\n$(PROJECT_DIR)/Carthage/Build/iOS/\n",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Hackerspaces/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
@@ -589,7 +622,13 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(PROJECT_DIR)/Carthage/Build/iOS/\n$(PROJECT_DIR)/Carthage/Build/iOS/\n$(PROJECT_DIR)/Carthage/Build/iOS/\n$(PROJECT_DIR)/Carthage/Build/iOS/\n$(PROJECT_DIR)/Carthage/Build/iOS/\n$(PROJECT_DIR)/Carthage/Build/iOS/\n",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/",
+					"$(PROJECT_DIR)/Carthage/Build/iOS/",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Hackerspaces/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
@@ -606,7 +645,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -624,7 +666,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = HackerspacesTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.fixme.$(PRODUCT_NAME:rfc1034identifier)";
