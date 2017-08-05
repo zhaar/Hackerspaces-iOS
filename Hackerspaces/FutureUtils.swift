@@ -20,7 +20,7 @@ struct FutureUtils {
     
     ///Converts a list of futures into a future of list discarding failing futures
     static func successfulFutureList<T, E: Error>(_ list: [Future<T, E>]) -> Future<[T], NoError> {
-        return flattenOptionalFuture(list.map(futureToOptional))
+        return flattenOptionalFuture § list.map(futureToOptional)
     }
     
     ///Converts a list of futures of Option into a future of list of non-nil values

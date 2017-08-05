@@ -33,7 +33,7 @@ struct SpaceAPI {
                     p.failure(NSError(domain: "HTTP request json cast error: \(JSONDecoder(data).description)", code: 126, userInfo: nil))
                 }
                 }.onFailure { error in
-                    p.failure(NSError(domain: "HTTP request error: \(error?.localizedDescription)", code: -889, userInfo: nil))
+                    p.failure(NSError(domain: "HTTP request error: \(String(describing: error?.localizedDescription))", code: -889, userInfo: nil))
             }
         }
         return p.future
@@ -81,7 +81,7 @@ struct SpaceAPI {
                         p.failure(NSError(domain: "JSON parsing error: \(JSONDecoder(data).description)", code: 126, userInfo: nil))
                     }
                 }.onFailure({ (err: Error?) in
-                    p.failure(NSError(domain: "cache fetch error: \(err?.localizedDescription)", code: -888, userInfo: nil))
+                    p.failure(NSError(domain: "cache fetch error: \(String(describing: err?.localizedDescription))", code: -888, userInfo: nil))
                 })
         }
         return p.future
@@ -122,7 +122,7 @@ struct SpaceAPI {
     }
     
     static func getHackerspaceLocation(_ url: String) -> Future<SpaceLocation?, NSError> {
-        return loadHackerspaceAPI(url).map { self.extractLocationInfo($0) }
+        return loadHackerspaceAPI(url).map(extractLocationInfo)
     }
     
     static func tupleFutureToFutureOfTuple<T,U>(_ t: (Future<T, NSError>, Future<U, NSError>)) -> Future<(T,U), NSError> {
@@ -130,7 +130,7 @@ struct SpaceAPI {
     }
     
     static func listTupleToListFuture(_ list: [(Future<String, NoError>, Future<[String : JSONDecoder], NoError>)]) -> Future<[(String, [String: JSONDecoder])], NoError> {
-        let m: [Future<(String, [String: JSONDecoder]), NoError>]  = list.map { (tuple: (Future<String, NoError>, Future<[String : JSONDecoder], NoError>)) -> Future<(String, [String: JSONDecoder]), NoError> in
+        let m: [Future<(String, [String: JSONDecoder]), NoError>] = list.map { (tuple: (Future<String, NoError>, Future<[String : JSONDecoder], NoError>)) -> Future<(String, [String: JSONDecoder]), NoError> in
             tuple.0.zip(tuple.1)}
         return m.sequence()
     }
@@ -138,7 +138,7 @@ struct SpaceAPI {
     /*!
      @brief converts dictionary of url into list of futures
      
-     @discussion This function takes a dictionnary of name to url as strings and maps it to a list of tuples containing the key of the dictionary as a non-failing future and the value as a future of a JSON object which is a dictionary from String to JSONDecoder
+     @discussion This function takes a dictionnary of name to urls as strings and maps it to a list of tuples containing the key of the dictionary as a non-failing future and the value as a future of a JSON object which is a dictionary from String to JSONDecoder
      
      @param  Dictionary of strings representing [name : url]
      
@@ -146,19 +146,18 @@ struct SpaceAPI {
      */
     fileprivate static func dictToFutureQuery(_ dictionary: [String : String]) -> [Future<(String, [String : JSONDecoder])?, NoError>] {
         return dictionary.map { (key, value) in
-            let t = (Future<String, NoError>(value: key), SpaceAPI.loadHackerspaceAPI(value))
-            let s = Future(value: key).zip(FutureUtils.futureToOptional(t.1))
-            let r = s.map { (tuple: (String, [String : JSONDecoder]?)) -> (String, [String : JSONDecoder])? in tuple.1.flatMap {(tuple.0, $0)}}
-            return r
+            let result = FutureUtils.futureToOptional(SpaceAPI.loadHackerspaceAPI(value))
+            return result.map { (r: [String : JSONDecoder]?) -> (String, [String : JSONDecoder])? in r.flatMap {(key, $0)}}
         }
     }
     
     fileprivate static func arrayFutureToFlatFutureArray(_ dict: [String : String]) -> Future<[(String, [String : JSONDecoder])], NoError> {
-        return FutureUtils.flattenOptionalFuture(dictToFutureQuery(dict))
+        return FutureUtils.flattenOptionalFuture • dictToFutureQuery § dict
     }
     
     static func loadAllSpacesAPI(_ fromCache: Bool = true) -> Future<[(String, [String: JSONDecoder])], NSError> {
-        return (fromCache ? loadAPI() : loadAPIFromWeb()).flatMap { (dict: [String : String]) -> Future<[(String, [String: JSONDecoder])], NSError> in
+        let api = fromCache ? loadAPI() : loadAPIFromWeb()
+        return api.flatMap { (dict: [String : String]) -> Future<[(String, [String: JSONDecoder])], NSError> in
             self.arrayFutureToFlatFutureArray(dict).promoteError()
         }
     }
@@ -177,14 +176,14 @@ struct SpaceAPI {
         return json["state"]?.dictionary?["open"]?.bool ?? false
     }
     
-    static func extractName(_ json: [String: JSONDecoder]) -> String {
-        return json[SpaceAPIConstants.APIname.rawValue]!.string!
+    static func extractName(_ json: [String: JSONDecoder]) -> String? {
+        return json[SpaceAPIConstants.APIname.rawValue]?.string
     }
     
     ///returns the location from a json file, returns nil if unable to parse
     static func extractLocationInfo(_ json: [String: JSONDecoder]) -> SpaceLocation? {
         let location = json[SpaceAPIConstants.APIlocation.rawValue]?.dictionary
         let name = self.extractName(json)
-        return location.flatMap {parseLocationObject($0, withName: name)}
+        return location.flatMap { l in name.flatMap { n in parseLocationObject(l, withName: n) } }
     }
 }

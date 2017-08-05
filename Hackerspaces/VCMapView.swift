@@ -19,31 +19,30 @@ class HSInfoCarrier: NSObject {
 }
 
 extension MapViewController: MKMapViewDelegate {
-    
+
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        if let annotation = annotation as? SpaceLocation {
-            var view: MKPinAnnotationView
-            if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: UIConstants.AnnotationViewReuseIdentifier)
-                as? MKPinAnnotationView {
-                    dequeuedView.annotation = annotation
-                    view = dequeuedView
-            } else {
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: UIConstants.AnnotationViewReuseIdentifier)
-                view.canShowCallout = true
-                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-            }
-            return view
+        guard let annotation = annotation as? SpaceLocation else { return nil }
+        var view: MKPinAnnotationView
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: UIConstants.AnnotationViewReuseIdentifier)
+            as? MKPinAnnotationView {
+            dequeuedView.annotation = annotation
+            view = dequeuedView
+        } else {
+            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: UIConstants.AnnotationViewReuseIdentifier)
+            view.canShowCallout = true
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
-        return nil
+        return view
+
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let SHVC = segue.destination as? SelectedHackerspaceTableViewController {
-            let info = sender as! HSInfoCarrier
+        if let SHVC = segue.destination as? SelectedHackerspaceTableViewController,
+            let info = sender as? HSInfoCarrier {
             SHVC.prepare(info.hsName, url: info.hsAPI)
         }
     }
-    
+
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let annotation = view.annotation as? SpaceLocation {
             SpaceAPI.loadAPI().onSuccess { dict in

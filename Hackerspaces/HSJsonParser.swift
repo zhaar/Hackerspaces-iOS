@@ -10,48 +10,107 @@ import Foundation
 import Swiftz
 import MapKit
 
+enum JSONKeys {
+    static let open = "open"
+    static let closed = "closed"
+    static let lastchange = "lastchange"
+    static let trigger_person = "trigger_person"
+    static let icon = "icon"
+    static let message = "message"
+    //location
+    static let lat = "lat"
+    static let lon = "lon"
+    static let address = "address"
+    //contact
+    static let keymasters = "keymasters"
+    static let phone = "phone"
+    static let sip = "sip"
+    static let irc = "irc"
+    static let twitter = "twitter"
+    static let facebook = "facebook"
+    static let google = "google"
+    static let plus = "plus"
+    static let identica = "identica"
+    static let foursquare = "foursquare"
+    static let email = "email"
+    static let ml = "ml"
+    static let jabber = "jabber"
+    static let issue_mail = "issue_mail"
+    //member
+    static let name = "name"
+    static let irc_nick = "irc_nick"
+}
+
 func parseHackerspaceDataModel(json: [String: JSONDecoder], name apiName: String, url: String) -> ParsedHackerspaceData? {
-    let apiVersion = json[SpaceAPIConstants.APIversion.rawValue]?.string
-    let name = SpaceAPI.extractName(json)
-    let logo = json[SpaceAPIConstants.APIlogo.rawValue]?.string
-    let websiteURL = json[SpaceAPIConstants.APIurl.rawValue]?.string
-    let state = json[SpaceAPIConstants.APIstate.rawValue]?.dictionary >>- { parseStateObject($0) }
-    let location = json[SpaceAPIConstants.APIlocation.rawValue]?.dictionary >>- { parseLocationObject($0, withName: name) }
-    let contact = json[SpaceAPIConstants.APIcontact.rawValue]?.dictionary >>- parseContactObject
-    let reportChannel = json[SpaceAPIConstants.APIreport.rawValue]?.array >>- { parseReportChannel($0) }
-    return apiVersion >>- { api in logo >>- { log in websiteURL >>- { web in location >>- { loc in contact >>- {cont in reportChannel >>- {report in state >>- { s in
-        ParsedHackerspaceData(apiVersion: api, apiEndpoint: url, apiName: apiName, name: name, logoURL: log, websiteURL: web, state: s, location: loc, contact: cont, issue_report_channel: report)}}}}}}}
+
+    if
+        let apiVersion = json[SpaceAPIConstants.APIversion.rawValue]?.string,
+        let name = SpaceAPI.extractName(json),
+        let logo = json[SpaceAPIConstants.APIlogo.rawValue]?.string,
+        let websiteURL = json[SpaceAPIConstants.APIurl.rawValue]?.string,
+        let state = json[SpaceAPIConstants.APIstate.rawValue]?.dictionary >>- parseStateObject,
+        let location = json[SpaceAPIConstants.APIlocation.rawValue]?.dictionary >>- { loc in name >>- {n in parseLocationObject(loc, withName: n) } },
+        let contact = json[SpaceAPIConstants.APIcontact.rawValue]?.dictionary >>- parseContactObject,
+        let reportChannel = json[SpaceAPIConstants.APIreport.rawValue]?.array >>-  parseReportChannel {
+
+        return ParsedHackerspaceData(apiVersion: apiVersion,
+                                     apiEndpoint: url,
+                                     apiName: apiName,
+                                     name: name,
+                                     logoURL: logo,
+                                     websiteURL: websiteURL,
+                                     state: state, location: location,
+                                     contact: contact,
+                                     issue_report_channel: reportChannel)
+    } else { return nil }
 
 }
 
 private func parseStateObject(_ state: [String: JSONDecoder]) -> StateObject {
-    let o = state["open"]
+    let o = state[JSONKeys.open]
     var isOpen: Bool? = o?.bool
     isOpen = isOpen ?? (o?.number == 1)
-    isOpen = isOpen ?? (o?.string == "open")
+    isOpen = isOpen ?? (o?.string == JSONKeys.open)
     let open = isOpen ?? false
-    let lastChange = state["lastchange"]?.number
-    let trigger = state["trigger_person"]?.string
-    let icon = parseIconObject(state["icon"]?.dictionary)
-    let message = state["message"]?.string
+    let lastChange = state[JSONKeys.lastchange]?.number
+    let trigger = state[JSONKeys.trigger_person]?.string
+    let icon = state[JSONKeys.icon]?.dictionary.flatMap(parseIconObject)
+    let message = state[JSONKeys.message]?.string
     return StateObject(open: open, lastChange: lastChange?.intValue, trigger_person: trigger, message: message, icon: icon)
 }
 
-private func parseIconObject(_ icon: [String : JSONDecoder]?) -> IconObject? {
-    return icon >>- { json in json["open"]?.string >>- { open in json["closed"]?.string >>- { closed in IconObject(openURL: open, closedURL: closed)}}}
+private func parseIconObject(_ icon: [String : JSONDecoder]) -> IconObject? {
+
+    guard let open = icon[JSONKeys.open]?.string,
+        let closed = icon[JSONKeys.closed]?.string else { return nil }
+
+    return IconObject(openURL: open, closedURL: closed)
+
 }
 
 func parseLocationObject(_ location: [String : JSONDecoder], withName name: String) -> SpaceLocation? {
-    let lat = location["lat"]?.number >>- {CLLocationDegrees($0)}
-    let lon = location["lon"]?.number >>- {CLLocationDegrees($0)}
+    let lat = location[JSONKeys.lat]?.number >>- CLLocationDegrees.init
+    let lon = location[JSONKeys.lon]?.number >>- CLLocationDegrees.init
     let loc = lat >>- {la in lon >>- { lo in CLLocationCoordinate2D(latitude: la, longitude: lo)}}
-    let addr = location["address"]?.string
+    let addr = location[JSONKeys.address]?.string
     return loc >>- {SpaceLocation(name: name, address: addr, location: $0)}
 }
 
 private func parseContactObject(_ contact: [String: JSONDecoder]) -> ContactObject {
-    let keymasters = contact["keymasters"]?.array >>- { parseKeymasters($0) }
-    return ContactObject(phone: contact["phone"]?.string, sip: contact["sip"]?.string, keyMasters: keymasters, ircURL: contact["irc"]?.string, twitterHandle: contact["twitter"]?.string, facebook: contact["facebook"]?.string, googlePlus: contact["google"]?.dictionary?["plus"]?.string, identica: contact["identica"]?.string, foursquareID: contact["foursquare"]?.string, email: contact["email"]?.string, mailingList: contact["ml"]?.string, jabber: contact["jabber"]?.string, issue_mail: contact["issue_mail"]?.string)
+    let keymasters = contact[JSONKeys.keymasters]?.array >>- parseKeymasters
+    return ContactObject(phone: contact[JSONKeys.phone]?.string,
+                         sip: contact[JSONKeys.sip]?.string,
+                         keyMasters: keymasters,
+                         ircURL: contact[JSONKeys.irc]?.string,
+                         twitterHandle: contact[JSONKeys.twitter]?.string,
+                         facebook: contact[JSONKeys.facebook]?.string,
+                         googlePlus: contact[JSONKeys.google]?.dictionary?[JSONKeys.plus]?.string,
+                         identica: contact[JSONKeys.identica]?.string,
+                         foursquareID: contact[JSONKeys.foursquare]?.string,
+                         email: contact[JSONKeys.email]?.string,
+                         mailingList: contact[JSONKeys.ml]?.string,
+                         jabber: contact[JSONKeys.jabber]?.string,
+                         issue_mail: contact[JSONKeys.issue_mail]?.string)
 }
 
 private func parseKeymasters(_ keymasters: [JSONDecoder]) -> [MemberObject] {
@@ -60,13 +119,15 @@ private func parseKeymasters(_ keymasters: [JSONDecoder]) -> [MemberObject] {
 }
 
 private func parseMember(_ member: [String: JSONDecoder]) -> MemberObject {
-    return MemberObject(name: member["name"]?.string, irc_nick: member["irc_nick"]?.string, phone: member["phone"]?.string, email: member["email"]?.string, twitterHandle: member["twitter"]?.string)
+    return MemberObject(name: member[JSONKeys.name]?.string,
+                        irc_nick: member[JSONKeys.irc_nick]?.string,
+                        phone: member[JSONKeys.phone]?.string,
+                        email: member[JSONKeys.email]?.string,
+                        twitterHandle: member[JSONKeys.twitter]?.string)
 }
 
 private func parseReportChannel(_ channels: [JSONDecoder]) -> [String] {
-    return channels.map { json in
-        json.string
-        }.filter { $0 != nil }.map { $0! }
+    return channels.flatMap { $0.string }
 }
 
 struct ParsedHackerspaceData {

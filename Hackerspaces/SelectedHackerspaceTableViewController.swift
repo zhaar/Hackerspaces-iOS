@@ -41,7 +41,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     fileprivate var hackerspaceData: ParsedHackerspaceData!
     var isFavorite: Bool {
         get {
-            return SharedData.favoritesDictionary().keys.contains(hackerspaceData.apiName) ?? false
+            return SharedData.favoritesDictionary().keys.contains(hackerspaceData.apiName)
         }
     }
     
@@ -77,11 +77,11 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         switch source {
             case .Right(let m):
                 applyDataModel(m)
-                callback >>- { $0() }
+                callback?()
             case .Left(let (name,url)) :
                 SpaceAPI.loadHackerspace(url).map {parseHackerspaceDataModel(json: $0, name: name,url: url)}.filter {$0 != nil}.map{$0!}.onSuccess(callback: applyDataModel).onComplete {_ in
                     self.refreshControl?.endRefreshing()
-                    callback >>- { $0() }
+                    callback?()
             }
         }
     }
@@ -134,7 +134,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     func reuseTitleCell(_ indexPath: IndexPath) -> UITableViewCell {
         if let titleCell = tableView.dequeueReusableCell(withIdentifier: storyboard.TitleIdentifier, for: indexPath) as? HackerspaceTitleTableViewCell{
             titleCell.logo.image = nil
-            hackerspaceData?.logoURL >>- { URL(string: $0) } >>- { titleCell.logo.hnk_setImageFromURL($0) }
+            hackerspaceData?.logoURL >>- URL.init(string: ) >>- { titleCell.logo.hnk_setImageFromURL($0) }
             return titleCell
         } else {
             return tableView.dequeueReusableCell(withIdentifier: storyboard.TitleIdentifier, for: indexPath)
@@ -176,51 +176,4 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         let removeFromFavs = UIPreviewAction(title: "Remove Favorite", style: .destructive, handler: callback)
         return isFavorite ? [removeFromFavs] : [addToFavs]
     }
-
-    
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
