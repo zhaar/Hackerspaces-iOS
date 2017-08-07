@@ -90,3 +90,29 @@ extension Dictionary {
         return cpy
     }
 }
+
+prefix operator ==
+prefix func == <T: Equatable>(rhs: T) -> (T) -> Bool {
+    return { lhs in lhs == rhs }
+}
+
+prefix operator ?>
+prefix func ?> <T: Comparable>(rhs: T) -> (T) -> Bool {
+    return { lhs in lhs > rhs }
+}
+
+prefix operator ?<
+prefix func ?< <T: Comparable>(rhs: T) -> (T) -> Bool {
+    return { lhs in lhs < rhs }
+}
+
+prefix operator ?>=
+prefix func ?>= <T: Comparable>(rhs: T) -> (T) -> Bool {
+    return { lhs in lhs >= rhs }
+}
+
+prefix operator ?<=
+prefix func ?<= <T: Comparable>(rhs: T) -> (T) -> Bool {
+    return { lhs in lhs <= rhs }
+}
+

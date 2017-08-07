@@ -2,4 +2,5 @@ github "Haneke/HanekeSwift" "feature/swift-3"
 github "daltoniam/SwiftHTTP"
 github "typelift/Swiftz"
 github "Thomvis/BrightFutures"
+github "andrevidela/JSONWrapper"
 

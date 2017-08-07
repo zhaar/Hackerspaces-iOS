@@ -9,6 +9,7 @@
 import Foundation
 import Swiftz
 import MapKit
+import JSONWrapper
 
 enum JSONKeys {
     static let open = "open"
@@ -41,17 +42,17 @@ enum JSONKeys {
     static let irc_nick = "irc_nick"
 }
 
-func parseHackerspaceDataModel(json: [String: JSONDecoder], name apiName: String, url: String) -> ParsedHackerspaceData? {
+func parseHackerspaceDataModel(json: [String: JSONValue], name apiName: String, url: String) -> ParsedHackerspaceData? {
 
     if
-        let apiVersion = json[SpaceAPIConstants.APIversion.rawValue]?.string,
+        let apiVersion = json[SpaceAPIConstants.APIversion.rawValue]?.asString,
         let name = SpaceAPI.extractName(json),
-        let logo = json[SpaceAPIConstants.APIlogo.rawValue]?.string,
-        let websiteURL = json[SpaceAPIConstants.APIurl.rawValue]?.string,
-        let state = json[SpaceAPIConstants.APIstate.rawValue]?.dictionary >>- parseStateObject,
-        let location = json[SpaceAPIConstants.APIlocation.rawValue]?.dictionary >>- { loc in name >>- {n in parseLocationObject(loc, withName: n) } },
-        let contact = json[SpaceAPIConstants.APIcontact.rawValue]?.dictionary >>- parseContactObject,
-        let reportChannel = json[SpaceAPIConstants.APIreport.rawValue]?.array >>-  parseReportChannel {
+        let logo = json[SpaceAPIConstants.APIlogo.rawValue]?.asString,
+        let websiteURL = json[SpaceAPIConstants.APIurl.rawValue]?.asString,
+        let state = json[SpaceAPIConstants.APIstate.rawValue]?.asObject >>- parseStateObject,
+        let location = json[SpaceAPIConstants.APIlocation.rawValue]?.asObject >>- { loc in name >>- {n in parseLocationObject(loc, withName: n) } },
+        let contact = json[SpaceAPIConstants.APIcontact.rawValue]?.asObject >>- parseContactObject,
+        let reportChannel = json[SpaceAPIConstants.APIreport.rawValue]?.asArray >>-  parseReportChannel {
 
         return ParsedHackerspaceData(apiVersion: apiVersion,
                                      apiEndpoint: url,
@@ -66,68 +67,69 @@ func parseHackerspaceDataModel(json: [String: JSONDecoder], name apiName: String
 
 }
 
-private func parseStateObject(_ state: [String: JSONDecoder]) -> StateObject {
+private func parseStateObject(_ state: [String: JSONValue]) -> StateObject {
+    
     let o = state[JSONKeys.open]
-    var isOpen: Bool? = o?.bool
-    isOpen = isOpen ?? (o?.number == 1)
-    isOpen = isOpen ?? (o?.string == JSONKeys.open)
+    var isOpen: Bool? = o?.asBool
+    isOpen = isOpen ?? (o?.asInt.map(==1))
+    isOpen = isOpen ?? (o?.asString.map({ $0 == JSONKeys.open || $0 == "1" }))
     let open = isOpen ?? false
-    let lastChange = state[JSONKeys.lastchange]?.number
-    let trigger = state[JSONKeys.trigger_person]?.string
-    let icon = state[JSONKeys.icon]?.dictionary.flatMap(parseIconObject)
-    let message = state[JSONKeys.message]?.string
-    return StateObject(open: open, lastChange: lastChange?.intValue, trigger_person: trigger, message: message, icon: icon)
+    let lastChange = state[JSONKeys.lastchange]?.asInt
+    let trigger = state[JSONKeys.trigger_person]?.asString
+    let icon = state[JSONKeys.icon]?.asObject.flatMap(parseIconObject)
+    let message = state[JSONKeys.message]?.asString
+    return StateObject(open: open, lastChange: lastChange, trigger_person: trigger, message: message, icon: icon)
 }
 
-private func parseIconObject(_ icon: [String : JSONDecoder]) -> IconObject? {
+private func parseIconObject(_ icon: [String : JSONValue]) -> IconObject? {
 
-    guard let open = icon[JSONKeys.open]?.string,
-        let closed = icon[JSONKeys.closed]?.string else { return nil }
+    guard let open = icon[JSONKeys.open]?.asString,
+        let closed = icon[JSONKeys.closed]?.asString else { return nil }
 
     return IconObject(openURL: open, closedURL: closed)
 
 }
 
-func parseLocationObject(_ location: [String : JSONDecoder], withName name: String) -> SpaceLocation? {
-    let lat = location[JSONKeys.lat]?.number >>- CLLocationDegrees.init
-    let lon = location[JSONKeys.lon]?.number >>- CLLocationDegrees.init
+func parseLocationObject(_ location: [String : JSONValue], withName name: String) -> SpaceLocation? {
+    let lat = location[JSONKeys.lat]?.asInt >>- CLLocationDegrees.init
+    let lon = location[JSONKeys.lon]?.asInt >>- CLLocationDegrees.init
     let loc = lat >>- {la in lon >>- { lo in CLLocationCoordinate2D(latitude: la, longitude: lo)}}
-    let addr = location[JSONKeys.address]?.string
+    let addr = location[JSONKeys.address]?.asString
     return loc >>- {SpaceLocation(name: name, address: addr, location: $0)}
 }
 
-private func parseContactObject(_ contact: [String: JSONDecoder]) -> ContactObject {
-    let keymasters = contact[JSONKeys.keymasters]?.array >>- parseKeymasters
-    return ContactObject(phone: contact[JSONKeys.phone]?.string,
-                         sip: contact[JSONKeys.sip]?.string,
+private func parseContactObject(_ contact: [String: JSONValue]) -> ContactObject {
+    let keymasters = contact[JSONKeys.keymasters]?.asArray >>- parseKeymasters
+    return ContactObject(phone: contact[JSONKeys.phone]?.asString,
+                         sip: contact[JSONKeys.sip]?.asString,
                          keyMasters: keymasters,
-                         ircURL: contact[JSONKeys.irc]?.string,
-                         twitterHandle: contact[JSONKeys.twitter]?.string,
-                         facebook: contact[JSONKeys.facebook]?.string,
-                         googlePlus: contact[JSONKeys.google]?.dictionary?[JSONKeys.plus]?.string,
-                         identica: contact[JSONKeys.identica]?.string,
-                         foursquareID: contact[JSONKeys.foursquare]?.string,
-                         email: contact[JSONKeys.email]?.string,
-                         mailingList: contact[JSONKeys.ml]?.string,
-                         jabber: contact[JSONKeys.jabber]?.string,
-                         issue_mail: contact[JSONKeys.issue_mail]?.string)
+                         ircURL: contact[JSONKeys.irc]?.asString,
+                         twitterHandle: contact[JSONKeys.twitter]?.asString,
+                         facebook: contact[JSONKeys.facebook]?.asString,
+                         googlePlus: contact[JSONKeys.google]?.asObject?[JSONKeys.plus]?.asString,
+                         identica: contact[JSONKeys.identica]?.asString,
+                         foursquareID: contact[JSONKeys.foursquare]?.asString,
+                         email: contact[JSONKeys.email]?.asString,
+                         mailingList: contact[JSONKeys.ml]?.asString,
+                         jabber: contact[JSONKeys.jabber]?.asString,
+                         issue_mail: contact[JSONKeys.issue_mail]?.asString)
 }
 
-private func parseKeymasters(_ keymasters: [JSONDecoder]) -> [MemberObject] {
-    let members: [MemberObject?] =  keymasters.map {$0.dictionary.map(parseMember)}
+private func parseKeymasters(_ keymasters: [JSONValue]) -> [MemberObject] {
+    let members: [MemberObject?] =  keymasters.map {$0.asObject.map(parseMember)}
     return Array(members.joined())
 }
 
-private func parseMember(_ member: [String: JSONDecoder]) -> MemberObject {
-    return MemberObject(name: member[JSONKeys.name]?.string,
-                        irc_nick: member[JSONKeys.irc_nick]?.string,
-                        phone: member[JSONKeys.phone]?.string,
-                        email: member[JSONKeys.email]?.string,
-                        twitterHandle: member[JSONKeys.twitter]?.string)
+private func parseMember(_ member: [String: JSONValue]) -> MemberObject {
+    return MemberObject(name: member[JSONKeys.name]?.asString,
+                        irc_nick: member[JSONKeys.irc_nick]?.asString,
+                        phone: member[JSONKeys.phone]?.asString,
+                        email: member[JSONKeys.email]?.asString,
+                        twitterHandle: member[JSONKeys.twitter]?.asString)
 }
 
-private func parseReportChannel(_ channels: [JSONDecoder]) -> [String] {
-    return channels.flatMap { $0.string }
+private func parseReportChannel(_ channels: [JSONValue]) -> [String] {
+    return channels.flatMap { $0.asString }
 }
 
 struct ParsedHackerspaceData {
@@ -149,10 +151,10 @@ struct ParsedHackerspaceData {
         return (name: apiName, url: apiEndpoint)
     }
     //missing
-    //let sensors: 
+    //let sensors:
     //let feeds:
     //let cache
-    //let 
+    //let
 }
 
 struct LocationObject {

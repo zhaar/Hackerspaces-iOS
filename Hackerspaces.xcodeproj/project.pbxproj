@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9514F85F1F30DFB70061A1E6 /* JSONDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C56FF1E89BFC70061A1E6 /* JSONDecoding.swift */; };
 		9514F8611F30E06B0061A1E6 /* HSJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2881B91EB310061A1E6 /* HSJsonParser.swift */; };
 		9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */; };
 		9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */; };
@@ -15,7 +14,6 @@
 		952915411D5A94B20061A1E6 /* FavoriteHackerspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */; };
 		953161871B73B12A0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
 		953C513B1B8F49190061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
-		954C57001E89BFC70061A1E6 /* JSONDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C56FF1E89BFC70061A1E6 /* JSONDecoding.swift */; };
 		954C57021E89C7C40061A1E6 /* FPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C57011E89C7C40061A1E6 /* FPUtils.swift */; };
 		954F351E1D57FF0F0061A1E6 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */; };
 		95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB21B729B3E0061A1E6 /* AppDelegate.swift */; };
@@ -35,6 +33,10 @@
 		9573A2891B91EB310061A1E6 /* HSJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2881B91EB310061A1E6 /* HSJsonParser.swift */; };
 		9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */; };
 		9573A2AF1B936F960061A1E6 /* RawDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */; };
+		957BF3E81F3918E30061A1E6 /* JSONWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957BF3E71F3918E30061A1E6 /* JSONWrapper.framework */; };
+		957BF3E91F3918E50061A1E6 /* JSONWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957BF3E71F3918E30061A1E6 /* JSONWrapper.framework */; };
+		957BF3EA1F391B490061A1E6 /* JSONWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957BF3E71F3918E30061A1E6 /* JSONWrapper.framework */; };
+		957BF3EB1F391B490061A1E6 /* JSONWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 957BF3E71F3918E30061A1E6 /* JSONWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */; };
 		958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */; };
 		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
@@ -70,6 +72,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				957BF3EB1F391B490061A1E6 /* JSONWrapper.framework in Embed Frameworks */,
 				956455181F3140410061A1E6 /* Swiftz.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -97,7 +100,6 @@
 		952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoriteHackerspace.swift; sourceTree = "<group>"; };
 		953161861B73B12A0061A1E6 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		953C513A1B8F49190061A1E6 /* FutureUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureUtils.swift; sourceTree = "<group>"; };
-		954C56FF1E89BFC70061A1E6 /* JSONDecoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONDecoding.swift; sourceTree = "<group>"; };
 		954C57011E89C7C40061A1E6 /* FPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPUtils.swift; sourceTree = "<group>"; };
 		954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		95643FAD1B729B3E0061A1E6 /* Hackerspaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hackerspaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -114,6 +116,7 @@
 		9573A2881B91EB310061A1E6 /* HSJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSJsonParser.swift; sourceTree = "<group>"; };
 		9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
 		9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawDataTableViewCell.swift; sourceTree = "<group>"; };
+		957BF3E71F3918E30061A1E6 /* JSONWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSONWrapper.framework; path = Carthage/Build/iOS/JSONWrapper.framework; sourceTree = "<group>"; };
 		9597A1AA1B79252F0061A1E6 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
 		9597A1AD1B7932100061A1E6 /* DataCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCache.xcdatamodel; sourceTree = "<group>"; };
 		95A5948C1B893C530061A1E6 /* Haneke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Haneke.framework; path = ../carthage_dependecies/Carthage/Build/iOS/Haneke.framework; sourceTree = "<group>"; };
@@ -140,8 +143,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				957BF3E81F3918E30061A1E6 /* JSONWrapper.framework in Frameworks */,
 				95DBD94C1B8CFF360061A1E6 /* Result.framework in Frameworks */,
 				958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */,
+				957BF3EA1F391B490061A1E6 /* JSONWrapper.framework in Frameworks */,
 				956455171F3140410061A1E6 /* Swiftz.framework in Frameworks */,
 				958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */,
 				95DBD9471B8CFF360061A1E6 /* Haneke.framework in Frameworks */,
@@ -152,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				957BF3E91F3918E50061A1E6 /* JSONWrapper.framework in Frameworks */,
 				9564551A1F3140A30061A1E6 /* Swiftz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,6 +168,7 @@
 		8178FF0F74739ED96AEB03D5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				957BF3E71F3918E30061A1E6 /* JSONWrapper.framework */,
 				956455161F3140410061A1E6 /* Swiftz.framework */,
 				95DBD94B1B8CFF360061A1E6 /* Result.framework */,
 				95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */,
@@ -183,14 +190,6 @@
 				9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */,
 			);
 			name = "Selected Hackerspace";
-			sourceTree = "<group>";
-		};
-		954C56FE1E89BFBA0061A1E6 /* JSON */ = {
-			isa = PBXGroup;
-			children = (
-				954C56FF1E89BFC70061A1E6 /* JSONDecoding.swift */,
-			);
-			name = JSON;
 			sourceTree = "<group>";
 		};
 		95643FA41B729B3E0061A1E6 = {
@@ -229,7 +228,6 @@
 				954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */,
 				953C513A1B8F49190061A1E6 /* FutureUtils.swift */,
 				954C57011E89C7C40061A1E6 /* FPUtils.swift */,
-				954C56FE1E89BFBA0061A1E6 /* JSON */,
 				95643FB81B729B3E0061A1E6 /* Main.storyboard */,
 				95643FBB1B729B3E0061A1E6 /* Images.xcassets */,
 				95643FBD1B729B3E0061A1E6 /* LaunchScreen.xib */,
@@ -448,7 +446,6 @@
 				9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */,
 				95ADEF991B8B53580061A1E6 /* SpaceAPIFunctions.swift in Sources */,
 				9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */,
-				954C57001E89BFC70061A1E6 /* JSONDecoding.swift in Sources */,
 				95DB78011B9149660061A1E6 /* sharedData.swift in Sources */,
 				953161871B73B12A0061A1E6 /* extensions.swift in Sources */,
 				95DB77FF1B9142D60061A1E6 /* Constants.swift in Sources */,
@@ -461,7 +458,6 @@
 			files = (
 				9564551C1F3141FD0061A1E6 /* Constants.swift in Sources */,
 				9564551D1F3142A50061A1E6 /* SpaceAPIFunctions.swift in Sources */,
-				9514F85F1F30DFB70061A1E6 /* JSONDecoding.swift in Sources */,
 				9564551F1F31446B0061A1E6 /* extensions.swift in Sources */,
 				9564551E1F3142CE0061A1E6 /* FutureUtils.swift in Sources */,
 				95643FCB1B729B3E0061A1E6 /* HackerspacesTests.swift in Sources */,
