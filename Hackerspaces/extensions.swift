@@ -35,10 +35,10 @@ extension Dictionary {
     
 }
 
-func tuplesAsDict<K: Hashable, V, S: Sequence>(seq: S) -> [K : V] where S.Iterator.Element == (K, V) {
+func tuplesAsDict<K: Hashable, V, S: Sequence>(_ seq: S) -> [K : V] where S.Iterator.Element == (K, V) {
     var dict: [K : V] = [:]
-    seq.forEach { tuple in
-        dict[tuple.0] = tuple.1
+    for (k, v) in seq {
+        dict[k] = v
     }
     return dict
 }
