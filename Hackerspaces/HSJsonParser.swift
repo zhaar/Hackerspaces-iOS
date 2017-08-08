@@ -50,7 +50,8 @@ func parseHackerspaceDataModel(json: [String: JSONValue], name apiName: String, 
         let logo = json[SpaceAPIConstants.APIlogo.rawValue]?.asString,
         let websiteURL = json[SpaceAPIConstants.APIurl.rawValue]?.asString,
         let state = json[SpaceAPIConstants.APIstate.rawValue]?.asObject >>- parseStateObject,
-        let location = json[SpaceAPIConstants.APIlocation.rawValue]?.asObject >>- { loc in name >>- { n in parseLocationObject(loc, withName: n) } },
+        let location = json[SpaceAPIConstants.APIlocation.rawValue]?.asObject >>- { loc in
+            name >>- { n in parseLocationObject(loc, withName: n) } },
         let contact = json[SpaceAPIConstants.APIcontact.rawValue]?.asObject >>- parseContactObject,
         let reportChannel = json[SpaceAPIConstants.APIreport.rawValue]?.asArray >>-  parseReportChannel {
 

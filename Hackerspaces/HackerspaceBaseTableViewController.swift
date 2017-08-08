@@ -120,10 +120,10 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
 
     // MARK: PreviewingDelegate
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
-        guard let indexPath = tableView.indexPathForRow(at: location) else { return nil }
-        let hsName = visibleResults[indexPath.row]
-        guard let state = hackerspaces[hsName] else { return nil }
-        guard case .finished(let data) = state else {return nil}
+        guard let indexPath = tableView.indexPathForRow(at: location),
+              let hsName = visibleResults.safeIndex(indexPath.row),
+              let state = hackerspaces[hsName],
+              case .finished(let data) = state else { return nil }
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let hackerspaceViewController = storyboard.instantiateViewController(withIdentifier: "HackerspaceDetail") as! SelectedHackerspaceTableViewController
         hackerspaceViewController.prepare(data)

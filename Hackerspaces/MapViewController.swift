@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Swiftz
 import MapKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
@@ -46,7 +47,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         SpaceAPI.getHackerspaceLocations().onSuccess { array in
-            self.map.addAnnotations(array.filter { $0 != nil }.map { $0! })
+            self.map.addAnnotations(array.flatMap(identity))
         }
     }
     
