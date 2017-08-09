@@ -9,7 +9,7 @@
 import Foundation
 import BrightFutures
 
-func optionalBind<T, U>(optional: T?, f: T -> U?) -> U?
+func optionalBind<T, U>(_ optional: T?, f: (T) -> U?) -> U?
 {
     if let x = optional {
         return f(x)
@@ -20,7 +20,7 @@ func optionalBind<T, U>(optional: T?, f: T -> U?) -> U?
 }
 
 extension Dictionary {
-    func split(discriminationFunction: (Key, Value) -> Bool) -> ([Key: Value],[Key : Value]) {
+    func split(_ discriminationFunction: (Key, Value) -> Bool) -> ([Key: Value],[Key : Value]) {
         var target = [Key: Value]()
         var rest = [Key : Value]()
         for (k, v) in self {
@@ -35,8 +35,16 @@ extension Dictionary {
     
 }
 
+func tuplesAsDict<K: Hashable, V, S: Sequence>(_ seq: S) -> [K : V] where S.Iterator.Element == (K, V) {
+    var dict: [K : V] = [:]
+    for (k, v) in seq {
+        dict[k] = v
+    }
+    return dict
+}
+
 extension Dictionary {
-    init(_ pairs: [Element]) {
+    init(pairs: [Element]) {
         self.init()
         for (k, v) in pairs {
             self[k] = v
@@ -46,21 +54,21 @@ extension Dictionary {
 
 extension Array {
     
-    func foreach(fn: Element -> Void) {
+    func foreach(_ fn: (Element) -> Void) {
         for e in self {
             fn(e)
         }
     }
     
-    func foldl<S>(initial: S,fn: (acc:S, elem: Element) -> S) -> S {
+    func foldl<S>(_ initial: S,fn: (_ acc:S, _ elem: Element) -> S) -> S {
         var result = initial
         for e in self {
-            result = fn(acc: result, elem: e)
+            result = fn(result, e)
         }
         return result
     }
     
-    func groupBy<S>(fn: Element -> S) -> [S: [Element]] {
+    func groupBy<S>(_ fn: (Element) -> S) -> [S: [Element]] {
         var dic = [S: [Element]]()
         for e in self {
             let key = fn(e)
@@ -72,13 +80,39 @@ extension Array {
 
 extension Dictionary {
     
-    func getWithDefault(key: Key, fallback: Value) -> Value {
+    func getWithDefault(_ key: Key, fallback: Value) -> Value {
         return self[key] ?? fallback
     }
     
-    func immutableInsert(key: Key, value val: Value) -> [Key : Value] {
+    func immutableInsert(_ key: Key, value val: Value) -> [Key : Value] {
         var cpy = self
         cpy[key] = val
         return cpy
     }
 }
+
+prefix operator ==
+prefix func == <T: Equatable>(rhs: T) -> (T) -> Bool {
+    return { lhs in lhs == rhs }
+}
+
+prefix operator ?>
+prefix func ?> <T: Comparable>(rhs: T) -> (T) -> Bool {
+    return { lhs in lhs > rhs }
+}
+
+prefix operator ?<
+prefix func ?< <T: Comparable>(rhs: T) -> (T) -> Bool {
+    return { lhs in lhs < rhs }
+}
+
+prefix operator ?>=
+prefix func ?>= <T: Comparable>(rhs: T) -> (T) -> Bool {
+    return { lhs in lhs >= rhs }
+}
+
+prefix operator ?<=
+prefix func ?<= <T: Comparable>(rhs: T) -> (T) -> Bool {
+    return { lhs in lhs <= rhs }
+}
+

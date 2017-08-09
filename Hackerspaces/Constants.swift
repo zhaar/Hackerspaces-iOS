@@ -22,11 +22,11 @@ enum SpaceAPIConstants : String {
     case APIreport = "issue_report_channels"
 }
 
-enum SpaceAPIError: ErrorType {
-    case ParseError(json: String)
-    case DataCastError(data: NSData)
-    case UnknownError(error: NSError)
-    case HTTPRequestError(error: ErrorType)
+enum SpaceAPIError: Error {
+    case parseError(String)
+    case dataCastError(data: Data)
+    case unknownError(error: Error)
+    case httpRequestError(error: Error)
 }
 
 enum UIConstants: String {

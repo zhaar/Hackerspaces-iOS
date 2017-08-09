@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Swiftz
 import MapKit
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
@@ -14,10 +15,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBOutlet weak var centerButtonOutlet: UIButton! {
         didSet {
-            centerButtonOutlet.setImage(centerButtonOutlet.currentImage?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate), forState: UIControlState.Normal)
+            centerButtonOutlet.setImage(centerButtonOutlet.currentImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: UIControlState.normal)
             centerButtonOutlet.tintColor = UIColor.init(colorLiteralRed: 0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
         }
     }
+
     @IBAction func centerButton(sender: UIButton) {
         locationManager.location.forEach(centerMapOnLocation)
     }
@@ -27,56 +29,65 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
             map.delegate = self
         }
     }
-    
+
     let locationManager = CLLocationManager()
     var refreshButton: UIBarButtonItem!
     var loadingIndicator: UIBarButtonItem!
-    
+
+    @IBAction func resetMap(_ sender: UILongPressGestureRecognizer) {
+        if let location = locationManager.location {
+            centerMapOnLocation(location)
+        }
+    }
+
     func checkLocationAuthorizationStatus() {
-        if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             map.showsUserLocation = true
-            map.userTrackingMode = MKUserTrackingMode.None
+            map.userTrackingMode = MKUserTrackingMode.none
             locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
             locationManager.startUpdatingLocation()
         } else {
             locationManager.requestWhenInUseAuthorization()
         }
     }
-    
-    func centerMapOnLocation(location: CLLocation) {
+
+    func centerMapOnLocation(_ location: CLLocation) {
         let regionRadius: CLLocationDistance = 5000
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
-            regionRadius * 2.0, regionRadius * 2.0)
+                                                                  regionRadius * 2.0, regionRadius * 2.0)
         map.setRegion(coordinateRegion, animated: true)
     }
-        
+
     func refresh(sender: UIBarButtonItem) {
         self.navigationItem.rightBarButtonItem = loadingIndicator
         self.map.removeAnnotations(map.annotations)
-        SpaceAPI.loadHackerspaceList(fromCache: false).map { hsList in
+        let _ = SpaceAPI.loadHackerspaceList(fromCache: false).map { hsList in
             hsList.map { name, url in
-                SpaceAPI.getParsedHackerspace(url, name: name, fromCache: false).onSuccess { parsed in
-                    self.map.addAnnotation(parsed.location)}
-                }.sequence().onComplete { _ in
+                SpaceAPI.getParsedHackerspace(url: url, name: name, fromCache: false)
+                    .onSuccess { self.map.addAnnotation($0.location) }
+                }
+                .sequence()
+                .onComplete { _ in
                     self.navigationItem.rightBarButtonItem = self.refreshButton
             }
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Refresh, target: self, action: #selector(refresh))
+
+        refreshButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.refresh, target: self, action: #selector(refresh))
         self.navigationItem.rightBarButtonItem = refreshButton
-        let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)
         indicator.startAnimating()
         loadingIndicator = UIBarButtonItem(customView: indicator)
-        refresh(refreshButton)
+        refresh(sender: refreshButton)
     }
-    
-    override func viewDidAppear(animated: Bool) {
+
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkLocationAuthorizationStatus()
     }
-
+    
 }
 

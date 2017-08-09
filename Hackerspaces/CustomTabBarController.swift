@@ -8,22 +8,31 @@
 
 import UIKit
 import BrightFutures
+import Result
 
 class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     let favoriteTableViewIndex = 0
     let searchTableViewIndex = 2
-    let preferencesDataSource: () -> Future<[String: String], SpaceAPIError> = {_ in future(UserDefaults.favoritesDictionary).onSuccess(callback: UserDefaults.updateIconShortcuts).promoteError()}
-    
-    func getHackerspaceTableFromViewController(viewController: UIViewController?) -> HackerspaceBaseTableViewController? {
+
+    let preferencesDataSource: () -> Future<[String: SharedData.HackerspaceAPIURL], SpaceAPIError> = {
+
+        Future(value: SharedData.favoritesDictionary())
+            .promoteError()
+            .onSuccess(callback: SharedData.updateIconShortcuts)
+    }
+
+    func getHackerspaceTableFromViewController(_ viewController: UIViewController?) -> HackerspaceBaseTableViewController? {
+
         if let nav = viewController as? UINavigationController {
             return nav.childViewControllers.map {$0 as? HackerspaceBaseTableViewController}.filter {$0 != nil}[0]
         } else {
             return nil
         }
     }
-    
-    func setDataSourceForView(viewController: UIViewController?, dataSource: () -> Future<[String: String], SpaceAPIError>) {
+
+    func setDataSourceForView(_ viewController: UIViewController?, dataSource: @escaping () -> Future<[String: String], SpaceAPIError>) {
+
         getHackerspaceTableFromViewController(viewController)?.dataSource = dataSource
     }
     
@@ -32,12 +41,12 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
         setDataSourceForView(self.viewControllers?[0], dataSource: preferencesDataSource)
     }
-    
-    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
-        switch self.viewControllers?.indexOf(viewController) {
-            case .Some(favoriteTableViewIndex): setDataSourceForView(self.viewControllers?[favoriteTableViewIndex], dataSource: preferencesDataSource)
-            case .Some(searchTableViewIndex): setDataSourceForView(self.viewControllers?[searchTableViewIndex], dataSource: {_ in SpaceAPI.loadHackerspaceList(fromCache: false)})
-            case _: ()
+
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        switch self.viewControllers?.index(of: viewController) {
+        case .some(favoriteTableViewIndex): setDataSourceForView(self.viewControllers?[favoriteTableViewIndex], dataSource: preferencesDataSource)
+        case .some(searchTableViewIndex): setDataSourceForView(self.viewControllers?[searchTableViewIndex], dataSource: {_ in SpaceAPI.loadHackerspaceList(fromCache: false) })
+        case _: ()
         }
     }
 }

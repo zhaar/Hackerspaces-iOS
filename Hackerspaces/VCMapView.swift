@@ -19,35 +19,33 @@ class HSInfoCarrier: NSObject {
 }
 
 extension MapViewController: MKMapViewDelegate {
-    
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        if let annotation = annotation as? SpaceLocation {
-            var view: MKPinAnnotationView
-            if let dequeuedView = mapView.dequeueReusableAnnotationViewWithIdentifier(UIConstants.AnnotationViewReuseIdentifier.rawValue)
-                as? MKPinAnnotationView {
-                    dequeuedView.annotation = annotation
-                    view = dequeuedView
-            } else {
-                view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: UIConstants.AnnotationViewReuseIdentifier.rawValue)
-                view.canShowCallout = true
-                view.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
-            }
-            return view
+
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let annotation = annotation as? SpaceLocation else { return nil }
+        var view: MKPinAnnotationView
+        if let dequeuedView = mapView.dequeueReusableAnnotationView(withIdentifier: UIConstants.AnnotationViewReuseIdentifier.rawValue)
+            as? MKPinAnnotationView {
+            dequeuedView.annotation = annotation
+            view = dequeuedView
+        } else {
+            view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: UIConstants.AnnotationViewReuseIdentifier.rawValue)
+            view.canShowCallout = true
+            view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         }
-        return nil
+        return view
     }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let SHVC = segue.destinationViewController as? SelectedHackerspaceTableViewController {
-            let info = sender as! HSInfoCarrier
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let SHVC = segue.destination as? SelectedHackerspaceTableViewController,
+            let info = sender as? HSInfoCarrier {
             SHVC.prepare(info.hsName, url: info.hsAPI)
         }
     }
-    
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let annotation = view.annotation as? SpaceLocation {
             SpaceAPI.loadHackerspaceList(fromCache: false).onSuccess { dict in
-                self.performSegueWithIdentifier(UIConstants.showHSMap.rawValue, sender: HSInfoCarrier(name: annotation.name, url: dict[annotation.name]!))
+                self.performSegue(withIdentifier: UIConstants.showHSMap.rawValue, sender: HSInfoCarrier(name: annotation.name, url: dict[annotation.name]!))
             }
         }
     }
