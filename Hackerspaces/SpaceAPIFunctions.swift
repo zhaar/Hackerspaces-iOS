@@ -37,6 +37,7 @@ struct SpaceAPI {
                     }
                 }.onFailure { error in
                     p.failure(SpaceAPIError.unknownError(error: error!))
+
             }
         }
         return p.future
@@ -45,6 +46,7 @@ struct SpaceAPI {
     static private func loadAPIFromWeb() -> Future<[String : String], SpaceAPIError> {
         let p = Promise<[String: String], SpaceAPIError>()
         DispatchQueue.global().async {
+
             do {
                 let req = try HTTP.GET(SpaceAPIConstants.FIXMEAPI.rawValue)
                 req.start { response in

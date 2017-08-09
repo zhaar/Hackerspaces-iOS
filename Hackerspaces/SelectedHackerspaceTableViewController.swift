@@ -17,9 +17,9 @@ class SelectedHackerspaceTableViewController: UITableViewController {
 
     @IBAction func MarkAsFavorite(_ sender: UIBarButtonItem?) {
         if isFavorite {
-            SharedData.removeFromFavoritesList(hackerspaceData.apiName)
+            SharedData.removeFromFavoritesList(name: hackerspaceData.apiName)
         } else {
-            SharedData.addToFavoriteDictionary((hackerspaceData.apiName, hackerspaceData.apiEndpoint))
+            SharedData.addToFavoriteDictionary(hackerspace: (hackerspaceData.apiName, hackerspaceData.apiEndpoint))
         }
         updateFavoriteButton()
     }
@@ -41,7 +41,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     fileprivate var loadOrigin: LoadOrigin!
     fileprivate var hackerspaceData: ParsedHackerspaceData!
     var isFavorite: Bool {
-            return SharedData.favoritesDictionary().keys.contains(hackerspaceData.apiName)
+        return SharedData.favoritesDictionary().keys.contains(hackerspaceData.apiName)
     }
 
     fileprivate struct storyboard {
@@ -80,9 +80,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
         case .Left(let (name,url)):
 
             SpaceAPI.loadHackerspaceData(url: url,fromCache: false)
-//            let f2: Future<[String : JSONValue], UnwrapError<SpaceAPIError>> = f.flatMap { .some($0) }
                 .flatMap { parseHackerspaceDataModel(json: $0, name: name, url: url) }
-
                 .onSuccess(callback: applyDataModel).onComplete { _ in
                     self.refreshControl?.endRefreshing()
                     callback?()

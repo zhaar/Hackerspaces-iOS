@@ -24,7 +24,7 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let hackerspaceToDelete = visibleResults[indexPath.row]
-            SharedData.removeFromFavoritesList(hackerspaceToDelete)
+            SharedData.removeFromFavoritesList(name: hackerspaceToDelete)
             visibleResults.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }

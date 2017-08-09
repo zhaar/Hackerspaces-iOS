@@ -22,12 +22,12 @@ enum NetworkState {
             }
         }
     }
-    var stateMessage: String { get {
+    var stateMessage: String {
+
         switch self {
         case .finished(let data): return data.state.open ? "open"  : "closed"
         case .loading: return "loading"
         case .unresponsive(_): return "unresponsive"
-        }
         }
     }
 }
@@ -190,7 +190,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     }
 
     func handleUnresponsiveError(error: SpaceAPIError) -> () {
-        
+
         func messageHandler(err: SpaceAPIError) -> (String, String?) {
             switch error {
             case .dataCastError(data: let data):
@@ -201,9 +201,10 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
                 return ("An error occured while parsing data. Maybe the data doesn't comply with SpaceAPI v0.13", "\ncould not parse:  \(json)")
             case .unknownError(error: let error):
                 return ("Unknown error", error.localizedDescription)
+
             }
         }
-        
+
         let title = "Hackerspace Unresponsive"
         var actions:[UIAlertAction] = [UIAlertAction(title: "Ok", style: .default, handler: nil)]
 
@@ -217,5 +218,6 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
             self.performSegue(withIdentifier: UIConstants.showErrorDetail.rawValue, sender: error.localizedDescription)
         }))
         present(alert, animated: true, completion: nil)
+        
     }
 }

@@ -15,8 +15,8 @@ class PrefPaneTableViewController: UITableViewController {
             toggle.isOn = SharedData.isInDebugMode()
         }
     }
-    
-    @IBAction func toggleDebugMode(sender: UISwitch) {
+    @IBAction func toggleDebug(_ sender: UISwitch) {
+
         SharedData.toggleDebugMode()
         toggle.isOn = SharedData.isInDebugMode()
         if toggle.isOn {

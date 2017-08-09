@@ -32,6 +32,7 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
 
     func setDataSourceForView(_ viewController: UIViewController?, dataSource: @escaping () -> Future<[String: String], SpaceAPIError>) {
+
         getHackerspaceTableFromViewController(viewController)?.dataSource = dataSource
     }
     

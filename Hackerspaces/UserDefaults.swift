@@ -32,29 +32,28 @@ struct SharedData {
     }
     
     static func favoritesDictionary() -> [String: HackerspaceAPIURL] {
-        return SharedData.defaults.dictionary(forKey: favoriteDictKey)?.map { value in value as! HackerspaceAPIURL} ?? [String: HackerspaceAPIURL]()
+        return defaults.dictionary(forKey: favoriteDictKey)?.map { value in value as! HackerspaceAPIURL} ?? [String: HackerspaceAPIURL]()
     }
     
-    static func addToFavoriteDictionary(_ hackerspace: (String, String)) {
+    static func addToFavoriteDictionary(hackerspace: (String, String)) {
         let (name, apiEndpoint) = hackerspace
-        setFavoritesDictionary(favoritesDictionary().insert(name, v: apiEndpoint))
+        setFavorites(dictionary: favoritesDictionary().insert(name, v: apiEndpoint))
     }
     
-    static func removeFromFavoritesList(_ name: String) {
-        setFavoritesDictionary(favoritesDictionary().delete(name))
+    static func removeFromFavoritesList(name: String) {
+        setFavorites(dictionary: favoritesDictionary().delete(name))
     }
     
-    static func setFavoritesDictionary(_ dict: [String : HackerspaceAPIURL]) {
-        updateIconShortcuts(dict)
-        SharedData.defaults.set(dict, forKey: favoriteDictKey)
-
+    static func setFavorites(dictionary: [String : HackerspaceAPIURL]) {
+        updateIconShortcuts(dict: dictionary)
+        defaults.set(dictionary, forKey: favoriteDictKey)
     }
     
     static func deleteAllDebug() {
-        setFavoritesDictionary([String: HackerspaceAPIURL]())
+        setFavorites(dictionary: [String: HackerspaceAPIURL]())
     }
     
-    static func updateIconShortcuts(_ dict: [String: HackerspaceAPIURL]) -> () {
+    static func updateIconShortcuts(dict: [String: String]) {
         let shorts = dict.map { key, value in
             UIApplicationShortcutItem(type: UIConstants.hackerspaceViewShortcut.rawValue, localizedTitle: key, localizedSubtitle: nil, icon: nil, userInfo: ["name": key, "url": value])
         }
