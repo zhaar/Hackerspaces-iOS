@@ -31,11 +31,11 @@ extension SpaceAPI {
         return fromCache ? loadAPIFromCache() : (loadAPIFromWeb().recoverWith { _ in print("loading from web failed, loading from cache"); return loadAPIFromCache() })
     }
 
-    static func loadHackerspaceData(url: String, fromCache: Bool = true) -> Future<[String : JSONValue], SpaceAPIError> {
+    static private func loadHackerspaceData(url: String, fromCache: Bool = true) -> Future<[String : JSONValue], SpaceAPIError> {
         return (fromCache ? SpaceAPI.loadHackerspaceDataFromCache : SpaceAPI.loadHackerspaceDataFromWeb)(url)
     }
 
-    static func parseHackerspace(json: [String : JSONValue], url: String, name: String) -> Result<ParsedHackerspaceData, SpaceAPIError>{
+    static private func parseHackerspace(json: [String : JSONValue], url: String, name: String) -> Result<ParsedHackerspaceData, SpaceAPIError>{
         return parseHackerspaceDataModel(json: json, name: name, url: url) |=> .parseError(json.description)
     }
 

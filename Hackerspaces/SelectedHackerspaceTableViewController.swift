@@ -79,8 +79,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
             callback?()
         case .Left(let (name,url)):
 
-            SpaceAPI.loadHackerspaceData(url: url,fromCache: false)
-                .flatMap { parseHackerspaceDataModel(json: $0, name: name, url: url) }
+            SpaceAPI.getParsedHackerspace(url: url, name: name, fromCache: false)
                 .onSuccess(callback: applyDataModel).onComplete { _ in
                     self.refreshControl?.endRefreshing()
                     callback?()
