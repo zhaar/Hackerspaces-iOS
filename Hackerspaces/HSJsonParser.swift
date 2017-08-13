@@ -46,7 +46,7 @@ func parseHackerspaceDataModel(json: [String: JSONValue], name apiName: String, 
 
     if
         let apiVersion = json[SpaceAPIConstants.APIversion.rawValue]?.asString,
-        let name = json[SpaceAPIConstants.APIname.rawValue]?.asString, 
+        let name = json[SpaceAPIConstants.APIname.rawValue]?.asString,
         let logo = json[SpaceAPIConstants.APIlogo.rawValue]?.asString,
         let websiteURL = json[SpaceAPIConstants.APIurl.rawValue]?.asString,
         let state = json[SpaceAPIConstants.APIstate.rawValue]?.asObject >>- parseStateObject,
@@ -69,7 +69,7 @@ func parseHackerspaceDataModel(json: [String: JSONValue], name apiName: String, 
 }
 
 private func parseStateObject(_ state: [String: JSONValue]) -> StateObject {
-    
+
     let o = state[JSONKeys.open]
     var isOpen: Bool? = o?.asBool
     isOpen = isOpen ?? (o?.asInt.map(==1))
@@ -191,6 +191,34 @@ struct ContactObject {
     let mailingList: String?
     let jabber: String?
     let issue_mail: String?
+    init(phone: String? = nil,
+         sip: String? = nil,
+         keyMasters: [MemberObject]? = nil,
+         ircURL: String? = nil,
+         twitterHandle: String? = nil,
+         facebook: String? = nil,
+         googlePlus: String? = nil,
+         identica: String? = nil,
+         foursquareID: String? = nil,
+         email: String? = nil,
+         mailingList: String? = nil,
+         jabber: String? = nil,
+         issue_mail: String? = nil
+        ) {
+        self.phone = phone
+        self.sip = sip
+        self.keyMasters = keyMasters
+        self.ircURL = ircURL
+        self.twitterHandle = twitterHandle
+        self.facebook = facebook
+        self.googlePlus = googlePlus
+        self.identica = identica
+        self.foursquareID = foursquareID
+        self.email = email
+        self.mailingList = mailingList
+        self.jabber = jabber
+        self.issue_mail = issue_mail
+    }
 }
 
 struct MemberObject {

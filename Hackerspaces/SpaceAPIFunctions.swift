@@ -28,7 +28,16 @@ enum SpaceAPI { }
 //MARK: - helper functions for automatically loading from cache or network
 extension SpaceAPI {
     static func loadHackerspaceList(fromCache: Bool) -> Future<[String: String], SpaceAPIError> {
-        return fromCache ? loadAPIFromCache() : (loadAPIFromWeb().recoverWith { _ in print("loading from web failed, loading from cache"); return loadAPIFromCache() })
+        if Testing.isTestingUI() {
+            return Future.init(value: Testing.mockAPIResponse).promoteError()
+        } else if fromCache {
+            return loadAPIFromCache()
+        } else {
+            return loadAPIFromWeb().recoverWith { _ in
+                print("loading from web failed, loading from cache")
+                return loadAPIFromCache()
+            }
+        }
     }
 
     static private func loadHackerspaceData(url: String, fromCache: Bool = true) -> Future<[String : JSONValue], SpaceAPIError> {
