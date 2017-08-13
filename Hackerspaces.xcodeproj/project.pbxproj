@@ -250,6 +250,7 @@
 				954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */,
 				953C513A1B8F49190061A1E6 /* FutureUtils.swift */,
 				954C57011E89C7C40061A1E6 /* FPUtils.swift */,
+				953161861B73B12A0061A1E6 /* extensions.swift */,
 				95643FB81B729B3E0061A1E6 /* Main.storyboard */,
 				95643FBB1B729B3E0061A1E6 /* Images.xcassets */,
 				95643FBD1B729B3E0061A1E6 /* LaunchScreen.xib */,
@@ -262,7 +263,6 @@
 			isa = PBXGroup;
 			children = (
 				9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */,
-				953161861B73B12A0061A1E6 /* extensions.swift */,
 				95643FB11B729B3E0061A1E6 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -461,7 +461,6 @@
 				9573A2AF1B936F960061A1E6 /* RawDataTableViewCell.swift in Sources */,
 				95DBD9561B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */,
 				9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */,
-				9573A2891B91EB310061A1E6 /* HSDataModel.swift in Sources */,
 				950AF2981D88CC500068F29E /* DisplayErrorViewController.swift in Sources */,
 				95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */,
 				9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */,

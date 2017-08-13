@@ -8,6 +8,7 @@
 
 import Foundation
 import BrightFutures
+import Result
 
 func optionalBind<T, U>(_ optional: T?, f: (T) -> U?) -> U?
 {
@@ -116,3 +117,7 @@ prefix func ?<= <T: Comparable>(rhs: T) -> (T) -> Bool {
     return { lhs in lhs <= rhs }
 }
 
+infix operator |=> : NilCoalescingPrecedence
+func |=> <T, E: Error>(lhs: T?, rhs: E) -> Result<T, E> {
+    return lhs.map({ .success($0) }) ?? .failure(rhs)
+}
