@@ -157,6 +157,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateStyle = DateFormatter.Style.medium
                 mapCell.HSStatus.text = data.state.open ? "Open" : "Closed"
+                mapCell.HSStatus.accessibilityIdentifier = "hackerspace status"
                 mapCell.HSUrl.text = data.websiteURL
                 mapCell.HSLastUpdateTime.text = data.state.lastChange >>- { dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval($0))) }
                 mapCell.openningMessageLabel.text = hackerspaceData?.state.message

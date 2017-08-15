@@ -57,7 +57,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "95BD266C1F40A9E90061A1E6"
+               BlueprintIdentifier = "9567344C1F430BC10061A1E6"
                BuildableName = "HackerspacesUITests.xctest"
                BlueprintName = "HackerspacesUITests"
                ReferencedContainer = "container:Hackerspaces.xcodeproj">
@@ -96,6 +96,12 @@
             ReferencedContainer = "container:Hackerspaces.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "UI-TESTING"
+            isEnabled = "NO">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
       <LocationScenarioReference

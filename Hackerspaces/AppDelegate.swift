@@ -49,6 +49,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
             return !handleShortcutItem(shortcutItem)
         }
+
+        if Testing.isTestingUI() {
+            UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
+        }
         return true
     }
 

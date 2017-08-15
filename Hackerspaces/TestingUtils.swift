@@ -26,4 +26,15 @@ public enum Testing {
                                                                location: SpaceLocation.init(name: "Open Hackerspace", address: nil, location: CLLocationCoordinate2D.init(latitude: 0, longitude: 0)),
                                                                contact: ContactObject.init(),
                                                                issue_report_channel: [])
+    static let closedHackerspaceAPI = ParsedHackerspaceData.init(apiVersion: "0.13",
+                                                               apiEndpoint: openEndpoint,
+                                                               apiName: "closed",
+                                                               name: "Closed Hackerspace",
+                                                               logoURL: "", websiteURL: "",
+                                                               state: StateObject(open: false, lastChange: nil, trigger_person: nil, message: "The space is closed", icon: nil),
+                                                               location: SpaceLocation.init(name: "Closed Hackerspace", address: nil, location: CLLocationCoordinate2D.init(latitude: 10, longitude: 10)),
+                                                               contact: ContactObject.init(),
+                                                               issue_report_channel: [])
+    static let mockHackerspaceData = [openEndpoint : openHackerspaceAPI.asJSON.asObject!,
+                                      closedEndpoint: closedHackerspaceAPI.asJSON.asObject!]
 }

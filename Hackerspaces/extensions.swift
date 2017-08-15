@@ -10,16 +10,6 @@ import Foundation
 import BrightFutures
 import Result
 
-func optionalBind<T, U>(_ optional: T?, f: (T) -> U?) -> U?
-{
-    if let x = optional {
-        return f(x)
-    }
-    else {
-        return nil
-    }
-}
-
 extension Dictionary {
     func split(_ discriminationFunction: (Key, Value) -> Bool) -> ([Key: Value],[Key : Value]) {
         var target = [Key: Value]()
@@ -77,6 +67,7 @@ extension Array {
         }
         return dic
     }
+
 }
 
 extension Dictionary {
