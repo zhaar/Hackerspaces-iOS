@@ -40,7 +40,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      codeCoverageEnabled = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
@@ -49,6 +50,16 @@
                BlueprintIdentifier = "95643FC31B729B3E0061A1E6"
                BuildableName = "HackerspacesTests.xctest"
                BlueprintName = "HackerspacesTests"
+               ReferencedContainer = "container:Hackerspaces.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "9567344C1F430BC10061A1E6"
+               BuildableName = "HackerspacesUITests.xctest"
+               BlueprintName = "HackerspacesUITests"
                ReferencedContainer = "container:Hackerspaces.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -85,6 +96,12 @@
             ReferencedContainer = "container:Hackerspaces.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "UI-TESTING"
+            isEnabled = "NO">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
       <LocationScenarioReference

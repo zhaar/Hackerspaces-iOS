@@ -79,8 +79,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
             callback?()
         case .Left(let (name,url)):
 
-            SpaceAPI.loadHackerspaceData(url: url,fromCache: false)
-                .flatMap { parseHackerspaceDataModel(json: $0, name: name, url: url) }
+            SpaceAPI.getParsedHackerspace(url: url, name: name, fromCache: false)
                 .onSuccess(callback: applyDataModel).onComplete { _ in
                     self.refreshControl?.endRefreshing()
                     callback?()
@@ -158,6 +157,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateStyle = DateFormatter.Style.medium
                 mapCell.HSStatus.text = data.state.open ? "Open" : "Closed"
+                mapCell.HSStatus.accessibilityIdentifier = "hackerspace status"
                 mapCell.HSUrl.text = data.websiteURL
                 mapCell.HSLastUpdateTime.text = data.state.lastChange >>- { dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval($0))) }
                 mapCell.openningMessageLabel.text = hackerspaceData?.state.message

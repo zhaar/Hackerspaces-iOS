@@ -21,6 +21,14 @@ class SpaceLocation : NSObject {
     }
 }
 
+extension SpaceLocation {
+    var toLocation: LocationObject {
+        return LocationObject(latitude: Float(self.location.latitude),
+                              longitude: Float(self.location.longitude),
+                              address: self.address)
+    }
+}
+
 extension SpaceLocation : MKAnnotation {
     var coordinate: CLLocationCoordinate2D {
         return self.location

@@ -38,11 +38,7 @@ public enum UnwrapError<E: Error>: Error {
 
 enum NilConversion<T, E: Error> {
     static func nilToResult(_ a: T?) -> Result<T, UnwrapError<E>> {
-        if let a = a {
-            return Result.success(a)
-        } else {
-            return Result.failure(.foundNil)
-        }
+        return a |=> .foundNil
     }
 }
 
@@ -55,7 +51,6 @@ public func bind<T, U, E: Error>(_ f: @escaping (T) -> U?) -> (Future<T, E>) -> 
 }
 
 extension Future {
-
 
     func flatMap<U>(_ f: @escaping (T) -> U?) -> Future<U, UnwrapError<E>> {
         return bind(f)(self)

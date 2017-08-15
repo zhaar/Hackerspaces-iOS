@@ -8,16 +8,7 @@
 
 import Foundation
 import BrightFutures
-
-func optionalBind<T, U>(_ optional: T?, f: (T) -> U?) -> U?
-{
-    if let x = optional {
-        return f(x)
-    }
-    else {
-        return nil
-    }
-}
+import Result
 
 extension Dictionary {
     func split(_ discriminationFunction: (Key, Value) -> Bool) -> ([Key: Value],[Key : Value]) {
@@ -76,6 +67,7 @@ extension Array {
         }
         return dic
     }
+
 }
 
 extension Dictionary {
@@ -116,3 +108,7 @@ prefix func ?<= <T: Comparable>(rhs: T) -> (T) -> Bool {
     return { lhs in lhs <= rhs }
 }
 
+infix operator |=> : NilCoalescingPrecedence
+func |=> <T, E: Error>(lhs: T?, rhs: E) -> Result<T, E> {
+    return lhs.map({ .success($0) }) ?? .failure(rhs)
+}

@@ -46,7 +46,7 @@ func parseHackerspaceDataModel(json: [String: JSONValue], name apiName: String, 
 
     if
         let apiVersion = json[SpaceAPIConstants.APIversion.rawValue]?.asString,
-        let name = json[SpaceAPIConstants.APIname.rawValue]?.asString, 
+        let name = json[SpaceAPIConstants.APIname.rawValue]?.asString,
         let logo = json[SpaceAPIConstants.APIlogo.rawValue]?.asString,
         let websiteURL = json[SpaceAPIConstants.APIurl.rawValue]?.asString,
         let state = json[SpaceAPIConstants.APIstate.rawValue]?.asObject >>- parseStateObject,
@@ -61,7 +61,8 @@ func parseHackerspaceDataModel(json: [String: JSONValue], name apiName: String, 
                                      name: name,
                                      logoURL: logo,
                                      websiteURL: websiteURL,
-                                     state: state, location: location,
+                                     state: state,
+                                     location: location,
                                      contact: contact,
                                      issue_report_channel: reportChannel)
     } else { return nil }
@@ -69,7 +70,7 @@ func parseHackerspaceDataModel(json: [String: JSONValue], name apiName: String, 
 }
 
 private func parseStateObject(_ state: [String: JSONValue]) -> StateObject {
-    
+
     let o = state[JSONKeys.open]
     var isOpen: Bool? = o?.asBool
     isOpen = isOpen ?? (o?.asInt.map(==1))
@@ -133,6 +134,21 @@ private func parseReportChannel(_ channels: [JSONValue]) -> [String] {
     return channels.flatMap { $0.asString }
 }
 
+extension ParsedHackerspaceData: JSONValueConvertible {
+    var asJSON: JSONValue {
+        return JSONValue.object([
+            SpaceAPIConstants.APIversion.rawValue: .string(self.apiVersion),
+            SpaceAPIConstants.APIname.rawValue: .string(self.name),
+            SpaceAPIConstants.APIlogo.rawValue: .string(self.logoURL),
+            SpaceAPIConstants.APIurl.rawValue: .string(self.websiteURL),
+            SpaceAPIConstants.APIstate.rawValue: self.state.asJSON,
+            SpaceAPIConstants.APIlocation.rawValue: self.location.toLocation.asJSON,
+            SpaceAPIConstants.APIcontact.rawValue: self.contact.asJSON,
+            SpaceAPIConstants.APIreport.rawValue: .array(self.issue_report_channel.map({$0.asJSON}))
+            ])
+    }
+}
+
 struct ParsedHackerspaceData {
     let apiVersion: String
     let apiEndpoint: String
@@ -164,6 +180,14 @@ struct LocationObject {
     let address: String?
 }
 
+extension LocationObject: JSONValueConvertible {
+    var asJSON: JSONValue {
+        return JSONValue.object([JSONKeys.lat: .float(self.latitude),
+                                 JSONKeys.lon: .float(self.longitude),
+                                 JSONKeys.address: self.address.map {.string($0)} ?? .null])
+    }
+}
+
 struct StateObject {
     let open: Bool
     let lastChange: Int?
@@ -172,9 +196,26 @@ struct StateObject {
     let icon: IconObject?
 }
 
+extension StateObject: JSONValueConvertible {
+    var asJSON: JSONValue {
+        return JSONValue.object([JSONKeys.open: .bool(self.open),
+                                 JSONKeys.lastchange: self.lastChange.map({JSONValue.float(Float($0))}) ?? .null,
+                                 JSONKeys.trigger_person: self.trigger_person.map {JSONValue.string($0)} ?? .null,
+                                 JSONKeys.message: self.message.map {.string($0)} ?? .null,
+                                 JSONKeys.icon: self.icon?.asJSON ?? .null])
+    }
+}
+
 struct IconObject {
     let openURL: String
     let closedURL: String
+}
+
+extension IconObject: JSONValueConvertible {
+    var asJSON: JSONValue {
+        return JSONValue.object([JSONKeys.open: .string(self.openURL),
+                                 JSONKeys.closed: .string(self.closedURL)])
+    }
 }
 
 struct ContactObject {
@@ -191,6 +232,55 @@ struct ContactObject {
     let mailingList: String?
     let jabber: String?
     let issue_mail: String?
+    init(phone: String? = nil,
+         sip: String? = nil,
+         keyMasters: [MemberObject]? = nil,
+         ircURL: String? = nil,
+         twitterHandle: String? = nil,
+         facebook: String? = nil,
+         googlePlus: String? = nil,
+         identica: String? = nil,
+         foursquareID: String? = nil,
+         email: String? = nil,
+         mailingList: String? = nil,
+         jabber: String? = nil,
+         issue_mail: String? = nil
+        ) {
+        self.phone = phone
+        self.sip = sip
+        self.keyMasters = keyMasters
+        self.ircURL = ircURL
+        self.twitterHandle = twitterHandle
+        self.facebook = facebook
+        self.googlePlus = googlePlus
+        self.identica = identica
+        self.foursquareID = foursquareID
+        self.email = email
+        self.mailingList = mailingList
+        self.jabber = jabber
+        self.issue_mail = issue_mail
+    }
+}
+
+extension ContactObject: JSONValueConvertible {
+    var asJSON: JSONValue {
+        let fields: [(String, JSONValue)?] = [
+            phone.map { (JSONKeys.phone, .string($0)) },
+                      sip.map { (JSONKeys.sip, .string($0)) },
+                      keyMasters.map { (JSONKeys.keymasters, .array($0.map({$0.asJSON}))) },
+                      ircURL.map { (JSONKeys.irc, .string($0)) },
+                      twitterHandle.map { (JSONKeys.twitter, .string($0)) },
+                      facebook.map { (JSONKeys.facebook, $0.asJSON) },
+                      googlePlus.map { (JSONKeys.google, $0.asJSON) },
+                      identica.map { (JSONKeys.identica, $0.asJSON) },
+                      foursquareID.map { (JSONKeys.foursquare, $0.asJSON) },
+                      email.map { (JSONKeys.email, $0.asJSON) },
+                      mailingList.map { (JSONKeys.ml, $0.asJSON) },
+                      jabber.map { (JSONKeys.jabber, $0.asJSON) },
+                      issue_mail.map { (JSONKeys.issue_mail, $0.asJSON) }
+            ]
+        return .object(tuplesAsDict(fields.flatMap(identity)))
+    }
 }
 
 struct MemberObject {
@@ -199,6 +289,17 @@ struct MemberObject {
     let phone: String?
     let email: String?
     let twitterHandle: String?
+}
+
+extension MemberObject: JSONValueConvertible {
+    var asJSON: JSONValue {
+        let values = [JSONKeys.name: name,
+                      JSONKeys.irc_nick: irc_nick,
+                      JSONKeys.phone: phone,
+                      JSONKeys.email: email,
+                      JSONKeys.twitter: twitterHandle].mapMaybe({value in value.flatMap({$0.asJSON})})
+        return JSONValue.object(values)
+    }
 }
 
 struct SpaceFedObject {
