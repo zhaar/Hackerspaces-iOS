@@ -21,9 +21,10 @@ class PrefPaneTableViewController: UITableViewController {
         SharedData.toggleDebugMode()
         toggle.isOn = SharedData.isInDebugMode()
         if toggle.isOn {
-            let alert = UIAlertController(title: "Advanced mode enabled", message: "Advanced mode displays more advanced features useful for hackerspace API developers", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: constArg(tableView.reloadData)))
-            present(alert, animated: true, completion:         nil)
+            displayAlert(alertTitle: "Advanced mode enabled",
+                         message: "Advanced mode displays more advanced features useful for hackerspace API developers",
+                         buttonTitle: "OK",
+                         confirmed: constFn(tableView.reloadData))
         } else {
             tableView.reloadData()
         }
@@ -40,15 +41,12 @@ class PrefPaneTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected indexpath \(indexPath)")
         if indexPath.section == 0, indexPath.row == 2 {
-            askConfirmation(for: SharedData.deleteAllDebug)
+            displayAlert(alertTitle: "Deleting Cache",
+                         alertStyle: .actionSheet,
+                         message: "Are you sure you want to delete the local cache?",
+                         buttonTitle: "Delete",
+                         buttonStyle: .destructive,
+                         confirmed: constFn(SharedData.deleteAllDebug))
         }
-    }
-
-
-    func askConfirmation(`for` action: @escaping () -> ()) -> () {
-        let alert = UIAlertController.init(title: "Deleting cache", message: "Are you sure you want to delete the local cache?", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction.init(title: "Delete", style: .destructive, handler: constArg(action)))
-        alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
-        present(alert, animated: true, completion: nil)
     }
 }

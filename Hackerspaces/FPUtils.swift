@@ -26,6 +26,6 @@ func const<A, B>(_ value: A) -> (B) -> A {
     return { _ in value }
 }
 
-func constArg<A, B>(_ f: @escaping () -> A) -> (B) -> A {
+func constFn<A, B>(_ f: @escaping () -> A) -> (B) -> A {
     return { _ in f() }
 }
