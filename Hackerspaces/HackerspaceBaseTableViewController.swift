@@ -209,11 +209,14 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         var actions:[UIAlertAction] = [UIAlertAction(title: "Ok", style: .default, handler: nil)]
 
         let (msg, sender) = messageHandler(err: error)
-        sender.forEach { s in actions.append(UIAlertAction(title: "More details", style: .default, handler: {_ in
-            self.performSegue(withIdentifier: UIConstants.showErrorDetail.rawValue, sender: s)
-        }))}
+        if let s = sender {
+            actions.append(UIAlertAction(title: "More details", style: .default, handler: {_ in
+                self.performSegue(withIdentifier: UIConstants.showErrorDetail.rawValue, sender: s)
+            }))
+        }
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         actions.foreach(alert.addAction)
+        //FIXME: There is a bug around here, the "More detail" button is added twice to the array but only once in the alert
         actions.append(UIAlertAction(title: "More details", style: .default, handler: {_ in
             self.performSegue(withIdentifier: UIConstants.showErrorDetail.rawValue, sender: error.localizedDescription)
         }))

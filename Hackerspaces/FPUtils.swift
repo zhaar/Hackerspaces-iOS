@@ -20,3 +20,12 @@ func map<A, B, F: Functor>(_ fn: @escaping (A) -> B) -> (F) -> F.FB where F.A ==
 func bind<A, B, M: Monad>(_ fn: @escaping (A) -> M.FB) -> (M) -> M.FB where M.A == A, M.B == B {
     return { f in f.bind(fn) }
 }
+
+
+func const<A, B>(_ value: A) -> (B) -> A {
+    return { _ in value }
+}
+
+func constFn<A, B>(_ f: @escaping () -> A) -> (B) -> A {
+    return { _ in f() }
+}

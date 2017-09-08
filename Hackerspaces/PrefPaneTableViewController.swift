@@ -15,18 +15,38 @@ class PrefPaneTableViewController: UITableViewController {
             toggle.isOn = SharedData.isInDebugMode()
         }
     }
+
     @IBAction func toggleDebug(_ sender: UISwitch) {
 
         SharedData.toggleDebugMode()
         toggle.isOn = SharedData.isInDebugMode()
         if toggle.isOn {
-            let alert = UIAlertController(title: "Debug mode enabled", message: "debug mode allows you to access error details when a hackerspace is unreachable", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
+            displayAlert(alertTitle: "Advanced mode enabled",
+                         message: "Advanced mode displays more advanced features useful for hackerspace API developers",
+                         buttonTitle: "OK",
+                         confirmed: constFn(tableView.reloadData))
+        } else {
+            tableView.reloadData()
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return toggle.isOn ? 3 : 2
+        } else {
+            return 5
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("selected indexpath \(indexPath)")
+        if indexPath.section == 0, indexPath.row == 2 {
+            displayAlert(alertTitle: "Deleting Cache",
+                         alertStyle: .actionSheet,
+                         message: "Are you sure you want to delete the local cache?",
+                         buttonTitle: "Delete",
+                         buttonStyle: .destructive,
+                         confirmed: constFn(SharedData.deleteAllDebug))
+        }
     }
 }
