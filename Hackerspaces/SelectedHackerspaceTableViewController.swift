@@ -59,6 +59,11 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     // MARK: - View controller lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        if #available(iOS 11.0, *) {
+            self.navigationItem.largeTitleDisplayMode = .never
+        }
+
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
         reloadData(loadOrigin)

@@ -84,6 +84,10 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        } 
         self.refreshControl?.addTarget(self, action: #selector(HackerspaceBaseTableViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         // Force touch code
         self.refresh(refreshControl!)
