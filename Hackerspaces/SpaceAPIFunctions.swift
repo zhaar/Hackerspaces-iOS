@@ -1,3 +1,4 @@
+
 //
 //  HackerspaceAPIFunctions.swift
 //  Hackerspaces
@@ -13,14 +14,16 @@ import BrightFutures
 import Result
 import MapKit
 import Haneke
-import JSONWrapper
-
 
 private func parseAPI(data: Data) -> [String: String]? {
-    let parsed = JSONObject.parse(fromData: data)?.asObject
-    let api = parsed.map { $0.flatMap { t in t.value.asString.map { (t.key, $0) } } }
-    return api.map(tuplesAsDict)
+    return try? JSONDecoder().decode([String: String].self, from: data)
 }
+
+private func parseAsDict(data: Data) -> [String: Data]? {
+    return try? JSONDecoder().decode([String: Data].self, from: data)
+}
+
+typealias HSData = Data
 
 /// namespace for all space api methods
 enum SpaceAPI { }
@@ -41,15 +44,14 @@ extension SpaceAPI {
         }
     }
 
-    static private func loadHackerspaceData(url: String, fromCache: Bool = true) -> Future<[String : JSONValue], SpaceAPIError> {
+    static private func loadHackerspaceData(url: String, fromCache: Bool = true) -> Future<HSData, SpaceAPIError> {
         if let response = Testing.mockHackerspaceData[url], Testing.isTestingUI() {
-            let fut: Future<[String : JSONValue], SpaceAPIError> = Future.init(value: response)
             return Future(value: response).promoteError()
         }
         return (fromCache ? SpaceAPI.loadHackerspaceDataFromCache : SpaceAPI.loadHackerspaceDataFromWeb)(url)
     }
 
-    static private func parseHackerspace(json: [String : JSONValue], url: String, name: String) -> Result<ParsedHackerspaceData, SpaceAPIError>{
+    static private func parseHackerspace(json: HSData, url: String, name: String) -> Result<ParsedHackerspaceData, SpaceAPIError>{
         return parseHackerspaceDataModel(json: json, name: name, url: url) |=> .parseError(json.description)
     }
 
@@ -92,12 +94,12 @@ extension SpaceAPI {
         return p.future
     }
 
-    static fileprivate func loadHackerspaceDataFromWeb(url: String) -> Future<[String : JSONValue], SpaceAPIError> {
+    static fileprivate func loadHackerspaceDataFromWeb(url: String) -> Future<HSData, SpaceAPIError> {
         return httpRequest(url: url)
             .mapError { SpaceAPIError.httpRequestError(error: $0) }
-            .flatMap({ (data: Data) -> Result<[String : JSONValue], SpaceAPIError> in
-                return JSONObject.parse(fromData: data)?.asObject |=> SpaceAPIError.dataCastError(data: data)
-            })
+//            .flatMap({ (data: Data) -> Result<[String : Data], SpaceAPIError> in
+//                return parseAsDict(data: data) |=> SpaceAPIError.dataCastError(data: data)
+//            }        )
     }
 
     static fileprivate func loadAPIFromWeb() -> Future<[String : String], SpaceAPIError> {
@@ -128,11 +130,11 @@ extension SpaceAPI {
         return p.future
     }
 
-    static fileprivate func loadHackerspaceDataFromCache(url: String) -> Future<[String : JSONValue], SpaceAPIError> {
+    static fileprivate func loadHackerspaceDataFromCache(url: String) -> Future<HSData, SpaceAPIError> {
         return loadFromCache(key: url).mapError { SpaceAPIError.unknownError(error: $0) }
-            .flatMap({ (data: Data) -> Result<[String : JSONValue], SpaceAPIError> in
-                JSONObject.parse(fromData: data)?.asObject |=> .dataCastError(data: data)
-            })
+//            .flatMap({ (data: Data) -> Result<[String : Data], SpaceAPIError> in
+//                (try? JSONDecoder().decode([String : Data].self, from: data)) |=> .dataCastError(data: data)
+//            })
     }
 
     ///Returns a future containing a dictionary of names and endpoints of all hackerspaces using the SpaceAPI

@@ -4,13 +4,12 @@ import MapKit
 import Swiftz
 import BrightFutures
 import Haneke
-import JSONWrapper
 
 class SelectedHackerspaceTableViewController: UITableViewController {
 
     // MARK: - Outlets & Actions
     @IBAction func refresh(_ sender: UIRefreshControl) {
-        reloadData(.Left(hackerspaceData.apiInfo), fromCache: false, callback: sender.endRefreshing)
+        reloadData(Swiftz.Either.Left(hackerspaceData.apiInfo), fromCache: false, callback: sender.endRefreshing)
     }
 
     @IBOutlet weak var favoriteStatusButton: UIBarButtonItem!
@@ -144,7 +143,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
 
     func reuseMapCell(_ indexPath: IndexPath) -> UITableViewCell {
         if let mapCell = tableView.dequeueReusableCell(withIdentifier: storyboard.MapIdentifier, for: indexPath) as? HackerspaceMapTableViewCell {
-            mapCell.location = hackerspaceData?.location
+            mapCell.location = hackerspaceData.location.toSpaceLocation(name: hackerspaceData.name)
             return mapCell
         } else {
             return tableView.dequeueReusableCell(withIdentifier: storyboard.TitleIdentifier, for: indexPath)
@@ -159,7 +158,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
                 mapCell.HSStatus.text = data.state.open ? "Open" : "Closed"
                 mapCell.HSStatus.accessibilityIdentifier = "hackerspace status"
                 mapCell.HSUrl.text = data.websiteURL
-                mapCell.HSLastUpdateTime.text = data.state.lastChange >>- { dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval($0))) }
+                mapCell.HSLastUpdateTime.text = data.state.lastchange >>- { dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval($0))) }
                 mapCell.openningMessageLabel.text = hackerspaceData?.state.message
                 mapCell.HSUsedAPI.text = "space api v " + (hackerspaceData?.apiVersion ?? "")
             }

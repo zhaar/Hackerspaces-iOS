@@ -33,10 +33,6 @@
 		956734501F430BC10061A1E6 /* HackerspacesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9567344F1F430BC10061A1E6 /* HackerspacesUITests.swift */; };
 		9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */; };
 		9573A2AF1B936F960061A1E6 /* RawDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */; };
-		957BF3E81F3918E30061A1E6 /* JSONWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957BF3E71F3918E30061A1E6 /* JSONWrapper.framework */; };
-		957BF3E91F3918E50061A1E6 /* JSONWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957BF3E71F3918E30061A1E6 /* JSONWrapper.framework */; };
-		957BF3EA1F391B490061A1E6 /* JSONWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 957BF3E71F3918E30061A1E6 /* JSONWrapper.framework */; };
-		957BF3EB1F391B490061A1E6 /* JSONWrapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 957BF3E71F3918E30061A1E6 /* JSONWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */; };
 		958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */; };
 		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
@@ -96,7 +92,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				957BF3EB1F391B490061A1E6 /* JSONWrapper.framework in Embed Frameworks */,
 				956455181F3140410061A1E6 /* Swiftz.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -175,10 +170,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				95BD26A91F41BC780061A1E6 /* Haneke.framework in Frameworks */,
-				957BF3E81F3918E30061A1E6 /* JSONWrapper.framework in Frameworks */,
 				95DBD94C1B8CFF360061A1E6 /* Result.framework in Frameworks */,
 				958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */,
-				957BF3EA1F391B490061A1E6 /* JSONWrapper.framework in Frameworks */,
 				956455171F3140410061A1E6 /* Swiftz.framework in Frameworks */,
 				958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */,
 			);
@@ -188,7 +181,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				957BF3E91F3918E50061A1E6 /* JSONWrapper.framework in Frameworks */,
 				9564551A1F3140A30061A1E6 /* Swiftz.framework in Frameworks */,
 				95BD26AA1F41BC780061A1E6 /* Haneke.framework in Frameworks */,
 			);
