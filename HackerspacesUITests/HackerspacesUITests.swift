@@ -31,19 +31,20 @@ class HackerspacesUITests: XCTestCase {
         } else {
             XCTFail("no element found in collection view")
         }
-        
-        app.navigationBars["Hackerspaces.SelectedHackerspaceTableView"].buttons["Star empty"].tap()
+
+        app.navigationBars["Hackerspaces.SelectedHackerspaceTableView"].children(matching: .button).element(boundBy: 1).tap()
         app.tabBars.buttons["Favorites"].tap()
         firstChild = app.cells.element(boundBy: 0)
         if firstChild.exists {
             firstChild.tap()
         }
-        
-        let favoritesNavigationBar = XCUIApplication().navigationBars["Favorites"]
-        favoritesNavigationBar.children(matching: .button).element(boundBy: 2).tap()
-        favoritesNavigationBar.buttons["Favorites"].tap()
+
         firstChild = app.cells.element(boundBy: 0)
+        app.navigationBars["Favorites"].children(matching: .button).element(boundBy: 1).tap()
+        app.navigationBars["Favorites"].buttons["Favorites"].tap()
+
         if firstChild.exists {
+            print(firstChild)
             XCTFail("favorite list should be empty after unfavorite")
         }
     }

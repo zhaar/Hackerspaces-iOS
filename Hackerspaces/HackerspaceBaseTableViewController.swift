@@ -35,12 +35,11 @@ enum NetworkState {
 class HackerspaceBaseTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
 
     func refresh(_ sender: UIRefreshControl) {
-        dataSource().onComplete { _ in
-            sender.endRefreshing()
-            }.onSuccess { api in
+        dataSource().onComplete(callback: constFn(sender.endRefreshing))
+            .onSuccess { api in
                 self.hackerspaces = api.map { _ in NetworkState.loading }
                 api.forEach { (hs, url) in
-                    SpaceAPI.getParsedHackerspace(url: url, name: hs, fromCache: false).map { NetworkState.finished($0) }
+                    SpaceAPI.getParsedHackerspace(url: url, name: hs, fromCache: false).map(NetworkState.finished)
                         .onSuccess { data in
                             self.hackerspaces.updateValue(data, forKey: hs)
                         }
