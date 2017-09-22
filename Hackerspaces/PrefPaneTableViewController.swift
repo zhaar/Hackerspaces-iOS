@@ -18,6 +18,11 @@ class PrefPaneTableViewController: UITableViewController {
             toggle.isOn = SharedData.isInDebugMode()
         }
     }
+    @IBOutlet var darkModeToggle: UISwitch! {
+        didSet {
+            darkModeToggle.isOn = SharedData.isInDarkMode()
+        }
+    }
 
     @IBAction func toggleDebug() {
 
@@ -32,8 +37,20 @@ class PrefPaneTableViewController: UITableViewController {
         }
     }
 
+    @IBAction func toggleDarkMode(_ sender: Any) {
+        SharedData.setDarkMode(value: !SharedData.isInDarkMode())
+        darkModeToggle.isOn = SharedData.isInDarkMode()
+        if SharedData.isInDarkMode() {
+            Theme.enableDarkMode()
+        } else {
+            Theme.enableClearMode()
+        }
+        Theme.redrawAll()
+        tableView.reloadData()
+    }
+
     func setupDebugMode(enable isEnabled: Bool) {
-        let rows = [IndexPath.init(row: 1, section: 0), IndexPath.init(row: 2, section: 0)]
+        let rows = (1...3).map { IndexPath.init(row: $0, section: 0) }
         let refreshTitle = isEnabled ? "Pull to disable Advanced Mode" : "Pull to enable Advanced Mode"
         let updateRows = isEnabled ? tableView.insertRows : tableView.deleteRows
         SharedData.setDebugMode(value: isEnabled)
@@ -52,7 +69,11 @@ class PrefPaneTableViewController: UITableViewController {
         refresh.tintColor = UIColor.clear
         refresh.addTarget(self, action: #selector(PrefPaneTableViewController.toggleDebug), for: UIControlEvents.valueChanged)
         self.refreshControl = refresh
+    }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.backgroundColor = SharedData.isInDarkMode() ? UIColor.darkBackground : UIColor.staticTableBackground
     }
 
     //MARK: - Table View
@@ -63,10 +84,14 @@ class PrefPaneTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if SharedData.isInDebugMode() && section == 0 {
-            return 3
+            return 4
         } else {
             return 1
         }
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.backgroundColor = SharedData.isInDarkMode() ? UIColor.themeGray : UIColor.white
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

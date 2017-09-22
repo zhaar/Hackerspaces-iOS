@@ -36,3 +36,65 @@ extension UIViewController {
         self.present(alert, animated: true, completion: callback)
     }
 }
+
+extension UIColor {
+
+    static let darkBackground = UIColor(red:0.18, green:0.18, blue:0.18, alpha:1.0)
+    static let darkTint = UIColor(red:0.25, green:0.62, blue:0.64, alpha:1.0)
+    static let themeWhite = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
+    static let themeGray = UIColor(red:0.3, green:0.3, blue:0.3, alpha:1.0)
+    static let staticTableBackground = UIColor(red: 239/255, green: 239/255, blue: 244/255, alpha: 1.0)
+
+}
+
+enum Theme {
+
+    static func enableDarkMode() {
+        print("enabling dark mode")
+        UINavigationBar.appearance().barTintColor = UIColor.darkBackground
+        UINavigationBar.appearance().tintColor = UIColor.darkTint
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.themeWhite]
+        if #available(iOS 11.0, *) {
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSForegroundColorAttributeName: UIColor.themeWhite]
+        }
+        UITabBar.appearance().barTintColor = UIColor.darkBackground
+        UITabBar.appearance().tintColor = UIColor.darkTint
+        UITableView.appearance().backgroundColor = UIColor.darkBackground
+        UITableView.appearance().sectionIndexBackgroundColor  = UIColor.darkBackground
+        UILabel.appearance().textColor = UIColor.themeWhite
+        UITableViewCell.appearance().backgroundColor = UIColor.darkBackground
+        UITextView.appearance().backgroundColor = UIColor.darkBackground
+        UITextView.appearance().tintColor = UIColor.darkTint
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+
+    static func enableClearMode() {
+        print("enabling clear mode")
+        UINavigationBar.appearance().barTintColor = nil
+        UINavigationBar.appearance().tintColor = nil
+        UINavigationBar.appearance().titleTextAttributes = [:]
+        if #available(iOS 11.0, *) {
+            UINavigationBar.appearance().largeTitleTextAttributes = [:]
+        }
+        UITabBar.appearance().barTintColor = nil
+        UITabBar.appearance().tintColor = nil
+        UITableView.appearance().backgroundColor = UIColor.white
+        UITableView.appearance().sectionIndexBackgroundColor  = nil
+        UILabel.appearance().textColor = UIColor.black
+        UITableViewCell.appearance().backgroundColor = UIColor.white
+        UITextView.appearance().backgroundColor = UIColor.white
+        UITextView.appearance().tintColor = nil
+        UIApplication.shared.statusBarStyle = .default
+
+    }
+
+    static func redrawAll() {
+        for window in UIApplication.shared.windows {
+            for view in window.subviews {
+                view.removeFromSuperview()
+                window.addSubview(view)
+            }
+        }
+    }
+}
+

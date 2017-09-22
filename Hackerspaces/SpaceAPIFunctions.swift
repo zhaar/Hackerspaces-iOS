@@ -96,15 +96,12 @@ extension SpaceAPI {
 
     static fileprivate func loadHackerspaceDataFromWeb(url: String) -> Future<HSData, SpaceAPIError> {
         return httpRequest(url: url)
-            .mapError { SpaceAPIError.httpRequestError(error: $0) }
-//            .flatMap({ (data: Data) -> Result<[String : Data], SpaceAPIError> in
-//                return parseAsDict(data: data) |=> SpaceAPIError.dataCastError(data: data)
-//            }        )
+            .mapError(SpaceAPIError.httpRequestError)
     }
 
     static fileprivate func loadAPIFromWeb() -> Future<[String : String], SpaceAPIError> {
         return httpRequest(url: SpaceAPIConstants.FIXMEAPI.rawValue)
-            .mapError { SpaceAPIError.httpRequestError(error: $0) }
+            .mapError(SpaceAPIError.httpRequestError)
             .flatMap { (data: Data) -> Result<[String: String], SpaceAPIError> in
                 return parseAPI(data: data) |=> SpaceAPIError.dataCastError(data: data)
         }
@@ -131,10 +128,7 @@ extension SpaceAPI {
     }
 
     static fileprivate func loadHackerspaceDataFromCache(url: String) -> Future<HSData, SpaceAPIError> {
-        return loadFromCache(key: url).mapError { SpaceAPIError.unknownError(error: $0) }
-//            .flatMap({ (data: Data) -> Result<[String : Data], SpaceAPIError> in
-//                (try? JSONDecoder().decode([String : Data].self, from: data)) |=> .dataCastError(data: data)
-//            })
+        return loadFromCache(key: url).mapError(SpaceAPIError.unknownError)
     }
 
     ///Returns a future containing a dictionary of names and endpoints of all hackerspaces using the SpaceAPI

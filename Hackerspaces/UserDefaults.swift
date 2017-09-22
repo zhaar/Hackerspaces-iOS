@@ -13,12 +13,21 @@ let favoriteList = "listOfFavorites"
 let favoriteDictKey = "DictionaryOfFavorites"
 let parsedDataList = "listOfParsedHackerspaceData"
 let debugModeKey = "debugModeKey"
+let darkModeKey = "darkModeKey"
 
 struct SharedData {
     
     typealias HackerspaceAPIURL = String
     static let defaults = UserDefaults.standard
-    
+
+    static func isInDarkMode() -> Bool {
+        return defaults.bool(forKey: darkModeKey)
+    }
+
+    static func setDarkMode(value: Bool) -> () {
+        defaults.set(value, forKey: darkModeKey)
+    }
+
     static func isInDebugMode() -> Bool {
         return defaults.bool(forKey: debugModeKey)
     }

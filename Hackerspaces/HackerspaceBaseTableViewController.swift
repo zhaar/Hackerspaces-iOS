@@ -155,6 +155,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         let state = self.hackerspaces[name]
         cell.textLabel?.text = name
         cell.detailTextLabel?.text = state?.stateMessage ?? "not found"
+        cell.detailTextLabel?.textColor = UIColor.gray
         cell.selectionStyle = state?.isDone ?? true ? .default : .none
 
         //workaround a bug where detail is no updated correctly
