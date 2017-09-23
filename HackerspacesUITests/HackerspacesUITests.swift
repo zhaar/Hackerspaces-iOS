@@ -52,8 +52,8 @@ class HackerspacesUITests: XCTestCase {
     func testSearchBar() {
         let app = XCUIApplication()
         app.tabBars.buttons["Search"].tap()
-        app.navigationBars["Search Bar Embedded in Navigation Bar"].searchFields["Search"].tap()
-        app.navigationBars["Search Bar Embedded in Navigation Bar"].searchFields["Search"].typeText("open")
+        app.searchFields["Search"].tap()
+        app.searchFields["Search"].typeText("open")
         let firstChild = app.cells.element(boundBy: 0)
         if firstChild.exists {
             firstChild.tap()
