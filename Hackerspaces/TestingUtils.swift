@@ -17,24 +17,33 @@ public enum Testing {
     static let closedEndpoint = "closedHackerspaceAPIEndpoint"
     static let openEndpoint = "openHackerspaceAPIEndpoint"
     static let mockAPIResponse = ["open": openEndpoint, "closed": closedEndpoint]
-    static let openHackerspaceAPI = ParsedHackerspaceData.init(apiVersion: "0.13",
-                                                               apiEndpoint: openEndpoint,
-                                                               apiName: "open",
-                                                               name: "Open Hackerspace",
-                                                               logoURL: "", websiteURL: "",
-                                                               state: StateObject(open: true, lastChange: nil, trigger_person: nil, message: "The space is open", icon: nil),
-                                                               location: SpaceLocation.init(name: "Open Hackerspace", address: nil, location: CLLocationCoordinate2D.init(latitude: 0, longitude: 0)),
-                                                               contact: ContactObject.init(),
-                                                               issue_report_channel: [])
-    static let closedHackerspaceAPI = ParsedHackerspaceData.init(apiVersion: "0.13",
-                                                               apiEndpoint: openEndpoint,
-                                                               apiName: "closed",
-                                                               name: "Closed Hackerspace",
-                                                               logoURL: "", websiteURL: "",
-                                                               state: StateObject(open: false, lastChange: nil, trigger_person: nil, message: "The space is closed", icon: nil),
-                                                               location: SpaceLocation.init(name: "Closed Hackerspace", address: nil, location: CLLocationCoordinate2D.init(latitude: 10, longitude: 10)),
-                                                               contact: ContactObject.init(),
-                                                               issue_report_channel: [])
-    static let mockHackerspaceData = [openEndpoint : openHackerspaceAPI.asJSON.asObject!,
-                                      closedEndpoint: closedHackerspaceAPI.asJSON.asObject!]
+    static let openHackerspaceAPI = HackerspaceData.init(api: openEndpoint,
+                                                         space: "Open Hackerspace",
+                                                         logo: "",
+                                                         url: "",
+                                                         location: LocationData.init(address: nil, lat: 0, lon: 0),
+                                                         spacefed: nil,
+                                                         cam: nil,
+                                                         state: StateData(open: true, lastchange: nil, trigger_person: nil, message: "The space is open", icon: nil),
+                                                         events: nil,
+                                                         contact: ContactData.init())
+
+    static let closedHackerspaceAPI = HackerspaceData.init(api: openEndpoint,
+                                                           space: "Closed Hackerspace",
+                                                           logo: "",
+                                                           url: "",
+                                                           location: LocationData.init(address: nil, lat: 0, lon: 0),
+                                                           spacefed: nil,
+                                                           cam: nil,
+                                                           state: StateData(open: false, lastchange: nil, trigger_person: nil, message: "The space is closed", icon: nil),
+                                                           events: nil,
+                                                           contact: ContactData.init())
+
+    static var  mockHackerspaceData: [String: Data] {
+        let openEncoded = try! JSONEncoder().encode(openHackerspaceAPI)
+        let closedEncoded = try! JSONEncoder().encode(closedHackerspaceAPI)
+
+        return [openEndpoint : openEncoded,
+                closedEndpoint: closedEncoded]
+    }
 }

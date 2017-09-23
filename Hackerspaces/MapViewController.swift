@@ -9,6 +9,7 @@
 import UIKit
 import Swiftz
 import MapKit
+import BrightFutures
 
 class MapViewController: UIViewController, CLLocationManagerDelegate {
 
@@ -61,15 +62,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func refresh(sender: UIBarButtonItem) {
         self.navigationItem.rightBarButtonItem = loadingIndicator
         self.map.removeAnnotations(map.annotations)
-        let _ = SpaceAPI.loadHackerspaceList(fromCache: false).map { hsList in
-            hsList.map { name, url in
-                SpaceAPI.getParsedHackerspace(url: url, name: name, fromCache: false)
-                    .onSuccess { self.map.addAnnotation($0.location) }
-                }
-                .sequence()
-                .onComplete { _ in
-                    self.navigationItem.rightBarButtonItem = self.refreshButton
-            }
+        _ = SpaceAPI.loadHackerspaceList(fromCache: false)
+            .map { hsList in
+                let list = hsList.mapWithKey { name, url in
+                    return SpaceAPI.getParsedHackerspace(url: url, name: name, fromCache: false)
+                        .onSuccess { self.map.addAnnotation($0.location.toSpaceLocation(name: $0.name)) }
+                    }
+
+                let seq = list.map({pair in pair.1}).sequence()
+                seq.onComplete { _ in self.navigationItem.rightBarButtonItem = self.refreshButton }
         }
     }
 

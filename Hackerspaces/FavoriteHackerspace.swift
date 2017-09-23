@@ -32,10 +32,10 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         if visibleResults.count == 0 {
-            let instructions = UILabel(frame: self.tableView.bounds)
+            let instructions = UILabel.init(frame: self.tableView.bounds)
             instructions.attributedText = NSAttributedString(string: "Select your favorite hackerspace from search or map")
             instructions.textAlignment = .center
-            instructions.textColor = UIColor.black
+            instructions.textColor = UIColor.gray
             instructions.numberOfLines = 0
             tableView.backgroundView = instructions
             tableView.separatorStyle = .none

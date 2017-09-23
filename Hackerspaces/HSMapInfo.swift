@@ -22,10 +22,10 @@ class SpaceLocation : NSObject {
 }
 
 extension SpaceLocation {
-    var toLocation: LocationObject {
-        return LocationObject(latitude: Float(self.location.latitude),
-                              longitude: Float(self.location.longitude),
-                              address: self.address)
+    var toLocation: LocationData {
+        return LocationData(address: self.address,
+                            lat: Float(self.location.latitude),
+                            lon: Float(self.location.longitude))
     }
 }
 

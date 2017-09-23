@@ -35,12 +35,11 @@ enum NetworkState {
 class HackerspaceBaseTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
 
     func refresh(_ sender: UIRefreshControl) {
-        dataSource().onComplete { _ in
-            sender.endRefreshing()
-            }.onSuccess { api in
+        dataSource().onComplete(callback: constFn(sender.endRefreshing))
+            .onSuccess { api in
                 self.hackerspaces = api.map { _ in NetworkState.loading }
                 api.forEach { (hs, url) in
-                    SpaceAPI.getParsedHackerspace(url: url, name: hs, fromCache: false).map { NetworkState.finished($0) }
+                    SpaceAPI.getParsedHackerspace(url: url, name: hs, fromCache: false).map(NetworkState.finished)
                         .onSuccess { data in
                             self.hackerspaces.updateValue(data, forKey: hs)
                         }
@@ -85,6 +84,10 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        } 
         self.refreshControl?.addTarget(self, action: #selector(HackerspaceBaseTableViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         // Force touch code
         self.refresh(refreshControl!)
@@ -152,6 +155,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         let state = self.hackerspaces[name]
         cell.textLabel?.text = name
         cell.detailTextLabel?.text = state?.stateMessage ?? "not found"
+        cell.detailTextLabel?.textColor = UIColor.gray
         cell.selectionStyle = state?.isDone ?? true ? .default : .none
 
         //workaround a bug where detail is no updated correctly

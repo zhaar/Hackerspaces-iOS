@@ -53,6 +53,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if Testing.isTestingUI() {
             UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
         }
+
+        if SharedData.isInDarkMode() {
+            Theme.enableDarkMode()
+        } else {
+            Theme.enableClearMode()
+        }
         return true
     }
 
