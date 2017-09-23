@@ -14,4 +14,4 @@ before_install:
   - carthage bootstrap --verbose --no-use-binaries --platform iOS --cache-builds
 
 script:
-  - xcodebuild clean build -sdk iphonesimulator -project Hackerspaces.xcodeproj -scheme Hackerspaces CODE_SIGNING_REQUIRED=NO
+  - xcodebuild clean build test -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone X,OS=11.0' -project Hackerspaces.xcodeproj -scheme Hackerspaces CODE_SIGNING_REQUIRED=NO

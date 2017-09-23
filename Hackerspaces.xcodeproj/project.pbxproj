@@ -43,6 +43,7 @@
 		95A594A21B893FB60061A1E6 /* Haneke.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */; };
 		95A594A41B893FB60061A1E6 /* SwiftHTTP.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */; };
 		95A594A51B893FB60061A1E6 /* Swiftz.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */; };
+		95ACC0221F7702EF0061A1E6 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B38C4E1F62B09C0061A1E6 /* UIUtils.swift */; };
 		95ADEF991B8B53580061A1E6 /* SpaceAPIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */; };
 		95B38C4F1F62B09C0061A1E6 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B38C4E1F62B09C0061A1E6 /* UIUtils.swift */; };
 		95BD26781F40AB2E0061A1E6 /* TestingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BD26771F40AB2E0061A1E6 /* TestingUtils.swift */; };
@@ -562,6 +563,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95ACC0221F7702EF0061A1E6 /* UIUtils.swift in Sources */,
 				95BD26991F40F4510061A1E6 /* DisplayErrorViewController.swift in Sources */,
 				95BD26941F40F40E0061A1E6 /* HSTitleTableViewCell.swift in Sources */,
 				95BD268F1F40F2850061A1E6 /* HackerspaceBaseTableViewController.swift in Sources */,

@@ -65,6 +65,7 @@ enum Theme {
         UITableViewCell.appearance().backgroundColor = UIColor.darkBackground
         UITextView.appearance().backgroundColor = UIColor.darkBackground
         UITextView.appearance().tintColor = UIColor.darkTint
+        UITextView.appearance().textColor = UIColor.themeWhite
         UIApplication.shared.statusBarStyle = .lightContent
     }
 
@@ -84,8 +85,13 @@ enum Theme {
         UITableViewCell.appearance().backgroundColor = UIColor.white
         UITextView.appearance().backgroundColor = UIColor.white
         UITextView.appearance().tintColor = nil
+        UITextView.appearance().textColor = nil
         UIApplication.shared.statusBarStyle = .default
 
+    }
+
+    static public var conditionalBackgroundColor: UIColor {
+        return SharedData.isInDarkMode() ? UIColor.darkBackground : UIColor.white
     }
 
     static func redrawAll() {

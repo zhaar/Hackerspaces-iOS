@@ -11,6 +11,7 @@ import Swiftz
 
 class PrefPaneTableViewController: UITableViewController {
 
+    let hiddenRange = 2..<5
     let refresh = UIRefreshControl()
 
     @IBOutlet weak var toggle: UISwitch! {
@@ -50,7 +51,7 @@ class PrefPaneTableViewController: UITableViewController {
     }
 
     func setupDebugMode(enable isEnabled: Bool) {
-        let rows = (1...3).map { IndexPath.init(row: $0, section: 0) }
+        let rows = hiddenRange.map { IndexPath.init(row: $0, section: 0) }
         let refreshTitle = isEnabled ? "Pull to disable Advanced Mode" : "Pull to enable Advanced Mode"
         let updateRows = isEnabled ? tableView.insertRows : tableView.deleteRows
         SharedData.setDebugMode(value: isEnabled)
@@ -84,9 +85,9 @@ class PrefPaneTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if SharedData.isInDebugMode() && section == 0 {
-            return 4
+            return hiddenRange.upperBound
         } else {
-            return 1
+            return hiddenRange.lowerBound
         }
     }
 
