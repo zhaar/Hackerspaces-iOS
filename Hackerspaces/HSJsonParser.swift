@@ -10,37 +10,6 @@ import Foundation
 import Swiftz
 import MapKit
 
-enum JSONKeys: String {
-    case open = "open"
-    case closed = "closed"
-    case lastchange = "lastchange"
-    case trigger_person = "trigger_person"
-    case icon = "icon"
-    case message = "message"
-    //location
-    case lat = "lat"
-    case lon = "lon"
-    case address = "address"
-    //contact
-    case keymasters = "keymasters"
-    case phone = "phone"
-    case sip = "sip"
-    case irc = "irc"
-    case twitter = "twitter"
-    case facebook = "facebook"
-    case google = "google"
-    case plus = "plus"
-    case identica = "identica"
-    case foursquare = "foursquare"
-    case email = "email"
-    case ml = "ml"
-    case jabber = "jabber"
-    case issue_mail = "issue_mail"
-    //member
-    case name = "name"
-    case irc_nick = "irc_nick"
-}
-
 func parseHackerspaceDataModel(json: HSData, name apiName: String, url: String) -> ParsedHackerspaceData? {
     let rawParsed: HackerspaceData?
     do {
