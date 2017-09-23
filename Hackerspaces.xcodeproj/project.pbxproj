@@ -44,6 +44,8 @@
 		95A594A41B893FB60061A1E6 /* SwiftHTTP.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */; };
 		95A594A51B893FB60061A1E6 /* Swiftz.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */; };
 		95ACC0221F7702EF0061A1E6 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B38C4E1F62B09C0061A1E6 /* UIUtils.swift */; };
+		95ACC0261F771D370061A1E6 /* CustomEndpointList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95ACC0251F771D370061A1E6 /* CustomEndpointList.storyboard */; };
+		95ACC02B1F771DA30061A1E6 /* EndpointList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ACC02A1F771DA30061A1E6 /* EndpointList.swift */; };
 		95ADEF991B8B53580061A1E6 /* SpaceAPIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */; };
 		95B38C4F1F62B09C0061A1E6 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B38C4E1F62B09C0061A1E6 /* UIUtils.swift */; };
 		95BD26781F40AB2E0061A1E6 /* TestingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BD26771F40AB2E0061A1E6 /* TestingUtils.swift */; };
@@ -149,6 +151,9 @@
 		95A5949F1B893FB60061A1E6 /* JSONJoy.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = JSONJoy.framework.dSYM; path = Carthage/Build/iOS/JSONJoy.framework.dSYM; sourceTree = "<group>"; };
 		95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftHTTP.framework.dSYM; path = Carthage/Build/iOS/SwiftHTTP.framework.dSYM; sourceTree = "<group>"; };
 		95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Swiftz.framework.dSYM; path = Carthage/Build/iOS/Swiftz.framework.dSYM; sourceTree = "<group>"; };
+		95ACC0251F771D370061A1E6 /* CustomEndpointList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomEndpointList.storyboard; sourceTree = "<group>"; };
+		95ACC0271F771D3F0061A1E6 /* CustomEndpointList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomEndpointList.storyboard; sourceTree = SOURCE_ROOT; };
+		95ACC02A1F771DA30061A1E6 /* EndpointList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointList.swift; sourceTree = "<group>"; };
 		95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceAPIFunctions.swift; sourceTree = "<group>"; };
 		95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
 		95B38C4E1F62B09C0061A1E6 /* UIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
@@ -241,6 +246,7 @@
 		95643FA41B729B3E0061A1E6 = {
 			isa = PBXGroup;
 			children = (
+				95ACC0251F771D370061A1E6 /* CustomEndpointList.storyboard */,
 				95A594A61B893FC90061A1E6 /* Debug symbols */,
 				95643FAF1B729B3E0061A1E6 /* Hackerspaces */,
 				95643FC71B729B3E0061A1E6 /* HackerspacesTests */,
@@ -265,11 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				95643FB21B729B3E0061A1E6 /* AppDelegate.swift */,
-				950AF2991D89BB500068F29E /* Preference pane */,
-				950AF2961D88CC2C0068F29E /* Error display */,
-				95D4B74D1B7D68C80061A1E6 /* Map */,
-				95E4B90A1B811F150061A1E6 /* Embeded search */,
-				9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */,
+				95ACC0281F771D7C0061A1E6 /* View Controllers */,
 				95DB77FE1B9142D60061A1E6 /* Constants.swift */,
 				95DB78001B9149660061A1E6 /* UserDefaults.swift */,
 				952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */,
@@ -283,6 +285,7 @@
 				953161861B73B12A0061A1E6 /* extensions.swift */,
 				95BD26771F40AB2E0061A1E6 /* TestingUtils.swift */,
 				95643FB81B729B3E0061A1E6 /* Main.storyboard */,
+				95ACC0271F771D3F0061A1E6 /* CustomEndpointList.storyboard */,
 				95643FBB1B729B3E0061A1E6 /* Images.xcassets */,
 				95643FBD1B729B3E0061A1E6 /* LaunchScreen.xib */,
 				95643FB01B729B3E0061A1E6 /* Supporting Files */,
@@ -334,6 +337,27 @@
 				95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */,
 			);
 			name = "Debug symbols";
+			sourceTree = "<group>";
+		};
+		95ACC0281F771D7C0061A1E6 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				95ACC0291F771D890061A1E6 /* CustomEndpoint */,
+				950AF2991D89BB500068F29E /* Preference pane */,
+				950AF2961D88CC2C0068F29E /* Error display */,
+				95D4B74D1B7D68C80061A1E6 /* Map */,
+				95E4B90A1B811F150061A1E6 /* Embeded search */,
+				9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		95ACC0291F771D890061A1E6 /* CustomEndpoint */ = {
+			isa = PBXGroup;
+			children = (
+				95ACC02A1F771DA30061A1E6 /* EndpointList.swift */,
+			);
+			name = CustomEndpoint;
 			sourceTree = "<group>";
 		};
 		95BD266E1F40A9E90061A1E6 /* HackerspacesUITests */ = {
@@ -481,6 +505,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95ACC0261F771D370061A1E6 /* CustomEndpointList.storyboard in Resources */,
 				95643FBA1B729B3E0061A1E6 /* Main.storyboard in Resources */,
 				95643FBF1B729B3E0061A1E6 /* LaunchScreen.xib in Resources */,
 				95643FBC1B729B3E0061A1E6 /* Images.xcassets in Resources */,
@@ -555,6 +580,7 @@
 				95DB78011B9149660061A1E6 /* UserDefaults.swift in Sources */,
 				953161871B73B12A0061A1E6 /* extensions.swift in Sources */,
 				95DB77FF1B9142D60061A1E6 /* Constants.swift in Sources */,
+				95ACC02B1F771DA30061A1E6 /* EndpointList.swift in Sources */,
 				95B38C4F1F62B09C0061A1E6 /* UIUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

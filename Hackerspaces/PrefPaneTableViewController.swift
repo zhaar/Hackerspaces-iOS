@@ -97,7 +97,7 @@ class PrefPaneTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("selected indexpath \(indexPath)")
-        if SharedData.isInDebugMode(), indexPath.section == 0, indexPath.row == 2 {
+        if SharedData.isInDebugMode(), indexPath.section == 0, indexPath.row == 3 {
             displayAlert(alertTitle: "Deleting Cache",
                          alertStyle: .actionSheet,
                          message: "Are you sure you want to delete the local cache?",

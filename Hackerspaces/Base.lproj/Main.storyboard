@@ -726,6 +726,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="S0y-FY-Rxx" kind="show" id="4jv-rh-r4K"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="DNR-mM-GTz" style="IBUITableViewCellStyleDefault" id="Cer-rT-yOJ">
                                         <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
@@ -902,6 +905,14 @@
                 </switch>
             </objects>
             <point key="canvasLocation" x="1406" y="2211"/>
+        </scene>
+        <!--CustomEndpointList-->
+        <scene sceneID="qdc-s6-6RR">
+            <objects>
+                <viewControllerPlaceholder storyboardName="CustomEndpointList" id="S0y-FY-Rxx" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ql7-EB-Yil" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2278" y="2210"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="S6N-SW-ahz">
