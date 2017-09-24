@@ -14,11 +14,28 @@ let favoriteDictKey = "DictionaryOfFavorites"
 let parsedDataList = "listOfParsedHackerspaceData"
 let debugModeKey = "debugModeKey"
 let darkModeKey = "darkModeKey"
+let customEndpointsKey = "customEndpointsKey"
 
 struct SharedData {
     
     typealias HackerspaceAPIURL = String
     static let defaults = UserDefaults.standard
+
+    static func addCustomEndpoint(name: String, url: String) -> () {
+        updateCustomEndpoint { [(name, url)] + $0 }
+    }
+
+    static func updateCustomEndpoint(_ updateFn: ([(String, String)]) -> [(String, String)]) -> () {
+        setCustomEndPoint(updateFn(getCustomEndPoint()))
+    }
+
+    static func getCustomEndPoint() -> [(String, String)] {
+        return defaults.array(forKey: customEndpointsKey) as? [(String, String)] ?? []
+    }
+
+    static func setCustomEndPoint(_ array:[(String, String)]) -> () {
+        defaults.set(array, forKey: customEndpointsKey)
+    }
 
     static func isInDarkMode() -> Bool {
         return defaults.bool(forKey: darkModeKey)
