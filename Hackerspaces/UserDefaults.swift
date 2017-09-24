@@ -16,6 +16,11 @@ let debugModeKey = "debugModeKey"
 let darkModeKey = "darkModeKey"
 let customEndpointsKey = "customEndpointsKey"
 
+struct KeyValuePair<Key: Codable, Value: Codable>: Codable {
+    let key: Key
+    let value: Value
+}
+
 struct SharedData {
     
     typealias HackerspaceAPIURL = String
@@ -26,15 +31,27 @@ struct SharedData {
     }
 
     static func updateCustomEndpoint(_ updateFn: ([(String, String)]) -> [(String, String)]) -> () {
-        setCustomEndPoint(updateFn(getCustomEndPoint()))
+        setCustomEndPoint(updateFn(getCustomEndPoints()))
     }
 
-    static func getCustomEndPoint() -> [(String, String)] {
-        return defaults.array(forKey: customEndpointsKey) as? [(String, String)] ?? []
+    static func getCustomEndPoints() -> [(String, String)] {
+        return getKeyValuePair(forKey: customEndpointsKey)
     }
 
     static func setCustomEndPoint(_ array:[(String, String)]) -> () {
-        defaults.set(array, forKey: customEndpointsKey)
+        let pairs = array.map { pair in KeyValuePair(key: pair.0, value: pair.1)}
+        _ = try? setKeyValuePair(forkey: customEndpointsKey, pair: pairs)
+    }
+
+    static func getKeyValuePair<K: Codable, V: Codable>(forKey key: String) -> [(K, V)] {
+        let plist = defaults.data(forKey: key)
+        let kvPairs = plist.flatMap { try? PropertyListDecoder().decode([KeyValuePair<K, V>].self, from: $0) } ?? []
+        return kvPairs.map { pair in (pair.key, pair.value) }
+    }
+
+    static func setKeyValuePair<K, V>(forkey key: String, pair: [KeyValuePair<K, V>]) throws -> () {
+
+        defaults.set(try PropertyListEncoder().encode(pair), forKey: key)
     }
 
     static func isInDarkMode() -> Bool {

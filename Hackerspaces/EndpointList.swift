@@ -16,7 +16,13 @@ class EndPointTableViewController: UITableViewController {
         super.viewDidLoad()
 
         tableView.setEditing(true, animated: true)
-        //        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addNewEndpoint))
+
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        source = SharedData.getCustomEndPoints()
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -59,6 +65,11 @@ class EndPointTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             source.remove(at: indexPath.row)
+            SharedData.updateCustomEndpoint { arr in
+                var cpy = arr
+                cpy.remove(at: indexPath.row)
+                return cpy
+            }
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             performSegue(withIdentifier: "ShowAddEndpoint", sender: nil)

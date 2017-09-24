@@ -40,10 +40,10 @@
             </objects>
             <point key="canvasLocation" x="-59" y="135"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Endpoint View Controller-->
         <scene sceneID="OCc-bY-bLn">
             <objects>
-                <viewController id="UV1-sw-tfv" sceneMemberID="viewController">
+                <viewController id="UV1-sw-tfv" customClass="AddEndpointViewController" customModule="Hackerspaces" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="j9q-iJ-4Wt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -69,6 +69,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bkj-P0-1AH">
                                 <rect key="frame" x="160" y="104" width="55" height="30"/>
                                 <state key="normal" title="Confirm"/>
+                                <connections>
+                                    <action selector="confirmAddWithSender:" destination="UV1-sw-tfv" eventType="touchUpInside" id="YjF-M1-K7G"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u2G-2s-VCK">
                                 <rect key="frame" x="16" y="32.5" width="45" height="21"/>
@@ -94,6 +97,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Lud-4s-W0a"/>
                     </view>
+                    <connections>
+                        <outlet property="endpointName" destination="mt1-0f-jYu" id="6cZ-2R-H6P"/>
+                        <outlet property="endpointURL" destination="bGX-CW-4YC" id="wF0-K8-XGM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bU1-Uk-07h" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
