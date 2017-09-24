@@ -23,15 +23,15 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
         
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let hackerspaceToDelete = visibleResults[indexPath.row]
+            let hackerspaceToDelete = visibleHackerspaces()[indexPath.row].0
             SharedData.removeFromFavoritesList(name: hackerspaceToDelete)
-            visibleResults.remove(at: indexPath.row)
+            hackerspaces = remove(from: hackerspaces, key: hackerspaceToDelete)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        if visibleResults.count == 0 {
+        if visibleHackerspaces().count + visibleEndpoints().count == 0 {
             let instructions = UILabel.init(frame: self.tableView.bounds)
             instructions.attributedText = NSAttributedString(string: "Select your favorite hackerspace from search or map")
             instructions.textAlignment = .center

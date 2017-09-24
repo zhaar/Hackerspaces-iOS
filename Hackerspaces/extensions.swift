@@ -43,6 +43,40 @@ extension Dictionary {
     }
 }
 
+func get<A: Equatable, B>(_ array: [(A, B)], key: A) -> B? {
+    return array.first(where: { p in p.0 == key })?.1
+}
+
+func update<A: Equatable, B>(key: A, value: B, _ array: [(A, B)]) -> [(A, B)] {
+    if let idx = array.index(where: { $0.0 == key }) {
+        var cpy: [(A, B)] = array
+        cpy[idx] = (key, value)
+        return cpy
+    } else {
+        return array
+    }
+}
+
+func addOrpdate<A: Equatable, B>(key: A, value: B, _ array: [(A, B)]) -> [(A, B)] {
+    var cpy: [(A, B)] = array
+    if let idx = array.index(where: { $0.0 == key }) {
+        cpy[idx] = (key, value)
+    } else {
+        cpy.append((key, value))
+    }
+    return cpy
+}
+
+func remove<A: Equatable, B>(from array: [(A, B)], key: A) -> [(A, B)] {
+    if let idx = array.index(where: { $0.0 == key }) {
+        var cpy = array
+        cpy.remove(at: idx)
+        return cpy
+    } else {
+        return array
+    }
+}
+
 extension Array {
     
     func foreach(_ fn: (Element) -> Void) {

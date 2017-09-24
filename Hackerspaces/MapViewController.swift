@@ -17,7 +17,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var centerButtonOutlet: UIButton! {
         didSet {
             centerButtonOutlet.setImage(centerButtonOutlet.currentImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: UIControlState.normal)
-            centerButtonOutlet.tintColor = UIColor.init(colorLiteralRed: 0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
+            centerButtonOutlet.tintColor = UIColor.init(red: 0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
         }
     }
 
