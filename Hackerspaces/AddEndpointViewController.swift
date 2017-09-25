@@ -23,4 +23,8 @@ class AddEndpointViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        view.backgroundColor = Theme.conditionalBackgroundColor
+    }
 }

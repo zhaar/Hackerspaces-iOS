@@ -52,6 +52,8 @@ class EndPointTableViewController: UITableViewController {
             cell.detailTextLabel?.text = source[indexPath.row].1
         }
 
+        cell.detailTextLabel?.textColor = Theme.conditionalForegroundColor
+        cell.textLabel?.textColor = Theme.conditionalForegroundColor
         return cell
     }
 

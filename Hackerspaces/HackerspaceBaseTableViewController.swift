@@ -228,7 +228,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
             case _ : print("could not segue into hackerspace with no data")
             }
         case let errorVC as DisplayErrorViewController :
-            errorVC.prepare(message: sender as! String)
+            errorVC.prepare(message: sender as! String, title: "Error details")
         case _: return
 
         }

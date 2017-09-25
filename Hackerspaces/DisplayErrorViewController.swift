@@ -10,8 +10,9 @@ import UIKit
 
 class DisplayErrorViewController: UIViewController {
 
-    func prepare(message: String) {
+    func prepare(message: String, title: String = "FAQ") {
         self.message = message
+        self.navigationItem.title = title
     }
     
     var message: String = """
@@ -33,7 +34,6 @@ A: You can communicate any issue with the app on the github repository at https:
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.title = "Error details"
         if #available(iOS 11.0, *) {
             self.navigationItem.largeTitleDisplayMode = .never
         }

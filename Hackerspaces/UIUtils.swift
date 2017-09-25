@@ -67,6 +67,8 @@ enum Theme {
         UITextView.appearance().tintColor = UIColor.darkTint
         UITextView.appearance().textColor = UIColor.themeWhite
         UIApplication.shared.statusBarStyle = .lightContent
+        UITextField.appearance().backgroundColor = UIColor.darkBackground
+        UITextField.appearance().textColor = UIColor.themeWhite
     }
 
     static func enableClearMode() {
@@ -87,11 +89,17 @@ enum Theme {
         UITextView.appearance().tintColor = nil
         UITextView.appearance().textColor = nil
         UIApplication.shared.statusBarStyle = .default
+        UITextField.appearance().backgroundColor = UIColor.white
+        UITextField.appearance().textColor = UIColor.black
 
     }
 
     static public var conditionalBackgroundColor: UIColor {
         return SharedData.isInDarkMode() ? UIColor.darkBackground : UIColor.white
+    }
+
+    static public var conditionalForegroundColor: UIColor {
+        return SharedData.isInDarkMode() ? UIColor.themeWhite : UIColor.black
     }
 
     static func redrawAll() {
