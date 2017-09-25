@@ -276,7 +276,6 @@
 				95ACC0281F771D7C0061A1E6 /* View Controllers */,
 				95DB77FE1B9142D60061A1E6 /* Constants.swift */,
 				95DB78001B9149660061A1E6 /* UserDefaults.swift */,
-				952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */,
 				95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */,
 				959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */,
 				95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */,
@@ -344,6 +343,7 @@
 		95ACC0281F771D7C0061A1E6 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				95CCB81A1F78731B0061A1E6 /* Favorites list */,
 				95ACC0291F771D890061A1E6 /* CustomEndpoint */,
 				950AF2991D89BB500068F29E /* Preference pane */,
 				950AF2961D88CC2C0068F29E /* Error display */,
@@ -370,6 +370,14 @@
 				95BD26711F40A9E90061A1E6 /* Info.plist */,
 			);
 			path = HackerspacesUITests;
+			sourceTree = "<group>";
+		};
+		95CCB81A1F78731B0061A1E6 /* Favorites list */ = {
+			isa = PBXGroup;
+			children = (
+				952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */,
+			);
+			name = "Favorites list";
 			sourceTree = "<group>";
 		};
 		95D4B74D1B7D68C80061A1E6 /* Map */ = {

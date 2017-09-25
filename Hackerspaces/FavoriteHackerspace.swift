@@ -15,19 +15,19 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
         navigationItem.leftBarButtonItem = editButtonItem
         title = "Favorites"
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.refresh(refreshControl!)
-    }
-        
+
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
+        guard editingStyle == .delete else { return }
+        if indexPath.section == 0 && !customEndpoints.isEmpty {
+            let hackerspaceToDelete = visibleEndpoints()[indexPath.row].0
+            SharedData.removeCustomEndPoint(name: hackerspaceToDelete)
+            customEndpoints = remove(from: customEndpoints, key: hackerspaceToDelete)
+        } else {
             let hackerspaceToDelete = visibleHackerspaces()[indexPath.row].0
             SharedData.removeFromFavoritesList(name: hackerspaceToDelete)
             hackerspaces = remove(from: hackerspaces, key: hackerspaceToDelete)
-            tableView.deleteRows(at: [indexPath], with: .fade)
         }
+        tableView.deleteRows(at: [indexPath], with: .fade)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

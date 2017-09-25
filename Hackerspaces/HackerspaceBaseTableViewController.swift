@@ -45,8 +45,8 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
             api.forEach { (pair) in
                 let (hs, url) = pair
                 SpaceAPI.getParsedHackerspace(url: url, name: hs, fromCache: false).map(NetworkState.finished)
-                    .onSuccess { data in
-                        set(addOrpdate(key: hs, value: (data, true), get()))
+                    .onSuccess { finalState in
+                        set(addOrpdate(key: hs, value: (finalState, true), get()))
                     }
                     .onFailure { error in
                         set(addOrpdate(key: hs, value: (NetworkState.unresponsive(error: error), true), get()))
@@ -83,7 +83,11 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         return self.hackerspaces.filter { hs in hs.1.1 }.map { hs in (hs.0, hs.1.0)}
     }
 
-    var customEndpoints: [(String, (NetworkState, isVisible: Bool))] = []
+    var customEndpoints: [(String, (NetworkState, isVisible: Bool))] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     func visibleEndpoints() -> [(String, NetworkState)] {
         return self.customEndpoints.filter { $0.1.1 }.map { ($0.0, $0.1.0) }
@@ -218,7 +222,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         switch segue.destination {
         case let SHVC as SelectedHackerspaceTableViewController :
             guard let hackerspaceKey = sender as? String else {return print("cannot prepare for segue, sender was not a string, instead it was: \(sender)")}
-            guard let data = get(hackerspaces, key: hackerspaceKey)  else {return print("could not find hackerspace with name \(hackerspaceKey)")}
+            guard let data = (get(hackerspaces, key: hackerspaceKey) ?? get(customEndpoints, key: hackerspaceKey))  else {return print("could not find hackerspace with name \(hackerspaceKey)")}
             switch data.0 {
             case .finished(let data): SHVC.prepare(data)
             case _ : print("could not segue into hackerspace with no data")

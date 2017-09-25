@@ -43,6 +43,13 @@ struct SharedData {
         _ = try? setKeyValuePair(forkey: customEndpointsKey, pair: pairs)
     }
 
+    static func removeCustomEndPoint(name: String) -> () {
+        updateCustomEndpoint { (endpoints) -> [(String, String)] in
+
+            return Array.init(tuplesAsDict(endpoints).delete(name))
+        }
+    }
+
     static func getKeyValuePair<K: Codable, V: Codable>(forKey key: String) -> [(K, V)] {
         let plist = defaults.data(forKey: key)
         let kvPairs = plist.flatMap { try? PropertyListDecoder().decode([KeyValuePair<K, V>].self, from: $0) } ?? []
