@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Swiftz
 
 let selected = "favorite"
 let favoriteList = "listOfFavorites"
@@ -39,8 +40,7 @@ struct SharedData {
     }
 
     static func setCustomEndPoint(_ array:[(String, String)]) -> () {
-        let pairs = array.map { pair in KeyValuePair(key: pair.0, value: pair.1)}
-        _ = try? setKeyValuePair(forkey: customEndpointsKey, pair: pairs)
+        setKeyValuePair(forkey: customEndpointsKey, pair: array)
     }
 
     static func removeCustomEndPoint(name: String) -> () {
@@ -50,17 +50,28 @@ struct SharedData {
         }
     }
 
+    // - MARK: Generic manipulation of storing key-value pairs
     static func getKeyValuePair<K: Codable, V: Codable>(forKey key: String) -> [(K, V)] {
         let plist = defaults.data(forKey: key)
         let kvPairs = plist.flatMap { try? PropertyListDecoder().decode([KeyValuePair<K, V>].self, from: $0) } ?? []
         return kvPairs.map { pair in (pair.key, pair.value) }
     }
 
-    static func setKeyValuePair<K, V>(forkey key: String, pair: [KeyValuePair<K, V>]) throws -> () {
-
-        defaults.set(try PropertyListEncoder().encode(pair), forKey: key)
+    static func setKeyValuePair<K: Codable, V: Codable>(forkey key: String, pair: [(K, V)])  -> () {
+        let pairs = pair.map { KeyValuePair<K, V>(key: $0.0, value: $0.1) }
+        do {
+            defaults.set(try PropertyListEncoder().encode(pairs), forKey: key)
+        } catch {
+            print("could not set the keyvalue pair: \(pair) \n with key: \(key)")
+        }
     }
 
+    static func updateKeyValuePair<K: Codable, V: Codable>(key: String, updateFn: ([(K, V)]) -> [(K, V)]) -> () {
+        setKeyValuePair(forkey: key, pair: updateFn(getKeyValuePair(forKey: key)))
+
+    }
+
+    // - MARK: Dark mode
     static func isInDarkMode() -> Bool {
         return defaults.bool(forKey: darkModeKey)
     }
@@ -69,6 +80,7 @@ struct SharedData {
         defaults.set(value, forKey: darkModeKey)
     }
 
+    // - MARK: Debug mode
     static func isInDebugMode() -> Bool {
         return defaults.bool(forKey: debugModeKey)
     }
@@ -80,26 +92,29 @@ struct SharedData {
     static func toggleDebugMode() -> () {
         setDebugMode(value: !isInDebugMode())
     }
-    
-    static func favoritesDictionary() -> [String: HackerspaceAPIURL] {
-        return defaults.dictionary(forKey: favoriteDictKey)?.map { value in value as! HackerspaceAPIURL} ?? [String: HackerspaceAPIURL]()
+
+    // - MARK
+    static func favoritesDictionary() -> [(String, HackerspaceAPIURL)] {
+        return getKeyValuePair(forKey: favoriteDictKey)
     }
     
     static func addToFavoriteDictionary(hackerspace: (String, String)) {
         let (name, apiEndpoint) = hackerspace
-        setFavorites(dictionary: favoritesDictionary().insert(name, v: apiEndpoint))
+        updateKeyValuePair(key: favoriteDictKey, updateFn: curry(addOrUpdate)(name)(apiEndpoint))
     }
     
     static func removeFromFavoritesList(name: String) {
-        setFavorites(dictionary: favoritesDictionary().delete(name))
+        
+        updateKeyValuePair(key: favoriteDictKey, updateFn: { arr -> [(String, String)] in remove(from: arr, key: name) })
     }
     
-    static func setFavorites(dictionary: [String : HackerspaceAPIURL]) {
-        defaults.set(dictionary, forKey: favoriteDictKey)
+    static func setFavorites(dictionary: [(String, HackerspaceAPIURL)]) {
+        setKeyValuePair(forkey: favoriteDictKey, pair: dictionary)
     }
     
     static func deleteAllDebug() {
-        setFavorites(dictionary: [String: HackerspaceAPIURL]())
+        setKeyValuePair(forkey: favoriteDictKey, pair: [(String, String)]())
+        setKeyValuePair(forkey: customEndpointsKey, pair: [(String, String)]())
     }
 
 }

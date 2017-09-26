@@ -15,8 +15,8 @@ import Result
 import MapKit
 import Haneke
 
-private func parseAPI(data: Data) -> [String: String]? {
-    return try? JSONDecoder().decode([String: String].self, from: data)
+private func parseAPI(data: Data) -> [(String, String)]? {
+    return try? Array<(String, String)>.initDictionary(JSONDecoder().decode([String: String].self, from: data))
 }
 
 private func parseAsDict(data: Data) -> [String: Data]? {
@@ -30,7 +30,7 @@ enum SpaceAPI { }
 
 //MARK: - helper functions for automatically loading from cache or network
 extension SpaceAPI {
-    static func loadHackerspaceList(fromCache: Bool) -> Future<[String: String], SpaceAPIError> {
+    static func loadHackerspaceList(fromCache: Bool) -> Future<[(String, String)], SpaceAPIError> {
         
         if Testing.isTestingUI() {
             return Future.init(value: Testing.mockAPIResponse).promoteError()
@@ -45,7 +45,7 @@ extension SpaceAPI {
     }
 
     static private func loadHackerspaceData(url: String, fromCache: Bool = true) -> Future<HSData, SpaceAPIError> {
-        if let response = Testing.mockHackerspaceData[url], Testing.isTestingUI() {
+        if let response = get(Testing.mockHackerspaceData, key: url), Testing.isTestingUI() {
             return Future(value: response).promoteError()
         }
         return (fromCache ? SpaceAPI.loadHackerspaceDataFromCache : SpaceAPI.loadHackerspaceDataFromWeb)(url)
@@ -99,10 +99,10 @@ extension SpaceAPI {
             .mapError(SpaceAPIError.httpRequestError)
     }
 
-    static fileprivate func loadAPIFromWeb() -> Future<[String : String], SpaceAPIError> {
+    static fileprivate func loadAPIFromWeb() -> Future<[(String, String)], SpaceAPIError> {
         return httpRequest(url: SpaceAPIConstants.FIXMEAPI.rawValue)
             .mapError(SpaceAPIError.httpRequestError)
-            .flatMap { (data: Data) -> Result<[String: String], SpaceAPIError> in
+            .flatMap { (data: Data) -> Result<[(String, String)], SpaceAPIError> in
                 return parseAPI(data: data) |=> SpaceAPIError.dataCastError(data: data)
         }
     }
@@ -132,10 +132,10 @@ extension SpaceAPI {
     }
 
     ///Returns a future containing a dictionary of names and endpoints of all hackerspaces using the SpaceAPI
-    static fileprivate func loadAPIFromCache() -> Future<[String : String], SpaceAPIError> {
+    static fileprivate func loadAPIFromCache() -> Future<[(String, String)], SpaceAPIError> {
         return loadFromCache(key: SpaceAPIConstants.FIXMEAPI.rawValue)
             .mapError({SpaceAPIError.unknownError(error: $0)})
-            .flatMap { (data: Data) -> Result<[String : String], SpaceAPIError> in
+            .flatMap { (data: Data) -> Result<[(String, String)], SpaceAPIError> in
                 parseAPI(data: data) |=> .dataCastError(data: data)
         }
     }

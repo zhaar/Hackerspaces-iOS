@@ -16,7 +16,7 @@ public enum Testing {
 
     static let closedEndpoint = "closedHackerspaceAPIEndpoint"
     static let openEndpoint = "openHackerspaceAPIEndpoint"
-    static let mockAPIResponse = ["open": openEndpoint, "closed": closedEndpoint]
+    static let mockAPIResponse = [("open", openEndpoint), ("closed", closedEndpoint)]
     static let openHackerspaceAPI = HackerspaceData.init(api: openEndpoint,
                                                          space: "Open Hackerspace",
                                                          logo: "",
@@ -39,11 +39,11 @@ public enum Testing {
                                                            events: nil,
                                                            contact: ContactData.init())
 
-    static var  mockHackerspaceData: [String: Data] {
+    static var  mockHackerspaceData: [(String, Data)] {
         let openEncoded = try! JSONEncoder().encode(openHackerspaceAPI)
         let closedEncoded = try! JSONEncoder().encode(closedHackerspaceAPI)
 
-        return [openEndpoint : openEncoded,
-                closedEndpoint: closedEncoded]
+        return [(openEndpoint, openEncoded),
+                (closedEndpoint, closedEncoded)]
     }
 }

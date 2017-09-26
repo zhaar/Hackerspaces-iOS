@@ -76,7 +76,16 @@ func remove<A: Equatable, B>(from array: [(A, B)], key: A) -> [(A, B)] {
     }
 }
 
+
 extension Array {
+
+    static func initDictionary<A, B>(_ dict: [A : B]) -> [(A, B)] {
+        var acc: [(A, B)] = []
+        for keyValue in dict {
+            acc.append((keyValue.key, keyValue.value))
+        }
+        return acc
+    }
     
     func foreach(_ fn: (Element) -> Void) {
         for e in self {

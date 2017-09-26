@@ -34,9 +34,9 @@ enum NetworkState {
     }
 }
 
-func updateDataSource(get: @escaping () -> [(String, (NetworkState, isVisible: Bool))],
-                      set: @escaping ([(String, (NetworkState, isVisible: Bool))]) -> (),
-                      api: [String: String]) -> () {
+func updateDataSource(api: [(String, String)],
+                      get: @escaping () -> [(String, (NetworkState, isVisible: Bool))],
+                      set: @escaping ([(String, (NetworkState, isVisible: Bool))]) -> ()) -> () {
     set(api.map { p in (p.0, (NetworkState.loading, true)) })
     api.forEach { (pair) in
         let (hs, url) = pair
@@ -52,19 +52,30 @@ func updateDataSource(get: @escaping () -> [(String, (NetworkState, isVisible: B
 
 class HackerspaceBaseTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
 
-    func refreshLocalData() {
-        let customAPI = SharedData.getCustomEndPoints()
-        updateDataSource(get: { self.customEndpoints },
-                         set: { self.customEndpoints = $0; self.tableView.reloadData() },
-                         api: tuplesAsDict(customAPI))
+    func refreshLocalData(api: [(String, String)]) {
+        updateDataSource(api: api,
+                         get: { self.customEndpoints },
+                         set: { self.customEndpoints = $0; self.tableView.reloadData() })
     }
 
-    func refreshRemoteData(api: () -> Future<[String: String], SpaceAPIError>, sender: UIRefreshControl?) {
+    func refreshCustomEndpoints() -> () {
+        updateDataSource(api: SharedData.getCustomEndPoints(),
+                         get: { self.customEndpoints },
+                         set: { self.customEndpoints = $0; self.tableView.reloadData() })
+    }
+
+    func refreshHackerspaces() -> () {
+        updateDataSource(api: SharedData.favoritesDictionary(),
+                         get: { self.hackerspaces },
+                         set: { self.hackerspaces = $0; self.tableView.reloadData() })
+    }
+
+    func refreshRemoteData(api: () -> Future<[(String, String)], SpaceAPIError>, sender: UIRefreshControl?) {
         api().onComplete(callback: {_ in sender?.endRefreshing() })
             .onSuccess { api in
-                updateDataSource(get: { self.hackerspaces },
-                                 set: { self.hackerspaces = $0; self.tableView.reloadData() },
-                                 api: api)
+                updateDataSource(api: api,
+                                 get: { self.hackerspaces },
+                                 set: { self.hackerspaces = $0; self.tableView.reloadData() })
         }
     }
 
@@ -72,9 +83,9 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
 
         print("refreshing tableview")
         refreshRemoteData(api: dataSource, sender: sender)
-        refreshLocalData()
+        refreshLocalData(api: SharedData.getCustomEndPoints())
     }
-    var dataSource: () -> Future<[String: String], SpaceAPIError> = { _ in SpaceAPI.loadHackerspaceList(fromCache: true)}
+    var dataSource: () -> Future<[(String, String)], SpaceAPIError> = { _ in SpaceAPI.loadHackerspaceList(fromCache: true)}
 
     // MARK: Types
 
