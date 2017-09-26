@@ -85,7 +85,11 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         refreshRemoteData(api: dataSource, sender: sender)
         refreshLocalData(api: SharedData.getCustomEndPoints())
     }
-    var dataSource: () -> Future<[(String, String)], SpaceAPIError> = { _ in SpaceAPI.loadHackerspaceList(fromCache: true)}
+    var dataSource: () -> Future<[(String, String)], SpaceAPIError> = { _ in SpaceAPI.loadHackerspaceList(fromCache: true)} {
+        didSet {
+            print("settings datasource")
+        }
+    }
 
     // MARK: Types
 

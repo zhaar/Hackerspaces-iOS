@@ -7,13 +7,23 @@
 //
 
 import UIKit
+import BrightFutures
 
 class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController {
-    
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshCustomEndpoints()
+        refreshHackerspaces()
+    }
+
     override func viewDidLoad() {
-        super.viewDidLoad()
         navigationItem.leftBarButtonItem = editButtonItem
+        dataSource =  { _ in
+            Future(value: SharedData.favoritesDictionary()).promoteError()
+        }
         title = "Favorites"
+        super.viewDidLoad()
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
