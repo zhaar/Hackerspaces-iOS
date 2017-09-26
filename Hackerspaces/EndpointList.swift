@@ -8,9 +8,22 @@
 
 import UIKit
 
+class EditMode {
+    let name: String
+    let url: String
+    init(name: String, url: String) {
+        self.name = name
+        self.url = url
+    }
+}
+
 class EndPointTableViewController: UITableViewController {
 
-    var source: [(String, String)] = []
+    var source: [(String, String)] = SharedData.getCustomEndPoints() {
+        didSet {
+            SharedData.setCustomEndPoint(source)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +34,6 @@ class EndPointTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        source = SharedData.getCustomEndPoints()
         tableView.reloadData()
     }
 
@@ -65,28 +77,48 @@ class EndPointTableViewController: UITableViewController {
 
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            source.remove(at: indexPath.row)
-            SharedData.updateCustomEndpoint { arr in
-                var cpy = arr
-                cpy.remove(at: indexPath.row)
-                return cpy
-            }
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
+        if editingStyle == .insert {
             performSegue(withIdentifier: "ShowAddEndpoint", sender: nil)
         }
     }
 
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        if indexPath.section == 1 {
+            let editAction = UITableViewRowAction.init(style: .normal, title: "Edit", handler: { (_, idx) in
+                let (name, url) = self.source[idx.row]
+                self.performSegue(withIdentifier: "ShowAddEndpoint", sender: EditMode(name: name, url: url))
+            }
+            )
+            let deleteAction = UITableViewRowAction.init(style: .destructive, title: "Delete", handler: { (_, idx) in
+                self.source.remove(at: idx.row)
+                SharedData.updateCustomEndpoint { arr in
+                    var cpy = arr
+                    cpy.remove(at: indexPath.row)
+                    return cpy
+                }
+                tableView.deleteRows(at: [idx], with: .fade)
+            })
+            return [deleteAction, editAction]
+        } else {
+            return []
+        }
+    }
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let editValues = sender as? EditMode,
+            let vc = segue.destination as? AddEndpointViewController {
+            vc.presetName = editValues.name
+            vc.presetURL = editValues.url
+            vc.confirm = { (newName, newURL) in
+                self.source = remove(from: self.source, key: editValues.name)
+                self.source = addOrUpdate(key: newName, value: newURL, self.source)
+            }
+        }
     }
-    */
+
 
 }

@@ -46,10 +46,10 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
                 let (hs, url) = pair
                 SpaceAPI.getParsedHackerspace(url: url, name: hs, fromCache: false).map(NetworkState.finished)
                     .onSuccess { finalState in
-                        set(addOrpdate(key: hs, value: (finalState, true), get()))
+                        set(addOrUpdate(key: hs, value: (finalState, true), get()))
                     }
                     .onFailure { error in
-                        set(addOrpdate(key: hs, value: (NetworkState.unresponsive(error: error), true), get()))
+                        set(addOrUpdate(key: hs, value: (NetworkState.unresponsive(error: error), true), get()))
                 }
             }
         }

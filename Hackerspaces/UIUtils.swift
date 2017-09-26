@@ -69,6 +69,7 @@ enum Theme {
         UIApplication.shared.statusBarStyle = .lightContent
         UITextField.appearance().backgroundColor = UIColor.darkBackground
         UITextField.appearance().textColor = UIColor.themeWhite
+        UIButton.appearance().tintColor = UIColor.darkTint
     }
 
     static func enableClearMode() {
@@ -91,6 +92,7 @@ enum Theme {
         UIApplication.shared.statusBarStyle = .default
         UITextField.appearance().backgroundColor = UIColor.white
         UITextField.appearance().textColor = UIColor.black
+        UIButton.appearance().tintColor = UIColor.defaultBlueTint
 
     }
 

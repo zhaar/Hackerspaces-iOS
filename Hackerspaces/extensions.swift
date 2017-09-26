@@ -56,7 +56,7 @@ func update<A: Equatable, B>(key: A, value: B, _ array: [(A, B)]) -> [(A, B)] {
     }
 }
 
-func addOrpdate<A: Equatable, B>(key: A, value: B, _ array: [(A, B)]) -> [(A, B)] {
+func addOrUpdate<A: Equatable, B>(key: A, value: B, _ array: [(A, B)]) -> [(A, B)] {
     var cpy: [(A, B)] = array
     if let idx = array.index(where: { $0.0 == key }) {
         cpy[idx] = (key, value)

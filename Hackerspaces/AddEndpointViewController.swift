@@ -12,6 +12,10 @@ class AddEndpointViewController: UIViewController {
 
     @IBOutlet var endpointName: UITextField!
     @IBOutlet var endpointURL: UITextField!
+
+    var presetName: String?
+    var presetURL: String?
+
     @IBAction func confirmAdd(sender: UIButton) {
         guard let n = endpointName.text else {
             return print("name can't be empty")
@@ -19,12 +23,18 @@ class AddEndpointViewController: UIViewController {
         guard let u = endpointURL.text else {
             return print("url can't be empty")
         }
-        SharedData.addCustomEndpoint(name:n, url: u)
+        confirm(n, u)
         self.navigationController?.popViewController(animated: true)
+    }
+
+    var confirm: (String, String) -> () = { (newName, newURL) in
+        SharedData.addCustomEndpoint(name: newName, url: newURL)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.backgroundColor = Theme.conditionalBackgroundColor
+        endpointName.text = presetName
+        endpointURL.text = presetURL
     }
 }
