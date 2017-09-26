@@ -34,6 +34,7 @@ class EndPointTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        source = SharedData.getCustomEndPoints()
         tableView.reloadData()
     }
 

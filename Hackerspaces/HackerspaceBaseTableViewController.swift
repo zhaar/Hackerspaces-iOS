@@ -34,37 +34,46 @@ enum NetworkState {
     }
 }
 
+func updateDataSource(get: @escaping () -> [(String, (NetworkState, isVisible: Bool))],
+                      set: @escaping ([(String, (NetworkState, isVisible: Bool))]) -> (),
+                      api: [String: String]) -> () {
+    set(api.map { p in (p.0, (NetworkState.loading, true)) })
+    api.forEach { (pair) in
+        let (hs, url) = pair
+        SpaceAPI.getParsedHackerspace(url: url, name: hs, fromCache: false).map(NetworkState.finished)
+            .onSuccess { finalState in
+                set(addOrUpdate(key: hs, value: (finalState, true), get()))
+            }
+            .onFailure { error in
+                set(addOrUpdate(key: hs, value: (NetworkState.unresponsive(error: error), true), get()))
+        }
+    }
+}
+
 class HackerspaceBaseTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
 
-    func refresh(_ sender: UIRefreshControl) {
-
-        func updateDataSource(get: @escaping () -> [(String, (NetworkState, isVisible: Bool))],
-                              set: @escaping ([(String, (NetworkState, isVisible: Bool))]) -> (),
-                              api: [String: String]) -> () {
-            set(api.map { p in (p.0, (NetworkState.loading, true)) })
-            api.forEach { (pair) in
-                let (hs, url) = pair
-                SpaceAPI.getParsedHackerspace(url: url, name: hs, fromCache: false).map(NetworkState.finished)
-                    .onSuccess { finalState in
-                        set(addOrUpdate(key: hs, value: (finalState, true), get()))
-                    }
-                    .onFailure { error in
-                        set(addOrUpdate(key: hs, value: (NetworkState.unresponsive(error: error), true), get()))
-                }
-            }
-        }
-        dataSource().onComplete(callback: constFn(sender.endRefreshing))
-            .onSuccess { api in
-                updateDataSource(get: { self.hackerspaces },
-                                 set: { self.hackerspaces = $0; self.tableView.reloadData() },
-                                 api: api)
-        }
+    func refreshLocalData() {
         let customAPI = SharedData.getCustomEndPoints()
         updateDataSource(get: { self.customEndpoints },
                          set: { self.customEndpoints = $0; self.tableView.reloadData() },
                          api: tuplesAsDict(customAPI))
     }
 
+    func refreshRemoteData(api: () -> Future<[String: String], SpaceAPIError>, sender: UIRefreshControl?) {
+        api().onComplete(callback: {_ in sender?.endRefreshing() })
+            .onSuccess { api in
+                updateDataSource(get: { self.hackerspaces },
+                                 set: { self.hackerspaces = $0; self.tableView.reloadData() },
+                                 api: api)
+        }
+    }
+
+    func refresh(_ sender: UIRefreshControl) {
+
+        print("refreshing tableview")
+        refreshRemoteData(api: dataSource, sender: sender)
+        refreshLocalData()
+    }
     var dataSource: () -> Future<[String: String], SpaceAPIError> = { _ in SpaceAPI.loadHackerspaceList(fromCache: true)}
 
     // MARK: Types

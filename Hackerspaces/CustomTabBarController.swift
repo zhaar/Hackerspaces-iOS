@@ -21,25 +21,28 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
             .promoteError()
     }
 
-    func setDataSourceForView(_ viewController: UIViewController?, dataSource: @escaping () -> Future<[String: String], SpaceAPIError>) {
+    func setDataSource(viewController: UIViewController?,
+                              dataSource: @escaping () -> Future<[String: String], SpaceAPIError>) {
         if let nav = viewController as? UINavigationController {
             let tableViewControllers = nav.childViewControllers.flatMap {$0 as? HackerspaceBaseTableViewController}
             tableViewControllers.first?.dataSource = dataSource
+            tableViewControllers.first?.refreshLocalData()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
-        setDataSourceForView(self.viewControllers?[0], dataSource: preferencesDataSource)
+        setDataSource(viewController: self.viewControllers?[0], dataSource: preferencesDataSource)
     }
 
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         switch self.viewControllers?.index(of: viewController) {
-        case .some(favoriteTableViewIndex): setDataSourceForView(self.viewControllers?[favoriteTableViewIndex],
-                                                                 dataSource: preferencesDataSource)
-        case .some(searchTableViewIndex): setDataSourceForView(self.viewControllers?[searchTableViewIndex],
-                                                               dataSource: { SpaceAPI.loadHackerspaceList(fromCache: false) })
+        case .some(favoriteTableViewIndex):
+            setDataSource(viewController: self.viewControllers?[favoriteTableViewIndex],
+                          dataSource: preferencesDataSource)
+        case .some(searchTableViewIndex): setDataSource(viewController: self.viewControllers?[searchTableViewIndex],
+                                                        dataSource: { SpaceAPI.loadHackerspaceList(fromCache: false) })
         case _: ()
         }
     }
