@@ -120,5 +120,4 @@ class EndPointTableViewController: UITableViewController {
         }
     }
 
-
 }

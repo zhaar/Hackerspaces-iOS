@@ -18,16 +18,23 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
+        
         if indexPath.section == 0 && !customEndpoints.isEmpty {
             let hackerspaceToDelete = visibleEndpoints()[indexPath.row].0
             SharedData.removeCustomEndPoint(name: hackerspaceToDelete)
             customEndpoints = remove(from: customEndpoints, key: hackerspaceToDelete)
+            if customEndpoints.count == 0 {
+                tableView.deleteSections([0], with: .automatic)
+            } else {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
         } else {
             let hackerspaceToDelete = visibleHackerspaces()[indexPath.row].0
             SharedData.removeFromFavoritesList(name: hackerspaceToDelete)
             hackerspaces = remove(from: hackerspaces, key: hackerspaceToDelete)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+
         }
-        tableView.deleteRows(at: [indexPath], with: .fade)
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -43,7 +50,7 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
         } else {
             tableView.separatorStyle = .singleLine
             tableView.backgroundView = nil
-            return 1
+            return visibleEndpoints().count > 0 ? 2 : 1
         }
     }
     

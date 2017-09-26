@@ -55,11 +55,13 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         }
         dataSource().onComplete(callback: constFn(sender.endRefreshing))
             .onSuccess { api in
-                updateDataSource(get: { self.hackerspaces }, set: { self.hackerspaces = $0 }, api: api)
+                updateDataSource(get: { self.hackerspaces },
+                                 set: { self.hackerspaces = $0; self.tableView.reloadData() },
+                                 api: api)
         }
         let customAPI = SharedData.getCustomEndPoints()
         updateDataSource(get: { self.customEndpoints },
-                         set: { self.customEndpoints = $0 },
+                         set: { self.customEndpoints = $0; self.tableView.reloadData() },
                          api: tuplesAsDict(customAPI))
     }
 
@@ -75,7 +77,6 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     var hackerspaces: [(String, (NetworkState, isVisible: Bool))] = [] {
         didSet {
             hackerspaces.sort(by: {l, r in l.0 < r.0})
-            tableView.reloadData()
         }
     }
 
@@ -83,11 +84,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         return self.hackerspaces.filter { hs in hs.1.1 }.map { hs in (hs.0, hs.1.0)}
     }
 
-    var customEndpoints: [(String, (NetworkState, isVisible: Bool))] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    var customEndpoints: [(String, (NetworkState, isVisible: Bool))] = []
 
     func visibleEndpoints() -> [(String, NetworkState)] {
         return self.customEndpoints.filter { $0.1.1 }.map { ($0.0, $0.1.0) }
@@ -96,14 +93,6 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     func hackerspaceStatus(indexPath: IndexPath) -> (String, NetworkState) {
         let isCustom =  !SharedData.getCustomEndPoints().isEmpty && indexPath.section == 0
         return (isCustom ? visibleEndpoints() : visibleHackerspaces())[indexPath.row]
-    }
-
-    func updateHackerspaceStatus(_ status: NetworkState, forKey name: String) -> () {
-        var cpy = self.hackerspaces
-        if let idx = cpy.index(where: { $0.0 == name }) {
-            cpy[idx] = (name, (status, cpy[idx].1.isVisible))
-        }
-        self.hackerspaces = cpy
     }
 
     // MARK: Lifecycle
