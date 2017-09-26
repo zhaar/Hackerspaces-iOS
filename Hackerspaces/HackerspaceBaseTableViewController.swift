@@ -100,8 +100,14 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     }
 
     func hackerspaceStatus(indexPath: IndexPath) -> (String, NetworkState) {
-        let isCustom =  !SharedData.getCustomEndPoints().isEmpty && indexPath.section == 0
+        let isCustom =  shouldDisplayCustomSection(indexPath: indexPath)
         return (isCustom ? visibleEndpoints() : visibleHackerspaces())[indexPath.row]
+    }
+
+    func shouldDisplayCustomSection(indexPath: IndexPath? = nil) -> Bool {
+        let section = indexPath?.section
+        let isZero = section.map(==0) ?? true
+        return !SharedData.getCustomEndPoints().isEmpty && SharedData.isInDebugMode() && isZero
     }
 
     // MARK: Lifecycle
@@ -174,11 +180,11 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     // MARK: UITableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return SharedData.getCustomEndPoints().isEmpty ? 1 : 2
+        return shouldDisplayCustomSection() ? 2 : 1
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if SharedData.getCustomEndPoints().isEmpty {
+        if !shouldDisplayCustomSection() {
             return nil
         } else {
             return section == 0 ? "Custom Endpoints" : "Space API"
@@ -186,7 +192,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let isCustom = !SharedData.getCustomEndPoints().isEmpty && section == 0
+        let isCustom = shouldDisplayCustomSection() && section == 0
         return isCustom ? visibleEndpoints().count : visibleHackerspaces().count
     }
 
