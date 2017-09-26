@@ -17,7 +17,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var centerButtonOutlet: UIButton! {
         didSet {
             centerButtonOutlet.setImage(centerButtonOutlet.currentImage?.withRenderingMode(UIImageRenderingMode.alwaysTemplate), for: UIControlState.normal)
-            centerButtonOutlet.tintColor = UIColor.init(red: 0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
+            centerButtonOutlet.tintColor = Theme.conditionalTintColor
         }
     }
 
@@ -62,15 +62,16 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     func refresh(sender: UIBarButtonItem) {
         self.navigationItem.rightBarButtonItem = loadingIndicator
         self.map.removeAnnotations(map.annotations)
-        _ = SpaceAPI.loadHackerspaceList(fromCache: false)
-            .map { hsList in
-                let list = hsList.mapWithKey { name, url in
-                    return SpaceAPI.getParsedHackerspace(url: url, name: name, fromCache: false)
-                        .onSuccess { self.map.addAnnotation($0.location.toSpaceLocation(name: $0.name)) }
-                    }
 
-                let seq = list.map({pair in pair.1}).sequence()
-                seq.onComplete { _ in self.navigationItem.rightBarButtonItem = self.refreshButton }
+        SpaceAPI.loadHackerspaceList(fromCache: true).onSuccess { hsDict in
+            let list = hsDict.map({ (name, url) in
+                SpaceAPI.getParsedHackerspace(url: url, name: name, fromCache: false).map { parsed in
+                    self.map.addAnnotation(parsed.toSpaceLocation())
+                }
+            })
+            list.sequence().onComplete { _ in
+                self.navigationItem.rightBarButtonItem = self.refreshButton
+            }
         }
     }
 

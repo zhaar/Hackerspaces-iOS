@@ -11,19 +11,17 @@ import MapKit
 
 
 class SpaceLocation : NSObject {
-    let name: String
-    let address: String?
+    let hackerspace: ParsedHackerspaceData
     let location: CLLocationCoordinate2D
-    init(name: String, address: String?, location: CLLocationCoordinate2D) {
-        self.name = name
-        self.location = location
-        self.address = address
+    init(hackerspace: ParsedHackerspaceData) {
+        self.hackerspace = hackerspace
+        self.location = CLLocationCoordinate2D(latitude: CLLocationDegrees(hackerspace.location.lat), longitude: CLLocationDegrees(hackerspace.location.lon))
     }
 }
 
 extension SpaceLocation {
     var toLocation: LocationData {
-        return LocationData(address: self.address,
+        return LocationData(address: self.hackerspace.location.address,
                             lat: Float(self.location.latitude),
                             lon: Float(self.location.longitude))
     }
@@ -34,9 +32,9 @@ extension SpaceLocation : MKAnnotation {
         return self.location
     }
     var title: String? {
-        return self.name
+        return self.hackerspace.name
     }
     var subtitle: String? {
-        return self.address
+        return self.hackerspace.location.address
     }
 }

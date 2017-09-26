@@ -23,7 +23,6 @@ extension Dictionary {
         }
         return (target, rest)
     }
-    
 }
 
 func tuplesAsDict<K: Hashable, V, S: Sequence>(_ seq: S) -> [K : V] where S.Iterator.Element == (K, V) {

@@ -19,7 +19,6 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
 
         return Future(value: SharedData.favoritesDictionary())
             .promoteError()
-            .onSuccess(callback: SharedData.updateIconShortcuts)
     }
 
     func setDataSourceForView(_ viewController: UIViewController?, dataSource: @escaping () -> Future<[String: String], SpaceAPIError>) {

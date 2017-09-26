@@ -10,11 +10,10 @@ import Foundation
 import MapKit
 
 class HSInfoCarrier: NSObject {
-    let hsName: String
-    let hsAPI: String
-    init(name: String, url: String) {
-        self.hsName = name
-        self.hsAPI = url
+
+    let parsedData: ParsedHackerspaceData
+    init(data: ParsedHackerspaceData) {
+        self.parsedData = data
     }
 }
 
@@ -38,15 +37,13 @@ extension MapViewController: MKMapViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let SHVC = segue.destination as? SelectedHackerspaceTableViewController,
             let info = sender as? HSInfoCarrier {
-            SHVC.prepare(info.hsName, url: info.hsAPI)
+            SHVC.prepare(info.parsedData)
         }
     }
 
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if let annotation = view.annotation as? SpaceLocation {
-            SpaceAPI.loadHackerspaceList(fromCache: false).onSuccess { dict in
-                self.performSegue(withIdentifier: UIConstants.showHSMap.rawValue, sender: HSInfoCarrier(name: annotation.name, url: dict[annotation.name]!))
-            }
+            self.performSegue(withIdentifier: UIConstants.showHSMap.rawValue, sender: HSInfoCarrier(data: annotation.hackerspace))
         }
     }
 }

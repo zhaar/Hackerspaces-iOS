@@ -49,6 +49,10 @@ struct ParsedHackerspaceData: Codable {
     var apiInfo: (name: String, url: String) {
         return (name: apiName, url: apiEndpoint)
     }
+
+    func toSpaceLocation() -> SpaceLocation {
+        return SpaceLocation(hackerspace: self)
+    }
 }
 
 struct SpaceFedData: Codable {
@@ -61,12 +65,6 @@ struct LocationData: Codable {
     let address: String?
     let lat: Float
     let lon: Float
-
-    func toSpaceLocation(name: String) -> SpaceLocation {
-        return SpaceLocation(name: name,
-                             address: address,
-                             location: CLLocationCoordinate2D(latitude: CLLocationDegrees(lat), longitude: CLLocationDegrees(lon)))
-    }
 }
 
 struct StateData: Codable {

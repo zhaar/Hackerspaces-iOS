@@ -13,42 +13,8 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
-    //Returns true if the shortcut item was handled, false otherwise.
-    func handleShortcutItem(_ shortcutItem: UIApplicationShortcutItem) -> Bool {
-        let tabs = self.window!.rootViewController as? CustomTabBarController
-        switch shortcutItem.type {
-            case UIConstants.hackerspaceViewShortcut.rawValue:
-
-                if let tabVC = tabs {
-                    tabVC.selectedIndex = 0
-                    let hsName = shortcutItem.userInfo!["name"]! as! String
-                    let hsUrl = shortcutItem.userInfo!["url"]! as! String
-                    let navigationController = tabVC.viewControllers?[0] as? UINavigationController
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let hackerspaceViewController = storyboard.instantiateViewController(withIdentifier: "HackerspaceDetail") as! SelectedHackerspaceTableViewController
-                    hackerspaceViewController.prepare(hsName, url: hsUrl)
-                    navigationController?.pushViewController(hackerspaceViewController, animated: false)
-                }
-                return true
-            case UIConstants.searchViewShortcut.rawValue:
-                tabs?.selectedIndex = 2
-                return true
-            case _ : return false
-        }
-    }
-    
-    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
- 
-        completionHandler(handleShortcutItem(shortcutItem))
-    }
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-       
-        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
-            return !handleShortcutItem(shortcutItem)
-        }
 
         if Testing.isTestingUI() {
             UserDefaults.standard.removePersistentDomain(forName: Bundle.main.bundleIdentifier!)
@@ -59,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else {
             Theme.enableClearMode()
         }
+        application.shortcutItems = nil
         return true
     }
 

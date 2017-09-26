@@ -44,7 +44,7 @@ extension UIColor {
     static let themeWhite = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
     static let themeGray = UIColor(red:0.3, green:0.3, blue:0.3, alpha:1.0)
     static let staticTableBackground = UIColor(red: 239/255, green: 239/255, blue: 244/255, alpha: 1.0)
-
+    static let defaultBlueTint = UIColor(red: 0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
 }
 
 enum Theme {
@@ -100,6 +100,10 @@ enum Theme {
 
     static public var conditionalForegroundColor: UIColor {
         return SharedData.isInDarkMode() ? UIColor.themeWhite : UIColor.black
+    }
+
+    static public var conditionalTintColor: UIColor {
+        return SharedData.isInDarkMode() ? UIColor.darkTint : UIColor.defaultBlueTint
     }
 
     static func redrawAll() {

@@ -95,18 +95,11 @@ struct SharedData {
     }
     
     static func setFavorites(dictionary: [String : HackerspaceAPIURL]) {
-        updateIconShortcuts(dict: dictionary)
         defaults.set(dictionary, forKey: favoriteDictKey)
     }
     
     static func deleteAllDebug() {
         setFavorites(dictionary: [String: HackerspaceAPIURL]())
     }
-    
-    static func updateIconShortcuts(dict: [String: String]) {
-        let shorts = dict.map { key, value in
-            UIApplicationShortcutItem(type: UIConstants.hackerspaceViewShortcut.rawValue, localizedTitle: key, localizedSubtitle: nil, icon: nil, userInfo: ["name": key, "url": value])
-        }
-        UIApplication.shared.shortcutItems = shorts
-    }
+
 }
