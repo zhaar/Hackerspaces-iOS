@@ -70,6 +70,7 @@ enum Theme {
         UITextField.appearance().backgroundColor = UIColor.darkBackground
         UITextField.appearance().textColor = UIColor.themeWhite
         UIButton.appearance().tintColor = UIColor.darkTint
+        UITableView.appearance().separatorColor = UIColor.gray
     }
 
     static func enableClearMode() {
@@ -93,6 +94,8 @@ enum Theme {
         UITextField.appearance().backgroundColor = UIColor.white
         UITextField.appearance().textColor = UIColor.black
         UIButton.appearance().tintColor = UIColor.defaultBlueTint
+        UITableView.appearance().separatorColor = UIColor(red: 214/255, green: 213/255, blue: 217/255, alpha: 1.0)
+
 
     }
 

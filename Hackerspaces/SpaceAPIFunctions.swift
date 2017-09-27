@@ -70,15 +70,16 @@ extension SpaceAPI {
         case notOK(HTTPStatusCode)
         case requestError(Error)
         case unknownError
+        case urlError(String)
     }
 
-    static private func httpRequest(url: String) -> Future<Data, HTTPError> {
+    static private func httpRequest(url: String, timeout: Int = 5) -> Future<Data, HTTPError> {
         let p = Promise<Data, HTTPError>()
         DispatchQueue.global().async {
 
-            do {
-                let req = try HTTP.GET(url)
-                req.start { response in
+            if let urlStr = URL(string: url) {
+                let req = URLRequest.init(url: urlStr, cachePolicy: URLRequest.CachePolicy.reloadIgnoringCacheData, timeoutInterval: TimeInterval(timeout))
+                HTTP.init(req).start { response in
                     Shared.dataCache.set(value: response.data, key: url)
                     if case HTTPStatusCode.ok.rawValue? = response.statusCode {
                         p.success(response.data)
@@ -90,8 +91,8 @@ extension SpaceAPI {
                         p.failure(.unknownError)
                     }
                 }
-            } catch let err {
-                p.failure(.requestError(err))
+            } else {
+                p.failure(.urlError(url))
             }
         }
         return p.future
