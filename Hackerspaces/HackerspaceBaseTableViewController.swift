@@ -52,12 +52,6 @@ func updateDataSource(api: [(String, String)],
 
 class HackerspaceBaseTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
 
-    func refreshLocalData(api: [(String, String)]) {
-        updateDataSource(api: api,
-                         get: { self.customEndpoints },
-                         set: { self.customEndpoints = $0; self.tableView.reloadData() })
-    }
-
     func refreshCustomEndpoints() -> () {
         updateDataSource(api: SharedData.getCustomEndPoints(),
                          get: { self.customEndpoints },
@@ -83,7 +77,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
 
         print("refreshing tableview")
         refreshRemoteData(api: dataSource, sender: sender)
-        refreshLocalData(api: SharedData.getCustomEndPoints())
+        refreshCustomEndpoints()
     }
     var dataSource: () -> Future<[(String, String)], SpaceAPIError> = { _ in SpaceAPI.loadHackerspaceList(fromCache: true)} {
         didSet {
@@ -119,12 +113,6 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         return (isCustom ? visibleEndpoints() : visibleHackerspaces())[indexPath.row]
     }
 
-    func shouldDisplayCustomSection(indexPath: IndexPath? = nil) -> Bool {
-        let section = indexPath?.section
-        let isZero = section.map(==0) ?? true
-        return !SharedData.getCustomEndPoints().isEmpty && SharedData.isInDebugMode() && isZero
-    }
-
     // MARK: Lifecycle
 
     override func viewDidLoad() {
@@ -156,7 +144,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
             if let str = filterString , !str.isEmpty {
                 let filterByName = { (hs: (String, (NetworkState, Bool))) -> (String, (NetworkState, Bool)) in
                     let (name, (network, _)) = hs
-                    return (name, (network, name.contains(str)))
+                    return (name, (network, name.uppercased().contains(str.uppercased())))
                 }
                 hackerspaces = hackerspaces.map(filterByName)
                 customEndpoints = customEndpoints.map(filterByName)

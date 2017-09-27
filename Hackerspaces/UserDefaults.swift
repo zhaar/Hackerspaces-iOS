@@ -22,6 +22,12 @@ struct KeyValuePair<Key: Codable, Value: Codable>: Codable {
     let value: Value
 }
 
+func shouldDisplayCustomSection(indexPath: IndexPath? = nil) -> Bool {
+    let section = indexPath?.section
+    let isZero = section.map(==0) ?? true
+    return !SharedData.getCustomEndPoints().isEmpty && SharedData.isInDebugMode() && isZero
+}
+
 struct SharedData {
     
     typealias HackerspaceAPIURL = String

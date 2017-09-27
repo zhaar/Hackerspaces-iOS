@@ -35,7 +35,10 @@ extension SpaceAPI {
         if Testing.isTestingUI() {
             return Future.init(value: Testing.mockAPIResponse).promoteError()
         } else if fromCache {
-            return loadAPIFromCache()
+            return loadAPIFromCache().recoverWith { _ in
+                print("loading from cache failed, loading from web")
+                return loadAPIFromWeb()
+            }
         } else {
             return loadAPIFromWeb().recoverWith { _ in
                 print("loading from web failed, loading from cache")

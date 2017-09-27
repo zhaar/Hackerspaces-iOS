@@ -29,7 +29,7 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         
-        if indexPath.section == 0 && !customEndpoints.isEmpty {
+        if shouldDisplayCustomSection(indexPath: indexPath) {
             let hackerspaceToDelete = visibleEndpoints()[indexPath.row].0
             SharedData.removeCustomEndPoint(name: hackerspaceToDelete)
             customEndpoints = remove(from: customEndpoints, key: hackerspaceToDelete)
