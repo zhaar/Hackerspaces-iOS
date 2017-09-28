@@ -44,7 +44,7 @@ extension UIColor {
     static let themeWhite = UIColor(red:0.98, green:0.98, blue:0.98, alpha:1.0)
     static let themeGray = UIColor(red:0.3, green:0.3, blue:0.3, alpha:1.0)
     static let staticTableBackground = UIColor(red: 239/255, green: 239/255, blue: 244/255, alpha: 1.0)
-
+    static let defaultBlueTint = UIColor(red: 0, green: 122.0/255.0, blue: 1.0, alpha: 1.0)
 }
 
 enum Theme {
@@ -67,6 +67,10 @@ enum Theme {
         UITextView.appearance().tintColor = UIColor.darkTint
         UITextView.appearance().textColor = UIColor.themeWhite
         UIApplication.shared.statusBarStyle = .lightContent
+        UITextField.appearance().backgroundColor = UIColor.darkBackground
+        UITextField.appearance().textColor = UIColor.themeWhite
+        UIButton.appearance().tintColor = UIColor.darkTint
+        UITableView.appearance().separatorColor = UIColor.gray
     }
 
     static func enableClearMode() {
@@ -87,11 +91,24 @@ enum Theme {
         UITextView.appearance().tintColor = nil
         UITextView.appearance().textColor = nil
         UIApplication.shared.statusBarStyle = .default
+        UITextField.appearance().backgroundColor = UIColor.white
+        UITextField.appearance().textColor = UIColor.black
+        UIButton.appearance().tintColor = UIColor.defaultBlueTint
+        UITableView.appearance().separatorColor = UIColor(red: 214/255, green: 213/255, blue: 217/255, alpha: 1.0)
+
 
     }
 
     static public var conditionalBackgroundColor: UIColor {
         return SharedData.isInDarkMode() ? UIColor.darkBackground : UIColor.white
+    }
+
+    static public var conditionalForegroundColor: UIColor {
+        return SharedData.isInDarkMode() ? UIColor.themeWhite : UIColor.black
+    }
+
+    static public var conditionalTintColor: UIColor {
+        return SharedData.isInDarkMode() ? UIColor.darkTint : UIColor.defaultBlueTint
     }
 
     static func redrawAll() {

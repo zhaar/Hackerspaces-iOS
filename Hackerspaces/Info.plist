@@ -29,17 +29,6 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>To show nearby Hackerspaces</string>
-	<key>UIApplicationShortcutItems</key>
-	<array>
-		<dict>
-			<key>UIApplicationShortcutItemIconType</key>
-			<string>UIApplicationShortcutIconTypeSearch</string>
-			<key>UIApplicationShortcutItemTitle</key>
-			<string>Search</string>
-			<key>UIApplicationShortcutItemType</key>
-			<string>moe.zephyz.hackerspaces.search_shortcut</string>
-		</dict>
-	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

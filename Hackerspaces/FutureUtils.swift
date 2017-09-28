@@ -15,12 +15,12 @@ import Result
 struct FutureUtils {
 
     ///Converts a future that can fail into a future of optional with no failure
-    static func futureToOptional<T, E: Error>(_ future: Future<T, E>) -> Future<T?, NoError> {
+    static func futureToOptional<T, E>(_ future: Future<T, E>) -> Future<T?, NoError> {
         return future.map(identity).recover{ _ in nil }
     }
 
     ///Converts a list of futures into a future of list discarding failing futures
-    static func successfulFutureList<T, E: Error>(_ list: [Future<T, E>]) -> Future<[T], NoError> {
+    static func successfulFutureList<T, E>(_ list: [Future<T, E>]) -> Future<[T], NoError> {
         return flattenOptionalFuture § list.map(futureToOptional)
     }
 

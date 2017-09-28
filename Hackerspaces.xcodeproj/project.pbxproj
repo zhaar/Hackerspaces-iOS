@@ -15,7 +15,6 @@
 		952915411D5A94B20061A1E6 /* FavoriteHackerspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */; };
 		953161871B73B12A0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
 		954C57021E89C7C40061A1E6 /* FPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C57011E89C7C40061A1E6 /* FPUtils.swift */; };
-		954F351E1D57FF0F0061A1E6 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */; };
 		95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB21B729B3E0061A1E6 /* AppDelegate.swift */; };
 		95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB61B729B3E0061A1E6 /* MapViewController.swift */; };
 		95643FBA1B729B3E0061A1E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95643FB81B729B3E0061A1E6 /* Main.storyboard */; };
@@ -40,17 +39,19 @@
 		959D61AE1F3B79DB0061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
 		959D61B01F3B7E350061A1E6 /* HSJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */; };
 		959D61B11F3B80450061A1E6 /* HSJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */; };
+		95A19D6D1F772D480061A1E6 /* AddEndpointViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A19D6C1F772D480061A1E6 /* AddEndpointViewController.swift */; };
 		95A594A21B893FB60061A1E6 /* Haneke.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */; };
 		95A594A41B893FB60061A1E6 /* SwiftHTTP.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */; };
 		95A594A51B893FB60061A1E6 /* Swiftz.framework.dSYM in Debug */ = {isa = PBXBuildFile; fileRef = 95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */; };
 		95ACC0221F7702EF0061A1E6 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B38C4E1F62B09C0061A1E6 /* UIUtils.swift */; };
+		95ACC0261F771D370061A1E6 /* CustomEndpointList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95ACC0251F771D370061A1E6 /* CustomEndpointList.storyboard */; };
+		95ACC02B1F771DA30061A1E6 /* EndpointList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ACC02A1F771DA30061A1E6 /* EndpointList.swift */; };
 		95ADEF991B8B53580061A1E6 /* SpaceAPIFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */; };
 		95B38C4F1F62B09C0061A1E6 /* UIUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B38C4E1F62B09C0061A1E6 /* UIUtils.swift */; };
 		95BD26781F40AB2E0061A1E6 /* TestingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BD26771F40AB2E0061A1E6 /* TestingUtils.swift */; };
 		95BD267C1F40F15F0061A1E6 /* TestingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BD26771F40AB2E0061A1E6 /* TestingUtils.swift */; };
 		95BD26801F40F2530061A1E6 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB78001B9149660061A1E6 /* UserDefaults.swift */; };
 		95BD26811F40F2530061A1E6 /* FavoriteHackerspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */; };
-		95BD26821F40F2530061A1E6 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */; };
 		95BD26831F40F2530061A1E6 /* FPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C57011E89C7C40061A1E6 /* FPUtils.swift */; };
 		95BD268F1F40F2850061A1E6 /* HackerspaceBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBD9511B8D0FC30061A1E6 /* HackerspaceBaseTableViewController.swift */; };
 		95BD26911F40F29D0061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */; };
@@ -123,7 +124,6 @@
 		953161861B73B12A0061A1E6 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		953C513A1B8F49190061A1E6 /* FutureUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FutureUtils.swift; sourceTree = "<group>"; };
 		954C57011E89C7C40061A1E6 /* FPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FPUtils.swift; sourceTree = "<group>"; };
-		954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		95643FAD1B729B3E0061A1E6 /* Hackerspaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hackerspaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		95643FB11B729B3E0061A1E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		95643FB21B729B3E0061A1E6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -144,11 +144,15 @@
 		9597A1AA1B79252F0061A1E6 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
 		9597A1AD1B7932100061A1E6 /* DataCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCache.xcdatamodel; sourceTree = "<group>"; };
 		959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSJsonParser.swift; sourceTree = "<group>"; };
+		95A19D6C1F772D480061A1E6 /* AddEndpointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEndpointViewController.swift; sourceTree = "<group>"; };
 		95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = Carthage/Build/iOS/SwiftHTTP.framework; sourceTree = "<group>"; };
 		95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Haneke.framework.dSYM; path = Carthage/Build/iOS/Haneke.framework.dSYM; sourceTree = "<group>"; };
 		95A5949F1B893FB60061A1E6 /* JSONJoy.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = JSONJoy.framework.dSYM; path = Carthage/Build/iOS/JSONJoy.framework.dSYM; sourceTree = "<group>"; };
 		95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftHTTP.framework.dSYM; path = Carthage/Build/iOS/SwiftHTTP.framework.dSYM; sourceTree = "<group>"; };
 		95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Swiftz.framework.dSYM; path = Carthage/Build/iOS/Swiftz.framework.dSYM; sourceTree = "<group>"; };
+		95ACC0251F771D370061A1E6 /* CustomEndpointList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomEndpointList.storyboard; sourceTree = "<group>"; };
+		95ACC0271F771D3F0061A1E6 /* CustomEndpointList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomEndpointList.storyboard; sourceTree = SOURCE_ROOT; };
+		95ACC02A1F771DA30061A1E6 /* EndpointList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointList.swift; sourceTree = "<group>"; };
 		95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceAPIFunctions.swift; sourceTree = "<group>"; };
 		95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
 		95B38C4E1F62B09C0061A1E6 /* UIUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIUtils.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 		95643FA41B729B3E0061A1E6 = {
 			isa = PBXGroup;
 			children = (
+				95ACC0251F771D370061A1E6 /* CustomEndpointList.storyboard */,
 				95A594A61B893FC90061A1E6 /* Debug symbols */,
 				95643FAF1B729B3E0061A1E6 /* Hackerspaces */,
 				95643FC71B729B3E0061A1E6 /* HackerspacesTests */,
@@ -265,24 +270,19 @@
 			isa = PBXGroup;
 			children = (
 				95643FB21B729B3E0061A1E6 /* AppDelegate.swift */,
-				950AF2991D89BB500068F29E /* Preference pane */,
-				950AF2961D88CC2C0068F29E /* Error display */,
-				95D4B74D1B7D68C80061A1E6 /* Map */,
-				95E4B90A1B811F150061A1E6 /* Embeded search */,
-				9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */,
+				95ACC0281F771D7C0061A1E6 /* View Controllers */,
 				95DB77FE1B9142D60061A1E6 /* Constants.swift */,
 				95DB78001B9149660061A1E6 /* UserDefaults.swift */,
-				952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */,
 				95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */,
 				959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */,
 				95DB77FC1B912B0F0061A1E6 /* HSMapInfo.swift */,
-				954F351D1D57FF0F0061A1E6 /* CustomTabBarController.swift */,
 				953C513A1B8F49190061A1E6 /* FutureUtils.swift */,
 				954C57011E89C7C40061A1E6 /* FPUtils.swift */,
 				95B38C4E1F62B09C0061A1E6 /* UIUtils.swift */,
 				953161861B73B12A0061A1E6 /* extensions.swift */,
 				95BD26771F40AB2E0061A1E6 /* TestingUtils.swift */,
 				95643FB81B729B3E0061A1E6 /* Main.storyboard */,
+				95ACC0271F771D3F0061A1E6 /* CustomEndpointList.storyboard */,
 				95643FBB1B729B3E0061A1E6 /* Images.xcassets */,
 				95643FBD1B729B3E0061A1E6 /* LaunchScreen.xib */,
 				95643FB01B729B3E0061A1E6 /* Supporting Files */,
@@ -336,6 +336,29 @@
 			name = "Debug symbols";
 			sourceTree = "<group>";
 		};
+		95ACC0281F771D7C0061A1E6 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				95CCB81A1F78731B0061A1E6 /* Favorites list */,
+				95ACC0291F771D890061A1E6 /* CustomEndpoint */,
+				950AF2991D89BB500068F29E /* Preference pane */,
+				950AF2961D88CC2C0068F29E /* Error display */,
+				95D4B74D1B7D68C80061A1E6 /* Map */,
+				95E4B90A1B811F150061A1E6 /* Embeded search */,
+				9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		95ACC0291F771D890061A1E6 /* CustomEndpoint */ = {
+			isa = PBXGroup;
+			children = (
+				95ACC02A1F771DA30061A1E6 /* EndpointList.swift */,
+				95A19D6C1F772D480061A1E6 /* AddEndpointViewController.swift */,
+			);
+			name = CustomEndpoint;
+			sourceTree = "<group>";
+		};
 		95BD266E1F40A9E90061A1E6 /* HackerspacesUITests */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +366,14 @@
 				95BD26711F40A9E90061A1E6 /* Info.plist */,
 			);
 			path = HackerspacesUITests;
+			sourceTree = "<group>";
+		};
+		95CCB81A1F78731B0061A1E6 /* Favorites list */ = {
+			isa = PBXGroup;
+			children = (
+				952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */,
+			);
+			name = "Favorites list";
 			sourceTree = "<group>";
 		};
 		95D4B74D1B7D68C80061A1E6 /* Map */ = {
@@ -481,6 +512,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95ACC0261F771D370061A1E6 /* CustomEndpointList.storyboard in Resources */,
 				95643FBA1B729B3E0061A1E6 /* Main.storyboard in Resources */,
 				95643FBF1B729B3E0061A1E6 /* LaunchScreen.xib in Resources */,
 				95643FBC1B729B3E0061A1E6 /* Images.xcassets in Resources */,
@@ -539,8 +571,8 @@
 				95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */,
 				9525AB801B868D160061A1E6 /* HSTitleTableViewCell.swift in Sources */,
 				95DB77FD1B912B0F0061A1E6 /* HSMapInfo.swift in Sources */,
-				954F351E1D57FF0F0061A1E6 /* CustomTabBarController.swift in Sources */,
 				9573A2AF1B936F960061A1E6 /* RawDataTableViewCell.swift in Sources */,
+				95A19D6D1F772D480061A1E6 /* AddEndpointViewController.swift in Sources */,
 				95DBD9561B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift in Sources */,
 				9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */,
 				950AF2981D88CC500068F29E /* DisplayErrorViewController.swift in Sources */,
@@ -555,6 +587,7 @@
 				95DB78011B9149660061A1E6 /* UserDefaults.swift in Sources */,
 				953161871B73B12A0061A1E6 /* extensions.swift in Sources */,
 				95DB77FF1B9142D60061A1E6 /* Constants.swift in Sources */,
+				95ACC02B1F771DA30061A1E6 /* EndpointList.swift in Sources */,
 				95B38C4F1F62B09C0061A1E6 /* UIUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -574,7 +607,6 @@
 				95BD26911F40F29D0061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */,
 				9564551E1F3142CE0061A1E6 /* FutureUtils.swift in Sources */,
 				95BD267C1F40F15F0061A1E6 /* TestingUtils.swift in Sources */,
-				95BD26821F40F2530061A1E6 /* CustomTabBarController.swift in Sources */,
 				95BD26801F40F2530061A1E6 /* UserDefaults.swift in Sources */,
 				95BD26811F40F2530061A1E6 /* FavoriteHackerspace.swift in Sources */,
 				95643FCB1B729B3E0061A1E6 /* HackerspacesTests.swift in Sources */,

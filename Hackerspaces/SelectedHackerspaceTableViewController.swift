@@ -9,7 +9,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
 
     // MARK: - Outlets & Actions
     @IBAction func refresh(_ sender: UIRefreshControl) {
-        reloadData(Swiftz.Either.Left(hackerspaceData.apiInfo), fromCache: false, callback: sender.endRefreshing)
+        reloadData(fromCache: false, callback: sender.endRefreshing)
     }
 
     @IBOutlet weak var favoriteStatusButton: UIBarButtonItem!
@@ -26,21 +26,18 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     let addToFavorites = UIImage(named: "Star-empty")
     let removeFromFavorites = UIImage(named: "Star-full")
 
-    func prepare(_ name: String, url: String) {
-        self.loadOrigin = Either.Left((name: name, url: url))
-    }
-
     func prepare(_ model: ParsedHackerspaceData) {
-        self.loadOrigin = Either.Right(model)
+//        self.loadOrigin = Either.Right(model)
+        hackerspaceData = model
     }
 
     var previewDeleteAction : (() -> ())? = nil
 
-    typealias LoadOrigin = Either<(name: String, url: String), ParsedHackerspaceData>
-    fileprivate var loadOrigin: LoadOrigin!
-    fileprivate var hackerspaceData: ParsedHackerspaceData!
+//    typealias LoadOrigin = Either<(name: String, url: String), ParsedHackerspaceData>
+//    var loadOrigin: LoadOrigin!
+    var hackerspaceData: ParsedHackerspaceData!
     var isFavorite: Bool {
-        return SharedData.favoritesDictionary().keys.contains(hackerspaceData.apiName)
+        return SharedData.favoritesDictionary().map(fst).contains(hackerspaceData.apiName)
     }
 
     fileprivate struct storyboard {
@@ -66,28 +63,24 @@ class SelectedHackerspaceTableViewController: UITableViewController {
 
         tableView.estimatedRowHeight = 200
         tableView.rowHeight = UITableViewAutomaticDimension
-        reloadData(loadOrigin)
+        reloadData()
     }
 
 
-    func reloadData(_ source: LoadOrigin, fromCache: Bool = true, callback: (() -> Void)? = nil) {
+    func reloadData(fromCache: Bool = true, callback: (() -> Void)? = nil) {
         func applyDataModel(_ hackerspaceData: ParsedHackerspaceData) -> () {
             self.hackerspaceData = hackerspaceData
             self.tableView.reloadData()
             updateFavoriteButton()
         }
 
-        switch source {
-        case .Right(let m):
-            applyDataModel(m)
-            callback?()
-        case .Left(let (name,url)):
 
-            SpaceAPI.getParsedHackerspace(url: url, name: name, fromCache: false)
-                .onSuccess(callback: applyDataModel).onComplete { _ in
-                    self.refreshControl?.endRefreshing()
-                    callback?()
-            }
+        let (name, url) = hackerspaceData.apiInfo
+
+        SpaceAPI.getParsedHackerspace(url: url, name: name, fromCache: false)
+            .onSuccess(callback: applyDataModel).onComplete { _ in
+                self.refreshControl?.endRefreshing()
+                callback?()
         }
     }
 
@@ -148,7 +141,7 @@ class SelectedHackerspaceTableViewController: UITableViewController {
 
     func reuseMapCell(_ indexPath: IndexPath) -> UITableViewCell {
         if let mapCell = tableView.dequeueReusableCell(withIdentifier: storyboard.MapIdentifier, for: indexPath) as? HackerspaceMapTableViewCell {
-            mapCell.location = hackerspaceData.location.toSpaceLocation(name: hackerspaceData.name)
+            mapCell.location = hackerspaceData.toSpaceLocation()
             return mapCell
         } else {
             return tableView.dequeueReusableCell(withIdentifier: storyboard.TitleIdentifier, for: indexPath)
