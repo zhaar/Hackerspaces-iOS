@@ -79,7 +79,8 @@ extension SpaceAPI {
 
             if let urlStr = URL(string: url) {
                 let req = URLRequest.init(url: urlStr, cachePolicy: URLRequest.CachePolicy.reloadIgnoringCacheData, timeoutInterval: TimeInterval(timeout))
-                HTTP.init(req).start { response in
+
+                HTTP.init(req).run { response in
                     Shared.dataCache.set(value: response.data, key: url)
                     if case HTTPStatusCode.ok.rawValue? = response.statusCode {
                         p.success(response.data)

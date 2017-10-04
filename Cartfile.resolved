@@ -1,5 +1,5 @@
 github "Haneke/HanekeSwift" "2f6d87f1f725d204d85cb34492e8c399cd5a200f"
 github "Thomvis/BrightFutures" "5.2.0"
-github "antitypical/Result" "3.2.3"
-github "daltoniam/SwiftHTTP" "2.0.2"
-github "typelift/Swiftz" "0.6.3"
+github "antitypical/Result" "3.2.4"
+github "daltoniam/SwiftHTTP" "3.0.0"
+github "tcldr/Swiftz" "1a650901ada6f2c07079a053546e37f540349a39"

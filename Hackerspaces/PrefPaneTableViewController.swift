@@ -19,6 +19,7 @@ class PrefPaneTableViewController: UITableViewController {
             toggle.isOn = SharedData.isInDebugMode()
         }
     }
+
     @IBOutlet var darkModeToggle: UISwitch! {
         didSet {
             darkModeToggle.isOn = SharedData.isInDarkMode()
@@ -60,7 +61,6 @@ class PrefPaneTableViewController: UITableViewController {
         refresh.attributedTitle = NSAttributedString(string: refreshTitle)
         updateRows(rows, .automatic)
     }
-
 
     // MARK: - App lifecycle
 

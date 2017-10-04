@@ -53,9 +53,9 @@ enum Theme {
         print("enabling dark mode")
         UINavigationBar.appearance().barTintColor = UIColor.darkBackground
         UINavigationBar.appearance().tintColor = UIColor.darkTint
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.themeWhite]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.themeWhite]
         if #available(iOS 11.0, *) {
-            UINavigationBar.appearance().largeTitleTextAttributes = [NSForegroundColorAttributeName: UIColor.themeWhite]
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.themeWhite]
         }
         UITabBar.appearance().barTintColor = UIColor.darkBackground
         UITabBar.appearance().tintColor = UIColor.darkTint

@@ -59,7 +59,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         map.setRegion(coordinateRegion, animated: true)
     }
 
-    func refresh(sender: UIBarButtonItem) {
+    @objc func refresh(sender: UIBarButtonItem) {
         self.navigationItem.rightBarButtonItem = loadingIndicator
         self.map.removeAnnotations(map.annotations)
 

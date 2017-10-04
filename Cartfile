@@ -1,5 +1,5 @@
 github "Haneke/HanekeSwift" "feature/swift-3"
 github "daltoniam/SwiftHTTP"
-github "typelift/Swiftz"
+github "tcldr/Swiftz" "swift-4"
 github "Thomvis/BrightFutures"
 

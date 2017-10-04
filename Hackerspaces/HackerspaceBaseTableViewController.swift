@@ -73,13 +73,13 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         }
     }
 
-    func refresh(_ sender: UIRefreshControl) {
+    @objc func refresh(_ sender: UIRefreshControl) {
 
         print("refreshing tableview")
         refreshRemoteData(api: dataSource, sender: sender)
         refreshCustomEndpoints()
     }
-    var dataSource: () -> Future<[(String, String)], SpaceAPIError> = { _ in SpaceAPI.loadHackerspaceList(fromCache: true)} {
+    var dataSource: () -> Future<[(String, String)], SpaceAPIError> = {  SpaceAPI.loadHackerspaceList(fromCache: true) } {
         didSet {
             print("settings datasource")
         }
