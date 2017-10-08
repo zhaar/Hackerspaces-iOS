@@ -21,9 +21,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
 
-    @IBAction func centerButton(sender: UIButton) {
+    @IBAction func centerMap(_ sender: UIButton) {
         locationManager.location.forEach(centerMapOnLocation)
+
     }
+
     
     @IBOutlet weak var map: MKMapView! {
         didSet {

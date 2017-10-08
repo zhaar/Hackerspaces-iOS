@@ -149,7 +149,6 @@
 		95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftHTTP.framework.dSYM; path = Carthage/Build/iOS/SwiftHTTP.framework.dSYM; sourceTree = "<group>"; };
 		95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Swiftz.framework.dSYM; path = Carthage/Build/iOS/Swiftz.framework.dSYM; sourceTree = "<group>"; };
 		95ACC0251F771D370061A1E6 /* CustomEndpointList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomEndpointList.storyboard; sourceTree = "<group>"; };
-		95ACC0271F771D3F0061A1E6 /* CustomEndpointList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomEndpointList.storyboard; sourceTree = SOURCE_ROOT; };
 		95ACC02A1F771DA30061A1E6 /* EndpointList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointList.swift; sourceTree = "<group>"; };
 		95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpaceAPIFunctions.swift; sourceTree = "<group>"; };
 		95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = BrightFutures.framework; path = Carthage/Build/iOS/BrightFutures.framework; sourceTree = "<group>"; };
@@ -243,7 +242,7 @@
 		95643FA41B729B3E0061A1E6 = {
 			isa = PBXGroup;
 			children = (
-				95ACC0251F771D370061A1E6 /* CustomEndpointList.storyboard */,
+				95AAAD5A1F8A70480061A1E6 /* StoryBoards */,
 				95A594A61B893FC90061A1E6 /* Debug symbols */,
 				95643FAF1B729B3E0061A1E6 /* Hackerspaces */,
 				95643FC71B729B3E0061A1E6 /* HackerspacesTests */,
@@ -279,8 +278,6 @@
 				95B38C4E1F62B09C0061A1E6 /* UIUtils.swift */,
 				953161861B73B12A0061A1E6 /* extensions.swift */,
 				95BD26771F40AB2E0061A1E6 /* TestingUtils.swift */,
-				95643FB81B729B3E0061A1E6 /* Main.storyboard */,
-				95ACC0271F771D3F0061A1E6 /* CustomEndpointList.storyboard */,
 				95643FBB1B729B3E0061A1E6 /* Images.xcassets */,
 				95643FBD1B729B3E0061A1E6 /* LaunchScreen.xib */,
 				95643FB01B729B3E0061A1E6 /* Supporting Files */,
@@ -332,6 +329,15 @@
 				95A594A11B893FB60061A1E6 /* Swiftz.framework.dSYM */,
 			);
 			name = "Debug symbols";
+			sourceTree = "<group>";
+		};
+		95AAAD5A1F8A70480061A1E6 /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				95643FB81B729B3E0061A1E6 /* Main.storyboard */,
+				95ACC0251F771D370061A1E6 /* CustomEndpointList.storyboard */,
+			);
+			path = StoryBoards;
 			sourceTree = "<group>";
 		};
 		95ACC0281F771D7C0061A1E6 /* View Controllers */ = {
@@ -786,7 +792,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -816,7 +822,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -839,7 +845,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.fixme.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hackerspaces.app/Hackerspaces";
 			};
@@ -858,7 +864,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ch.fixme.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Hackerspaces.app/Hackerspaces";
 			};
@@ -879,7 +885,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = moe.zephyz.Hackerspaces.HackerspacesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = Hackerspaces;
 			};
@@ -898,7 +904,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = moe.zephyz.Hackerspaces.HackerspacesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = Hackerspaces;
 			};
