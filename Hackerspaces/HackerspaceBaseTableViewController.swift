@@ -53,13 +53,13 @@ func updateDataSource(api: [(String, String)],
 class HackerspaceBaseTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
 
     func refreshCustomEndpoints() -> () {
-        updateDataSource(api: SharedData.getCustomEndPoints(),
+        updateDataSource(api: SharedData.customEndpoints.emptyGet(),
                          get: { self.customEndpoints },
                          set: { self.customEndpoints = $0; self.tableView.reloadData() })
     }
 
     func refreshHackerspaces() -> () {
-        updateDataSource(api: SharedData.favoritesDictionary(),
+        updateDataSource(api: SharedData.favorites.emptyGet(),
                          get: { self.hackerspaces },
                          set: { self.hackerspaces = $0; self.tableView.reloadData() })
     }

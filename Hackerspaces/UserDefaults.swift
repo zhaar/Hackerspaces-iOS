@@ -25,7 +25,78 @@ struct KeyValuePair<Key: Codable, Value: Codable>: Codable {
 func shouldDisplayCustomSection(indexPath: IndexPath? = nil) -> Bool {
     let section = indexPath?.section
     let isZero = section.map(==0) ?? true
-    return !SharedData.getCustomEndPoints().isEmpty && SharedData.isInDebugMode() && isZero
+    return !SharedData.customEndpoints.emptyGet().isEmpty && SharedData.isInDebugMode() && isZero
+}
+
+protocol DataBaseTable {
+    associatedtype Key
+    associatedtype Value
+    typealias KeyValue = [(Key, Value)]
+
+    var title: String { get }
+    func get() -> KeyValue?
+    func set(data: KeyValue) -> ()
+}
+
+extension DataBaseTable {
+
+    func emptyGet() -> KeyValue {
+        return get() ?? []
+    }
+
+    func deleteRow(at index: Int) -> () {
+        self.updateData { (array: KeyValue) -> KeyValue in
+            var cpy = array
+            cpy.remove(at: index)
+            return cpy
+        }
+    }
+
+    func updateData(_ fn: (KeyValue) -> KeyValue) -> ()? {
+        if let data: KeyValue = get() {
+            return set(data: fn(data))
+        } else {
+            return nil
+        }
+    }
+}
+
+extension DataBaseTable where Key: Equatable {
+
+    func addRow(key: Key, value: Value) -> () {
+        self.updateData(curry(addOrUpdate)(key)(value))
+    }
+
+    func getRow(named key: Key) -> Value? {
+        if let data = get(),
+            let found = data.first(where: { pair in pair.0 == key }) {
+            return found.1
+        } else {
+            return nil
+        }
+    }
+
+    func deleteRow(named key: Key) -> () {
+        self.updateData { (array: KeyValue) -> KeyValue in
+            remove(from: array, key: key)
+        }
+    }
+}
+
+struct ManagedData<Key: Codable & Equatable, Value: Codable>: DataBaseTable {
+    typealias KeyValue = [(Key, Value)]
+    let mainKey: String
+
+    var title: String {
+        return mainKey
+    }
+    func set(data: KeyValue) -> () {
+        SharedData.setKeyValuePair(forkey: mainKey, pair: data)
+    }
+
+    func get() -> KeyValue? {
+        return SharedData.getKeyValuePair(forKey: mainKey)
+    }
 }
 
 struct SharedData {
@@ -33,34 +104,15 @@ struct SharedData {
     typealias HackerspaceAPIURL = String
     static let defaults = UserDefaults.standard
 
-    static func addCustomEndpoint(name: String, url: String) -> () {
-        updateCustomEndpoint { [(name, url)] + $0 }
-    }
+    static let customEndpoints = ManagedData<String, String>(mainKey: customEndpointsKey)
 
-    static func updateCustomEndpoint(_ updateFn: ([(String, String)]) -> [(String, String)]) -> () {
-        setCustomEndPoint(updateFn(getCustomEndPoints()))
-    }
-
-    static func getCustomEndPoints() -> [(String, String)] {
-        return getKeyValuePair(forKey: customEndpointsKey)
-    }
-
-    static func setCustomEndPoint(_ array:[(String, String)]) -> () {
-        setKeyValuePair(forkey: customEndpointsKey, pair: array)
-    }
-
-    static func removeCustomEndPoint(name: String) -> () {
-        updateCustomEndpoint { (endpoints) -> [(String, String)] in
-
-            return Array.init(tuplesAsDict(endpoints).delete(name))
-        }
-    }
+    static let favorites = ManagedData<String, String>(mainKey: favoriteDictKey)
 
     // - MARK: Generic manipulation of storing key-value pairs
-    static func getKeyValuePair<K: Codable, V: Codable>(forKey key: String) -> [(K, V)] {
+    static func getKeyValuePair<K: Codable, V: Codable>(forKey key: String) -> [(K, V)]? {
         let plist = defaults.data(forKey: key)
-        let kvPairs = plist.flatMap { try? PropertyListDecoder().decode([KeyValuePair<K, V>].self, from: $0) } ?? []
-        return kvPairs.map { pair in (pair.key, pair.value) }
+        let kvPairs = plist.flatMap { try? PropertyListDecoder().decode([KeyValuePair<K, V>].self, from: $0) }
+        return kvPairs.map { array in array.map { pair in (pair.key, pair.value) } }
     }
 
     static func setKeyValuePair<K: Codable, V: Codable>(forkey key: String, pair: [(K, V)])  -> () {
@@ -70,11 +122,6 @@ struct SharedData {
         } catch {
             print("could not set the keyvalue pair: \(pair) \n with key: \(key)")
         }
-    }
-
-    static func updateKeyValuePair<K: Codable, V: Codable>(key: String, updateFn: ([(K, V)]) -> [(K, V)]) -> () {
-        setKeyValuePair(forkey: key, pair: updateFn(getKeyValuePair(forKey: key)))
-
     }
 
     // - MARK: Dark mode
@@ -99,28 +146,8 @@ struct SharedData {
         setDebugMode(value: !isInDebugMode())
     }
 
-    // - MARK
-    static func favoritesDictionary() -> [(String, HackerspaceAPIURL)] {
-        return getKeyValuePair(forKey: favoriteDictKey)
-    }
-    
-    static func addToFavoriteDictionary(hackerspace: (String, String)) {
-        let (name, apiEndpoint) = hackerspace
-        updateKeyValuePair(key: favoriteDictKey, updateFn: curry(addOrUpdate)(name)(apiEndpoint))
-    }
-    
-    static func removeFromFavoritesList(name: String) {
-        
-        updateKeyValuePair(key: favoriteDictKey, updateFn: { arr -> [(String, String)] in remove(from: arr, key: name) })
-    }
-    
-    static func setFavorites(dictionary: [(String, HackerspaceAPIURL)]) {
-        setKeyValuePair(forkey: favoriteDictKey, pair: dictionary)
-    }
-    
     static func deleteAllDebug() {
         setKeyValuePair(forkey: favoriteDictKey, pair: [(String, String)]())
         setKeyValuePair(forkey: customEndpointsKey, pair: [(String, String)]())
     }
-
 }

@@ -19,11 +19,7 @@ class EditMode {
 
 class EndPointTableViewController: UITableViewController {
 
-    var source: [(String, String)] = SharedData.getCustomEndPoints() {
-        didSet {
-            SharedData.setCustomEndPoint(source)
-        }
-    }
+    var source: [(String, String)] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +30,7 @@ class EndPointTableViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        source = SharedData.getCustomEndPoints()
+        source = SharedData.customEndpoints.emptyGet()
         tableView.reloadData()
     }
 
@@ -92,11 +88,7 @@ class EndPointTableViewController: UITableViewController {
             )
             let deleteAction = UITableViewRowAction.init(style: .destructive, title: "Delete", handler: { (_, idx) in
                 self.source.remove(at: idx.row)
-                SharedData.updateCustomEndpoint { arr in
-                    var cpy = arr
-                    cpy.remove(at: indexPath.row)
-                    return cpy
-                }
+                SharedData.customEndpoints.deleteRow(at: idx.row)
                 tableView.deleteRows(at: [idx], with: .fade)
             })
             return [deleteAction, editAction]
@@ -110,13 +102,19 @@ class EndPointTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let editValues = sender as? EditMode,
-            let vc = segue.destination as? AddEndpointViewController {
+        guard let vc = segue.destination as? AddEndpointViewController else { return }
+        if let editValues = sender as? EditMode {
             vc.presetName = editValues.name
             vc.presetURL = editValues.url
             vc.confirm = { (newName, newURL) in
                 self.source = remove(from: self.source, key: editValues.name)
                 self.source = addOrUpdate(key: newName, value: newURL, self.source)
+                SharedData.customEndpoints.set(data: self.source)
+            }
+        } else {
+            vc.confirm = { (newName, newURL) in
+                self.source.append((newName, newURL))
+                SharedData.customEndpoints.set(data: self.source)
             }
         }
     }

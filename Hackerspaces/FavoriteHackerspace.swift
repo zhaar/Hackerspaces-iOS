@@ -20,7 +20,7 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
     override func viewDidLoad() {
         navigationItem.leftBarButtonItem = editButtonItem
         dataSource =  { 
-            Future(value: SharedData.favoritesDictionary()).promoteError()
+            Future(value: SharedData.favorites.emptyGet()).promoteError()
         }
         title = "Favorites"
         super.viewDidLoad()
@@ -31,7 +31,7 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
         
         if shouldDisplayCustomSection(indexPath: indexPath) {
             let hackerspaceToDelete = visibleEndpoints()[indexPath.row].0
-            SharedData.removeCustomEndPoint(name: hackerspaceToDelete)
+            SharedData.favorites.deleteRow(named: hackerspaceToDelete)
             customEndpoints = remove(from: customEndpoints, key: hackerspaceToDelete)
             if customEndpoints.count == 0 {
                 tableView.deleteSections([0], with: .automatic)
@@ -40,7 +40,7 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
             }
         } else {
             let hackerspaceToDelete = visibleHackerspaces()[indexPath.row].0
-            SharedData.removeFromFavoritesList(name: hackerspaceToDelete)
+            SharedData.favorites.deleteRow(named: hackerspaceToDelete)
             hackerspaces = remove(from: hackerspaces, key: hackerspaceToDelete)
             tableView.deleteRows(at: [indexPath], with: .fade)
             

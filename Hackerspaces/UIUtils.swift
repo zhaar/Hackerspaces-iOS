@@ -25,13 +25,15 @@ extension UIViewController {
     func displayAlert(alertTitle: String?,
                       alertStyle preferredStyle: UIAlertControllerStyle = .alert,
                       message: String?,
-                      buttonTitle button: String,
+                      buttonTitle button: String?,
                       buttonStyle style: UIAlertActionStyle = .default,
                       confirmed onclick: ((UIAlertAction) -> ())? = nil,
                       canceled oncancel: ((UIAlertAction) -> ())? = nil,
                       dismissed callback: (() -> ())? = nil) -> () {
         let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
-        alert.addAction(UIAlertAction(title: button, style: style, handler: onclick))
+        if let button = button {
+            alert.addAction(UIAlertAction(title: button, style: style, handler: onclick))
+        }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: oncancel))
         self.present(alert, animated: true, completion: callback)
     }
