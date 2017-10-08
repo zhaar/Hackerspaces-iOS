@@ -17,7 +17,7 @@ public enum Testing {
     static let closedEndpoint = "closedHackerspaceAPIEndpoint"
     static let openEndpoint = "openHackerspaceAPIEndpoint"
     static let mockAPIResponse = [("open", openEndpoint), ("closed", closedEndpoint)]
-    static let openHackerspaceAPI = HackerspaceData.init(api: openEndpoint,
+    static let openHackerspaceAPI = HackerspaceData.init(api: "13.0",
                                                          space: "Open Hackerspace",
                                                          logo: "",
                                                          url: "",
@@ -28,7 +28,7 @@ public enum Testing {
                                                          events: nil,
                                                          contact: ContactData.init())
 
-    static let closedHackerspaceAPI = HackerspaceData.init(api: openEndpoint,
+    static let closedHackerspaceAPI = HackerspaceData.init(api: "13.0",
                                                            space: "Closed Hackerspace",
                                                            logo: "",
                                                            url: "",

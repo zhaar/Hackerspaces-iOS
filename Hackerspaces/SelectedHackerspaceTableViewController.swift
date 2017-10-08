@@ -27,14 +27,11 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     let removeFromFavorites = UIImage(named: "Star-full")
 
     func prepare(_ model: ParsedHackerspaceData) {
-//        self.loadOrigin = Either.Right(model)
         hackerspaceData = model
     }
 
     var previewDeleteAction : (() -> ())? = nil
 
-//    typealias LoadOrigin = Either<(name: String, url: String), ParsedHackerspaceData>
-//    var loadOrigin: LoadOrigin!
     var hackerspaceData: ParsedHackerspaceData!
     var isFavorite: Bool {
         return SharedData.favoritesDictionary().map(fst).contains(hackerspaceData.apiName)
