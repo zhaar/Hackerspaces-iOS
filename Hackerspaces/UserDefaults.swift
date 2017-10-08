@@ -64,7 +64,9 @@ extension DataBaseTable {
 extension DataBaseTable where Key: Equatable {
 
     func addRow(key: Key, value: Value) -> () {
-        self.updateData(curry(addOrUpdate)(key)(value))
+        if self.updateData(curry(addOrUpdate)(key)(value)) == nil {
+            set(data: [(key, value)])
+        }
     }
 
     func getRow(named key: Key) -> Value? {

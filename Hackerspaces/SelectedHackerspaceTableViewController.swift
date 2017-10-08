@@ -33,8 +33,9 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     var previewDeleteAction : (() -> ())? = nil
 
     var hackerspaceData: ParsedHackerspaceData!
+
     var isFavorite: Bool {
-        return SharedData.favorites.emptyGet().map(fst).contains(hackerspaceData.apiName)
+        return SharedData.favorites.getRow(named: hackerspaceData.apiName) != nil
     }
 
     fileprivate struct storyboard {
