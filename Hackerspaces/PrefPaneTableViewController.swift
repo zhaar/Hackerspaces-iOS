@@ -103,7 +103,7 @@ class PrefPaneTableViewController: UITableViewController {
                          message: "Are you sure you want to delete the local cache?",
                          buttonTitle: "Delete",
                          buttonStyle: .destructive,
-                         confirmed: constFn(SharedData.deleteAllDebug))
+                         confirmed: constFn(SpaceAPI.deleteCache))
         }
     }
 }
