@@ -17,19 +17,19 @@ class AddEndpointViewController: UIViewController {
     var presetURL: String?
 
     @IBAction func confirmAdd(sender: UIButton) {
-        guard let n = endpointName.text else {
-            return print("name can't be empty")
+        guard let n = endpointName.text, !n.isEmpty else {
+            self.displayAlert(alertTitle: "Custom Endpoint", message: "Custom endpoint name can't be empty", buttonTitle: nil)
+            return
         }
-        guard let u = endpointURL.text else {
-            return print("url can't be empty")
+        guard let u = endpointURL.text, !u.isEmpty else {
+            self.displayAlert(alertTitle: "Custom Endpoint", message: "Custom endpoint URL can't be empty", buttonTitle: nil)
+            return
         }
         confirm(n, u)
         self.navigationController?.popViewController(animated: true)
     }
 
-    var confirm: (String, String) -> () = { (newName, newURL) in
-        SharedData.addCustomEndpoint(name: newName, url: newURL)
-    }
+    var confirm: (String, String) -> () = { _,_  in fatalError("confirmation call back not set") }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

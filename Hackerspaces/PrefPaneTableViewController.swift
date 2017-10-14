@@ -19,6 +19,7 @@ class PrefPaneTableViewController: UITableViewController {
             toggle.isOn = SharedData.isInDebugMode()
         }
     }
+
     @IBOutlet var darkModeToggle: UISwitch! {
         didSet {
             darkModeToggle.isOn = SharedData.isInDarkMode()
@@ -61,7 +62,6 @@ class PrefPaneTableViewController: UITableViewController {
         updateRows(rows, .automatic)
     }
 
-
     // MARK: - App lifecycle
 
     override func viewDidLoad() {
@@ -103,7 +103,7 @@ class PrefPaneTableViewController: UITableViewController {
                          message: "Are you sure you want to delete the local cache?",
                          buttonTitle: "Delete",
                          buttonStyle: .destructive,
-                         confirmed: constFn(SharedData.deleteAllDebug))
+                         confirmed: constFn(SpaceAPI.deleteCache))
         }
     }
 }

@@ -16,9 +16,9 @@ class SelectedHackerspaceTableViewController: UITableViewController {
 
     @IBAction func MarkAsFavorite(_ sender: UIBarButtonItem?) {
         if isFavorite {
-            SharedData.removeFromFavoritesList(name: hackerspaceData.apiName)
+            SharedData.favorites.deleteRow(named: hackerspaceData.apiName)
         } else {
-            SharedData.addToFavoriteDictionary(hackerspace: (hackerspaceData.apiName, hackerspaceData.apiEndpoint))
+            SharedData.favorites.addRow(key: hackerspaceData.apiName, value: hackerspaceData.apiEndpoint)
         }
         updateFavoriteButton()
     }
@@ -27,17 +27,15 @@ class SelectedHackerspaceTableViewController: UITableViewController {
     let removeFromFavorites = UIImage(named: "Star-full")
 
     func prepare(_ model: ParsedHackerspaceData) {
-//        self.loadOrigin = Either.Right(model)
         hackerspaceData = model
     }
 
     var previewDeleteAction : (() -> ())? = nil
 
-//    typealias LoadOrigin = Either<(name: String, url: String), ParsedHackerspaceData>
-//    var loadOrigin: LoadOrigin!
     var hackerspaceData: ParsedHackerspaceData!
+
     var isFavorite: Bool {
-        return SharedData.favoritesDictionary().map(fst).contains(hackerspaceData.apiName)
+        return SharedData.favorites.getRow(named: hackerspaceData.apiName) != nil
     }
 
     fileprivate struct storyboard {

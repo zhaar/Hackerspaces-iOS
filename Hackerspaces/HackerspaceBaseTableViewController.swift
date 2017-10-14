@@ -53,13 +53,13 @@ func updateDataSource(api: [(String, String)],
 class HackerspaceBaseTableViewController: UITableViewController, UIViewControllerPreviewingDelegate {
 
     func refreshCustomEndpoints() -> () {
-        updateDataSource(api: SharedData.getCustomEndPoints(),
+        updateDataSource(api: SharedData.customEndpoints.emptyGet(),
                          get: { self.customEndpoints },
                          set: { self.customEndpoints = $0; self.tableView.reloadData() })
     }
 
     func refreshHackerspaces() -> () {
-        updateDataSource(api: SharedData.favoritesDictionary(),
+        updateDataSource(api: SharedData.favorites.emptyGet(),
                          get: { self.hackerspaces },
                          set: { self.hackerspaces = $0; self.tableView.reloadData() })
     }
@@ -73,13 +73,13 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         }
     }
 
-    func refresh(_ sender: UIRefreshControl) {
+    @objc func refresh(_ sender: UIRefreshControl) {
 
         print("refreshing tableview")
         refreshRemoteData(api: dataSource, sender: sender)
         refreshCustomEndpoints()
     }
-    var dataSource: () -> Future<[(String, String)], SpaceAPIError> = { _ in SpaceAPI.loadHackerspaceList(fromCache: true)} {
+    var dataSource: () -> Future<[(String, String)], SpaceAPIError> = {  SpaceAPI.loadHackerspaceList(fromCache: true) } {
         didSet {
             print("settings datasource")
         }

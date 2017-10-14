@@ -73,13 +73,18 @@ extension SpaceAPI {
         case urlError(String)
     }
 
+    static func deleteCache() -> () {
+        Shared.dataCache.removeAll()
+    }
+
     static private func httpRequest(url: String, timeout: Int = 5) -> Future<Data, HTTPError> {
         let p = Promise<Data, HTTPError>()
         DispatchQueue.global().async {
 
             if let urlStr = URL(string: url) {
                 let req = URLRequest.init(url: urlStr, cachePolicy: URLRequest.CachePolicy.reloadIgnoringCacheData, timeoutInterval: TimeInterval(timeout))
-                HTTP.init(req).start { response in
+
+                HTTP.init(req).run { response in
                     Shared.dataCache.set(value: response.data, key: url)
                     if case HTTPStatusCode.ok.rawValue? = response.statusCode {
                         p.success(response.data)

@@ -21,9 +21,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
 
-    @IBAction func centerButton(sender: UIButton) {
+    @IBAction func centerMap(_ sender: UIButton) {
         locationManager.location.forEach(centerMapOnLocation)
+
     }
+
     
     @IBOutlet weak var map: MKMapView! {
         didSet {
@@ -59,7 +61,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
         map.setRegion(coordinateRegion, animated: true)
     }
 
-    func refresh(sender: UIBarButtonItem) {
+    @objc func refresh(sender: UIBarButtonItem) {
         self.navigationItem.rightBarButtonItem = loadingIndicator
         self.map.removeAnnotations(map.annotations)
 

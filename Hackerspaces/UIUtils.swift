@@ -25,13 +25,15 @@ extension UIViewController {
     func displayAlert(alertTitle: String?,
                       alertStyle preferredStyle: UIAlertControllerStyle = .alert,
                       message: String?,
-                      buttonTitle button: String,
+                      buttonTitle button: String?,
                       buttonStyle style: UIAlertActionStyle = .default,
                       confirmed onclick: ((UIAlertAction) -> ())? = nil,
                       canceled oncancel: ((UIAlertAction) -> ())? = nil,
                       dismissed callback: (() -> ())? = nil) -> () {
         let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
-        alert.addAction(UIAlertAction(title: button, style: style, handler: onclick))
+        if let button = button {
+            alert.addAction(UIAlertAction(title: button, style: style, handler: onclick))
+        }
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: oncancel))
         self.present(alert, animated: true, completion: callback)
     }
@@ -53,9 +55,9 @@ enum Theme {
         print("enabling dark mode")
         UINavigationBar.appearance().barTintColor = UIColor.darkBackground
         UINavigationBar.appearance().tintColor = UIColor.darkTint
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.themeWhite]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.themeWhite]
         if #available(iOS 11.0, *) {
-            UINavigationBar.appearance().largeTitleTextAttributes = [NSForegroundColorAttributeName: UIColor.themeWhite]
+            UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.themeWhite]
         }
         UITabBar.appearance().barTintColor = UIColor.darkBackground
         UITabBar.appearance().tintColor = UIColor.darkTint
@@ -71,6 +73,9 @@ enum Theme {
         UITextField.appearance().textColor = UIColor.themeWhite
         UIButton.appearance().tintColor = UIColor.darkTint
         UITableView.appearance().separatorColor = UIColor.gray
+        UISearchBar.appearance().tintColor = UIColor.darkTint
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.white]
+
     }
 
     static func enableClearMode() {
@@ -81,21 +86,22 @@ enum Theme {
         if #available(iOS 11.0, *) {
             UINavigationBar.appearance().largeTitleTextAttributes = [:]
         }
-        UITabBar.appearance().barTintColor = nil
-        UITabBar.appearance().tintColor = nil
+        UITabBar.appearance().barTintColor = UIColor(red:0.9765, green:0.9765, blue:0.9765, alpha:1.0)
+        UITabBar.appearance().tintColor = UIColor.defaultBlueTint
         UITableView.appearance().backgroundColor = UIColor.white
-        UITableView.appearance().sectionIndexBackgroundColor  = nil
+        UITableView.appearance().sectionIndexBackgroundColor = UIColor(red:0.9686, green:0.9686, blue:0.9686, alpha:1.0)
         UILabel.appearance().textColor = UIColor.black
         UITableViewCell.appearance().backgroundColor = UIColor.white
         UITextView.appearance().backgroundColor = UIColor.white
-        UITextView.appearance().tintColor = nil
-        UITextView.appearance().textColor = nil
+        UITextView.appearance().tintColor = UIColor.defaultBlueTint
+        UITextView.appearance().textColor = UIColor.black
         UIApplication.shared.statusBarStyle = .default
         UITextField.appearance().backgroundColor = UIColor.white
         UITextField.appearance().textColor = UIColor.black
         UIButton.appearance().tintColor = UIColor.defaultBlueTint
         UITableView.appearance().separatorColor = UIColor(red: 214/255, green: 213/255, blue: 217/255, alpha: 1.0)
-
+        UISearchBar.appearance().tintColor = UIColor.defaultBlueTint
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.black]
 
     }
 
