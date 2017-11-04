@@ -11,7 +11,7 @@
 "EmptyFavoriteListMessage" = "Select your favorite hackerspace from search or map";
 
 //CustomEndpoint
-"Custom_Endpoint" = "Custom Endpoint";
+"Custom_Endpoint" = "Custom Endpoint"; //Also for Embeded Search
 "CustomNameCantBeEmpty" = "Custom endpoint name can't be empty";
 "CustomURLCantBeEmpty" = "Custom endpoint URL can't be empty";
 
@@ -24,6 +24,7 @@
 "DeleteCacheMessage" = "Are you sure you want to delete the local cache?";
 
 //ErrorDisplay
+"ErrorDisplayViewTitle" = "Error details";
 "QuestionIndicator" = "Q" ;
 "AnswerIndicator" = "A";
 "CannotFindHSQuestion" = "Why can't I find my local hackerspace in the list?";
@@ -33,10 +34,22 @@
 "ReportBugQuestion" = "Something is wrong with the app, what can I do?";
 "ReportBugAnswer" = "You can communicate any issue with the app on the github repository at https://github.com/zhaar/Hackerspaces-iOS/issues. You can even issue pull requests to enable more functionalities.";
 
+//Embeded Search
+"Loading" = "loading";
+"Unresponsive" = "unresponsive";
+
+//Selected Hackerspace
+"SelectedHSViewTitle" = "hackerspace status";
+"AddHSFavorite" = "Add Favorite";
+"RemoveHSFavorite" = "Remove Favorite";
+
 // General
 "Delete" = "Delete";
 "HackerspaceOpen" = "open";
+"HackerspaceClosed" = "closed";
 "Edit" = "Edit";
 "Name" = "Name";
 "Ok" = "Ok";
 "Search" = "Search";
+"More_details" = "More details";
+

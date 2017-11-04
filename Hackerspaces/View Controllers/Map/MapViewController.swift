@@ -29,7 +29,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var map: MKMapView! {
         didSet {
-            map.delegate = self
+            map.delegate = self as MKMapViewDelegate
         }
     }
 

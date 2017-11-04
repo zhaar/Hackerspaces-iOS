@@ -40,10 +40,6 @@
 		9598B91E1FAE36B70061A1E6 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9598B91D1FAE36B70061A1E6 /* R.generated.swift */; };
 		9598B9211FAE37420061A1E6 /* RawDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */; };
 		9598B9221FAE37420061A1E6 /* RawDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */; };
-		9598B9231FAE376A0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
-		9598B9241FAE376B0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
-		9598B9251FAE37A30061A1E6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB61B729B3E0061A1E6 /* MapViewController.swift */; };
-		9598B9261FAE37A30061A1E6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB61B729B3E0061A1E6 /* MapViewController.swift */; };
 		959D61AE1F3B79DB0061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
 		959D61B01F3B7E350061A1E6 /* HSJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */; };
 		959D61B11F3B80450061A1E6 /* HSJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */; };
@@ -60,7 +56,6 @@
 		95BD267C1F40F15F0061A1E6 /* TestingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BD26771F40AB2E0061A1E6 /* TestingUtils.swift */; };
 		95BD26801F40F2530061A1E6 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB78001B9149660061A1E6 /* UserDefaults.swift */; };
 		95BD26831F40F2530061A1E6 /* FPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C57011E89C7C40061A1E6 /* FPUtils.swift */; };
-		95BD26911F40F29D0061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */; };
 		95BD26941F40F40E0061A1E6 /* HSTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */; };
 		95BD26971F40F4360061A1E6 /* HSMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */; };
 		95BD269B1F40F45E0061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */; };
@@ -579,7 +574,6 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Haneke.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftHTTP.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Swiftz.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/BrightFutures.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
@@ -640,12 +634,9 @@
 				9564551D1F3142A50061A1E6 /* SpaceAPIFunctions.swift in Sources */,
 				9564551F1F31446B0061A1E6 /* extensions.swift in Sources */,
 				95BD26831F40F2530061A1E6 /* FPUtils.swift in Sources */,
-				95BD26911F40F29D0061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */,
 				9564551E1F3142CE0061A1E6 /* FutureUtils.swift in Sources */,
 				95BD267C1F40F15F0061A1E6 /* TestingUtils.swift in Sources */,
-				9598B9231FAE376A0061A1E6 /* VCMapView.swift in Sources */,
 				95BD26801F40F2530061A1E6 /* UserDefaults.swift in Sources */,
-				9598B9251FAE37A30061A1E6 /* MapViewController.swift in Sources */,
 				95643FCB1B729B3E0061A1E6 /* HackerspacesTests.swift in Sources */,
 				9564551B1F3141ED0061A1E6 /* HSMapInfo.swift in Sources */,
 				9598B9211FAE37420061A1E6 /* RawDataTableViewCell.swift in Sources */,
@@ -659,10 +650,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9598B9241FAE376B0061A1E6 /* VCMapView.swift in Sources */,
 				9598B9221FAE37420061A1E6 /* RawDataTableViewCell.swift in Sources */,
 				956734501F430BC10061A1E6 /* HackerspacesUITests.swift in Sources */,
-				9598B9261FAE37A30061A1E6 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

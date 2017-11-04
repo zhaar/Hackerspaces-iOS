@@ -27,9 +27,10 @@ enum NetworkState {
     var stateMessage: String {
 
         switch self {
-        case .finished(let data): return data.state.open ? "open"  : "closed"
-        case .loading: return "loading"
-        case .unresponsive(_): return "unresponsive"
+        case .finished(let data): return data.state.open ? R.string.localizable.hackerspaceOpen()
+                                                         : R.string.localizable.hackerspaceClosed()
+        case .loading: return R.string.localizable.loading()
+        case .unresponsive(_): return R.string.localizable.unresponsive()
         }
     }
 }
@@ -190,7 +191,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         if !shouldDisplayCustomSection() {
             return nil
         } else {
-            return section == 0 ? "Custom Endpoints" : "Space API"
+            return section == 0 ? R.string.localizable.custom_Endpoint() : "OpenSpace Directory"
         }
     }
 
@@ -235,7 +236,7 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
             case _ : print("could not segue into hackerspace with no data")
             }
         case let errorVC as DisplayErrorViewController :
-            errorVC.prepare(message: sender as! String, title: "Error details")
+            errorVC.prepare(message: sender as! String, title: R.string.localizable.errorDisplayViewTitle())
         case _: return
 
         }
@@ -258,18 +259,18 @@ class HackerspaceBaseTableViewController: UITableViewController, UIViewControlle
         }
 
         let title = "Hackerspace Unresponsive"
-        var actions:[UIAlertAction] = [UIAlertAction(title: "Ok", style: .default, handler: nil)]
+        var actions:[UIAlertAction] = [UIAlertAction(title: R.string.localizable.ok(), style: .default, handler: nil)]
 
         let (msg, sender) = messageHandler(err: error)
         if let s = sender {
-            actions.append(UIAlertAction(title: "More details", style: .default, handler: {_ in
+            actions.append(UIAlertAction(title: R.string.localizable.more_details(), style: .default, handler: {_ in
                 self.performSegue(withIdentifier: UIConstants.showErrorDetail.rawValue, sender: s)
             }))
         }
         let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
         actions.foreach(alert.addAction)
         //FIXME: There is a bug around here, the "More detail" button is added twice to the array but only once in the alert
-        actions.append(UIAlertAction(title: "More details", style: .default, handler: {_ in
+        actions.append(UIAlertAction(title: R.string.localizable.more_details(), style: .default, handler: {_ in
             self.performSegue(withIdentifier: UIConstants.showErrorDetail.rawValue, sender: error.localizedDescription)
         }))
         present(alert, animated: true, completion: nil)

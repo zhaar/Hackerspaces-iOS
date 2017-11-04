@@ -24,6 +24,7 @@
 "DeleteCacheMessage" = "Êtes-vous sûr de vouloir effacer les données enregistrées en cache?";
 
 //ErrorDisplay
+"ErrorDisplayViewTitle" = "Détails de l'erreur";
 "QuestionIndicator" = "Q" ;
 "AnswerIndicator" = "R";
 "CannotFindHSQuestion" = "Pourquoi est-ce que je ne peux pas trouver mon hackerspace local?";
@@ -33,10 +34,22 @@
 "ReportBugQuestion" = "Quelque-chose ne va pas avec l'app, que puis-je faire?";
 "ReportBugAnswer" = "Vous pouvez partager quelque problème que vous rencontrez avec l'app sur la page Github du projet à l'adresse https://github.com/zhaar/Hackerspaces-iOS/issues. Vous pouvez même permettre d'incorporer de nouvelles fonctionnalités en créant une issue ou une pull request.";
 
+//Embeded Search
+"Loading" = "chargement";
+"Unresponsive" = "pas de réponse";
+
+//Selected Hackerspace
+"SelectedHSViewTitle" = "Status du Hackerspace";
+"AddHSFavorite" = "Ajouter aux favoris";
+"RemoveHSFavorite" = "Retirer des favoris";
+
 // General
 "Delete" = "Supprimer";
 "HackerspaceOpen" = "ouvert";
+"HackerspaceClosed" = "fermé";
 "Edit" = "Modifier";
 "Name" = "Nom";
 "Ok" = "Ok";
 "Search" = "Recherche";
+"More_details" = "Détails";
+
