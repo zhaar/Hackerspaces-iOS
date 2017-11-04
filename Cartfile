@@ -1,6 +1,6 @@
 github "mac-cain13/R.swift.Library"
 github "Haneke/HanekeSwift" "feature/swift-3"
 github "daltoniam/SwiftHTTP"
-github "tcldr/Swiftz" "swift-4"
+github "typelift/Swiftz"
 github "Thomvis/BrightFutures"
 

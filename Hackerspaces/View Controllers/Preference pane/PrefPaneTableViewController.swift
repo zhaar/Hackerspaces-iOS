@@ -29,9 +29,9 @@ class PrefPaneTableViewController: UITableViewController {
     @IBAction func toggleDebug() {
 
         if !SharedData.isInDebugMode() {
-            displayAlert(alertTitle: "Advanced mode enabled",
-                         message: "Advanced mode displays more advanced features useful for hackerspace API developers",
-                         buttonTitle: "OK",
+            displayAlert(alertTitle: R.string.localizable.advancedModeEngagedTitle(),
+                         message: R.string.localizable.advancedModeEngagedMessage(),
+                         buttonTitle: R.string.localizable.ok(),
                          confirmed: { _ in self.setupDebugMode(enable: true) },
                          canceled: constFn(refresh.endRefreshing))
         } else {
@@ -53,7 +53,8 @@ class PrefPaneTableViewController: UITableViewController {
 
     func setupDebugMode(enable isEnabled: Bool) {
         let rows = hiddenRange.map { IndexPath.init(row: $0, section: 0) }
-        let refreshTitle = isEnabled ? "Pull to disable Advanced Mode" : "Pull to enable Advanced Mode"
+        let refreshTitle = isEnabled ? R.string.localizable.pullToEngage()
+                                     : R.string.localizable.pullToDisengage()
         let updateRows = isEnabled ? tableView.insertRows : tableView.deleteRows
         SharedData.setDebugMode(value: isEnabled)
         toggle.isOn = isEnabled
@@ -96,12 +97,11 @@ class PrefPaneTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("selected indexpath \(indexPath)")
         if SharedData.isInDebugMode(), indexPath.section == 0, indexPath.row == 3 {
-            displayAlert(alertTitle: "Deleting Cache",
+            displayAlert(alertTitle: R.string.localizable.deleteCacheTitle(),
                          alertStyle: .actionSheet,
-                         message: "Are you sure you want to delete the local cache?",
-                         buttonTitle: "Delete",
+                         message: R.string.localizable.deleteCacheMessage(),
+                         buttonTitle: R.string.localizable.delete(),
                          buttonStyle: .destructive,
                          confirmed: constFn(SpaceAPI.deleteCache))
         }

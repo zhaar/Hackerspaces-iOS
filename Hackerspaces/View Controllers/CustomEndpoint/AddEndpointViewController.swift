@@ -18,11 +18,15 @@ class AddEndpointViewController: UIViewController {
 
     @IBAction func confirmAdd(sender: UIButton) {
         guard let n = endpointName.text, !n.isEmpty else {
-            self.displayAlert(alertTitle: "Custom Endpoint", message: "Custom endpoint name can't be empty", buttonTitle: nil)
+            self.displayAlert(alertTitle: R.string.localizable.custom_Endpoint(),
+                              message: R.string.localizable.customNameCantBeEmpty(),
+                              buttonTitle: nil)
             return
         }
         guard let u = endpointURL.text, !u.isEmpty else {
-            self.displayAlert(alertTitle: "Custom Endpoint", message: "Custom endpoint URL can't be empty", buttonTitle: nil)
+            self.displayAlert(alertTitle: R.string.localizable.custom_Endpoint(),
+                              message: R.string.localizable.customURLCantBeEmpty(),
+                              buttonTitle: nil)
             return
         }
         confirm(n, u)

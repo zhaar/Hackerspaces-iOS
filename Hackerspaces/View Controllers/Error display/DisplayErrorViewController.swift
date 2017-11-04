@@ -8,6 +8,25 @@
 
 import UIKit
 
+struct QAMessage: CustomStringConvertible {
+    let question: String
+    let answer: String
+    var description: String {
+        return """
+        \(R.string.localizable.questionIndicator()): \(question)
+        \(R.string.localizable.answerIndicator()): \(answer)
+        """
+    }
+}
+
+let questions = [QAMessage(question: R.string.localizable.cannotFindHSQuestion(),
+                           answer: R.string.localizable.cannotFindHSAnswer()),
+                 QAMessage(question: R.string.localizable.howToAddHSQuestion(),
+                           answer: R.string.localizable.howToAddHSAnswer()),
+                 QAMessage(question: R.string.localizable.reportBugQuestion(),
+                           answer: R.string.localizable.reportBugAnswer())]
+
+
 class DisplayErrorViewController: UIViewController {
 
     func prepare(message: String, title: String = "FAQ") {
@@ -15,16 +34,8 @@ class DisplayErrorViewController: UIViewController {
         self.navigationItem.title = title
     }
     
-    var message: String = """
-Q: Why can't I find my local hackerspace in the list?
-A: Only hackerspaces registered on the OpenSpace directory are visible. Your hackerspace needs to expose an API that conforms to the SpaceAPI.net format.
+    var message: String = questions.map { $0.description }.joined(separator: "\n\n")
 
-Q: How can I add my local hackerspace?
-A: You will need a server that exposes a public API. Once your API is up and running you can register it's address at the OpenSpace directory  (https://github.com/fixme-lausanne/OpenSpaceDirectory) by making a pull request. Once the pull request is accepted your Hackerspace will be visible in the app. If you want to test your API inside the app before it's added to the Open Space DIrectory you can add it as a custom endpoint in the advanced settings. To enable advanced settings, pull the settings list and select "ok".
-
-Q: Something is wrong with the app, what can I do?
-A: You can communicate any issue with the app on the github repository at https://github.com/zhaar/Hackerspaces-iOS/issues. You can even issue pull requests to enable more functionalities.
-"""
     
     @IBOutlet weak var errorTextField: UITextView! {
         didSet {
