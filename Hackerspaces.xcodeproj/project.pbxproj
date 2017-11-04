@@ -216,7 +216,7 @@
 			children = (
 				950AF2971D88CC500068F29E /* DisplayErrorViewController.swift */,
 			);
-			name = "Error display";
+			path = "Error display";
 			sourceTree = "<group>";
 		};
 		950AF2991D89BB500068F29E /* Preference pane */ = {
@@ -224,7 +224,7 @@
 			children = (
 				950AF29A1D89BB7C0068F29E /* PrefPaneTableViewController.swift */,
 			);
-			name = "Preference pane";
+			path = "Preference pane";
 			sourceTree = "<group>";
 		};
 		9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */ = {
@@ -236,7 +236,7 @@
 				9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */,
 				9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */,
 			);
-			name = "Selected Hackerspace";
+			path = "Selected Hackerspace";
 			sourceTree = "<group>";
 		};
 		95643FA41B729B3E0061A1E6 = {
@@ -266,8 +266,8 @@
 		95643FAF1B729B3E0061A1E6 /* Hackerspaces */ = {
 			isa = PBXGroup;
 			children = (
-				95643FB21B729B3E0061A1E6 /* AppDelegate.swift */,
 				95ACC0281F771D7C0061A1E6 /* View Controllers */,
+				95643FB21B729B3E0061A1E6 /* AppDelegate.swift */,
 				95DB77FE1B9142D60061A1E6 /* Constants.swift */,
 				95DB78001B9149660061A1E6 /* UserDefaults.swift */,
 				95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */,
@@ -351,7 +351,7 @@
 				95E4B90A1B811F150061A1E6 /* Embeded search */,
 				9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */,
 			);
-			name = "View Controllers";
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		95ACC0291F771D890061A1E6 /* CustomEndpoint */ = {
@@ -360,7 +360,7 @@
 				95ACC02A1F771DA30061A1E6 /* EndpointList.swift */,
 				95A19D6C1F772D480061A1E6 /* AddEndpointViewController.swift */,
 			);
-			name = CustomEndpoint;
+			path = CustomEndpoint;
 			sourceTree = "<group>";
 		};
 		95BD266E1F40A9E90061A1E6 /* HackerspacesUITests */ = {
@@ -377,7 +377,7 @@
 			children = (
 				952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */,
 			);
-			name = "Favorites list";
+			path = "Favorites list";
 			sourceTree = "<group>";
 		};
 		95D4B74D1B7D68C80061A1E6 /* Map */ = {
@@ -386,7 +386,7 @@
 				95643FB61B729B3E0061A1E6 /* MapViewController.swift */,
 				9597A1AA1B79252F0061A1E6 /* VCMapView.swift */,
 			);
-			name = Map;
+			path = Map;
 			sourceTree = "<group>";
 		};
 		95E4B90A1B811F150061A1E6 /* Embeded search */ = {
@@ -396,7 +396,7 @@
 				95DBD9591B8D10120061A1E6 /* SearchResultsViewController.swift */,
 				95DBD9521B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift */,
 			);
-			name = "Embeded search";
+			path = "Embeded search";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
