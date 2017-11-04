@@ -1,0 +1,15 @@
+Hackerspaces is a tool to help you discover and track hackerspaces around the world.
+
+Know at a glance when your favorite hackerspace opens. And discover new hackerspaces around you using the map.
+
+The search function allows you to quickly add hackerspaces to your favorite list and check their status!
+
+- Know your favorite's hackerspace status anytime.
+- Discover nearby hackerspaces using the map view.
+- Search for any hackerspace in the world and get a look at their status.
+
+If you want to know more about hackerspaces, please visit http://hackerspaces.org
+
+Powered by OpenSpaceDirectory https://github.com/fixme-lausanne/OpenSpaceDirectory
+
+If you cannot find your favorite hackerspace. Contact them and tell them about the OpenSpaceDirectory api!

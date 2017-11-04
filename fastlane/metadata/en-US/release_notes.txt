@@ -1,0 +1,5 @@
+Support for iOS 11 and iPhone X.
+Fix bug with reloading list of hackerspaces.
+New settings tab:
+- toggle for dark mode
+- instructions to add your local hackerspace
