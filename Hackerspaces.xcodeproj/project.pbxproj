@@ -32,7 +32,6 @@
 		9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */; };
 		9573A2AF1B936F960061A1E6 /* RawDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */; };
 		958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */; };
-		958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */; };
 		9592669D1FAE47C90061A1E6 /* Rswift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9598B92B1FAE42A50061A1E6 /* Rswift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9592669F1FAE47F10061A1E6 /* Rswift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9598B92B1FAE42A50061A1E6 /* Rswift.framework */; };
 		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
@@ -156,7 +155,6 @@
 		9598B92B1FAE42A50061A1E6 /* Rswift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Rswift.framework; path = Carthage/Build/iOS/Rswift.framework; sourceTree = "<group>"; };
 		959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSJsonParser.swift; sourceTree = "<group>"; };
 		95A19D6C1F772D480061A1E6 /* AddEndpointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEndpointViewController.swift; sourceTree = "<group>"; };
-		95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = Carthage/Build/iOS/SwiftHTTP.framework; sourceTree = "<group>"; };
 		95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Haneke.framework.dSYM; path = Carthage/Build/iOS/Haneke.framework.dSYM; sourceTree = "<group>"; };
 		95A5949F1B893FB60061A1E6 /* JSONJoy.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = JSONJoy.framework.dSYM; path = Carthage/Build/iOS/JSONJoy.framework.dSYM; sourceTree = "<group>"; };
 		95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftHTTP.framework.dSYM; path = Carthage/Build/iOS/SwiftHTTP.framework.dSYM; sourceTree = "<group>"; };
@@ -189,7 +187,6 @@
 				9592669F1FAE47F10061A1E6 /* Rswift.framework in Frameworks */,
 				958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */,
 				956455171F3140410061A1E6 /* Swiftz.framework in Frameworks */,
-				958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,7 +217,6 @@
 				956455161F3140410061A1E6 /* Swiftz.framework */,
 				95DBD94B1B8CFF360061A1E6 /* Result.framework */,
 				95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */,
-				95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
