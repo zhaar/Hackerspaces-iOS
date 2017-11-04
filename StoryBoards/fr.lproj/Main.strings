@@ -3,7 +3,7 @@
 "0Fm-Bf-uh0.text" = "Search results cell";
 
 /* Class = "UITabBarItem"; title = "Settings"; ObjectID = "0aB-nW-dRW"; */
-"0aB-nW-dRW.title" = "Settings";
+"0aB-nW-dRW.title" = "Préférences";
 
 /* Class = "UILabel"; text = "Last Update:"; ObjectID = "1Tb-D3-axI"; */
 "1Tb-D3-axI.text" = "Last Update:";
@@ -21,13 +21,13 @@
 "9oT-s0-SmW.text" = "Custom";
 
 /* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ACy-bB-ysG"; */
-"ACy-bB-ysG.title" = "Settings";
+"ACy-bB-ysG.title" = "Préférences";
 
 /* Class = "UILabel"; text = "Manage custom endpoints"; ObjectID = "CWz-ns-1WS"; */
-"CWz-ns-1WS.text" = "Manage custom endpoints";
+"CWz-ns-1WS.text" = "Gérer les serveurs personnalisés";
 
 /* Class = "UILabel"; text = "Delete Cache"; ObjectID = "DNR-mM-GTz"; */
-"DNR-mM-GTz.text" = "Delete Cache";
+"DNR-mM-GTz.text" = "Effacer les données en cache";
 
 /* Class = "UILabel"; text = "FAQ"; ObjectID = "ERl-pC-4Ma"; */
 "ERl-pC-4Ma.text" = "FAQ";
@@ -39,13 +39,13 @@
 "HaT-lG-qv6.headerTitle" = "Fetch interval";
 
 /* Class = "UINavigationItem"; title = "Map"; ObjectID = "IIZ-GL-omg"; */
-"IIZ-GL-omg.title" = "Map";
+"IIZ-GL-omg.title" = "Carte";
 
 /* Class = "UILabel"; text = "Detail"; ObjectID = "LNr-Ua-Ftm"; */
 "LNr-Ua-Ftm.text" = "Detail";
 
 /* Class = "UITableViewSection"; headerTitle = "General"; ObjectID = "PDJ-Jt-eYJ"; */
-"PDJ-Jt-eYJ.headerTitle" = "General";
+"PDJ-Jt-eYJ.headerTitle" = "Général";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "RJo-5e-DJu"; */
 "RJo-5e-DJu.text" = "Label";
@@ -57,16 +57,16 @@
 "ZkI-J6-mtj.text" = "Detail";
 
 /* Class = "UILabel"; text = "Enable Advanced mode"; ObjectID = "bus-II-dL6"; */
-"bus-II-dL6.text" = "Enable Advanced mode";
+"bus-II-dL6.text" = "Activer le Mode Avancé";
 
 /* Class = "UITabBarItem"; title = "Map"; ObjectID = "cPa-gy-q4n"; */
-"cPa-gy-q4n.title" = "Map";
+"cPa-gy-q4n.title" = "Carte";
 
 /* Class = "UILabel"; text = "Open"; ObjectID = "edB-zt-VmQ"; */
-"edB-zt-VmQ.text" = "Open";
+"edB-zt-VmQ.text" = "Ouvert";
 
 /* Class = "UILabel"; text = "Dark Mode"; ObjectID = "iqY-VI-TUc"; */
-"iqY-VI-TUc.text" = "Dark Mode";
+"iqY-VI-TUc.text" = "Mode Nuit";
 
 /* Class = "UILabel"; text = "Label"; ObjectID = "l0h-9b-BaG"; */
 "l0h-9b-BaG.text" = "Label";
@@ -96,4 +96,4 @@
 "xW4-jK-3z5.text" = "Every 30 Minutes";
 
 /* Class = "UINavigationItem"; title = "Search"; ObjectID = "y1Y-vH-UMJ"; */
-"y1Y-vH-UMJ.title" = "Search";
+"y1Y-vH-UMJ.title" = "Recherche";

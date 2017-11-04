@@ -15,8 +15,6 @@
 		952915411D5A94B20061A1E6 /* FavoriteHackerspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */; };
 		953161871B73B12A0061A1E6 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953161861B73B12A0061A1E6 /* extensions.swift */; };
 		954C57021E89C7C40061A1E6 /* FPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C57011E89C7C40061A1E6 /* FPUtils.swift */; };
-		955456591FAE44180061A1E6 /* Rswift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9598B92B1FAE42A50061A1E6 /* Rswift.framework */; };
-		9554565A1FAE44180061A1E6 /* Rswift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9598B92B1FAE42A50061A1E6 /* Rswift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB21B729B3E0061A1E6 /* AppDelegate.swift */; };
 		95643FB71B729B3E0061A1E6 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95643FB61B729B3E0061A1E6 /* MapViewController.swift */; };
 		95643FBA1B729B3E0061A1E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95643FB81B729B3E0061A1E6 /* Main.storyboard */; };
@@ -35,6 +33,8 @@
 		9573A2AF1B936F960061A1E6 /* RawDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */; };
 		958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */; };
 		958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */; };
+		9592669D1FAE47C90061A1E6 /* Rswift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9598B92B1FAE42A50061A1E6 /* Rswift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9592669F1FAE47F10061A1E6 /* Rswift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9598B92B1FAE42A50061A1E6 /* Rswift.framework */; };
 		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
 		9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */; };
 		9598B91B1FAE35BD0061A1E6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9598B9191FAE35BD0061A1E6 /* Localizable.strings */; };
@@ -94,13 +94,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9554565B1FAE44190061A1E6 /* Embed Frameworks */ = {
+		9592669E1FAE47C90061A1E6 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9554565A1FAE44180061A1E6 /* Rswift.framework in Embed Frameworks */,
+				9592669D1FAE47C90061A1E6 /* Rswift.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,8 +185,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				95BD26A91F41BC780061A1E6 /* Haneke.framework in Frameworks */,
-				955456591FAE44180061A1E6 /* Rswift.framework in Frameworks */,
 				95DBD94C1B8CFF360061A1E6 /* Result.framework in Frameworks */,
+				9592669F1FAE47F10061A1E6 /* Rswift.framework in Frameworks */,
 				958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */,
 				956455171F3140410061A1E6 /* Swiftz.framework in Frameworks */,
 				958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */,
@@ -428,7 +428,7 @@
 				95643FAB1B729B3E0061A1E6 /* Resources */,
 				95A5949C1B893E7E0061A1E6 /* Carthage copy-frameworks */,
 				95A5949D1B893F630061A1E6 /* Debug */,
-				9554565B1FAE44190061A1E6 /* Embed Frameworks */,
+				9592669E1FAE47C90061A1E6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
