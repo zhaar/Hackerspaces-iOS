@@ -1,0 +1,99 @@
+
+/* Class = "UILabel"; text = "Search results cell"; ObjectID = "0Fm-Bf-uh0"; */
+"0Fm-Bf-uh0.text" = "Search results cell";
+
+/* Class = "UITabBarItem"; title = "Settings"; ObjectID = "0aB-nW-dRW"; */
+"0aB-nW-dRW.title" = "Préférences";
+
+/* Class = "UILabel"; text = "Last Update:"; ObjectID = "1Tb-D3-axI"; */
+"1Tb-D3-axI.text" = "Last Update:";
+
+/* Class = "UILabel"; text = "Do not fetch"; ObjectID = "3xg-9B-Dh4"; */
+"3xg-9B-Dh4.text" = "Do not fetch";
+
+/* Class = "UILabel"; text = "Search results cell"; ObjectID = "6pn-LV-kyo"; */
+"6pn-LV-kyo.text" = "Search results cell";
+
+/* Class = "UILabel"; text = "3 hours ago"; ObjectID = "7RK-1K-EP0"; */
+"7RK-1K-EP0.text" = "3 hours ago";
+
+/* Class = "UILabel"; text = "Custom"; ObjectID = "9oT-s0-SmW"; */
+"9oT-s0-SmW.text" = "Custom";
+
+/* Class = "UINavigationItem"; title = "Settings"; ObjectID = "ACy-bB-ysG"; */
+"ACy-bB-ysG.title" = "Préférences";
+
+/* Class = "UILabel"; text = "Manage custom endpoints"; ObjectID = "CWz-ns-1WS"; */
+"CWz-ns-1WS.text" = "Gérer les serveurs personnalisés";
+
+/* Class = "UILabel"; text = "Delete Cache"; ObjectID = "DNR-mM-GTz"; */
+"DNR-mM-GTz.text" = "Effacer les données en cache";
+
+/* Class = "UILabel"; text = "FAQ"; ObjectID = "ERl-pC-4Ma"; */
+"ERl-pC-4Ma.text" = "FAQ";
+
+/* Class = "UITableViewSection"; footerTitle = "A shorter fetch interval may result in decreased battery life"; ObjectID = "HaT-lG-qv6"; */
+"HaT-lG-qv6.footerTitle" = "A shorter fetch interval may result in decreased battery life";
+
+/* Class = "UITableViewSection"; headerTitle = "Fetch interval"; ObjectID = "HaT-lG-qv6"; */
+"HaT-lG-qv6.headerTitle" = "Fetch interval";
+
+/* Class = "UINavigationItem"; title = "Map"; ObjectID = "IIZ-GL-omg"; */
+"IIZ-GL-omg.title" = "Carte";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "LNr-Ua-Ftm"; */
+"LNr-Ua-Ftm.text" = "Detail";
+
+/* Class = "UITableViewSection"; headerTitle = "General"; ObjectID = "PDJ-Jt-eYJ"; */
+"PDJ-Jt-eYJ.headerTitle" = "Général";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "RJo-5e-DJu"; */
+"RJo-5e-DJu.text" = "Label";
+
+/* Class = "UITextView"; text = "test"; ObjectID = "RVv-UD-QrX"; */
+"RVv-UD-QrX.text" = "test";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "ZkI-J6-mtj"; */
+"ZkI-J6-mtj.text" = "Detail";
+
+/* Class = "UILabel"; text = "Enable Advanced mode"; ObjectID = "bus-II-dL6"; */
+"bus-II-dL6.text" = "Activer le Mode Avancé";
+
+/* Class = "UITabBarItem"; title = "Map"; ObjectID = "cPa-gy-q4n"; */
+"cPa-gy-q4n.title" = "Carte";
+
+/* Class = "UILabel"; text = "Open"; ObjectID = "edB-zt-VmQ"; */
+"edB-zt-VmQ.text" = "Ouvert";
+
+/* Class = "UILabel"; text = "Dark Mode"; ObjectID = "iqY-VI-TUc"; */
+"iqY-VI-TUc.text" = "Mode Nuit";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "l0h-9b-BaG"; */
+"l0h-9b-BaG.text" = "Label";
+
+/* Class = "UILabel"; text = "Hourly"; ObjectID = "lN4-8T-M0H"; */
+"lN4-8T-M0H.text" = "Hourly";
+
+/* Class = "UILabel"; text = "space api v 0.13"; ObjectID = "mGo-tL-cOM"; */
+"mGo-tL-cOM.text" = "space api v 0.13";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "pr1-XO-hf7"; */
+"pr1-XO-hf7.text" = "Label";
+
+/* Class = "UILabel"; text = "opening message"; ObjectID = "qBx-cJ-f5D"; */
+"qBx-cJ-f5D.text" = "opening message";
+
+/* Class = "UILabel"; text = "Every 15 Minutes"; ObjectID = "qeU-bg-W4D"; */
+"qeU-bg-W4D.text" = "Every 15 Minutes";
+
+/* Class = "UILabel"; text = "Status:"; ObjectID = "tvM-C3-iNN"; */
+"tvM-C3-iNN.text" = "Status:";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "wc7-Ee-Vbn"; */
+"wc7-Ee-Vbn.text" = "Label";
+
+/* Class = "UILabel"; text = "Every 30 Minutes"; ObjectID = "xW4-jK-3z5"; */
+"xW4-jK-3z5.text" = "Every 30 Minutes";
+
+/* Class = "UINavigationItem"; title = "Search"; ObjectID = "y1Y-vH-UMJ"; */
+"y1Y-vH-UMJ.title" = "Recherche";

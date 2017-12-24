@@ -59,7 +59,7 @@ class HackerspacesUITests: XCTestCase {
             firstChild.tap()
         }
         let open = XCUIApplication().staticTexts.element(matching: .any, identifier: "hackerspace status").label
-        XCTAssertEqual(open, "Open")
+        XCTAssertEqual(open, "open")
 
     }
 

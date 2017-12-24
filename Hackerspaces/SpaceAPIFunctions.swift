@@ -9,7 +9,6 @@
 
 import Foundation
 import Swiftz
-import SwiftHTTP
 import BrightFutures
 import Result
 import MapKit
@@ -67,7 +66,7 @@ extension SpaceAPI {
 extension SpaceAPI {
 
     enum HTTPError: Error {
-        case notOK(HTTPStatusCode)
+        case notOK(Int)
         case requestError(Error)
         case unknownError
         case urlError(String)
@@ -84,18 +83,20 @@ extension SpaceAPI {
             if let urlStr = URL(string: url) {
                 let req = URLRequest.init(url: urlStr, cachePolicy: URLRequest.CachePolicy.reloadIgnoringCacheData, timeoutInterval: TimeInterval(timeout))
 
-                HTTP.init(req).run { response in
-                    Shared.dataCache.set(value: response.data, key: url)
-                    if case HTTPStatusCode.ok.rawValue? = response.statusCode {
-                        p.success(response.data)
-                    } else if let r = response.statusCode, let code = HTTPStatusCode.init(rawValue: r) {
-                        p.failure(.notOK(code))
-                    } else if let err = response.error {
+                let task = URLSession.shared.dataTask(with: req) { data, response, error in
+
+                    if let err = error {
                         p.failure(.requestError(err))
+                    } else if let code = (response as? HTTPURLResponse)?.statusCode,
+                        200 < code && code >= 300 {
+                        p.failure(.notOK(code))
+                    } else if let data = data {
+                        p.success(data)
                     } else {
                         p.failure(.unknownError)
                     }
                 }
+                task.resume()
             } else {
                 p.failure(.urlError(url))
             }

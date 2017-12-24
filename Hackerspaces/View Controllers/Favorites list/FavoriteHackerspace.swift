@@ -22,7 +22,7 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
         dataSource =  { 
             Future(value: SharedData.favorites.emptyGet()).promoteError()
         }
-        title = "Favorites"
+        title = R.string.localizable.favoriteHackerspaceTitle()
         super.viewDidLoad()
     }
 
@@ -50,7 +50,7 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
     override func numberOfSections(in tableView: UITableView) -> Int {
         if visibleHackerspaces().count + visibleEndpoints().count == 0 {
             let instructions = UILabel.init(frame: self.tableView.bounds)
-            instructions.attributedText = NSAttributedString(string: "Select your favorite hackerspace from search or map")
+            instructions.text = R.string.localizable.emptyFavoriteListMessage()
             instructions.textAlignment = .center
             instructions.textColor = UIColor.gray
             instructions.numberOfLines = 0
@@ -65,7 +65,6 @@ class FavoriteHackerspaceTableViewController: HackerspaceBaseTableViewController
     }
 
     override func previewActionCallback() {
-        print("refreshing from callback")
         self.refresh(refreshControl!)
     }
 }

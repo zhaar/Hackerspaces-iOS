@@ -1,0 +1,55 @@
+/* 
+  Localizable.strings
+  Hackerspaces
+
+  Created by zephyz on 04.11.17.
+  Copyright © 2017 Fixme. All rights reserved.
+*/
+
+//Favorites list
+"FavoriteHackerspaceTitle" = "Favoris";
+"EmptyFavoriteListMessage" = "Selectionnez vos Hackerspace favoris depuis la recherche ou la carte";
+
+//CustomEndpoint
+"Custom_Endpoint" = "Serveur personalisé";
+"CustomNameCantBeEmpty" = "Le nom ne peut pas être vide";
+"CustomURLCantBeEmpty" = "L'URL ne peut pas être vide";
+
+//Preference pane
+"AdvancedModeEngagedTitle" = "Mode Avancé activé";
+"AdvancedModeEngagedMessage" = "Le Mode Avancé expose des fonctionnalités avancées utiles pour les développeurs";
+"PullToEngage" = "Tirez pour activer le Mode Avancé";
+"PullToDisengage" = "Tirez pour desactiver le Mode Avancé";
+"DeleteCacheTitle" = "Effacer le cache";
+"DeleteCacheMessage" = "Êtes-vous sûr de vouloir effacer les données enregistrées en cache?";
+
+//ErrorDisplay
+"ErrorDisplayViewTitle" = "Détails de l'erreur";
+"QuestionIndicator" = "Q" ;
+"AnswerIndicator" = "R";
+"CannotFindHSQuestion" = "Pourquoi est-ce que je ne peux pas trouver mon hackerspace local?";
+"CannotFindHSAnswer" = "Seuls les Hackespaces enregistré sur l'OpenSpace Directory sont visible. Afin d'être visibe dans l'app, votre hackerspace local doit exposer une API conforme à la specification décrite sur SpaceAPI.net et s'enregistrer sur l'OpenSpace Directory";
+"HowToAddHSQuestion" = "Comment ajouter mon hackerspace dans l'OpenSpace Directory?";
+"HowToAddHSAnswer" = "Vous aurez besoin d'un serveur qui expose une API public sous le format décrit par SpaceAPI.net. Une fois que le serveur est prêt vous pouvez enregistrer son URL dans l'OpenSpace Directory (https://github.com/fixme-lausanne/OpenSpaceDirectory) en créant une \"pull request\". Une fois que la pull request est acceptée votre hackerspace sera visible dans l'app. Si vous souhaiter tester votre API avec l'app avant qu'elle soit ajoutée sur l'OpenSpace Directory vous pouvez activer le mode avancé dans les préférences. Pour activer le mode avancé simplement tirez la liste depuis le haut et selectionner \"Ok\"";
+"ReportBugQuestion" = "Quelque-chose ne va pas avec l'app, que puis-je faire?";
+"ReportBugAnswer" = "Vous pouvez partager quelque problème que vous rencontrez avec l'app sur la page Github du projet à l'adresse https://github.com/zhaar/Hackerspaces-iOS/issues. Vous pouvez même permettre d'incorporer de nouvelles fonctionnalités en créant une issue ou une pull request.";
+
+//Embeded Search
+"Loading" = "chargement";
+"Unresponsive" = "pas de réponse";
+
+//Selected Hackerspace
+"SelectedHSViewTitle" = "Status du Hackerspace";
+"AddHSFavorite" = "Ajouter aux favoris";
+"RemoveHSFavorite" = "Retirer des favoris";
+
+// General
+"Delete" = "Supprimer";
+"HackerspaceOpen" = "ouvert";
+"HackerspaceClosed" = "fermé";
+"Edit" = "Modifier";
+"Name" = "Nom";
+"Ok" = "Ok";
+"Search" = "Recherche";
+"More_details" = "Détails";
+

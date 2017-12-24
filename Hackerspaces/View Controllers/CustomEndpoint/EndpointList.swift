@@ -54,7 +54,7 @@ class EndPointTableViewController: UITableViewController {
             cell = UITableViewCell.init(style: UITableViewCellStyle.subtitle, reuseIdentifier: cellID)
         }
         if indexPath.section == 0 {
-            cell.textLabel?.text = "Name"
+            cell.textLabel?.text = R.string.localizable.name()
             cell.detailTextLabel?.text = "Url"
         } else {
             cell.textLabel?.text = source[indexPath.row].0
@@ -81,12 +81,12 @@ class EndPointTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if indexPath.section == 1 {
-            let editAction = UITableViewRowAction.init(style: .normal, title: "Edit", handler: { (_, idx) in
+            let editAction = UITableViewRowAction.init(style: .normal, title: R.string.localizable.edit(), handler: { (_, idx) in
                 let (name, url) = self.source[idx.row]
                 self.performSegue(withIdentifier: "ShowAddEndpoint", sender: EditMode(name: name, url: url))
             }
             )
-            let deleteAction = UITableViewRowAction.init(style: .destructive, title: "Delete", handler: { (_, idx) in
+            let deleteAction = UITableViewRowAction.init(style: .destructive, title: R.string.localizable.delete(), handler: { (_, idx) in
                 self.source.remove(at: idx.row)
                 SharedData.customEndpoints.deleteRow(at: idx.row)
                 tableView.deleteRows(at: [idx], with: .fade)

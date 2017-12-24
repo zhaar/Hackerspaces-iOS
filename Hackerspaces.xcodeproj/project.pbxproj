@@ -32,9 +32,14 @@
 		9573A28D1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */; };
 		9573A2AF1B936F960061A1E6 /* RawDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */; };
 		958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */; };
-		958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */; };
+		9592669D1FAE47C90061A1E6 /* Rswift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9598B92B1FAE42A50061A1E6 /* Rswift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9592669F1FAE47F10061A1E6 /* Rswift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9598B92B1FAE42A50061A1E6 /* Rswift.framework */; };
 		9597A1AB1B79252F0061A1E6 /* VCMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AA1B79252F0061A1E6 /* VCMapView.swift */; };
 		9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */; };
+		9598B91B1FAE35BD0061A1E6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9598B9191FAE35BD0061A1E6 /* Localizable.strings */; };
+		9598B91E1FAE36B70061A1E6 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9598B91D1FAE36B70061A1E6 /* R.generated.swift */; };
+		9598B9211FAE37420061A1E6 /* RawDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */; };
+		9598B9221FAE37420061A1E6 /* RawDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */; };
 		959D61AE1F3B79DB0061A1E6 /* FutureUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 953C513A1B8F49190061A1E6 /* FutureUtils.swift */; };
 		959D61B01F3B7E350061A1E6 /* HSJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */; };
 		959D61B11F3B80450061A1E6 /* HSJsonParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */; };
@@ -50,13 +55,9 @@
 		95BD26781F40AB2E0061A1E6 /* TestingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BD26771F40AB2E0061A1E6 /* TestingUtils.swift */; };
 		95BD267C1F40F15F0061A1E6 /* TestingUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95BD26771F40AB2E0061A1E6 /* TestingUtils.swift */; };
 		95BD26801F40F2530061A1E6 /* UserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DB78001B9149660061A1E6 /* UserDefaults.swift */; };
-		95BD26811F40F2530061A1E6 /* FavoriteHackerspace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */; };
 		95BD26831F40F2530061A1E6 /* FPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 954C57011E89C7C40061A1E6 /* FPUtils.swift */; };
-		95BD268F1F40F2850061A1E6 /* HackerspaceBaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95DBD9511B8D0FC30061A1E6 /* HackerspaceBaseTableViewController.swift */; };
-		95BD26911F40F29D0061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7C1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift */; };
 		95BD26941F40F40E0061A1E6 /* HSTitleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB7F1B868D160061A1E6 /* HSTitleTableViewCell.swift */; };
 		95BD26971F40F4360061A1E6 /* HSMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9525AB811B8748010061A1E6 /* HSMapTableViewCell.swift */; };
-		95BD26991F40F4510061A1E6 /* DisplayErrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 950AF2971D88CC500068F29E /* DisplayErrorViewController.swift */; };
 		95BD269B1F40F45E0061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */; };
 		95BD26A91F41BC780061A1E6 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95BD26A81F41BC780061A1E6 /* Haneke.framework */; };
 		95BD26AA1F41BC780061A1E6 /* Haneke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95BD26A81F41BC780061A1E6 /* Haneke.framework */; };
@@ -87,12 +88,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		956455191F3140410061A1E6 /* Embed Frameworks */ = {
+		9592669E1FAE47C90061A1E6 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				9592669D1FAE47C90061A1E6 /* Rswift.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,12 +140,16 @@
 		956734511F430BC10061A1E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSGeneralInfoTableViewCell.swift; sourceTree = "<group>"; };
 		9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RawDataTableViewCell.swift; sourceTree = "<group>"; };
-		957BF3E71F3918E30061A1E6 /* JSONWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSONWrapper.framework; path = Carthage/Build/iOS/JSONWrapper.framework; sourceTree = "<group>"; };
 		9597A1AA1B79252F0061A1E6 /* VCMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCMapView.swift; sourceTree = "<group>"; };
 		9597A1AD1B7932100061A1E6 /* DataCache.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataCache.xcdatamodel; sourceTree = "<group>"; };
+		9598B9171FAE34640061A1E6 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		9598B9181FAE34640061A1E6 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		9598B91A1FAE35BD0061A1E6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9598B91C1FAE35C20061A1E6 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9598B91D1FAE36B70061A1E6 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		9598B92B1FAE42A50061A1E6 /* Rswift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Rswift.framework; path = Carthage/Build/iOS/Rswift.framework; sourceTree = "<group>"; };
 		959D61AF1F3B7E350061A1E6 /* HSJsonParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSJsonParser.swift; sourceTree = "<group>"; };
 		95A19D6C1F772D480061A1E6 /* AddEndpointViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddEndpointViewController.swift; sourceTree = "<group>"; };
-		95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHTTP.framework; path = Carthage/Build/iOS/SwiftHTTP.framework; sourceTree = "<group>"; };
 		95A5949E1B893FB60061A1E6 /* Haneke.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Haneke.framework.dSYM; path = Carthage/Build/iOS/Haneke.framework.dSYM; sourceTree = "<group>"; };
 		95A5949F1B893FB60061A1E6 /* JSONJoy.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = JSONJoy.framework.dSYM; path = Carthage/Build/iOS/JSONJoy.framework.dSYM; sourceTree = "<group>"; };
 		95A594A01B893FB60061A1E6 /* SwiftHTTP.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftHTTP.framework.dSYM; path = Carthage/Build/iOS/SwiftHTTP.framework.dSYM; sourceTree = "<group>"; };
@@ -173,9 +179,9 @@
 			files = (
 				95BD26A91F41BC780061A1E6 /* Haneke.framework in Frameworks */,
 				95DBD94C1B8CFF360061A1E6 /* Result.framework in Frameworks */,
+				9592669F1FAE47F10061A1E6 /* Rswift.framework in Frameworks */,
 				958B31A81C6A89DC000EF9E1 /* BrightFutures.framework in Frameworks */,
 				956455171F3140410061A1E6 /* Swiftz.framework in Frameworks */,
-				958B31AB1C6A89E0000EF9E1 /* SwiftHTTP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,12 +207,11 @@
 		8178FF0F74739ED96AEB03D5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9598B92B1FAE42A50061A1E6 /* Rswift.framework */,
 				95BD26A81F41BC780061A1E6 /* Haneke.framework */,
-				957BF3E71F3918E30061A1E6 /* JSONWrapper.framework */,
 				956455161F3140410061A1E6 /* Swiftz.framework */,
 				95DBD94B1B8CFF360061A1E6 /* Result.framework */,
 				95ADEF9A1B8B612F0061A1E6 /* BrightFutures.framework */,
-				95A594961B893E5E0061A1E6 /* SwiftHTTP.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -216,7 +221,7 @@
 			children = (
 				950AF2971D88CC500068F29E /* DisplayErrorViewController.swift */,
 			);
-			name = "Error display";
+			path = "Error display";
 			sourceTree = "<group>";
 		};
 		950AF2991D89BB500068F29E /* Preference pane */ = {
@@ -224,7 +229,7 @@
 			children = (
 				950AF29A1D89BB7C0068F29E /* PrefPaneTableViewController.swift */,
 			);
-			name = "Preference pane";
+			path = "Preference pane";
 			sourceTree = "<group>";
 		};
 		9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */ = {
@@ -236,7 +241,7 @@
 				9573A28C1B9227080061A1E6 /* HSGeneralInfoTableViewCell.swift */,
 				9573A2AE1B936F960061A1E6 /* RawDataTableViewCell.swift */,
 			);
-			name = "Selected Hackerspace";
+			path = "Selected Hackerspace";
 			sourceTree = "<group>";
 		};
 		95643FA41B729B3E0061A1E6 = {
@@ -266,8 +271,8 @@
 		95643FAF1B729B3E0061A1E6 /* Hackerspaces */ = {
 			isa = PBXGroup;
 			children = (
-				95643FB21B729B3E0061A1E6 /* AppDelegate.swift */,
 				95ACC0281F771D7C0061A1E6 /* View Controllers */,
+				95643FB21B729B3E0061A1E6 /* AppDelegate.swift */,
 				95DB77FE1B9142D60061A1E6 /* Constants.swift */,
 				95DB78001B9149660061A1E6 /* UserDefaults.swift */,
 				95ADEF981B8B53580061A1E6 /* SpaceAPIFunctions.swift */,
@@ -288,8 +293,10 @@
 		95643FB01B729B3E0061A1E6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9598B91D1FAE36B70061A1E6 /* R.generated.swift */,
 				9597A1AC1B7932100061A1E6 /* DataCache.xcdatamodeld */,
 				95643FB11B729B3E0061A1E6 /* Info.plist */,
+				9598B9191FAE35BD0061A1E6 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -351,7 +358,7 @@
 				95E4B90A1B811F150061A1E6 /* Embeded search */,
 				9525AB7E1B8622C70061A1E6 /* Selected Hackerspace */,
 			);
-			name = "View Controllers";
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 		95ACC0291F771D890061A1E6 /* CustomEndpoint */ = {
@@ -360,7 +367,7 @@
 				95ACC02A1F771DA30061A1E6 /* EndpointList.swift */,
 				95A19D6C1F772D480061A1E6 /* AddEndpointViewController.swift */,
 			);
-			name = CustomEndpoint;
+			path = CustomEndpoint;
 			sourceTree = "<group>";
 		};
 		95BD266E1F40A9E90061A1E6 /* HackerspacesUITests */ = {
@@ -377,7 +384,7 @@
 			children = (
 				952915401D5A94B20061A1E6 /* FavoriteHackerspace.swift */,
 			);
-			name = "Favorites list";
+			path = "Favorites list";
 			sourceTree = "<group>";
 		};
 		95D4B74D1B7D68C80061A1E6 /* Map */ = {
@@ -386,7 +393,7 @@
 				95643FB61B729B3E0061A1E6 /* MapViewController.swift */,
 				9597A1AA1B79252F0061A1E6 /* VCMapView.swift */,
 			);
-			name = Map;
+			path = Map;
 			sourceTree = "<group>";
 		};
 		95E4B90A1B811F150061A1E6 /* Embeded search */ = {
@@ -396,7 +403,7 @@
 				95DBD9591B8D10120061A1E6 /* SearchResultsViewController.swift */,
 				95DBD9521B8D0FC30061A1E6 /* SearchBarEmbeddedInNavigationBarViewController.swift */,
 			);
-			name = "Embeded search";
+			path = "Embeded search";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,12 +413,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 95643FCE1B729B3E0061A1E6 /* Build configuration list for PBXNativeTarget "Hackerspaces" */;
 			buildPhases = (
+				9598B9161FAE2BE10061A1E6 /* R.Swift */,
 				95643FA91B729B3E0061A1E6 /* Sources */,
 				95643FAA1B729B3E0061A1E6 /* Frameworks */,
 				95643FAB1B729B3E0061A1E6 /* Resources */,
 				95A5949C1B893E7E0061A1E6 /* Carthage copy-frameworks */,
 				95A5949D1B893F630061A1E6 /* Debug */,
-				956455191F3140410061A1E6 /* Embed Frameworks */,
+				9592669E1FAE47C90061A1E6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -501,6 +509,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 95643FA41B729B3E0061A1E6;
 			productRefGroup = 95643FAE1B729B3E0061A1E6 /* Products */;
@@ -519,6 +528,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9598B91B1FAE35BD0061A1E6 /* Localizable.strings in Resources */,
 				95ACC0261F771D370061A1E6 /* CustomEndpointList.storyboard in Resources */,
 				95643FBA1B729B3E0061A1E6 /* Main.storyboard in Resources */,
 				95643FBF1B729B3E0061A1E6 /* LaunchScreen.xib in Resources */,
@@ -543,6 +553,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		9598B9161FAE2BE10061A1E6 /* R.Swift */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = R.Swift;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT/rswift\" generate \"$SRCROOT\"\n";
+		};
 		95A5949C1B893E7E0061A1E6 /* Carthage copy-frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -550,10 +574,10 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Haneke.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SwiftHTTP.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Swiftz.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/BrightFutures.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RSwift.framework",
 			);
 			name = "Carthage copy-frameworks";
 			outputPaths = (
@@ -584,6 +608,7 @@
 				9525AB7D1B8622C10061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */,
 				950AF2981D88CC500068F29E /* DisplayErrorViewController.swift in Sources */,
 				95643FB31B729B3E0061A1E6 /* AppDelegate.swift in Sources */,
+				9598B91E1FAE36B70061A1E6 /* R.generated.swift in Sources */,
 				9597A1AE1B7932100061A1E6 /* DataCache.xcdatamodeld in Sources */,
 				959D61B01F3B7E350061A1E6 /* HSJsonParser.swift in Sources */,
 				9525AB821B8748010061A1E6 /* HSMapTableViewCell.swift in Sources */,
@@ -604,20 +629,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				95ACC0221F7702EF0061A1E6 /* UIUtils.swift in Sources */,
-				95BD26991F40F4510061A1E6 /* DisplayErrorViewController.swift in Sources */,
 				95BD26941F40F40E0061A1E6 /* HSTitleTableViewCell.swift in Sources */,
-				95BD268F1F40F2850061A1E6 /* HackerspaceBaseTableViewController.swift in Sources */,
 				9564551C1F3141FD0061A1E6 /* Constants.swift in Sources */,
 				9564551D1F3142A50061A1E6 /* SpaceAPIFunctions.swift in Sources */,
 				9564551F1F31446B0061A1E6 /* extensions.swift in Sources */,
 				95BD26831F40F2530061A1E6 /* FPUtils.swift in Sources */,
-				95BD26911F40F29D0061A1E6 /* SelectedHackerspaceTableViewController.swift in Sources */,
 				9564551E1F3142CE0061A1E6 /* FutureUtils.swift in Sources */,
 				95BD267C1F40F15F0061A1E6 /* TestingUtils.swift in Sources */,
 				95BD26801F40F2530061A1E6 /* UserDefaults.swift in Sources */,
-				95BD26811F40F2530061A1E6 /* FavoriteHackerspace.swift in Sources */,
 				95643FCB1B729B3E0061A1E6 /* HackerspacesTests.swift in Sources */,
 				9564551B1F3141ED0061A1E6 /* HSMapInfo.swift in Sources */,
+				9598B9211FAE37420061A1E6 /* RawDataTableViewCell.swift in Sources */,
 				959D61B11F3B80450061A1E6 /* HSJsonParser.swift in Sources */,
 				95BD269B1F40F45E0061A1E6 /* HSGeneralInfoTableViewCell.swift in Sources */,
 				95BD26971F40F4360061A1E6 /* HSMapTableViewCell.swift in Sources */,
@@ -628,6 +650,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9598B9221FAE37420061A1E6 /* RawDataTableViewCell.swift in Sources */,
 				956734501F430BC10061A1E6 /* HackerspacesUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -652,6 +675,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				95643FB91B729B3E0061A1E6 /* Base */,
+				9598B9171FAE34640061A1E6 /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -660,8 +684,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				95643FBE1B729B3E0061A1E6 /* Base */,
+				9598B9181FAE34640061A1E6 /* fr */,
 			);
 			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		9598B9191FAE35BD0061A1E6 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9598B91A1FAE35BD0061A1E6 /* Base */,
+				9598B91C1FAE35C20061A1E6 /* fr */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -671,6 +705,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -725,6 +760,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -787,7 +823,7 @@
 				);
 				INFOPLIST_FILE = Hackerspaces/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(SRCROOT)/Carthage/Build/iOS";
 				PRODUCT_BUNDLE_IDENTIFIER = "moe.zephyz.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -817,7 +853,7 @@
 				);
 				INFOPLIST_FILE = Hackerspaces/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks $(SRCROOT)/Carthage/Build/iOS";
 				PRODUCT_BUNDLE_IDENTIFIER = "moe.zephyz.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

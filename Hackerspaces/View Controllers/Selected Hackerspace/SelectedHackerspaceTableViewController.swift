@@ -1,5 +1,4 @@
 import UIKit
-import SwiftHTTP
 import MapKit
 import Swiftz
 import BrightFutures
@@ -151,8 +150,9 @@ class SelectedHackerspaceTableViewController: UITableViewController {
             if let data = hackerspaceData {
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateStyle = DateFormatter.Style.medium
-                mapCell.HSStatus.text = data.state.open ? "Open" : "Closed"
-                mapCell.HSStatus.accessibilityIdentifier = "hackerspace status"
+                mapCell.HSStatus.text = data.state.open ? R.string.localizable.hackerspaceOpen()
+                                                        : R.string.localizable.hackerspaceClosed()
+                mapCell.HSStatus.accessibilityIdentifier = R.string.localizable.selectedHSViewTitle()
                 mapCell.HSUrl.text = data.websiteURL
                 mapCell.HSLastUpdateTime.text = data.state.lastchange >>- { dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval($0))) }
                 mapCell.openningMessageLabel.text = hackerspaceData?.state.message
@@ -169,8 +169,8 @@ class SelectedHackerspaceTableViewController: UITableViewController {
             self.MarkAsFavorite(nil)
             self.previewDeleteAction >>- {$0()}
         }
-        let addToFavs = UIPreviewAction(title: "Add Favorite", style: .default, handler: callback )
-        let removeFromFavs = UIPreviewAction(title: "Remove Favorite", style: .destructive, handler: callback)
+        let addToFavs = UIPreviewAction(title: R.string.localizable.addHSFavorite(), style: .default, handler: callback )
+        let removeFromFavs = UIPreviewAction(title: R.string.localizable.removeHSFavorite(), style: .destructive, handler: callback)
         return isFavorite ? [removeFromFavs] : [addToFavs]
     }
 }
